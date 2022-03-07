@@ -33,7 +33,7 @@ return (
 
         <View style={{ flex: 1, justifyContent: 'flex-end', width: '80%', marginBottom: 1, }}>
             <View style={{ width: '100%', borderColor: 'orange', }}>
-                <Button color="#4356FF" title="New! Get Started" onpress={buttonPressedHandler}/>
+                <Button color="#4356FF" title="New! Get Started" onPress={buttonPressedHandler}/>
             </View>
             <View style={{ width: '100%', marginBottom: 75, marginTop: 15, borderColor: '#4356FF', borderWidth: 3,  color: 'white', }}>
                 <Button color="#FFFFFF" title="Existing user? Log In"/>
