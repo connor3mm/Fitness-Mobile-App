@@ -32,11 +32,15 @@ return (
         </View>
 
         <View style={{ flex: 1, justifyContent: 'flex-end', width: '80%', marginBottom: 1, }}>
+            <View style={{ width: '100%', marginBottom: 75, marginTop: 15, borderColor: '#4356FF', borderWidth: 3,  color: 'white', }}>
+                <Button backgroundColor="#FFFFFF" title="Home Page For Testing(REMOVE LATER!)" onPress={buttonPressedHandler}/>
+            </View>
+
             <View style={{ width: '100%', borderColor: 'orange', }}>
-                <Button color="#4356FF" title="New! Get Started" onPress={buttonPressedHandler}/>
+                <Button color="#4356FF" title="New! Get Started"/>
             </View>
             <View style={{ width: '100%', marginBottom: 75, marginTop: 15, borderColor: '#4356FF', borderWidth: 3,  color: 'white', }}>
-                <Button color="#FFFFFF" title="Existing user? Log In"/>
+                <Button color="#4356FF" title="Existing user? Log In"/>
             </View>
         </View>
     </SafeAreaView>
