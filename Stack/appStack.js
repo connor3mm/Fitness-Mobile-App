@@ -10,9 +10,14 @@ import WorkoutsPage from "../Screens/WorkoutsPage";
 import CalorieCounterPage from "../Screens/CalorieCounterPage";
 
 const screen = {
+    
     Welcome:{
-        screen: Welcomepage
+        screen: Welcomepage,
+        navigationOptions: {
+            headerShown: false,
+        }
     },
+
     Homepage:{
         screen: Homepage
     },
