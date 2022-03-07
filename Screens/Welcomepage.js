@@ -15,7 +15,6 @@ export default function Welcome( {navigation} ) {
     });
 
     const buttonPressedHandler = () => {
-        console.log("boo")
         navigation.navigate('Homepage');
     }
 
