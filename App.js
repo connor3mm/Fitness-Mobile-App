@@ -6,5 +6,6 @@ import Navigator from './Stack/appStack';
 export default function App() {
  return(
   <Navigator />
- );
+
+);
 }
