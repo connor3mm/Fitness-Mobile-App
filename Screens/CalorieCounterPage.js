@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal} from "react-native";
 import CardComponent from "../CustomComponents/CardComponent";
 import { MaterialIcons } from '@expo/vector-icons';
+import FoodForm from "./FoodForm";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 
@@ -25,7 +26,7 @@ export default function CalorieCounter( {navigation} ) {
                         style = {styles.modalCloseStyle}
                         onPress = {() => setOpenModal(false)}
                     />
-                    <Text>Welcome to the modal</Text>
+                    <FoodForm/>
                 </View>
             </Modal>
             <Text style = {styles.foodAddTitle}>Add Breakfast</Text>
