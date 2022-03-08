@@ -8,6 +8,7 @@ import GoalsAchievementsPage from '../Screens/GoalsAchievementsPage'
 import StepCounterPage from '../Screens/StepCounterPage'
 import WorkoutsPage from "../Screens/WorkoutsPage";
 import CalorieCounterPage from "../Screens/CalorieCounterPage";
+import FoodDetails from "../Screens/FoodDetails";
 
 const screen = {
     Welcome:{
@@ -33,6 +34,9 @@ const screen = {
     },
     CalorieCounterPage:{
         screen: CalorieCounterPage
+    },
+    FoodDetails: {
+        screen: FoodDetails
     },
 
 }
