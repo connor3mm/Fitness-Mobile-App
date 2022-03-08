@@ -2,12 +2,13 @@ import React from 'react';
 import {Button, StyleSheet, Text, View, TextInput} from "react-native";
 import { Formik } from 'formik';
 
-export default function FoodFormPage() {
+export default function FoodFormPage( {addFood} ) {
     return(
         <View style = {styles.container}>
             <Formik
                 initialValues={{ foodName: '', calories: '', quantity: ''}}
                 onSubmit = {(values) => {
+                    addFood(values);
                     console.log(values);
                 }}
             >
@@ -24,12 +25,14 @@ export default function FoodFormPage() {
                             placeholder = 'Calories'
                             onChangeText = {formikProps.handleChange('calories')}
                             value = {formikProps.values.calories}
+                            keyboardType = 'numeric'
                         />
                         <TextInput
                             style = {styles.inputStyle}
                             placeholder = 'Quantity'
                             onChangeText = {formikProps.handleChange('quantity')}
                             value = {formikProps.values.quantity}
+                            keyboardType = 'numeric'
                         />
                         <Button title='Submit' onPress={formikProps.handleSubmit} color='dodgerblue'/>
                     </View>

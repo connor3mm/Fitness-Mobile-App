@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TouchableHighlight} from "react-native";
+import {Button, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard} from "react-native";
 import CardComponent from "../CustomComponents/CardComponent";
 import { MaterialIcons } from '@expo/vector-icons';
 import FoodForm from './FoodForm';
@@ -16,19 +16,30 @@ export default function CalorieCounter( {navigation} ) {
         {foodName: 'Cheese', calories: 58, quantity: 1, key: '2'},
         
     ]);
+
+    const addFood = (food) => {
+        food.key = Math.random().toString();
+        setBreakfastFood((current) => {
+            return [food, ...current]
+        })
+        setOpenModal(false);
+    }
+
     return(
         <View style = {styles.container}>
 
             <Modal visible={openModal} animationType='slide'>
-                <View style = {styles.modalText} >
-                    <MaterialIcons
-                        name = 'close'
-                        size = {24}
-                        style = {styles.modalCloseStyle}
-                        onPress = {() => setOpenModal(false)}
-                    />
-                    <FoodForm />
-                </View>
+                <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
+                    <View style = {styles.modalText} >
+                        <MaterialIcons
+                            name = 'close'
+                            size = {24}
+                            style = {styles.modalCloseStyle}
+                            onPress = {() => setOpenModal(false)}
+                        />
+                        <FoodForm addFood={addFood}/>
+                    </View>
+                </TouchableWithoutFeedback>
             </Modal>
             <Text style = {styles.foodAddTitle}>Add Breakfast</Text>
             <MaterialIcons
