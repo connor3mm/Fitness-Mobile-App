@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, StyleSheet, Text, View, TextInput} from "react-native";
 import { Formik } from 'formik';
 
-export default function FoodForm() {
+export default function FoodFormPage() {
     return(
         <View style = {styles.container}>
             <Formik
@@ -11,7 +11,6 @@ export default function FoodForm() {
                     console.log(values);
                 }}
             >
-                //render different text inputs
                 { (formikProps) => (
                     <View>
                         <TextInput
@@ -22,18 +21,17 @@ export default function FoodForm() {
                         />
                         <TextInput
                             style = {styles.inputStyle}
-                            placeholder = 'Food name'
+                            placeholder = 'Calories'
                             onChangeText = {formikProps.handleChange('calories')}
                             value = {formikProps.values.calories}
                         />
                         <TextInput
                             style = {styles.inputStyle}
-                            placeholder = 'Food name'
+                            placeholder = 'Quantity'
                             onChangeText = {formikProps.handleChange('quantity')}
                             value = {formikProps.values.quantity}
                         />
-
-                        <Button title='submit' color='blue' onPress={formikProps.handleSubmit()}/>
+                        <Button title='Submit' onPress={formikProps.handleSubmit} color='dodgerblue'/>
                     </View>
                 )}
             </Formik>

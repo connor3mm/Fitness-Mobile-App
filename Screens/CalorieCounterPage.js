@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal} from "react-native";
+import {Button, SafeAreaView, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TouchableHighlight} from "react-native";
 import CardComponent from "../CustomComponents/CardComponent";
 import { MaterialIcons } from '@expo/vector-icons';
-import FoodForm from "./FoodForm";
+import FoodForm from './FoodForm';
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 
@@ -12,11 +12,12 @@ export default function CalorieCounter( {navigation} ) {
     const [openModal, setOpenModal] = useState(false);
 
     const [breakfastFood, setBreakfastFood] = useState([
-        {foodName: 'Eggs', calories: 58, quantity: 1, key: '1'}
+        {foodName: 'Eggs', calories: 58, quantity: 1, key: '1'},
+        {foodName: 'Cheese', calories: 58, quantity: 1, key: '2'},
+        
     ]);
     return(
         <View style = {styles.container}>
-            <Text> Calorie Counter Screen</Text>
 
             <Modal visible={openModal} animationType='slide'>
                 <View style = {styles.modalText} >
@@ -26,7 +27,7 @@ export default function CalorieCounter( {navigation} ) {
                         style = {styles.modalCloseStyle}
                         onPress = {() => setOpenModal(false)}
                     />
-                    <FoodForm/>
+                    <FoodForm />
                 </View>
             </Modal>
             <Text style = {styles.foodAddTitle}>Add Breakfast</Text>
