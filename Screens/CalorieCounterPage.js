@@ -16,11 +16,26 @@ export default function CalorieCounter( {navigation} ) {
     return(
         <View style = {styles.container}>
             <Text> Calorie Counter Screen</Text>
-            <Modal visible={openModal}>
+
+            <Modal visible={openModal} animationType='slide'>
                 <View style = {styles.modalText} >
+                    <MaterialIcons
+                        name = 'close'
+                        size = {24}
+                        style = {styles.modalCloseStyle}
+                        onPress = {() => setOpenModal(false)}
+                    />
                     <Text>Welcome to the modal</Text>
                 </View>
             </Modal>
+            <Text style = {styles.foodAddTitle}>Add Breakfast</Text>
+            <MaterialIcons
+                name = 'add'
+                size = {24}
+                style = {styles.modalStyle}
+                onPress = {() => setOpenModal(true)}
+            />
+
             <ScrollView>
                 { breakfastFood.map (item => (
                     <View key = {item.key}>
@@ -46,5 +61,35 @@ const styles = StyleSheet.create({
         fontSize: 16.5,
         color: '#424242',
 
+    },
+    modalText: {
+        flex: 1,
+    },
+    modalStyle: {
+        marginBottom: 10,
+        borderWidth: 2,
+        borderStyle: 'dotted',
+        borderColor: 'grey',
+        padding: 10,
+        borderRadius: 10,
+        alignSelf: 'center',
+    },
+    foodAddTitle: {
+        marginBottom: 10,
+        padding: 10,
+        borderRadius: 10,
+        alignSelf: 'center',
+        fontSize: 18,
+       fontWeight: 'bold',
+    },
+    modalCloseStyle: {
+        marginTop: 35,
+        marginBottom: 0,
+        borderWidth: 2,
+        borderStyle: 'dotted',
+        borderColor: 'grey',
+        padding: 10,
+        borderRadius: 10,
+        alignSelf: 'center',
     }
 })
