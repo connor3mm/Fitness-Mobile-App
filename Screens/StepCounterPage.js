@@ -19,12 +19,14 @@ export default class App extends React.Component {
     }
   
     _subscribe = () => {
+      //Sets the current number of steps in the state
       this._subscription = Pedometer.watchStepCount(result => {
         this.setState({
           currentStepCount: result.steps,
         });
       });
   
+      //Checks if the current device has a pedometer
       Pedometer.isAvailableAsync().then(
         result => {
           this.setState({
@@ -38,6 +40,7 @@ export default class App extends React.Component {
         }
       );
   
+      //Gets the total number of steps taken in the last 24 hours
       const end = new Date();
       const start = new Date();
       start.setDate(end.getDate() - 1);
@@ -61,6 +64,7 @@ export default class App extends React.Component {
     render() {
       return (
         <View style={styles.container}>
+          <Text>Pedometer in current device: {this.state.isPedometerAvailable}</Text>
           <Text>Number of steps in the last 24 hours: {this.state.pastStepCount}</Text>
           <Text>Current step count: {this.state.currentStepCount}</Text>
         </View>
@@ -76,12 +80,3 @@ export default class App extends React.Component {
       justifyContent: 'center',
     },
   });
-
-// export default function StepCounter() {
-//     return(
-//         <View style = {StyleSheet.container}>
-//             <Text>Step Counter Screen</Text>
-//         </View>
-
-//     )
-// }
