@@ -2,7 +2,10 @@ import React from 'react';
 import {Button, StyleSheet, Text, View, TextInput} from "react-native";
 import { Formik } from 'formik';
 
-export default function FoodFormPage( {addFood} ) {
+export default function FoodFormPage( {addFood, getTotalCaloriesIntake} ) {
+
+    getTotalCaloriesIntake();
+
     return(
         <View style = {styles.container}>
             <Formik
@@ -22,7 +25,7 @@ export default function FoodFormPage( {addFood} ) {
                         />
                         <TextInput
                             style = {styles.inputStyle}
-                            placeholder = 'Calories'
+                            placeholder = 'Calories for one quantity'
                             onChangeText = {formikProps.handleChange('calories')}
                             value = {formikProps.values.calories}
                             keyboardType = 'numeric'

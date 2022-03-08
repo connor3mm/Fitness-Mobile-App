@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard} from "react-native";
+import {Button, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard, TextInput} from "react-native";
 import CardComponent from "../CustomComponents/CardComponent";
 import { MaterialIcons } from '@expo/vector-icons';
 import FoodForm from './FoodForm';
@@ -11,11 +11,15 @@ export default function CalorieCounter( {navigation} ) {
 
     const [openModal, setOpenModal] = useState(false);
 
+    const [goalCalories, setGoal] = useState(0);
+
     const [breakfastFood, setBreakfastFood] = useState([
         {foodName: 'Eggs', calories: 58, quantity: 1, key: '1'},
-        {foodName: 'Cheese', calories: 58, quantity: 1, key: '2'},
+        {foodName: 'Cheese', calories: 50, quantity: 1, key: '2'},
         
     ]);
+
+    const [totalCalories, setTotal] = useState(0);
 
     const addFood = (food) => {
         food.key = Math.random().toString();
@@ -23,6 +27,18 @@ export default function CalorieCounter( {navigation} ) {
             return [food, ...current]
         })
         setOpenModal(false);
+    }
+
+    const getTotalCaloriesIntake = () => {
+        let total = 0;
+        console.log(breakfastFood)
+        for (let i = 0; i < breakfastFood.length; i++) {
+            total += (parseInt(breakfastFood[i].calories) * parseInt(breakfastFood[i].quantity));
+            console.log(breakfastFood[i].calories);
+        }
+        setTotal(total);
+        console.log(total);
+
     }
 
     return(
@@ -37,10 +53,14 @@ export default function CalorieCounter( {navigation} ) {
                             style = {styles.modalCloseStyle}
                             onPress = {() => setOpenModal(false)}
                         />
-                        <FoodForm addFood={addFood}/>
+                        <FoodForm addFood={addFood} getTotalCaloriesIntake={getTotalCaloriesIntake}/>
                     </View>
                 </TouchableWithoutFeedback>
             </Modal>
+            <Text>Total calories intake: {totalCalories}</Text>
+            <TextInput>
+
+            </TextInput>
             <Text style = {styles.foodAddTitle}>Add Breakfast</Text>
             <MaterialIcons
                 name = 'add'
