@@ -2,7 +2,7 @@ import React from 'react';
 import { Bottomnavbar } from '../Stack/appStack';
 import { NavigationContainer } from '@react-navigation/native';
 import { styles } from "./Welcomepage";
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Touchable, TouchableHighlight} from "react-native";
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Platform, StatusBar} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { TabRouter } from 'react-navigation';
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
@@ -26,10 +26,16 @@ export default function Home({navigation}) {
     const workoutsPressedHandler = () => navigation.navigate('WorkoutsPage');
     
     const calorieCounterPressedHandler = () => navigation.navigate('CalorieCounterPage');
-    
+
+    const settingsPressedHandler = () => navigation.navigate('SettingsPage');
+
+    const profilePressedHandler = () => navigation.navigate('ProfilePage');
+
+    const homePressedHandler = () => navigation.navigate('Homepage');
+
 
     return(
-        <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
+        <SafeAreaView style = {[styles.container, styling.menuContainer, styling.AndroidSafeArea,]}>
             <ScrollView style={{width: '100%',}}>
 
             <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent:'center'
@@ -41,7 +47,7 @@ export default function Home({navigation}) {
             <View style={[styling.dashboard, styles.boxShadow]}>
 
                 <View style={{ width: '100%', padding: 10,}}>
-                    <Text style={[styling.profileName,]}>Connor M.</Text>
+                    <Text style={[styling.smallText, styling.profileName]}>Connor M.</Text>
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
@@ -130,21 +136,21 @@ export default function Home({navigation}) {
             </ScrollView>
 
             <View style={[styling.footer]}>
-                <TouchableOpacity style={{ width: '33.3%', alignItems: 'center' }}>
+                <TouchableOpacity  onPress={homePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
                     <Image  style={[styling.footerIcon, ]} source={require('../assets/img/homepage.png')} />
                     <Text  style={[styles.buttonText, styling.greyText]}>Home</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ width: '33.3%', alignItems: 'center' }}>
+                <TouchableOpacity onPress={profilePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
                     <Image  style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
                     <Text  style={[styles.buttonText, styling.greyText]}>Profile</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ width: '33.3%', alignItems: 'center' }}>
+                <TouchableOpacity onPress={settingsPressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
                     <Image  style={[styling.footerIcon, ]} source={require('../assets/img/settings.png')} />
                     <Text  style={[styles.buttonText, styling.greyText]}>Settings</Text>
                 </TouchableOpacity>
-            </View>
+            </View> 
             
         </SafeAreaView>
         
@@ -153,6 +159,13 @@ export default function Home({navigation}) {
 }
 
 const styling = StyleSheet.create({
+
+    AndroidSafeArea: {
+        flex: 1,
+        backgroundColor: "white",
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    },
+
     smallTitle: {
         fontSize: 25,
     },
@@ -164,17 +177,16 @@ const styling = StyleSheet.create({
 
     dashboard: { 
         width: '92.5%',
+        alignSelf: 'center',
         padding: 2,
-        marginHorizontal: 'auto',
         borderRadius: 10, 
         backgroundColor: '#4356FF',
     },
 
     profileName: {
         color: '#FFF',
-        fontWeight: "700",
-        fontFamily: 'Righteous_400Regular',
         fontSize: 25,
+        fontFamily: 'Righteous_400Regular',
     },
 
     menuContainer: {
@@ -236,7 +248,7 @@ const styling = StyleSheet.create({
         backgroundColor : "#4356FF", 
         height: '9%', 
         maxHeight: '9%', 
-        width: '100%',
+        width: '105%',
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -244,7 +256,5 @@ const styling = StyleSheet.create({
     footerIcon: {
         width: 23,
         height: 23,
-        borderColor: 'red',
-        borderWidth: 3,
     },
 })

@@ -6,9 +6,9 @@ import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 export default function GoalsAchievements() {
     return(
-        <View style = {StyleSheet.container}>
-            <Text> Goals and Achievements Screen</Text>
-        </View>
+        <SafeAreaView style = {StyleSheet.container}>
+            <Text>Settings hello</Text>
+        </SafeAreaView>
 
     )
 }

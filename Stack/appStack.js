@@ -79,7 +79,7 @@ const screen = {
 
     },
 
-    ProflePage: {
+    ProfilePage: {
         screen: ProfilePage, 
         navigationOptions: {
             headerShown: false,
