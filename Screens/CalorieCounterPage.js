@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignSelf: 'center',
         fontSize: 18,
-       fontWeight: 'bold',
+        fontWeight: 'bold',
     },
     modalCloseStyle: {
         marginTop: 35,
@@ -194,11 +194,18 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     input: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: 'grey',
         padding: 8,
-        margin: 10,
         width: 200,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        shadowOffset: { width: 1, height: 1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        marginHorizontal: 1,
+        marginVertical: 6,
 
     }
 })
