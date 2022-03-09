@@ -1,18 +1,7 @@
 import React, {useState} from 'react';
 import {Button, SafeAreaView, TextInput, StyleSheet, Text, View} from "react-native";
 import {RadioButton} from 'react-native-paper';
-import RadioGroup from 'react-native-radio-buttons-group';
 
-
-const radioButtonsData2 = [{
-    id: '1',
-    label: 'Stone',
-    value: 'stone'
-}, {
-    id: '2',
-    label: 'Pounds',
-    value: 'pounds'
-}]
 
 export default function BMICalculator() {
 
@@ -44,21 +33,6 @@ export default function BMICalculator() {
     const [bmi, setBmi] = useState(0);
 
 
-
-    const [radioButtons2, setRadioButtons2] = useState(radioButtonsData2)
-
-
-
-    function onPressRadioButton2(radioButtonsArray2) {
-        setRadioButtons2(radioButtonsArray2);
-        setWeightType(!weightType);
-    }
-
-
-    // let radioHandler = (status) => {
-    //     this.setState({ status });
-    // };
-
     const calculate = () => {
         console.log(checked)
         console.log(age)
@@ -69,35 +43,49 @@ export default function BMICalculator() {
         console.log(heightType)
         console.log(weightType)
 
-        const formValid = heightFeet > 0 && heightInches > 0 && massStone > 0;
-        if (!formValid) {
-            return;
+        // const formValid = heightFeet > 0 && heightInches > 0 && massStone > 0;
+        // if (!formValid) {
+        //     return;
+        // }
+
+        let inchCalc
+        //converts feet into inches
+        if (heightType === 'feet') {
+            inchCalc = parseInt(heightFeet * 12) + parseInt(heightInches)
+        } else {
+            inchCalc = (heightCm * 0.4)
         }
 
-        //converts feet into inches
-        const inchCalc = (heightFeet * 12) + heightInches
 
-        //converts stone & lbs into kg
-        let weightCalc = (massStone * 14) + massStoneLbs
-        weightCalc *= 0.45
+        //converts stone & lbs into lbs
+        let weightCalc
+        if (weightType === 'stone') {
+            weightCalc = (parseInt(massStone) + parseInt(massStoneLbs) / 10)
+            weightCalc *= 14
+
+        } else if (weightType === 'LBS') {
+            weightCalc = parseInt(massLBS)
+
+        } else {
+            weightCalc = parseInt(massKG * 2.2)
+        }
 
         //Calcs BMI
-        const bmi = weightCalc / (inchCalc) ** 2;
+        const bmiCalc = Math.floor((weightCalc / (inchCalc ** 2)) * 703);
 
-        setBmi(bmi);
-        console.log(bmi)
+        setBmi(bmiCalc);
+        console.log(bmiCalc)
     }
 
     return (
         <View style={styles.container}>
 
-            <RadioButton.Group  onValueChange={heightType => setHeightType(heightType)} value={heightType}>
-                <RadioButton.Item label="Feet" value="feet" />
-                <RadioButton.Item label="CM" value="cm" />
-            </RadioButton.Group>
-
-
-
+            <View style={styles.radio}>
+                <RadioButton.Group onValueChange={heightType => setHeightType(heightType)} value={heightType}>
+                    <RadioButton.Item label="Feet" value="feet"/>
+                    <RadioButton.Item label="CM" value="cm"/>
+                </RadioButton.Group>
+            </View>
 
             <Text>Enter Height: </Text>
             <View>
@@ -110,7 +98,7 @@ export default function BMICalculator() {
                         onChangeText={(height) => setHeightFeet(height)}
                     />) : null}
 
-                {heightType  === 'feet' ? (
+                {heightType === 'feet' ? (
                     <TextInput
                         keyboardType='numeric'
                         style={styles.input}
@@ -132,22 +120,18 @@ export default function BMICalculator() {
 
             </View>
 
-
-            <RadioButton.Group onValueChange={weightType => setWeightType(weightType)} value={weightType}>
-                <RadioButton.Item label="Stone" value="stone"/>
-                <RadioButton.Item label="Pounds" value="LBS"/>
-                <RadioButton.Item label="Kilograms" value="KG"/>
-            </RadioButton.Group>
-
-
-            {/*<RadioGroup*/}
-            {/*    radioButtons={radioButtons2}*/}
-            {/*    onPress={onPressRadioButton2}*/}
-            {/*/>*/}
+            <View style={styles.radio}>
+                <RadioButton.Group style={styles.radio} onValueChange={weightType => setWeightType(weightType)}
+                                   value={weightType}>
+                    <RadioButton.Item label="Stone" value="stone"/>
+                    <RadioButton.Item label="Pounds" value="LBS"/>
+                    <RadioButton.Item label="Kilograms" value="KG"/>
+                </RadioButton.Group>
+            </View>
 
             <Text>Enter Weight: </Text>
             <View>
-                {(weightType === 'stone' )? (
+                {(weightType === 'stone') ? (
                     <TextInput
                         keyboardType='numeric'
                         style={styles.input}
@@ -155,7 +139,7 @@ export default function BMICalculator() {
                         onChangeText={(Weight) => setMassStone(Weight)}
                     />) : null}
 
-                {(weightType === 'stone' ) ? (
+                {(weightType === 'stone') ? (
                     <TextInput
                         keyboardType='numeric'
                         style={styles.input}
@@ -167,23 +151,23 @@ export default function BMICalculator() {
             <View>
 
                 {(weightType === 'LBS') ? (
-                <TextInput
-                    keyboardType='numeric'
-                    style={styles.input}
-                    placeholder='Pounds'
-                    onChangeText={(Weight) => setMassLBS(Weight)}
-                />) : null}
+                    <TextInput
+                        keyboardType='numeric'
+                        style={styles.input}
+                        placeholder='Pounds'
+                        onChangeText={(Weight) => setMassLBS(Weight)}
+                    />) : null}
             </View>
 
             <View>
 
                 {weightType === "KG" ? (
-                <TextInput
-                    keyboardType='numeric'
-                    style={styles.input}
-                    placeholder='Kilograms'
-                    onChangeText={(Weight) => setMassKG(Weight)}
-                />) : null}
+                    <TextInput
+                        keyboardType='numeric'
+                        style={styles.input}
+                        placeholder='Kilograms'
+                        onChangeText={(Weight) => setMassKG(Weight)}
+                    />) : null}
             </View>
 
 
@@ -195,7 +179,7 @@ export default function BMICalculator() {
                 onChangeText={(Age) => setAge(Age)}
             />
 
-            <View>
+            <View style={styles.radio}>
                 <Text>Choose your Sex: </Text>
 
                 <RadioButton.Group onValueChange={checked => setChecked(checked)} value={checked}>
@@ -215,7 +199,7 @@ export default function BMICalculator() {
                 </RadioButton.Group>
             </View>
 
-            <Button backgroundColor="#FFFFFF" title="Calculate" onPress={calculate}/>
+            <Button style={styles.submit} backgroundColor="#FFFFFF" title="Calculate" onPress={calculate}/>
 
         </View>
 
@@ -232,16 +216,18 @@ const styles = StyleSheet.create({
         width: 200,
     },
 
-    emptyDisplay: {
-        display: 'none',
-    },
 
     radio: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'left',
+        justifyContent: 'left',
         marginBottom: 25,
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingRight: 150,
+    },
+
+    submit: {
+        marginTop: 100,
     },
 
 });
