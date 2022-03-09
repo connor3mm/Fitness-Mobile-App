@@ -10,6 +10,8 @@ import GoalsAchievementsPage from '../Screens/GoalsAchievementsPage';
 import StepCounterPage from '../Screens/StepCounterPage';
 import WorkoutsPage from "../Screens/WorkoutsPage";
 import CalorieCounterPage from "../Screens/CalorieCounterPage";
+import ProfilePage from "../Screens/ProfilePage";
+import SettingsPage from "../Screens/SettingsPage";
 
 const screen = {
     
@@ -67,6 +69,22 @@ const screen = {
         navigationOptions: {
             headerShown: false,
         }
+    },
+
+    SettingsPage: {
+        screen: SettingsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+    ProflePage: {
+        screen: ProfilePage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
     },
 };
 

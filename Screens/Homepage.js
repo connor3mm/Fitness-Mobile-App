@@ -245,6 +245,6 @@ const styling = StyleSheet.create({
         width: 23,
         height: 23,
         borderColor: 'red',
-        borderWidth: '3',
+        borderWidth: 3,
     },
 })
