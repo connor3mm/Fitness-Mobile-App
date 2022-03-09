@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard, TextInput} from "react-native";
+import {Button, StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard, TextInput, Platform} from "react-native";
 import CardComponent from "../CustomComponents/CardComponent";
 import { MaterialIcons } from '@expo/vector-icons';
 import FoodForm from './FoodForm';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 
@@ -16,13 +17,34 @@ export default function CalorieCounter( {navigation} ) {
 
     const [remaining, setRemaining] = useState(0);
 
+    const [totalCalories, setTotal] = useState(0);
+
+    const [date, setDate] = useState(new Date());
+    const [pickedMode, setPickedMode] = useState('date');
+    const [showed, setShowed] = useState(false);
+    const [dateText, setDateText] = useState('');
+
+    const pickedHandler = (event, selected) => {
+        const current = selected || date; //if selected = selected, if not it will be the initial date
+        setShowed(Platform.OS === 'ios' || Platform.OS === 'android');
+        setDate(current);
+
+        let temp = new Date(current);
+        let formatted = temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear();
+        setDateText(formatted);
+    }
+
+    const modeShow = (current) => {
+        setShowed(true);
+        setPickedMode(current);
+
+    }
+
     const [breakfastFood, setBreakfastFood] = useState([
         {foodName: 'Eggs', calories: 58, quantity: 1, key: '1'},
         {foodName: 'Cheese', calories: 50, quantity: 1, key: '2'},
         
     ]);
-
-    const [totalCalories, setTotal] = useState(0);
 
     const addFood = (food) => {
         food.key = Math.random().toString();
@@ -74,14 +96,34 @@ export default function CalorieCounter( {navigation} ) {
                     </View>
                 </TouchableWithoutFeedback>
             </Modal>
-            <Text style = {styles.container}>Total calories intake: {totalCalories}</Text>
-            <Text style = {styles.container}>Set a Daily Goal: {goalCalories1}</Text>
-            <TextInput
-                keyboardType = 'numeric'
-                style = {styles.input}
-                placeholder = 'e.g. 2500'
-                onChangeText = {(goal) => setGoal(goal)}
-            />
+            <Text>Date: {dateText}</Text>
+            <View>
+                <Button title='Pick Date' onPress={() => modeShow('date')}/>
+            </View>
+
+            {showed && (
+                <DateTimePicker
+                id = 'datePicker'
+                value = {date}
+                mode = {pickedMode}
+                is24Hour = {true}
+                display = 'default'
+                onChange = {pickedHandler}
+                />
+            )}
+
+            <Text>Total calories intake: {totalCalories}</Text>
+            <Text>Set a Daily Goal: {goalCalories1}</Text>
+            <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
+                <View>
+                    <TextInput
+                        keyboardType = 'numeric'
+                        style = {styles.input}
+                        placeholder = 'e.g. 2500'
+                        onChangeText = {(goal) => setGoal(goal)}
+                    />
+                </View>
+            </TouchableWithoutFeedback>
 
             <Text>Remaining Calories: {remaining}</Text>
 
