@@ -1,13 +1,8 @@
 import React from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
-
-import {
-    Righteous_400Regular
-} from '@expo-google-fonts/righteous';
-
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
+import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import {NavigationActions as navigation} from "react-navigation";
 
 export default function Welcome( {navigation} ) {
     let [fontsLoaded, error] = useFonts ({
@@ -22,7 +17,7 @@ return (
 
         <View style={{ flex: 2.5, justifyContent: 'center', alignItems: 'stretch'}}>
 
-            <View style={{ width: '100%',        flexDirection: 'row', alignItems: 'center', justifyContent:'center'}}>
+            <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent:'center'}}>
                 <Text style={styles.title}>Welcome to Fit
                     <Text style={styles.blueText}>Me</Text>
                 </Text>
@@ -51,7 +46,7 @@ return (
 
 
 //  styles
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF',
@@ -99,10 +94,9 @@ const styles = StyleSheet.create({
 
     boxShadow: {
         // add box shadow to iOS devices
-        shadowOffset: {width: -2, height: 4},
+        shadowOffset: {width: 0, height: 1},
         shadowOpacity: 0.2,
-        shadowRadius: 3,
-
+        shadowRadius: 1,
         // add box shadows to android devices
         elevation: 1,
     },
@@ -110,7 +104,7 @@ const styles = StyleSheet.create({
     signup: {
         backgroundColor: '#4356FF',
         borderColor: '#4356FF',
-        shadowColor: '#4356FF',
+        shadowColor: 'black',
     },
 
     login: {
@@ -122,3 +116,4 @@ const styles = StyleSheet.create({
     },
  
 });
+
