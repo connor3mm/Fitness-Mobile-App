@@ -2,9 +2,10 @@ import React from 'react';
 import {Button, StyleSheet, Text, View, TextInput} from "react-native";
 import { Formik } from 'formik';
 
-export default function FoodFormPage( {addFood, getTotalCaloriesIntake} ) {
+export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories} ) {
 
     getTotalCaloriesIntake();
+    getRemainingCalories();
 
     return(
         <View style = {styles.container}>

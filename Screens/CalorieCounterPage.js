@@ -12,6 +12,9 @@ export default function CalorieCounter( {navigation} ) {
     const [openModal, setOpenModal] = useState(false);
 
     const [goalCalories, setGoal] = useState(0);
+    const [goalCalories1, setGoal1] = useState(0);
+
+    const [remaining, setRemaining] = useState(0);
 
     const [breakfastFood, setBreakfastFood] = useState([
         {foodName: 'Eggs', calories: 58, quantity: 1, key: '1'},
@@ -41,6 +44,20 @@ export default function CalorieCounter( {navigation} ) {
 
     }
 
+    const setDailyGoal = () => {
+       setGoal1(goalCalories);
+    }
+
+    const getRemainingCalories = () => {
+        setRemaining(goalCalories - totalCalories);
+
+    }
+
+    const clickHandler = () => {
+        setDailyGoal();
+        getRemainingCalories();
+    }
+
     return(
         <View style = {styles.container}>
 
@@ -53,15 +70,24 @@ export default function CalorieCounter( {navigation} ) {
                             style = {styles.modalCloseStyle}
                             onPress = {() => setOpenModal(false)}
                         />
-                        <FoodForm addFood={addFood} getTotalCaloriesIntake={getTotalCaloriesIntake}/>
+                        <FoodForm addFood={addFood} getTotalCaloriesIntake={getTotalCaloriesIntake} getRemainingCalories={getRemainingCalories} />
                     </View>
                 </TouchableWithoutFeedback>
             </Modal>
-            <Text>Total calories intake: {totalCalories}</Text>
-            <TextInput>
+            <Text style = {styles.container}>Total calories intake: {totalCalories}</Text>
+            <Text style = {styles.container}>Set a Daily Goal: {goalCalories1}</Text>
+            <TextInput
+                keyboardType = 'numeric'
+                style = {styles.input}
+                placeholder = 'e.g. 2500'
+                onChangeText = {(goal) => setGoal(goal)}
+            />
 
-            </TextInput>
-            <Text style = {styles.foodAddTitle}>Add Breakfast</Text>
+            <Text>Remaining Calories: {remaining}</Text>
+
+            <Button title='Submit' onPress = {clickHandler}/>
+
+            <Text style = {styles.foodAddTitle}>Add Food</Text>
             <MaterialIcons
                 name = 'add'
                 size = {24}
@@ -124,5 +150,13 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         alignSelf: 'center',
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: 'grey',
+        padding: 8,
+        margin: 10,
+        width: 200,
+
     }
 })
