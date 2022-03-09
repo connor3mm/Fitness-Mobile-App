@@ -189,7 +189,7 @@ export default function BMICalculator() {
             </View>
 
 
-            <View style={styles.radio}>
+            <View style={styles.activity}>
                 <Text>Choose your Activity level: </Text>
 
                 <RadioButton.Group onValueChange={activity => setActivity(activity)} value={activity}>
@@ -226,8 +226,14 @@ const styles = StyleSheet.create({
         paddingRight: 150,
     },
 
-    submit: {
-        marginTop: 100,
+    activity: {
+        flex: 1,
+        alignItems: 'left',
+        justifyContent: 'left',
+        marginBottom: 25,
+        textAlign: 'center',
+        paddingRight: 150,
+        paddingBottom: 60,
     },
 
 });
