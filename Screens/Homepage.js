@@ -172,7 +172,7 @@ const styling = StyleSheet.create({
 
     profileName: {
         color: '#FFF',
-        fontWeight: 700,
+        fontWeight: "700",
         fontFamily: 'Righteous_400Regular',
         fontSize: 25,
     },
@@ -215,7 +215,7 @@ const styling = StyleSheet.create({
 
     whiteText: {
         color: '#FFF',
-        fontWeight: 700,
+        fontWeight: "700",
         fontFamily: 'Righteous_400Regular',
         fontSize: 17.5,
     },  
@@ -244,7 +244,5 @@ const styling = StyleSheet.create({
     footerIcon: {
         width: 23,
         height: 23,
-        borderColor: 'red',
-        borderWidth: '3',
     },
 })
