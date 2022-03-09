@@ -44,9 +44,7 @@ export default function BMICalculator() {
         console.log(weightType)
 
         // const formValid = heightFeet > 0 && heightInches > 0 && massStone > 0;
-        // if (!formValid) {
-        //     return;
-        // }
+
 
         let inchCalc
         //converts feet into inches
@@ -68,6 +66,10 @@ export default function BMICalculator() {
 
         } else {
             weightCalc = parseInt(massKG * 2.2)
+        }
+
+        if (!formValid) {
+            return;
         }
 
         //Calcs BMI
