@@ -7,7 +7,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 
-
 export default function CalorieCounter( {navigation} ) {
 
     const [openModal, setOpenModal] = useState(false);
@@ -46,11 +45,36 @@ export default function CalorieCounter( {navigation} ) {
         
     ]);
 
-    const addFood = (food) => {
+    const [lunchFood, setLunchFood] = useState([
+        {foodName: 'Apple', calories: 58, quantity: 1, key: '1'},
+        {foodName: 'Cheese', calories: 50, quantity: 1, key: '2'},
+
+    ]);
+
+    const [dinnerFood, setDinnerFood] = useState([
+        {foodName: 'Pasta', calories: 58, quantity: 1, key: '1'},
+        {foodName: 'Cheese', calories: 50, quantity: 1, key: '2'},
+
+    ]);
+
+    const addFood = (food,foodType) => {
         food.key = Math.random().toString();
-        setBreakfastFood((current) => {
-            return [food, ...current]
-        })
+        if(foodType === 'Breakfast') {
+            setBreakfastFood((current) => {
+                return [food, ...current]
+            })
+        }
+        if(foodType === 'Lunch') {
+            setLunchFood((current) => {
+                return [food, ...current]
+            })
+        }
+        if(foodType === 'Dinner') {
+            setDinnerFood((current) => {
+                return [food, ...current]
+            })
+        }
+
         setOpenModal(false);
     }
 
@@ -60,6 +84,16 @@ export default function CalorieCounter( {navigation} ) {
         for (let i = 0; i < breakfastFood.length; i++) {
             total += (parseInt(breakfastFood[i].calories) * parseInt(breakfastFood[i].quantity));
             console.log(breakfastFood[i].calories);
+        }
+
+        for (let i = 0; i < lunchFood.length; i++) {
+            total += (parseInt(lunchFood[i].calories) * parseInt(lunchFood[i].quantity));
+            console.log(lunchFood[i].calories);
+        }
+
+        for (let i = 0; i < dinnerFood.length; i++) {
+            total += (parseInt(dinnerFood[i].calories) * parseInt(dinnerFood[i].quantity));
+            console.log(dinnerFood[i].calories);
         }
         setTotal(total);
         console.log(total);
@@ -82,63 +116,73 @@ export default function CalorieCounter( {navigation} ) {
 
     return(
         <View style = {styles.container}>
+            <ScrollView>
+                <Modal visible={openModal} animationType='slide'>
+                    <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
+                        <View style = {styles.modalText} >
+                            <MaterialIcons
+                                name = 'close'
+                                size = {24}
+                                style = {styles.modalCloseStyle}
+                                onPress = {() => setOpenModal(false)}
+                            />
+                            <FoodForm addFood={addFood} getTotalCaloriesIntake={getTotalCaloriesIntake} getRemainingCalories={getRemainingCalories} />
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
+                <Text>Date: {dateText}</Text>
+                <View>
+                    <Button title='Pick Date' onPress={() => modeShow('date')}/>
+                </View>
 
-            <Modal visible={openModal} animationType='slide'>
+                {showed && (
+                    <DateTimePicker
+                    id = 'datePicker'
+                    value = {date}
+                    mode = {pickedMode}
+                    is24Hour = {true}
+                    display = 'default'
+                    onChange = {pickedHandler}
+                    />
+                )}
+
+                <Text>Total calories intake: {totalCalories}</Text>
+                <Text>Set a Daily Goal: {goalCalories1}</Text>
                 <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
-                    <View style = {styles.modalText} >
-                        <MaterialIcons
-                            name = 'close'
-                            size = {24}
-                            style = {styles.modalCloseStyle}
-                            onPress = {() => setOpenModal(false)}
+                    <View>
+                        <TextInput
+                            keyboardType = 'numeric'
+                            style = {styles.input}
+                            placeholder = 'e.g. 2500'
+                            onChangeText = {(goal) => setGoal(goal)}
                         />
-                        <FoodForm addFood={addFood} getTotalCaloriesIntake={getTotalCaloriesIntake} getRemainingCalories={getRemainingCalories} />
                     </View>
                 </TouchableWithoutFeedback>
-            </Modal>
-            <Text>Date: {dateText}</Text>
-            <View>
-                <Button title='Pick Date' onPress={() => modeShow('date')}/>
-            </View>
 
-            {showed && (
-                <DateTimePicker
-                id = 'datePicker'
-                value = {date}
-                mode = {pickedMode}
-                is24Hour = {true}
-                display = 'default'
-                onChange = {pickedHandler}
+                <Text>Remaining Calories: {remaining}</Text>
+
+                <Button title='Submit' onPress = {clickHandler}/>
+
+                <Text style = {styles.foodAddTitle}>Add Food</Text>
+                <MaterialIcons
+                    name = 'add'
+                    size = {24}
+                    style = {styles.modalStyle}
+                    onPress = {() => setOpenModal(true)}
                 />
-            )}
+                <Text>Breakfast Food</Text>
+                    { breakfastFood.map (item => (
+                        <View key = {item.key}>
+                            <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
+                                <CardComponent>
+                                    <Text style = {styles.item}>{item.foodName}</Text>
+                                </CardComponent>
+                            </TouchableOpacity>
+                        </View>
+                    ))}
 
-            <Text>Total calories intake: {totalCalories}</Text>
-            <Text>Set a Daily Goal: {goalCalories1}</Text>
-            <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
-                <View>
-                    <TextInput
-                        keyboardType = 'numeric'
-                        style = {styles.input}
-                        placeholder = 'e.g. 2500'
-                        onChangeText = {(goal) => setGoal(goal)}
-                    />
-                </View>
-            </TouchableWithoutFeedback>
-
-            <Text>Remaining Calories: {remaining}</Text>
-
-            <Button title='Submit' onPress = {clickHandler}/>
-
-            <Text style = {styles.foodAddTitle}>Add Food</Text>
-            <MaterialIcons
-                name = 'add'
-                size = {24}
-                style = {styles.modalStyle}
-                onPress = {() => setOpenModal(true)}
-            />
-
-            <ScrollView>
-                { breakfastFood.map (item => (
+                <Text>Lunch Food</Text>
+                { lunchFood.map (item => (
                     <View key = {item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
@@ -146,7 +190,18 @@ export default function CalorieCounter( {navigation} ) {
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
-                    ))}
+                ))}
+
+                <Text>Dinner Food</Text>
+                { dinnerFood.map (item => (
+                    <View key = {item.key}>
+                        <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
+                            <CardComponent>
+                                <Text style = {styles.item}>{item.foodName}</Text>
+                            </CardComponent>
+                        </TouchableOpacity>
+                    </View>
+                ))}
             </ScrollView>
         </View>
 

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, StyleSheet, Text, View, TextInput} from "react-native";
+import {RadioButton} from 'react-native-paper';
 import { Formik } from 'formik';
 
 export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories} ) {
@@ -7,12 +8,14 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
     getTotalCaloriesIntake();
     getRemainingCalories();
 
+    const [foodType,setFoodType] = useState('');
+
     return(
         <View style = {styles.container}>
             <Formik
                 initialValues={{ foodName: '', calories: '', quantity: ''}}
                 onSubmit = {(values) => {
-                    addFood(values);
+                    addFood(values,foodType);
                     console.log(values);
                 }}
             >
@@ -38,6 +41,16 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                             value = {formikProps.values.quantity}
                             keyboardType = 'numeric'
                         />
+
+                        <View>
+                            <RadioButton.Group onValueChange={foodType => setFoodType(foodType)}
+                                               value={foodType}>
+                                <RadioButton.Item label="Breakfast" value="Breakfast"/>
+                                <RadioButton.Item label="Lunch" value="Lunch"/>
+                                <RadioButton.Item label="Dinner" value="Dinner"/>
+                            </RadioButton.Group>
+                        </View>
+
                         <Button title='Submit' onPress={formikProps.handleSubmit} color='dodgerblue'/>
                     </View>
                 )}
@@ -58,4 +71,5 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 16,
     },
+
 })
