@@ -1,8 +1,9 @@
 import React from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Bottomnavbar } from '../Stack/appStack';
 import { NavigationContainer } from '@react-navigation/native';
 import { styles } from "./Welcomepage";
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Platform, StatusBar} from "react-native";
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { TabRouter } from 'react-navigation';
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
@@ -35,19 +36,22 @@ export default function Home({navigation}) {
 
 
     return(
-        <SafeAreaView style = {[styles.container, styling.menuContainer, styling.AndroidSafeArea,]}>
-            <ScrollView style={{width: '100%',}}>
+        <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
 
-            <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent:'center'
-            , padding: 10, }}>
-                <Text style={[styles.title, styling.smallTitle, ]}>Fit<Text style={styles.blueText}>Me</Text></Text>
-                <Image style={[styles.logo, styling.smallLogo, ]} source={require('../assets/img/barbell.png')}/>
-            </View> 
+            <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
+            colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
+            style={[styling.dashboard, styles.boxShadow]}>
 
-            <View style={[styling.dashboard, styles.boxShadow]}>
-
-                <View style={{ width: '100%', padding: 10,}}>
+                <View style={{ width: '100%', paddingTop: 50, 
+                paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={[styling.smallText, styling.profileName]}>Connor M.</Text>
+
+                    <View style={{flexDirection: 'row',}}>
+                        <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
+                        alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text></Text>
+                        <Image style={styling.logo} source={require('../assets/img/barbell.png')}/>
+                    </View>
+                 
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
@@ -87,7 +91,9 @@ export default function Home({navigation}) {
                         </View>
                     </View> 
                 </View>
-            </View>
+            </LinearGradient>
+
+            <ScrollView style={{width: '95%',}}>
 
             <View style={[styling.menu,]}>
                 <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
@@ -158,13 +164,7 @@ export default function Home({navigation}) {
     
 }
 
-const styling = StyleSheet.create({
-
-    AndroidSafeArea: {
-        flex: 1,
-        backgroundColor: "white",
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-    },
+export const styling = StyleSheet.create({
 
     smallTitle: {
         fontSize: 25,
@@ -176,16 +176,16 @@ const styling = StyleSheet.create({
     },
 
     dashboard: { 
-        width: '92.5%',
-        alignSelf: 'center',
-        padding: 2,
-        borderRadius: 10, 
+        padding: 3,
+        width: '102%',
+        marginTop: -3,
+        borderRadius: 30, 
         backgroundColor: '#4356FF',
     },
 
     profileName: {
         color: '#FFF',
-        fontSize: 25,
+        fontSize: 30,
         fontFamily: 'Righteous_400Regular',
     },
 
@@ -194,11 +194,17 @@ const styling = StyleSheet.create({
     },
 
     menu: {
-        width: '100%', 
         flexDirection: 'row', 
         justifyContent: 'center', 
         height: '20%',  
         marginVertical: 5,
+    },
+
+    logo: {
+        width: 22.5,
+        height: 22.5,
+        alignSelf: 'center',
+        transform: [{ rotate: '45deg'}, {translateX: -20}]
     },
 
     menuIcon: {
@@ -247,8 +253,9 @@ const styling = StyleSheet.create({
 
         backgroundColor : "#4356FF", 
         height: '9%', 
-        maxHeight: '9%', 
-        width: '105%',
+        width: '95%',
+        marginBottom: 10,
+        borderRadius: 10,
         flexDirection: 'row',
         alignItems: 'center',
     },
