@@ -2,6 +2,14 @@ import React, {useState} from 'react';
 import {Button, StyleSheet, Text, View, TextInput} from "react-native";
 import {RadioButton} from 'react-native-paper';
 import { Formik } from 'formik';
+import * as yup from 'yup';
+
+const validation = yup.object({
+    foodName: yup.string().required().min(2),
+    calories: yup.string().required().min(0),
+    quantity: yup.string().required().min(1),
+
+})
 
 export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories} ) {
 
@@ -14,6 +22,7 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
         <View style = {styles.container}>
             <Formik
                 initialValues={{ foodName: '', calories: '', quantity: ''}}
+                validationSchema={validation}
                 onSubmit = {(values) => {
                     addFood(values,foodType);
                     console.log(values);
@@ -44,7 +53,7 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
 
                         <View>
                             <RadioButton.Group onValueChange={foodType => setFoodType(foodType)}
-                                               value={foodType}>
+                                               value={foodType} id='radioGroup'>
                                 <RadioButton.Item label="Breakfast" value="Breakfast"/>
                                 <RadioButton.Item label="Lunch" value="Lunch"/>
                                 <RadioButton.Item label="Dinner" value="Dinner"/>

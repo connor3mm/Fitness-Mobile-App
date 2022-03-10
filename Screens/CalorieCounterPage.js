@@ -163,7 +163,7 @@ export default function CalorieCounter( {navigation} ) {
 
                 <Button title='Submit' onPress = {clickHandler}/>
 
-                <Text style = {styles.foodAddTitle}>Add Food</Text>
+                <Text style = {styles.foodAddTitle}>Add Food and Drinks</Text>
                 <MaterialIcons
                     name = 'add'
                     size = {24}
