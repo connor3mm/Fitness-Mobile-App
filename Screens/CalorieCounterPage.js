@@ -40,38 +40,38 @@ export default function CalorieCounter( {navigation} ) {
     }
 
     const [breakfastFood, setBreakfastFood] = useState([
-        {foodName: 'Eggs', calories: 58, quantity: 1, key: '1'},
-        {foodName: 'Cheese', calories: 50, quantity: 1, key: '2'},
+        {food: 'Eggs', calories: 58, quantity: 1, key: '1'},
+        {food: 'Cheese', calories: 50, quantity: 1, key: '2'},
         
     ]);
 
     const [lunchFood, setLunchFood] = useState([
-        {foodName: 'Apple', calories: 58, quantity: 1, key: '1'},
-        {foodName: 'Cheese', calories: 50, quantity: 1, key: '2'},
+        {food: 'Apple', calories: 58, quantity: 1, key: '1'},
+        {food: 'Cheese', calories: 50, quantity: 1, key: '2'},
 
     ]);
 
     const [dinnerFood, setDinnerFood] = useState([
-        {foodName: 'Pasta', calories: 58, quantity: 1, key: '1'},
-        {foodName: 'Cheese', calories: 50, quantity: 1, key: '2'},
+        {food: 'Pasta', calories: 58, quantity: 1, key: '1'},
+        {food: 'Cheese', calories: 50, quantity: 1, key: '2'},
 
     ]);
 
-    const addFood = (food,foodType) => {
-        food.key = Math.random().toString();
+    const addFood = (foodName,foodType) => {
+        foodName.key = Math.random().toString();
         if(foodType === 'Breakfast') {
             setBreakfastFood((current) => {
-                return [food, ...current]
+                return [foodName, ...current]
             })
         }
         if(foodType === 'Lunch') {
             setLunchFood((current) => {
-                return [food, ...current]
+                return [foodName, ...current]
             })
         }
         if(foodType === 'Dinner') {
             setDinnerFood((current) => {
-                return [food, ...current]
+                return [foodName, ...current]
             })
         }
 
@@ -175,7 +175,7 @@ export default function CalorieCounter( {navigation} ) {
                         <View key = {item.key}>
                             <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                                 <CardComponent>
-                                    <Text style = {styles.item}>{item.foodName}</Text>
+                                    <Text style = {styles.item}>{item.food}</Text>
                                 </CardComponent>
                             </TouchableOpacity>
                         </View>
@@ -186,7 +186,7 @@ export default function CalorieCounter( {navigation} ) {
                     <View key = {item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
-                                <Text style = {styles.item}>{item.foodName}</Text>
+                                <Text style = {styles.item}>{item.food}</Text>
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
@@ -197,7 +197,7 @@ export default function CalorieCounter( {navigation} ) {
                     <View key = {item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
-                                <Text style = {styles.item}>{item.foodName}</Text>
+                                <Text style = {styles.item}>{item.food}</Text>
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
