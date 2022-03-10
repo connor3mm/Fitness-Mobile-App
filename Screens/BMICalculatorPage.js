@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Button, SafeAreaView, TextInput, StyleSheet, Text, View} from "react-native";
+import {Button, SafeAreaView, TextInput, StyleSheet, Text, View, Alert} from "react-native";
 import {RadioButton} from 'react-native-paper';
+import {Alert as AlertIOS} from "react-native-web";
 
 
 
@@ -80,10 +81,19 @@ export default function BMICalculator() {
 
 
     const displayMessage = (bmi) => {
-
-
-
-
+        console.log("hi")
+        Alert.alert(
+            "Alert Title",
+            "My Alert Msg",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+        );
     }
 
 
@@ -229,8 +239,6 @@ const styles = StyleSheet.create({
 
     radio: {
         flex: 1,
-        alignItems: 'left',
-        justifyContent: 'left',
         marginBottom: 25,
         textAlign: 'center',
         paddingRight: 150,
@@ -238,8 +246,6 @@ const styles = StyleSheet.create({
 
     activity: {
         flex: 1,
-        alignItems: 'left',
-        justifyContent: 'left',
         marginBottom: 25,
         textAlign: 'center',
         paddingRight: 150,
