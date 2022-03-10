@@ -3,6 +3,7 @@ import {Button, SafeAreaView, TextInput, StyleSheet, Text, View} from "react-nat
 import {RadioButton} from 'react-native-paper';
 
 
+
 export default function BMICalculator() {
 
     //height values
@@ -30,7 +31,7 @@ export default function BMICalculator() {
     const [activity, setActivity] = React.useState('');
 
     //BMI value
-    const [bmi, setBmi] = useState(0);
+    let [bmi, setBmi] = useState(0);
 
 
     const calculate = () => {
@@ -68,16 +69,23 @@ export default function BMICalculator() {
             weightCalc = parseInt(massKG * 2.2)
         }
 
-        if (!formValid) {
-            return;
-        }
+        // if (!formValid) {
+        //     return;
+        // }
 
         //Calcs BMI
-        const bmiCalc = Math.floor((weightCalc / (inchCalc ** 2)) * 703);
-
-        setBmi(bmiCalc);
-        console.log(bmiCalc)
+        bmi =  Math.floor((weightCalc / (inchCalc ** 2)) * 703);
+        displayMessage(bmi);
     }
+
+
+    const displayMessage = (bmi) => {
+
+
+
+
+    }
+
 
     return (
         <View style={styles.container}>
