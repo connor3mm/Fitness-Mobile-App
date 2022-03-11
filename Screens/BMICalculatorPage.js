@@ -15,10 +15,10 @@ export default function BMICalculator() {
     //weight values
     const [weightType, setWeightType] = useState('stone');
 
-    const [massStone, setMassStone] = useState(0);
+    const [massStone, setMassStone] = useState(-1);
     const [massStoneLbs, setMassStoneLbs] = useState(0);
-    const [massLBS, setMassLBS] = useState(0);
-    const [massKG, setMassKG] = useState(0);
+    const [massLBS, setMassLBS] = useState(-1);
+    const [massKG, setMassKG] = useState(-1);
 
     //age values
     const [age, setAge] = useState(0);
@@ -33,29 +33,64 @@ export default function BMICalculator() {
     let [bmi, setBmi] = useState(0);
 
 
+    const fullFormValidation = () => {
+
+        let formValidation = true
+
+        if (checked === "0") {
+            setChecked('');
+            formValidation = false
+        }
+
+        //height Validation
+        let feetValidation = heightType === 'feet' && (heightFeet === -1 || heightFeet <= 0);
+        let cmValidation = heightType === 'cm' && (heightCm === -1 || heightCm <= 0)
+
+        if (feetValidation) {
+            setHeightFeet(0);
+            formValidation = false
+        }
+
+        if (cmValidation) {
+            setHeightCm(0);
+            formValidation = false
+        }
+
+        //weight Validation
+        let stoneValidation = weightType === 'stone' && (massStone === -1 || massStone <= 0)
+        let lbsValidation = weightType === 'LBS' && (massLBS === -1 || massLBS <= 0)
+        let kgValidation = weightType === 'KG' && (massKG === -1 || massKG <= 0)
+
+        if (stoneValidation) {
+            setMassStone(0);
+            console.log("stone")
+            formValidation = false
+        }
+
+        if (lbsValidation) {
+            setMassLBS(0);
+            formValidation = false
+        }
+
+        if (kgValidation) {
+            setMassKG(0);
+            formValidation = false
+        }
+
+        if(age !== 0 && age <= 0 && age >= 120){
+            setAge(-1);
+            formValidation = false
+        }
+
+        return formValidation
+
+    }
+
     const calculate = () => {
 
-        let formValidation = true;
+        let formValidation = fullFormValidation();
 
-        if(checked === "0"){
-            setChecked('');
-            formValidation = false;
-
-        }
-
-        let feetValidation = heightType === 'feet' && (heightFeet === -1 || heightFeet < 0);
-
-        if(feetValidation){
-            setHeightFeet(0);
-            formValidation = false;
-        }
-
-        if(heightType === 'cm' && (heightCm === -1 || heightCm < 0)){
-            setHeightCm(0);
-            formValidation = false;
-        }
-
-        if (formValidation === false){
+        if (formValidation === false) {
             return
         }
 
@@ -185,16 +220,30 @@ export default function BMICalculator() {
         return weight;
     }
 
+    const resetHeightValue = (heightType) => {
+        setHeightType(heightType)
+        setHeightFeet(-1);
+        setHeightInches(0);
+        setHeightCm(-1);
+    }
+
+    const resetWeightValue = (weightType) => {
+        setWeightType(weightType)
+        setMassStone(-1);
+        setMassStoneLbs(0);
+        setMassLBS(-1);
+        setMassKG(-1);
+    }
+
 
     return (
         <View style={styles.container}>
             <ScrollView>
                 <View style={styles.radio}>
-                    <RadioButton.Group onValueChange={heightType => setHeightType(heightType)} value={heightType}>
+                    <RadioButton.Group onValueChange={heightType => resetHeightValue(heightType)} value={heightType}>
                         <RadioButton.Item label="Feet" value="feet"/>
                         <RadioButton.Item label="CM" value="cm"/>
                     </RadioButton.Group>
-                    {/*{setHeightFeet(0)}  {setHeightInches(0)} {setHeightCm(0)}*/}
                 </View>
 
                 <Text>Enter Height: </Text>
@@ -215,7 +264,9 @@ export default function BMICalculator() {
                     />) : null}
 
                     <View>
-                        {heightFeet === 0 ? (<Text style={styles.errorMessage}>Please fill Feet input box with a positive integer</Text>) : null}
+                        {heightFeet === 0 ? (
+                            <Text style={styles.errorMessage}>Please fill Feet input box with a positive
+                                integer</Text>) : null}
                     </View>
                 </View>
 
@@ -229,18 +280,18 @@ export default function BMICalculator() {
                     />) : null}
 
                     <View>
-                        {heightCm === 0 ? (<Text style={styles.errorMessage}>Please fill CM input box with a positive integer</Text>) : null}
+                        {heightCm === 0 ? (<Text style={styles.errorMessage}>Please fill CM input box with a positive
+                            integer</Text>) : null}
                     </View>
 
                 </View>
 
                 <View>
-                    <RadioButton.Group style={styles.radio} onValueChange={weightType => setWeightType(weightType)}
+                    <RadioButton.Group style={styles.radio} onValueChange={weightType => resetWeightValue(weightType)}
                                        value={weightType}>
                         <RadioButton.Item label="Stone" value="stone"/>
                         <RadioButton.Item label="Pounds" value="LBS"/>
                         <RadioButton.Item label="Kilograms" value="KG"/>
-                        {/*{ setMassStone(0)}{ setMassStoneLbs(0)} {setMassLBS(0)} {setMassKG(0)}*/}
                     </RadioButton.Group>
                 </View>
 
@@ -259,6 +310,12 @@ export default function BMICalculator() {
                         placeholder='Pounds'
                         onChangeText={(Weight2) => setMassStoneLbs(Weight2)}
                     />) : null}
+
+                    <View>
+                        {massStone === 0 ? (
+                            <Text style={styles.errorMessage}>Please fill Stone input box with a positive
+                                integer</Text>) : null}
+                    </View>
                 </View>
 
                 <View>
@@ -269,6 +326,10 @@ export default function BMICalculator() {
                         placeholder='Pounds'
                         onChangeText={(Weight) => setMassLBS(Weight)}
                     />) : null}
+
+                    {massLBS === 0 ? (
+                        <Text style={styles.errorMessage}>Please fill Pounds input box with a positive
+                            integer</Text>) : null}
                 </View>
 
                 <View>
@@ -279,16 +340,27 @@ export default function BMICalculator() {
                         placeholder='Kilograms'
                         onChangeText={(Weight) => setMassKG(Weight)}
                     />) : null}
+
+                    {massKG === 0 ? (
+                        <Text style={styles.errorMessage}>Please fill Kilogram input box with a positive
+                            integer</Text>) : null}
+
                 </View>
 
+                <View>
+                    <Text>Enter Age (Optional): </Text>
+                    <TextInput
+                        keyboardType='numeric'
+                        style={styles.input}
+                        placeholder='Age'
+                        onChangeText={(Age) => setAge(Age)}
+                    />
 
-                <Text>Enter Age (Optional): </Text>
-                <TextInput
-                    keyboardType='numeric'
-                    style={styles.input}
-                    placeholder='Age'
-                    onChangeText={(Age) => setAge(Age)}
-                />
+                        {age === -1  ? (
+                            <Text style={styles.errorMessage}>Please fill age with a positive
+                                integer between 1-120</Text>) : null}
+
+                </View>
 
                 <View>
                     <Text>Choose your Sex: </Text>
