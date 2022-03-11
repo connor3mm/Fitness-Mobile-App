@@ -5,27 +5,30 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 const validation = yup.object({
-    food: yup.string().required().min(2),
-    calories: yup.string().required().min(0).
+    Food: yup.string().required().min(2),
+    Calories: yup.string().required().min(0).
     test('not-negative', 'Please enter a positive number', (val) => {return parseInt(val) > 0;}), //if this returns falls, the validation fails and it will display the message
-    quantity: yup.string().required().min(1).
+    Quantity: yup.string().required().min(1).
     test('not-negative', 'Please enter a positive number', (val) => {return parseInt(val) > 0;}),
 })
 
-export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories} ) {
+export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories, getTotalBreakfastCalories, getTotalLunchCalories, getTotalDinnerCalories} ) {
 
     getTotalCaloriesIntake();
     getRemainingCalories();
+    getTotalBreakfastCalories();
+    getTotalLunchCalories();
+    getTotalDinnerCalories();
 
     const [foodType,setFoodType] = useState('0');
 
     return(
         <View style = {styles.container}>
             <Formik
-                initialValues={{ food: '', calories: '', quantity: ''}}
+                initialValues={{ Food: '', Calories: '', Quantity: ''}}
                 validationSchema={validation}
                 onSubmit = {(values) => {
-                    if(foodType === '0') {
+                    if(foodType <= '0') {
                         setFoodType('');
                         return
                     }
@@ -38,29 +41,29 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                         <TextInput
                             style = {styles.inputStyle}
                             placeholder = 'Food name'
-                            onChangeText = {formikProps.handleChange('food')}
-                            value = {formikProps.values.food}
-                            onBlur = {formikProps.handleBlur('food')}
+                            onChangeText = {formikProps.handleChange('Food')}
+                            value = {formikProps.values.Food}
+                            onBlur = {formikProps.handleBlur('Food')}
                         />
-                        <Text style = {styles.errorMessage}> {formikProps.touched.food && formikProps.errors.food} </Text>
+                        <Text style = {styles.errorMessage}> {formikProps.touched.Food && formikProps.errors.Food} </Text>
                         <TextInput
                             style = {styles.inputStyle}
                             placeholder = 'Calories for one quantity'
-                            onChangeText = {formikProps.handleChange('calories')}
-                            value = {formikProps.values.calories}
+                            onChangeText = {formikProps.handleChange('Calories')}
+                            value = {formikProps.values.Calories}
                             keyboardType = 'numeric'
-                            onBlur = {formikProps.handleBlur('calories')}
+                            onBlur = {formikProps.handleBlur('Calories')}
                         />
-                        <Text style = {styles.errorMessage}> {formikProps.touched.calories && formikProps.errors.calories} </Text>
+                        <Text style = {styles.errorMessage}> {formikProps.touched.Calories && formikProps.errors.Calories} </Text>
                         <TextInput
                             style = {styles.inputStyle}
                             placeholder = 'Quantity'
-                            onChangeText = {formikProps.handleChange('quantity')}
-                            value = {formikProps.values.quantity}
+                            onChangeText = {formikProps.handleChange('Quantity')}
+                            value = {formikProps.values.Quantity}
                             keyboardType = 'numeric'
-                            onBlur = {formikProps.handleBlur('quantity')}
+                            onBlur = {formikProps.handleBlur('Quantity')}
                         />
-                        <Text style = {styles.errorMessage}> {formikProps.touched.quantity && formikProps.errors.quantity} </Text>
+                        <Text style = {styles.errorMessage}> {formikProps.touched.Quantity && formikProps.errors.Quantity} </Text>
                         <View>
                             <RadioButton.Group onValueChange={foodType => setFoodType(foodType)}
                                                value={foodType} id='radioGroup'>

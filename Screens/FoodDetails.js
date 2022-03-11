@@ -10,9 +10,9 @@ export default function FoodDetails( {navigation} ) {
         <View style = {styles.container}>
             <Text>Food Details Screen</Text>
             <CardComponent>
-                <Text>Food: { navigation.getParam('food')}</Text>
-                <Text>Calories: { navigation.getParam('calories')}</Text>
-                <Text>Quantity: { navigation.getParam('quantity')}</Text>
+                <Text>Food: { navigation.getParam('Food')}</Text>
+                <Text>Calories: { navigation.getParam('Calories')}</Text>
+                <Text>Quantity: { navigation.getParam('Quantity')}</Text>
             </CardComponent>
         </View>
 

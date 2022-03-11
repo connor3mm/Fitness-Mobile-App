@@ -17,11 +17,32 @@ export default function CalorieCounter( {navigation} ) {
     const [remaining, setRemaining] = useState(0);
 
     const [totalCalories, setTotal] = useState(0);
+    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState('');
+    const [totalCaloriesLunch, setTotalLunchCalories] = useState('');
+    const [totalCaloriesDinner, setTotalDinnerCalories] = useState('');
 
     const [date, setDate] = useState(new Date());
     const [pickedMode, setPickedMode] = useState('date');
     const [showed, setShowed] = useState(false);
     const [dateText, setDateText] = useState('');
+
+    const [breakfastFood, setBreakfastFood] = useState([
+        {Food: 'Eggs', Calories: 58, Quantity: 1, key: '1'},
+        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
+
+    ]);
+
+    const [lunchFood, setLunchFood] = useState([
+        {Food: 'Apple', Calories: 58, Quantity: 1, key: '1'},
+        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
+
+    ]);
+
+    const [dinnerFood, setDinnerFood] = useState([
+        {Food: 'Pasta', Calories: 58, Quantity: 1, key: '1'},
+        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
+
+    ]);
 
     const pickedHandler = (event, selected) => {
         const current = selected || date; //if selected = selected, if not it will be the initial date
@@ -38,24 +59,6 @@ export default function CalorieCounter( {navigation} ) {
         setPickedMode(current);
 
     }
-
-    const [breakfastFood, setBreakfastFood] = useState([
-        {food: 'Eggs', calories: 58, quantity: 1, key: '1'},
-        {food: 'Cheese', calories: 50, quantity: 1, key: '2'},
-        
-    ]);
-
-    const [lunchFood, setLunchFood] = useState([
-        {food: 'Apple', calories: 58, quantity: 1, key: '1'},
-        {food: 'Cheese', calories: 50, quantity: 1, key: '2'},
-
-    ]);
-
-    const [dinnerFood, setDinnerFood] = useState([
-        {food: 'Pasta', calories: 58, quantity: 1, key: '1'},
-        {food: 'Cheese', calories: 50, quantity: 1, key: '2'},
-
-    ]);
 
     const addFood = (foodName,foodType) => {
         foodName.key = Math.random().toString();
@@ -80,22 +83,49 @@ export default function CalorieCounter( {navigation} ) {
 
     const getTotalCaloriesIntake = () => {
         let total = 0;
-        console.log(breakfastFood)
+
         for (let i = 0; i < breakfastFood.length; i++) {
-            total += (parseInt(breakfastFood[i].calories) * parseInt(breakfastFood[i].quantity));
-            console.log(breakfastFood[i].calories);
+            total += (parseInt(breakfastFood[i].Calories) * parseInt(breakfastFood[i].Quantity));
         }
 
         for (let i = 0; i < lunchFood.length; i++) {
-            total += (parseInt(lunchFood[i].calories) * parseInt(lunchFood[i].quantity));
-            console.log(lunchFood[i].calories);
+            total += (parseInt(lunchFood[i].Calories) * parseInt(lunchFood[i].Quantity));
         }
 
         for (let i = 0; i < dinnerFood.length; i++) {
-            total += (parseInt(dinnerFood[i].calories) * parseInt(dinnerFood[i].quantity));
-            console.log(dinnerFood[i].calories);
+            total += (parseInt(dinnerFood[i].Calories) * parseInt(dinnerFood[i].Quantity));
         }
         setTotal(total);
+    }
+
+    const getTotalBreakfastCalories = () => {
+        let total = 0;
+
+        for (let i = 0; i < breakfastFood.length; i++) {
+            total += (parseInt(breakfastFood[i].Calories) * parseInt(breakfastFood[i].Quantity));
+        }
+
+        setTotalBreakfastCalories(total);
+    }
+
+    const getTotalLunchCalories = () => {
+        let total = 0;
+
+        for (let i = 0; i < lunchFood.length; i++) {
+            total += (parseInt(lunchFood[i].Calories) * parseInt(lunchFood[i].Quantity));
+        }
+
+        setTotalLunchCalories(total);
+    }
+
+    const getTotalDinnerCalories = () => {
+        let total = 0;
+
+        for (let i = 0; i < dinnerFood.length; i++) {
+            total += (parseInt(dinnerFood[i].Calories) * parseInt(dinnerFood[i].Quantity));
+        }
+
+        setTotalDinnerCalories(total);
     }
 
     const setDailyGoal = () => {
@@ -124,7 +154,15 @@ export default function CalorieCounter( {navigation} ) {
                                 style = {styles.modalCloseStyle}
                                 onPress = {() => setOpenModal(false)}
                             />
-                            <FoodForm addFood={addFood} getTotalCaloriesIntake={getTotalCaloriesIntake} getRemainingCalories={getRemainingCalories} />
+                            <FoodForm addFood={addFood}
+                                      getTotalCaloriesIntake={getTotalCaloriesIntake}
+                                      getRemainingCalories={getRemainingCalories}
+                                      getTotalBreakfastCalories={getTotalBreakfastCalories}
+                                      getTotalLunchCalories={getTotalLunchCalories}
+                                      getTotalDinnerCalories={getTotalDinnerCalories}
+
+
+                            />
                         </View>
                     </TouchableWithoutFeedback>
                 </Modal>
@@ -168,34 +206,34 @@ export default function CalorieCounter( {navigation} ) {
                     style = {styles.modalStyle}
                     onPress = {() => setOpenModal(true)}
                 />
-                <Text>Breakfast</Text>
+                <Text>Breakfast: {totalCaloriesBreakfast}</Text>
                     { breakfastFood.map (item => (
                         <View key = {item.key}>
                             <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                                 <CardComponent>
-                                    <Text style = {styles.item}>{item.food}</Text>
+                                    <Text style = {styles.item}>{item.Food}</Text>
                                 </CardComponent>
                             </TouchableOpacity>
                         </View>
                     ))}
 
-                <Text>Lunch</Text>
+                <Text>Lunch: {totalCaloriesLunch}</Text>
                 { lunchFood.map (item => (
                     <View key = {item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
-                                <Text style = {styles.item}>{item.food}</Text>
+                                <Text style = {styles.item}>{item.Food}</Text>
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
                 ))}
 
-                <Text>Dinner</Text>
+                <Text>Dinner: {totalCaloriesDinner}</Text>
                 { dinnerFood.map (item => (
                     <View key = {item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
-                                <Text style = {styles.item}>{item.food}</Text>
+                                <Text style = {styles.item}>{item.Food}</Text>
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
