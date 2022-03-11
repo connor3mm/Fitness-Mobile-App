@@ -170,7 +170,7 @@ export default function CalorieCounter( {navigation} ) {
                     style = {styles.modalStyle}
                     onPress = {() => setOpenModal(true)}
                 />
-                <Text>Breakfast Food</Text>
+                <Text>Breakfast</Text>
                     { breakfastFood.map (item => (
                         <View key = {item.key}>
                             <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
@@ -181,7 +181,7 @@ export default function CalorieCounter( {navigation} ) {
                         </View>
                     ))}
 
-                <Text>Lunch Food</Text>
+                <Text>Lunch</Text>
                 { lunchFood.map (item => (
                     <View key = {item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
@@ -192,7 +192,7 @@ export default function CalorieCounter( {navigation} ) {
                     </View>
                 ))}
 
-                <Text>Dinner Food</Text>
+                <Text>Dinner</Text>
                 { dinnerFood.map (item => (
                     <View key = {item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>

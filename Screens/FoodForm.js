@@ -8,7 +8,6 @@ const validation = yup.object({
     food: yup.string().required().min(2),
     calories: yup.string().required().min(0),
     quantity: yup.string().required().min(1),
-
 })
 
 export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories} ) {
@@ -16,7 +15,7 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
     getTotalCaloriesIntake();
     getRemainingCalories();
 
-    const [foodType,setFoodType] = useState('');
+    const [foodType,setFoodType] = useState('0');
 
     return(
         <View style = {styles.container}>
@@ -24,8 +23,12 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                 initialValues={{ food: '', calories: '', quantity: ''}}
                 validationSchema={validation}
                 onSubmit = {(values) => {
+                    if(foodType === '0') {
+                        setFoodType('');
+                        return
+                    }
                     addFood(values,foodType);
-                    console.log(values);
+
                 }}
             >
                 { (formikProps) => (
@@ -64,7 +67,9 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                                 <RadioButton.Item label="Dinner" value="Dinner"/>
                             </RadioButton.Group>
                         </View>
-
+                        <View>
+                            {foodType === '' ? (<Text style={styles.errorMessage}>Please choose time of day</Text>) : null}
+                        </View>
                         <Button title='Submit' onPress={formikProps.handleSubmit} color='dodgerblue'/>
                     </View>
                 )}
