@@ -33,10 +33,14 @@ export default function BMICalculator() {
     let [bmi, setBmi] = useState(0);
 
 
+    /**
+     * checks the form to validate inputs
+     * @returns {boolean}
+     */
     const fullFormValidation = () => {
-
         let formValidation = true
 
+        //sex validation
         if (checked === "0") {
             setChecked('');
             formValidation = false
@@ -63,7 +67,6 @@ export default function BMICalculator() {
 
         if (stoneValidation) {
             setMassStone(0);
-            console.log("stone")
             formValidation = false
         }
 
@@ -77,25 +80,30 @@ export default function BMICalculator() {
             formValidation = false
         }
 
-        if(age !== 0 && age <= 0 && age >= 120){
+        //age validation
+        if (age !== 0 && (age <= 0 || age >= 120)) {
             setAge(-1);
             formValidation = false
         }
 
         return formValidation
-
     }
 
+
+    /**
+     * calculates BMI with height, weight and sex as a minimum, age and activity levels optional
+     */
     const calculate = () => {
 
         let formValidation = fullFormValidation();
 
-        if (formValidation === false) {
+        //cancel calculation if validation is false
+        if (!formValidation) {
             return
         }
 
-        // const formValid = heightFeet > 0 && heightInches > 0 && massStone > 0;
         let inchCalc
+
         //converts feet into inches
         if (heightType === 'feet') {
             inchCalc = parseInt(heightFeet * 12) + parseInt(heightInches);
@@ -116,37 +124,50 @@ export default function BMICalculator() {
             weightCalc = parseInt(massKG * 2.2);
         }
 
-
-        //Calcs BMI
+        //Calculates BMI
         bmi = Math.floor((weightCalc / (inchCalc ** 2)) * 703);
         displayMessage(bmi);
     }
 
 
+    /**
+     * Creates the alert display message
+     * @param bmi
+     */
     const displayMessage = (bmi) => {
-
+        //variables
         let weight = '';
         let activityMessage = ''
         let ageMessage = ''
 
+        //Check if user is male or female
         if (checked === 'first') {
             weight = maleBMI(bmi);
         } else {
             weight = femaleBMI(bmi);
         }
 
+        //create activity message
         activityMessage = activityOutputMessage(activity);
 
+        //create age message
         ageMessage = ageOutputMessage(age);
 
+        //create final message
         let message = "\nYour BMI calculation is: " + bmi + "\n\n This puts you into the category of: " + weight + ageMessage + activityMessage;
 
-
+        //Output for the Alert
         Alert.alert("BMI Results!", message, [
 
             {text: "Close", onPress: () => console.log("Close Pressed")}]);
     }
 
+
+    /**
+     * Creates activity message
+     * @param activity
+     * @returns {string}
+     */
     const activityOutputMessage = (activity) => {
         let activityMessage = ''
         if (activity === 'low') {
@@ -162,6 +183,12 @@ export default function BMICalculator() {
         return activityMessage;
     }
 
+
+    /**
+     * Creates age message
+     * @param age
+     * @returns {string}
+     */
     const ageOutputMessage = (age) => {
         let ageMessage = ''
 
@@ -176,21 +203,30 @@ export default function BMICalculator() {
         return ageMessage;
     }
 
+
+    /**
+     * calculates male bmi output
+     * @param bmi
+     * @returns {string}
+     */
     const maleBMI = (bmi) => {
 
         let weight = '';
         if (bmi < 18.5) {
             weight = 'Underweight';
+
         } else if (bmi >= 18.5 && bmi < 25) {
-
             weight = 'Normal Weight';
-        } else if (bmi >= 25 && bmi < 30) {
 
+        } else if (bmi >= 25 && bmi < 30) {
             weight = 'Overweight';
+
         } else if (bmi >= 30 && bmi < 35) {
             weight = 'Severe Overweight';
+
         } else if (bmi >= 35) {
             weight = 'Obesity';
+
         } else {
             weight = 'BMI Could not be calculated';
         }
@@ -198,21 +234,30 @@ export default function BMICalculator() {
         return weight;
     }
 
+
+    /**
+     * calculates female bmi output
+     * @param bmi
+     * @returns {string}
+     */
     const femaleBMI = (bmi) => {
 
         let weight = '';
         if (bmi < 17.5) {
             weight = 'Underweight';
+
         } else if (bmi >= 17.5 && bmi < 24) {
-
             weight = 'Normal Weight';
-        } else if (bmi >= 24 && bmi < 29) {
 
+        } else if (bmi >= 24 && bmi < 29) {
             weight = 'Overweight';
+
         } else if (bmi >= 29 && bmi < 34) {
             weight = 'Severe Overweight';
+
         } else if (bmi >= 34) {
             weight = 'Obesity';
+
         } else {
             weight = 'BMI Could not be calculated';
         }
@@ -220,6 +265,11 @@ export default function BMICalculator() {
         return weight;
     }
 
+
+    /**
+     * resets height values if radio button changes
+     * @param heightType
+     */
     const resetHeightValue = (heightType) => {
         setHeightType(heightType)
         setHeightFeet(-1);
@@ -227,6 +277,10 @@ export default function BMICalculator() {
         setHeightCm(-1);
     }
 
+    /**
+     * resets weight value if radio button changes
+     * @param weightType
+     */
     const resetWeightValue = (weightType) => {
         setWeightType(weightType)
         setMassStone(-1);
@@ -239,6 +293,7 @@ export default function BMICalculator() {
     return (
         <View style={styles.container}>
             <ScrollView>
+
                 <View style={styles.radio}>
                     <RadioButton.Group onValueChange={heightType => resetHeightValue(heightType)} value={heightType}>
                         <RadioButton.Item label="Feet" value="feet"/>
@@ -286,6 +341,7 @@ export default function BMICalculator() {
 
                 </View>
 
+
                 <View>
                     <RadioButton.Group style={styles.radio} onValueChange={weightType => resetWeightValue(weightType)}
                                        value={weightType}>
@@ -319,7 +375,6 @@ export default function BMICalculator() {
                 </View>
 
                 <View>
-
                     {(weightType === 'LBS') ? (<TextInput
                         keyboardType='numeric'
                         style={styles.input}
@@ -333,7 +388,6 @@ export default function BMICalculator() {
                 </View>
 
                 <View>
-
                     {weightType === "KG" ? (<TextInput
                         keyboardType='numeric'
                         style={styles.input}
@@ -344,8 +398,8 @@ export default function BMICalculator() {
                     {massKG === 0 ? (
                         <Text style={styles.errorMessage}>Please fill Kilogram input box with a positive
                             integer</Text>) : null}
-
                 </View>
+
 
                 <View>
                     <Text>Enter Age (Optional): </Text>
@@ -356,11 +410,11 @@ export default function BMICalculator() {
                         onChangeText={(Age) => setAge(Age)}
                     />
 
-                        {age === -1  ? (
-                            <Text style={styles.errorMessage}>Please fill age with a positive
-                                integer between 1-120</Text>) : null}
-
+                    {age === -1 ? (
+                        <Text style={styles.errorMessage}>Please fill age with a positive
+                            integer between 1-120</Text>) : null}
                 </View>
+
 
                 <View>
                     <Text>Choose your Sex: </Text>
@@ -387,10 +441,12 @@ export default function BMICalculator() {
                     </RadioButton.Group>
                 </View>
 
+
                 <Button style={styles.submit} backgroundColor="#FFFFFF" title="Calculate" onPress={calculate}/>
+
+
             </ScrollView>
         </View>
-
     );
 }
 
@@ -410,7 +466,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 6,
         textAlign: 'center',
-
     },
 
 });
