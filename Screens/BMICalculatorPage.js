@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
-import {Button, SafeAreaView, TextInput, StyleSheet, Text, View, Alert, ScrollView} from "react-native";
-import {RadioButton} from 'react-native-paper';
-
+import {SafeAreaView, TextInput, StyleSheet, 
+    Text, View, Alert, ScrollView, TouchableOpacity, Image} from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+import { styling } from './Homepage';
+import {Button, RadioButton} from 'react-native-paper';
+import { styles } from "./Welcomepage";
 
 export default function BMICalculator() {
 
@@ -38,56 +41,56 @@ export default function BMICalculator() {
      * @returns {boolean}
      */
     const fullFormValidation = () => {
-        let formValidation = true
+        let formValidation = true;
 
         //sex validation
         if (checked === "0") {
             setChecked('');
-            formValidation = false
+            formValidation = false;
         }
 
         //height Validation
         let feetValidation = heightType === 'feet' && (heightFeet === -1 || heightFeet <= 0);
-        let cmValidation = heightType === 'cm' && (heightCm === -1 || heightCm <= 0)
+        let cmValidation = heightType === 'cm' && (heightCm === -1 || heightCm <= 0);
 
         if (feetValidation) {
             setHeightFeet(0);
-            formValidation = false
+            formValidation = false;
         }
 
         if (cmValidation) {
             setHeightCm(0);
-            formValidation = false
+            formValidation = false;
         }
 
         //weight Validation
-        let stoneValidation = weightType === 'stone' && (massStone === -1 || massStone <= 0)
-        let lbsValidation = weightType === 'LBS' && (massLBS === -1 || massLBS <= 0)
-        let kgValidation = weightType === 'KG' && (massKG === -1 || massKG <= 0)
+        let stoneValidation = weightType === 'stone' && (massStone === -1 || massStone <= 0);
+        let lbsValidation = weightType === 'LBS' && (massLBS === -1 || massLBS <= 0);
+        let kgValidation = weightType === 'KG' && (massKG === -1 || massKG <= 0);
 
         if (stoneValidation) {
             setMassStone(0);
-            formValidation = false
+            formValidation = false;
         }
 
         if (lbsValidation) {
             setMassLBS(0);
-            formValidation = false
+            formValidation = false;
         }
 
         if (kgValidation) {
             setMassKG(0);
-            formValidation = false
+            formValidation = false;
         }
 
         //age validation
         if (age !== 0 && (age <= 0 || age >= 120)) {
             setAge(-1);
-            formValidation = false
+            formValidation = false;
         }
 
-        return formValidation
-    }
+        return formValidation;
+    };
 
 
     /**
@@ -98,11 +101,9 @@ export default function BMICalculator() {
         let formValidation = fullFormValidation();
 
         //cancel calculation if validation is false
-        if (!formValidation) {
-            return
-        }
+        if (!formValidation) return;
 
-        let inchCalc
+        let inchCalc;
 
         //converts feet into inches
         if (heightType === 'feet') {
@@ -112,7 +113,7 @@ export default function BMICalculator() {
         }
 
         //converts stone & lbs into lbs
-        let weightCalc
+        let weightCalc;
         if (weightType === 'stone') {
             weightCalc = (parseInt(massStone) + parseInt(massStoneLbs) / 10);
             weightCalc *= 14;
@@ -127,7 +128,7 @@ export default function BMICalculator() {
         //Calculates BMI
         bmi = Math.floor((weightCalc / (inchCalc ** 2)) * 703);
         displayMessage(bmi);
-    }
+    };
 
 
     /**
@@ -137,8 +138,8 @@ export default function BMICalculator() {
     const displayMessage = (bmi) => {
         //variables
         let weight = '';
-        let activityMessage = ''
-        let ageMessage = ''
+        let activityMessage = '';
+        let ageMessage = '';
 
         //Check if user is male or female
         if (checked === 'first') {
@@ -160,7 +161,7 @@ export default function BMICalculator() {
         Alert.alert("BMI Results!", message, [
 
             {text: "Close", onPress: () => console.log("Close Pressed")}]);
-    }
+    };
 
 
     /**
@@ -169,19 +170,15 @@ export default function BMICalculator() {
      * @returns {string}
      */
     const activityOutputMessage = (activity) => {
-        let activityMessage = ''
-        if (activity === 'low') {
-            activityMessage = '\n\nWe recommend increasing your activity levels to an average or higher level'
-        }
-        if (activity === 'average') {
-            activityMessage = '\n\nActivity levels are at a good standard, Keep going! '
-        }
-        if (activity === 'high') {
-            activityMessage = '\n\nActivity Levels are at a great standard, Keep it up!'
-        }
-
+        let activityMessage = '';
+        if (activity === 'low') activityMessage = '\n\nWe recommend increasing your activity levels to an average or higher level';
+        
+        if (activity === 'average') activityMessage = '\n\nActivity levels are at a good standard, Keep going! ';
+        
+        if (activity === 'high') activityMessage = '\n\nActivity Levels are at a great standard, Keep it up!';
+    
         return activityMessage;
-    }
+    };
 
 
     /**
@@ -190,10 +187,10 @@ export default function BMICalculator() {
      * @returns {string}
      */
     const ageOutputMessage = (age) => {
-        let ageMessage = ''
+        let ageMessage = '';
 
         if (age < 18 && age > 1) {
-            ageMessage = "\n\nFor your age, we recommend focusing on adding more nutrition to your diet."
+            ageMessage = "\n\nFor your age, we recommend focusing on adding more nutrition to your diet.";
         } else if (age >= 18 && age < 60) {
             ageMessage = "\n\nFor your age, we recommend focusing on high activity levels and improved nutrition.";
         } else if (age >= 60) {
@@ -201,7 +198,7 @@ export default function BMICalculator() {
         }
 
         return ageMessage;
-    }
+    };
 
 
     /**
@@ -232,7 +229,7 @@ export default function BMICalculator() {
         }
 
         return weight;
-    }
+    };
 
 
     /**
@@ -263,7 +260,7 @@ export default function BMICalculator() {
         }
 
         return weight;
-    }
+    };
 
 
     /**
@@ -271,56 +268,68 @@ export default function BMICalculator() {
      * @param heightType
      */
     const resetHeightValue = (heightType) => {
-        setHeightType(heightType)
+        setHeightType(heightType);
         setHeightFeet(-1);
         setHeightInches(0);
         setHeightCm(-1);
-    }
+    };
 
     /**
      * resets weight value if radio button changes
      * @param weightType
      */
     const resetWeightValue = (weightType) => {
-        setWeightType(weightType)
+        setWeightType(weightType);
         setMassStone(-1);
         setMassStoneLbs(0);
         setMassLBS(-1);
         setMassKG(-1);
-    }
+    };
 
 
     return (
-        <View style={styles.container}>
-            <ScrollView>
+        <SafeAreaView style={styles.container}>
 
-                <View style={styles.radio}>
-                    <RadioButton.Group onValueChange={heightType => resetHeightValue(heightType)} value={heightType}>
-                        <RadioButton.Item label="Feet" value="feet"/>
-                        <RadioButton.Item label="CM" value="cm"/>
-                    </RadioButton.Group>
+            <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
+            colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
+            style={[styling.dashboard, styles.boxShadow]}>
+
+                <View style={{ width: '100%', paddingTop: 50, 
+                paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <Text style={[styling.smallText, styling.profileName]}>BMI</Text>
+
+                    <View style={{flexDirection: 'row',}}>
+                        <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
+                        alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text>
+                        </Text>
+                        <Image style={styling.logo} source={require('../assets/img/barbell.png')}/>
+                    </View>
                 </View>
+            </LinearGradient>
 
-                <Text>Enter Height: </Text>
-                <View>
+            <ScrollView style={{height: '90%',}}>
+             
+                <Text style={[styling.blackText,BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
+                <View style={{ flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'column', alignItems: 'center',}}>  
                     {heightType === 'feet' ? (<TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={[BMIstyles.input, BMIstyles.shortInput]}
                         placeholder='Feet'
                         onChangeText={(height) => setHeightFeet(height)}
                     />) : null}
 
                     {heightType === 'feet' ? (<TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={[BMIstyles.input, BMIstyles.shortInput]}
                         placeholder='Inches'
                         onChangeText={(height2) => setHeightInches(height2)}
                     />) : null}
 
                     <View>
                         {heightFeet === 0 ? (
-                            <Text style={styles.errorMessage}>Please fill Feet input box with a positive
+                            <Text style={BMIstyles.errorMessage}>Please fill Feet input box with a positive
                                 integer</Text>) : null}
                     </View>
                 </View>
@@ -329,47 +338,47 @@ export default function BMICalculator() {
                 <View>
                     {heightType === 'cm' ? (<TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={[BMIstyles.input,]}
                         placeholder='Centimeters '
                         onChangeText={(height) => setHeightCm(height)}
                     />) : null}
 
                     <View>
-                        {heightCm === 0 ? (<Text style={styles.errorMessage}>Please fill CM input box with a positive
+                        {heightCm === 0 ? (<Text style={BMIstyles.errorMessage}>Please fill CM input box with a positive
                             integer</Text>) : null}
                     </View>
 
                 </View>
 
-
-                <View>
-                    <RadioButton.Group style={styles.radio} onValueChange={weightType => resetWeightValue(weightType)}
-                                       value={weightType}>
-                        <RadioButton.Item label="Stone" value="stone"/>
-                        <RadioButton.Item label="Pounds" value="LBS"/>
-                        <RadioButton.Item label="Kilograms" value="KG"/>
+                <View style={BMIstyles.radio}>
+                    <RadioButton.Group onValueChange={heightType => resetHeightValue(heightType)} value={heightType}>
+                        <RadioButton.Item label="Feet" value="feet"/>
+                        <RadioButton.Item label="CM" value="cm"/>
                     </RadioButton.Group>
                 </View>
+                </View>
 
-                <Text>Enter Weight: </Text>
-                <View>
+                <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Enter Weight: </Text>
+
+                <View style={{ flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'column', alignItems: 'center',}}>  
                     {(weightType === 'stone') ? (<TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={BMIstyles.input}
                         placeholder='Stone'
                         onChangeText={(Weight) => setMassStone(Weight)}
                     />) : null}
 
                     {(weightType === 'stone') ? (<TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={[BMIstyles.input]}
                         placeholder='Pounds'
                         onChangeText={(Weight2) => setMassStoneLbs(Weight2)}
                     />) : null}
 
                     <View>
                         {massStone === 0 ? (
-                            <Text style={styles.errorMessage}>Please fill Stone input box with a positive
+                            <Text style={BMIstyles.errorMessage}>Please fill Stone input box with a positive
                                 integer</Text>) : null}
                     </View>
                 </View>
@@ -377,89 +386,129 @@ export default function BMICalculator() {
                 <View>
                     {(weightType === 'LBS') ? (<TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={BMIstyles.input}
                         placeholder='Pounds'
                         onChangeText={(Weight) => setMassLBS(Weight)}
                     />) : null}
 
                     {massLBS === 0 ? (
-                        <Text style={styles.errorMessage}>Please fill Pounds input box with a positive
+                        <Text style={BMIstyles.errorMessage}>Please fill Pounds input box with a positive
                             integer</Text>) : null}
                 </View>
 
                 <View>
                     {weightType === "KG" ? (<TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={BMIstyles.input}
                         placeholder='Kilograms'
                         onChangeText={(Weight) => setMassKG(Weight)}
                     />) : null}
 
                     {massKG === 0 ? (
-                        <Text style={styles.errorMessage}>Please fill Kilogram input box with a positive
+                        <Text style={BMIstyles.errorMessage}>Please fill Kilogram input box with a positive
                             integer</Text>) : null}
                 </View>
 
 
                 <View>
-                    <Text>Enter Age (Optional): </Text>
+                    <RadioButton.Group style={BMIstyles.radio} onValueChange={weightType => resetWeightValue(weightType)}
+                                       value={weightType}>
+                        <RadioButton.Item label="Stone" value="stone"/>
+                        <RadioButton.Item label="Pounds" value="LBS"/>
+                        <RadioButton.Item label="Kilograms" value="KG"/>
+                    </RadioButton.Group>
+                </View>
+                </View>
+
+                <View>
+                    <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Enter Age (Optional): </Text>
                     <TextInput
                         keyboardType='numeric'
-                        style={styles.input}
+                        style={[BMIstyles.input,]}
                         placeholder='Age'
                         onChangeText={(Age) => setAge(Age)}
                     />
 
                     {age === -1 ? (
-                        <Text style={styles.errorMessage}>Please fill age with a positive
+                        <Text style={BMIstyles.errorMessage}>Please fill age with a positive
                             integer between 1-120</Text>) : null}
                 </View>
 
 
                 <View>
-                    <Text>Choose your Sex: </Text>
-
-                    <RadioButton.Group onValueChange={checked => setChecked(checked)} value={checked}>
-                        <RadioButton.Item label="Male" value="first"/>
-                        <RadioButton.Item label="Female" value="second"/>
-                    </RadioButton.Group>
+                    <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Choose your Sex: </Text>
+                        
+                    <View style={{ width: '100%',flex: 1, flexDirection: 'row', 
+                    justifyContent: 'center', }}> 
+                        <RadioButton.Group
+                            onValueChange={checked => setChecked(checked)} value={checked}>
+                            <RadioButton.Item style={{}}label="Male" value="first"/>
+                            <RadioButton.Item label="Female" value="second"/>
+                        </RadioButton.Group>
+                    </View>
+                    
                 </View>
 
                 <View>
-                    {checked === '' ? (<Text style={styles.errorMessage}>Please choose a sex</Text>) : null}
+                    {checked === '' ? (<Text style={BMIstyles.errorMessage}>Please choose a sex</Text>) : null}
                 </View>
 
 
                 <View>
-                    <Text>Choose your Activity level (Optional): </Text>
+                    <Text style={[styling.blackText, BMIstyles.sectionHeading]}>
+                        Choose your Activity level (Optional): </Text>
 
                     <RadioButton.Group onValueChange={activity => setActivity(activity)} value={activity}>
-                        <RadioButton.Item label="Low Activity Levels - Less that 30 minutes a week" value="low"/>
-                        <RadioButton.Item label="Average Activity Levels - Between 30-60 minutes a week"
+                        <RadioButton.Item style={{ color: 'red',}} label="Low - Less that 30 minutes a week" value="low"/>
+                        <RadioButton.Item label="Averages - Between 30-60 minutes a week"
                                           value="average"/>
-                        <RadioButton.Item label="High Activity Levels - More than 60 minutes a week" value="high"/>
+                        <RadioButton.Item label="Highs - More than 60 minutes a week" value="high"/>
                     </RadioButton.Group>
                 </View>
 
-
-                <Button style={styles.submit} backgroundColor="#FFFFFF" title="Calculate" onPress={calculate}/>
-
+            <TouchableOpacity style={BMIstyles.submit} onPress={calculate}>
+                <Text style={[styling.blackText,]}>Calculate BMI</Text>
+            </TouchableOpacity>
 
             </ScrollView>
-        </View>
+
+
+
+        </SafeAreaView>
     );
 }
 
 
-const styles = StyleSheet.create({
+const BMIstyles = StyleSheet.create({
     input: {
-        borderWidth: 1, borderColor: '#777', padding: 8, margin: 10, width: 200,
+        borderWidth: 1, 
+        borderColor: '#777', 
+        padding: 8, 
+        margin: 10, 
+        width: 150,
+        alignItems: 'center',
+    },
+
+    shortInput: {
+        // width: '45%',
+    },
+
+    sectionHeading: { 
+        textAlign: 'center',
+        margin: 25,
+        fontSize: 19,   
+        color: '#4356FF',
     },
 
     activity: {
         flex: 1,
-        marginBottom: 25, textAlign: 'center', paddingRight: 150, paddingBottom: 60,
+        marginBottom: 25, 
+        textAlign: 'center', 
+        paddingRight: 150, 
+        paddingBottom: 60,
     },
+
+
     errorMessage: {
         color: '#d90f32',
         fontWeight: 'bold',
@@ -468,4 +517,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
+    submit: {
+        padding: 10,
+        backgroundColor: '#4356FF',
+
+    },
+
+    radio: {
+        justifyContent: 'flex-start',
+    }, 
 });
