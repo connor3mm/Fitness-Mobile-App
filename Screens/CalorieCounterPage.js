@@ -96,8 +96,6 @@ export default function CalorieCounter( {navigation} ) {
             console.log(dinnerFood[i].calories);
         }
         setTotal(total);
-        console.log(total);
-
     }
 
     const setDailyGoal = () => {

@@ -6,8 +6,10 @@ import * as yup from 'yup';
 
 const validation = yup.object({
     food: yup.string().required().min(2),
-    calories: yup.string().required().min(0),
-    quantity: yup.string().required().min(1),
+    calories: yup.string().required().min(0).
+    test('not-negative', 'Please enter a positive number', (val) => {return parseInt(val) > 0;}), //if this returns falls, the validation fails and it will display the message
+    quantity: yup.string().required().min(1).
+    test('not-negative', 'Please enter a positive number', (val) => {return parseInt(val) > 0;}),
 })
 
 export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories} ) {
