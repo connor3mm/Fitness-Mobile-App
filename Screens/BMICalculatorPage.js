@@ -8,9 +8,9 @@ export default function BMICalculator() {
     //height values
     const [heightType, setHeightType] = useState('feet');
 
-    const [heightFeet, setHeightFeet] = useState(0);
+    const [heightFeet, setHeightFeet] = useState(-1);
     const [heightInches, setHeightInches] = useState(0);
-    const [heightCm, setHeightCm] = useState(0);
+    const [heightCm, setHeightCm] = useState(-1);
 
     //weight values
     const [weightType, setWeightType] = useState('stone');
@@ -24,7 +24,7 @@ export default function BMICalculator() {
     const [age, setAge] = useState(0);
 
     //sex values
-    const [checked, setChecked] = React.useState('');
+    const [checked, setChecked] = React.useState('0');
 
     //activity level value
     const [activity, setActivity] = React.useState('');
@@ -34,6 +34,30 @@ export default function BMICalculator() {
 
 
     const calculate = () => {
+
+        let formValidation = true;
+
+        if(checked === "0"){
+            setChecked('');
+            formValidation = false;
+
+        }
+
+        let feetValidation = heightType === 'feet' && (heightFeet === -1 || heightFeet < 0);
+
+        if(feetValidation){
+            setHeightFeet(0);
+            formValidation = false;
+        }
+
+        if(heightType === 'cm' && (heightCm === -1 || heightCm < 0)){
+            setHeightCm(0);
+            formValidation = false;
+        }
+
+        if (formValidation === false){
+            return
+        }
 
         // const formValid = heightFeet > 0 && heightInches > 0 && massStone > 0;
         let inchCalc
@@ -57,9 +81,6 @@ export default function BMICalculator() {
             weightCalc = parseInt(massKG * 2.2);
         }
 
-        // if (!formValid) {
-        //     return;
-        // }
 
         //Calcs BMI
         bmi = Math.floor((weightCalc / (inchCalc ** 2)) * 703);
@@ -173,6 +194,7 @@ export default function BMICalculator() {
                         <RadioButton.Item label="Feet" value="feet"/>
                         <RadioButton.Item label="CM" value="cm"/>
                     </RadioButton.Group>
+                    {/*{setHeightFeet(0)}  {setHeightInches(0)} {setHeightCm(0)}*/}
                 </View>
 
                 <Text>Enter Height: </Text>
@@ -192,6 +214,9 @@ export default function BMICalculator() {
                         onChangeText={(height2) => setHeightInches(height2)}
                     />) : null}
 
+                    <View>
+                        {heightFeet === 0 ? (<Text style={styles.errorMessage}>Please fill Feet input box with a positive integer</Text>) : null}
+                    </View>
                 </View>
 
 
@@ -203,6 +228,10 @@ export default function BMICalculator() {
                         onChangeText={(height) => setHeightCm(height)}
                     />) : null}
 
+                    <View>
+                        {heightCm === 0 ? (<Text style={styles.errorMessage}>Please fill CM input box with a positive integer</Text>) : null}
+                    </View>
+
                 </View>
 
                 <View>
@@ -211,6 +240,7 @@ export default function BMICalculator() {
                         <RadioButton.Item label="Stone" value="stone"/>
                         <RadioButton.Item label="Pounds" value="LBS"/>
                         <RadioButton.Item label="Kilograms" value="KG"/>
+                        {/*{ setMassStone(0)}{ setMassStoneLbs(0)} {setMassLBS(0)} {setMassKG(0)}*/}
                     </RadioButton.Group>
                 </View>
 
@@ -252,7 +282,7 @@ export default function BMICalculator() {
                 </View>
 
 
-                <Text>Enter Age: </Text>
+                <Text>Enter Age (Optional): </Text>
                 <TextInput
                     keyboardType='numeric'
                     style={styles.input}
@@ -269,9 +299,13 @@ export default function BMICalculator() {
                     </RadioButton.Group>
                 </View>
 
+                <View>
+                    {checked === '' ? (<Text style={styles.errorMessage}>Please choose a sex</Text>) : null}
+                </View>
+
 
                 <View>
-                    <Text>Choose your Activity level: </Text>
+                    <Text>Choose your Activity level (Optional): </Text>
 
                     <RadioButton.Group onValueChange={activity => setActivity(activity)} value={activity}>
                         <RadioButton.Item label="Low Activity Levels - Less that 30 minutes a week" value="low"/>
@@ -297,6 +331,14 @@ const styles = StyleSheet.create({
     activity: {
         flex: 1,
         marginBottom: 25, textAlign: 'center', paddingRight: 150, paddingBottom: 60,
+    },
+    errorMessage: {
+        color: '#d90f32',
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginTop: 6,
+        textAlign: 'center',
+
     },
 
 });
