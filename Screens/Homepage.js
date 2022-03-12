@@ -222,6 +222,7 @@ export const styling = StyleSheet.create({
     },
 
     blackText: {
+        fontFamily: 'Righteous_400Regular',
         color: '#424242',
     },  
 
