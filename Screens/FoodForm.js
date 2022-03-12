@@ -60,7 +60,6 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                             placeholder = 'Quantity'
                             onChangeText = {formikProps.handleChange('Quantity')}
                             value = {formikProps.values.Quantity}
-                            keyboardType = 'numeric'
                             onBlur = {formikProps.handleBlur('Quantity')}
                         />
                         <Text style = {styles.errorMessage}> {formikProps.touched.Quantity && formikProps.errors.Quantity} </Text>
