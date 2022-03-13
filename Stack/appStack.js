@@ -12,7 +12,13 @@ import WorkoutsPage from "../Screens/WorkoutsPage";
 import CalorieCounterPage from "../Screens/CalorieCounterPage";
 import ProfilePage from "../Screens/ProfilePage";
 import SettingsPage from "../Screens/SettingsPage";
-import atHomeWorkoutPage from "../Screens/atHomeWorkoutPage";
+import backPage from "../Screens/backPage";
+import legsPage from "../Screens/legsPage";
+import tricepsPage from "../Screens/tricepsPage";
+import chestPage from "../Screens/chestPage";
+import bicepsCorePage from "../Screens/bicepsCorePage";
+
+
 
 const screen = {
     
@@ -88,8 +94,40 @@ const screen = {
 
     },
 
-    atHomeWorkoutPage: {
-        screen: atHomeWorkoutPage, 
+    backPage: {
+        screen: backPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+    legsPage: {
+        screen: legsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+    tricepsPage: {
+        screen: tricepsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+    chestPage: {
+        screen: chestPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+    bicepsCorePage: {
+        screen: bicepsCorePage, 
         navigationOptions: {
             headerShown: false,
         }

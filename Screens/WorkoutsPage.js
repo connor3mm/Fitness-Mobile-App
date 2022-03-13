@@ -27,10 +27,10 @@ export default function Workouts({navigation}) {
                 <Text style = {{fontFamily: 'Righteous_400Regular',marginLeft:'10%', marginRight:'10%', marginTop:'5%'}}>Choose one of the bellow workputs to complete</Text>
 
                 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: '#00BCD4',}]}>
+                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: '#00BCD4',}]} onPress={() => navigation.navigate('bicepsCorePage')}>
                       
                     <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Chest</Text>
+                        <Text style = {styles.workoutSingleText}>Biceps + core</Text>
                         <Text style = {styles.workoutSingleText}>Minutes</Text>
                         <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
                     </View>
@@ -42,9 +42,9 @@ export default function Workouts({navigation}) {
                 </TouchableOpacity>
                 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'red'}]}>
+                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'red'}]} onPress={() => navigation.navigate('tricepsPage')}>
                     <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Core</Text>
+                        <Text style = {styles.workoutSingleText}>Triceps</Text>
                         <Text style = {styles.workoutSingleText}>Minutes</Text>
                         <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
                     </View>
@@ -55,7 +55,7 @@ export default function Workouts({navigation}) {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]}>
+                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]} onPress={() => navigation.navigate('legsPage')}>
                     <View style = {styles.workoutText}>
                         <Text style = {styles.workoutSingleText}>Legs</Text>
                         <Text style = {styles.workoutSingleText}>Minutes</Text>
@@ -65,7 +65,7 @@ export default function Workouts({navigation}) {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]}>
+                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]} onPress={() => navigation.navigate('backPage')}>
                     <View style = {styles.workoutText}>
                         <Text style = {styles.workoutSingleText}>Back</Text>
                         <Text style = {styles.workoutSingleText}>Minutes</Text>
@@ -75,9 +75,9 @@ export default function Workouts({navigation}) {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]} onPress={() => navigation.navigate('atHomeWorkoutPage')}>
+                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]} onPress={() => navigation.navigate('chestPage')}>
                     <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Home</Text>
+                        <Text style = {styles.workoutSingleText}>Chest</Text>
                         <Text style = {styles.workoutSingleText}>Minutes</Text>
                         <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
                     </View>
