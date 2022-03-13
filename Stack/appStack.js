@@ -12,6 +12,7 @@ import WorkoutsPage from "../Screens/WorkoutsPage";
 import CalorieCounterPage from "../Screens/CalorieCounterPage";
 import ProfilePage from "../Screens/ProfilePage";
 import SettingsPage from "../Screens/SettingsPage";
+import atHomeWorkoutPage from "../Screens/atHomeWorkoutPage";
 
 const screen = {
     
@@ -81,6 +82,14 @@ const screen = {
 
     ProfilePage: {
         screen: ProfilePage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+    atHomeWorkoutPage: {
+        screen: atHomeWorkoutPage, 
         navigationOptions: {
             headerShown: false,
         }
