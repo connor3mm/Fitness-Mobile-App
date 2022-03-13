@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from "react-native";
+import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
+import { CheckBox } from 'react-native-web';
 
 
 export default function tricepsPage({navigation}) {
@@ -57,31 +58,41 @@ export default function tricepsPage({navigation}) {
 
                 {
                     shouldShow1 ? (
-                        <><Text style={styles.exerText}>Close Grip Barbell Bench Press</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/ccBarbellPress.gif')} /></>
+                        <><Text style={styles.exerText}>Close Grip Barbell Bench Press</Text>
+                        <Text>3 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/ccBarbellPress.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow2 ? (
-                        <><Text style={styles.exerText}>Triceps Dips</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/chestDips.gif')} /></>
+                        <><Text style={styles.exerText}>Triceps Dips</Text>
+                        <Text>3 x 5</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/chestDips.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow3 ? (
-                        <><Text style={styles.exerText}>Skull Crusher</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/skullCrusher.gif')} /></>
+                        <><Text style={styles.exerText}>Skull Crusher</Text>
+                        <Text>3 x 8</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/skullCrusher.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow4 ? (
-                        <><Text style={styles.exerText}>Seated Triceps Dumbell Pulls</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/stdPulls.gif')} /></>
+                        <><Text style={styles.exerText}>Seated Triceps Dumbell Pulls</Text>
+                        <Text>3 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/stdPulls.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow5 ? (
-                        <><Text style={styles.exerText}>Triceps Pushdown with Cable</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/tpwC.gif')} /></>
+                        <><Text style={styles.exerText}>Triceps Pushdown with Cable</Text>
+                        <Text>3 x 12</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/triceps/tpwC.gif')} /></>
                     ):null
                 }
 

@@ -57,31 +57,41 @@ export default function legsPage({navigation}) {
 
                 {
                     shouldShow1 ? (
-                        <><Text style={styles.exerText}>Dumbbell Step Ups</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/dsU.gif')} /></>
+                        <><Text style={styles.exerText}>Dumbbell Step Ups</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/dsU.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow2 ? (
-                        <><Text style={styles.exerText}>Front Squat</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/fr.gif')} /></>
+                        <><Text style={styles.exerText}>Front Squat</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/fr.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow3 ? (
-                        <><Text style={styles.exerText}>Leg Press</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/lp.gif')} /></>
+                        <><Text style={styles.exerText}>Leg Press</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/lp.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow4 ? (
-                        <><Text style={styles.exerText}>Romanian Deadlift</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/rd.gif')} /></>
+                        <><Text style={styles.exerText}>Romanian Deadlift</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/rd.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow5 ? (
-                        <><Text style={styles.exerText}>Walking Lunges</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/wl.gif')} /></>
+                        <><Text style={styles.exerText}>Walking Lunges</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/legs/wl.gif')} /></>
                     ):null
                 }
 

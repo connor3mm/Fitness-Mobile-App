@@ -16,74 +16,54 @@ export default function Workouts({navigation}) {
 
     return(
         <SafeAreaView style={styles.container}>
-            <View style = {{marginTop: 50, flexDirection: "row", justifyContent:"space-evenly"}}>
-                <Button title = "Home" onPress={() => navigation.navigate('Homepage')} style = {styles.Button}/>
-            </View>
+           
+            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.btnBack,]} 
+            onPress={() => navigation.navigate('Homepage')}>
+                <Text style={{fontFamily: 'Righteous_400Regular',color:"white"}}>Back to menu</Text>
+            </TouchableOpacity>
 
             
 
             <ScrollView style = {styles.workoutMain}> 
-
-                <Text style = {{fontFamily: 'Righteous_400Regular',marginLeft:'10%', marginRight:'10%', marginTop:'5%'}}>Choose one of the bellow workputs to complete</Text>
-
                 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: '#00BCD4',}]} onPress={() => navigation.navigate('bicepsCorePage')}>
-                      
-                    <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Biceps + core</Text>
-                        <Text style = {styles.workoutSingleText}>Minutes</Text>
-                        <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
-                    </View>
-                        
-                    <View>
-                        <Image style = {styles.workoutIconImage} source={require('../assets/img/chestWorkout.png')}/>
-                    </View>
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('bicepsCorePage')}>
+                    
+                        <Text style = {styles.workoutText}>Biceps {"\n"}and{"\n"}Core</Text>
+                        <Image style = {{height:135, width: 180,}} source={require('../assets/img/workoutsImages/icons/icon_bicepsCore.png')}/>
                     
                 </TouchableOpacity>
                 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'red'}]} onPress={() => navigation.navigate('tricepsPage')}>
-                    <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Triceps</Text>
-                        <Text style = {styles.workoutSingleText}>Minutes</Text>
-                        <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
-                    </View>
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('tricepsPage')}>
+                   
+                        <Text style = {styles.workoutText}>Triceps</Text>
+                        <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_triceps2.png')}/>
                     
-                    <View>
-                        <Image style = {styles.workoutIconImage} source={require('../assets/img/coreWorkout.png')}/>
-                    </View>
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]} onPress={() => navigation.navigate('legsPage')}>
-                    <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Legs</Text>
-                        <Text style = {styles.workoutSingleText}>Minutes</Text>
-                        <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
-                    </View>
-                        <Image style = {styles.workoutIconImage} source={require('../assets/img/legsWorkout.png')}/>
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('chestPage')}>
+
+                        <Text style = {styles.workoutText}>Chest</Text>
+                        <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_chest.png')}/>
+
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]} onPress={() => navigation.navigate('backPage')}>
-                    <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Back</Text>
-                        <Text style = {styles.workoutSingleText}>Minutes</Text>
-                        <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
-                    </View>
-                        <Image style = {styles.workoutIconImage} source={require('../assets/img/legsWorkout.png')}/>
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('backPage')}>
+
+                        <Text style = {styles.workoutText}>Back</Text>
+                        <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_back.png')}/>
+                
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style = {[styles.workoutBox,{backgroundColor: 'green'}]} onPress={() => navigation.navigate('chestPage')}>
-                    <View style = {styles.workoutText}>
-                        <Text style = {styles.workoutSingleText}>Chest</Text>
-                        <Text style = {styles.workoutSingleText}>Minutes</Text>
-                        <Text style = {styles.workoutSingleText}>Num. of exercises: </Text>
-                    </View>
-                        <Image style = {styles.workoutIconImage} source={require('../assets/img/legsWorkout.png')}/>
-                </TouchableOpacity>
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('legsPage')}>
 
+                        <Text style = {styles.workoutText}>Legs</Text>
+                        <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_legs.png')}/>
+               
+                </TouchableOpacity>
             </ScrollView>
             
         </SafeAreaView>
@@ -96,20 +76,13 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF',
-        //alignItems: 'center',
-        //justifyContent: 'flex-end'   //tova promenq na main axisa
     },
 
     workoutMain:{
         flex: 1,
-        //justifyContent: 'space-evenly',
-        //alignItems:'center',
-        //width:"95%",
     },
 
     workoutBox:{
-        width:'80%',
-        height:'25%',
         borderWidth: 1,
         borderRadius: 10,
         flexDirection: 'row', 
@@ -117,29 +90,49 @@ export const styles = StyleSheet.create({
         marginTop:'10%',
         marginLeft:'10%',
         marginRight:'10%',
+        justifyContent:"space-around",
+        alignItems:"center",
+        backgroundColor: '#fff'
     },
 
     workoutIconImage:{
         width: 135,
         height: 135,
-        margin: 20,
         marginLeft: 40,
+        //backgroundColor:"black",
     },
 
     workoutText:{
-        marginLeft: 15,
-        marginTop: 30,
-    },
-
-    workoutSingleText:{
-        padding: 5,
+        //padding: 5,
         fontFamily: 'Righteous_400Regular',
+        fontSize:20,
     },
 
-    workoutIconGif:{
-        width: 200,
-        height: 200
-    }
+
+    button:{
+        alignItems: 'center',
+        padding: 15,
+        width: '70%',
+        borderWidth: .5,
+        borderRadius: 5,
+        backgroundColor: '#4356FF',
+        borderColor: '#4356FF',
+        shadowColor: 'black',
+    },
+
+    btnBack:{
+        marginTop:50,
+        width:"100%"
+    },
+
+    boxShadow: {
+        // add box shadow to iOS devices
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+        // add box shadows to android devices
+        elevation: 1,
+    },
 
 
 });

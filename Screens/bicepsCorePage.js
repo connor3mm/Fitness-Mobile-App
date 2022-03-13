@@ -18,6 +18,8 @@ export default function bicepsCorePage({navigation}) {
 
     const [numTimesClicked, setnumTimesClicked] = useState(1)
 
+    
+    
 
     function showNextExercise(){
         setnumTimesClicked(numTimesClicked +1)
@@ -61,38 +63,50 @@ export default function bicepsCorePage({navigation}) {
 
                 {
                     shouldShow1 ? (
-                        <><Text style={styles.exerText}>Crunches</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/Crunches.gif')} /></>
+                        <><Text style={styles.exerText}>Crunches</Text>
+                        <Text>5 x 15</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/Crunches.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow2 ? (
-                        <><Text style={styles.exerText}>Decline Crunches</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/declineCrunches.gif')} /></>
+                        <><Text style={styles.exerText}>Decline Crunches</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/declineCrunches.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow3 ? (
-                        <><Text style={styles.exerText}>Stationary Abdominal Draw In</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/SAD.gif')} /></>
+                        <><Text style={styles.exerText}>Stationary Abdominal Draw In</Text>
+                        <Text>60 seconds</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/SAD.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow4 ? (
-                        <><Text style={styles.exerText}>Incline Dumbbell Curls</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/IDC.gif')} /></>
+                        <><Text style={styles.exerText}>Incline Dumbbell Curls</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/IDC.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow5 ? (
-                        <><Text style={styles.exerText}>Seated Dumbbell Curls</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/SDC.gif')} /></>
+                        <><Text style={styles.exerText}>Seated Dumbbell Curls</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/SDC.gif')} /></>
                     ):null
                 }
 
 
                 {
                     shouldShow6 ? (
-                        <><Text style={styles.exerText}>Wide Grip Standing Barbell Curl</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/WGSBC.gif')} /></>
+                        <><Text style={styles.exerText}>Wide Grip Standing Barbell Curl</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/WGSBC.gif')} /></>
                     ):null
                 }
 

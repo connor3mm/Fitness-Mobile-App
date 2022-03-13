@@ -61,38 +61,50 @@ export default function chestPage({navigation}) {
 
                 {
                     shouldShow1 ? (
-                        <><Text style={styles.exerText}>Bench Press</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/benchPress.gif')} /></>
+                        <><Text style={styles.exerText}>Bench Press</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/benchPress.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow2 ? (
-                        <><Text style={styles.exerText}>Butterfly Machine</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/buttMachine.gif')} /></>
+                        <><Text style={styles.exerText}>Butterfly Machine</Text>
+                        <Text>5 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/buttMachine.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow3 ? (
-                        <><Text style={styles.exerText}>Cable Flys</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/cableFly.gif')} /></>
+                        <><Text style={styles.exerText}>Cable Flys</Text>
+                        <Text>3 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/cableFly.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow4 ? (
-                        <><Text style={styles.exerText}>Chest Dips</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/chestDips.gif')} /></>
+                        <><Text style={styles.exerText}>Chest Dips</Text>
+                        <Text>5 x 5</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/chestDips.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow5 ? (
-                        <><Text style={styles.exerText}>Decline Machine Chest Press</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DMCP.gif')} /></>
+                        <><Text style={styles.exerText}>Decline Machine Chest Press</Text>
+                        <Text>3 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DMCP.gif')} /></>
                     ):null
                 }
 
 
                 {
                     shouldShow6 ? (
-                        <><Text style={styles.exerText}>Dumbbell Bent Arm Pullover</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DBAP.gif')} /></>
+                        <><Text style={styles.exerText}>Dumbbell Bent Arm Pullover</Text>
+                        <Text>3 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DBAP.gif')} /></>
                     ):null
                 }
 

@@ -57,31 +57,41 @@ export default function backPage({navigation}) {
 
                 {
                     shouldShow1 ? (
-                        <><Text style={styles.exerText}>Bent Over Barbell Row</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/boBR.gif')} /></>
+                        <><Text style={styles.exerText}>Bent Over Barbell Row</Text>
+                        <Text>3 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/boBR.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow2 ? (
-                        <><Text style={styles.exerText}>Dumbbell Rows</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/dR.gif')} /></>
+                        <><Text style={styles.exerText}>Dumbbell Rows</Text>
+                        <Text>3 x 10</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/dR.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow3 ? (
-                        <><Text style={styles.exerText}>Seated Cable Rows</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/scR.gif')} /></>
+                        <><Text style={styles.exerText}>Seated Cable Rows</Text>
+                        <Text>3 x 12</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/scR.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow4 ? (
-                        <><Text style={styles.exerText}>T Bar Rows</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/tbR.gif')} /></>
+                        <><Text style={styles.exerText}>T Bar Rows</Text>
+                        <Text>3 x 8</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/tbR.gif')} /></>
                     ):null
                 }
 
                 {
                     shouldShow5 ? (
-                        <><Text style={styles.exerText}>Dumbbell Lying Lateral Raise</Text><Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/dumbLitRaise.gif')} /></>
+                        <><Text style={styles.exerText}>Dumbbell Lying Lateral Raise</Text>
+                        <Text>3 x 12</Text>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/dumbLitRaise.gif')} /></>
                     ):null
                 }
 
