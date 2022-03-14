@@ -142,7 +142,7 @@ export default class StepCounter extends React.Component {
                         style={styles.closeText}
                         onPress={() => {
                             this.displayModal(!this.state.modalVisible);
-                        }}>Close Modal</Text>
+                        }}>Return home</Text>
                 </Modal>
 
                 <Modal
@@ -155,12 +155,12 @@ export default class StepCounter extends React.Component {
 
                     <Text>This device does not have a Pedometer. This functionality is unavailable.</Text>
 
-                    {/* <Text
+                    <Text
                         style={styles.closeText}
                         onPress={() => {
                             //
                             this.displayErrorModal(!this.state.noPedometerModalVisible);
-                        }}>Return home</Text> */}
+                        }}>Return home</Text>
                 </Modal>
 
                 <Text>Number of steps in the last 24 hours: {this.state.pastStepCount}</Text>
@@ -170,7 +170,7 @@ export default class StepCounter extends React.Component {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        this.displayErrorModal(true);
+                        this.displayModal(true);
                     }}>
                     <Text style={styles.buttonText}>Set Daily Step Goal</Text>
                 </TouchableOpacity>
