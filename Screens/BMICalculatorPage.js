@@ -324,7 +324,7 @@ export default function BMICalculator({navigation}) {
                 </View>
             </LinearGradient>
 
-            <ScrollView style={{height: '90%',}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{height: '90%',}}>
 
                 <Text style={[styling.blackText, BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
