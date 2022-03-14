@@ -33,6 +33,7 @@ export default function Home({navigation}) {
     const profilePressedHandler = () => navigation.navigate('ProfilePage');
 
     const homePressedHandler = () => navigation.navigate('Homepage');
+    
 
     return(
         <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
