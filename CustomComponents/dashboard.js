@@ -1,10 +1,16 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import {SafeAreaView, TextInput, StyleSheet, 
-    Text, View, Alert, ScrollView, TouchableOpacity, Image} from "react-native";
+import { Text, View, TouchableOpacity, Image} from "react-native";
 import { styles } from '../Screens/Welcomepage';
 import { styling } from '../Screens/Homepage';
+import { BMIstyles} from '../Screens/BMICalculatorPage';
+import { Bottomnavbar } from '../Stack/appStack';
+import { NavigationContainer } from '@react-navigation/native';
+import { TabRouter } from 'react-navigation';
+
 
 export default function DashBoard({ navigation }) {
+
+    const homePressedHandler = () => navigation.navigate('Homepage');
 
     return (
         <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 

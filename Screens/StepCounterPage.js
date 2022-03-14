@@ -14,7 +14,7 @@ import {
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import {Pedometer} from 'expo-sensors';
 import ValidationComponent from 'react-native-form-validator';
-
+import DashBoard from '../CustomComponents/dashboard';
 export default class StepCounter extends React.Component {
     state = {
         isPedometerAvailable: 'checking',
@@ -115,6 +115,8 @@ export default class StepCounter extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
+                
+                <DashBoard/>
 
                 <Modal
                     animationType={"slide"}

@@ -3,7 +3,7 @@ import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,Sc
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
-
+import DashBoard from '../CustomComponents/dashboard';
 
 
 
@@ -16,13 +16,8 @@ export default function Workouts({navigation}) {
 
     return(
         <SafeAreaView style={styles.container}>
-           
-            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.btnBack,]} 
-            onPress={() => navigation.navigate('Homepage')}>
-                <Text style={{fontFamily: 'Righteous_400Regular',color:"white"}}>Back to menu</Text>
-            </TouchableOpacity>
 
-            
+            <DashBoard/>  
 
             <ScrollView style = {styles.workoutMain}> 
                 
