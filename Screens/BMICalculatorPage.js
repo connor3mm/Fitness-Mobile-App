@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {SafeAreaView, TextInput, StyleSheet, 
     Text, View, Alert, ScrollView, TouchableOpacity, Image} from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
 import { styling } from './Homepage';
 import {Button, RadioButton} from 'react-native-paper';
 import { styles } from "./Welcomepage";
 
-export default function BMICalculator() {
+export default function BMICalculator({navigation}) {
+
+    const homePressedHandler = () => navigation.navigate('Homepage');
+
 
     //height values
     const [heightType, setHeightType] = useState('feet');
@@ -296,18 +298,26 @@ export default function BMICalculator() {
 
                 <View style={{ width: '100%', paddingTop: 50, 
                 paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={[styling.smallText, styling.profileName]}>BMI</Text>
+                    
+                    <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
+                        <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
+                        <Text style={{ color: '#FFF'}}>Menu</Text>
+                    </TouchableOpacity>
 
-                    <View style={{flexDirection: 'row',}}>
+                    <Text style={[styling.smallText, BMIstyles.sectionTitle]}>BMI</Text>
+
+                    <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
                         <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
                         alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text>
                         </Text>
-                        <Image style={styling.logo} source={require('../assets/img/barbell.png')}/>
+                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
                     </View>
                 </View>
             </LinearGradient>
 
-            <ScrollView style={{height: '90%',}}>
+            <ScrollView  showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
+            style={{height: '90%',}}>
              
                 <Text style={[styling.blackText,BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
@@ -434,7 +444,7 @@ export default function BMICalculator() {
                             integer between 1-120</Text>) : null}
                 </View>
 
-
+                
                 <View>
                     <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Choose your Sex: </Text>
                         
@@ -460,14 +470,13 @@ export default function BMICalculator() {
 
                     <RadioButton.Group onValueChange={activity => setActivity(activity)} value={activity}>
                         <RadioButton.Item style={{ color: 'red',}} label="Low - Less that 30 minutes a week" value="low"/>
-                        <RadioButton.Item label="Averages - Between 30-60 minutes a week"
-                                          value="average"/>
+                        <RadioButton.Item label="Average - Between 30-60 minutes a week" value="average"/>
                         <RadioButton.Item label="Highs - More than 60 minutes a week" value="high"/>
                     </RadioButton.Group>
                 </View>
 
             <TouchableOpacity style={BMIstyles.submit} onPress={calculate}>
-                <Text style={[styling.blackText,]}>Calculate BMI</Text>
+                <Text style={[styling.whiteText,{ textAlign: 'center'}]}>Calculate BMI</Text>
             </TouchableOpacity>
 
             </ScrollView>
@@ -491,6 +500,18 @@ const BMIstyles = StyleSheet.create({
 
     shortInput: {
         // width: '45%',
+    },
+
+    homeButton: {
+        width: 35,
+        height: 35, 
+        alignSelf: 'center',
+    },
+
+    sectionTitle: {
+        fontSize: 40,
+        margin: 20,
+
     },
 
     sectionHeading: { 
@@ -518,9 +539,16 @@ const BMIstyles = StyleSheet.create({
     },
 
     submit: {
-        padding: 10,
-        backgroundColor: '#4356FF',
+        shadowOffset: { width: 10, height: 10 },
+        shadowColor: '#b3b3b3',
+        shadowOpacity: 1,
+        shadowRadius: 22.5,
+        elevation: 3,
 
+        padding: 15,
+        marginVertical: 20,
+        backgroundColor: '#4356FF',
+        borderRadius: 10,
     },
 
     radio: {
