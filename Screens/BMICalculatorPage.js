@@ -1,9 +1,19 @@
 import React, {useState} from 'react';
-import {SafeAreaView, TextInput, StyleSheet, 
-    Text, View, Alert, ScrollView, TouchableOpacity, Image} from "react-native";
-import { styling } from './Homepage';
+import {
+    SafeAreaView,
+    TextInput,
+    StyleSheet,
+    Text,
+    View,
+    Alert,
+    ScrollView,
+    TouchableOpacity,
+    Image
+} from "react-native";
+import {LinearGradient} from 'expo-linear-gradient';
+import {styling} from './Homepage';
 import {Button, RadioButton} from 'react-native-paper';
-import { styles } from "./Welcomepage";
+import {styles} from "./Welcomepage";
 
 export default function BMICalculator({navigation}) {
 
@@ -174,11 +184,11 @@ export default function BMICalculator({navigation}) {
     const activityOutputMessage = (activity) => {
         let activityMessage = '';
         if (activity === 'low') activityMessage = '\n\nWe recommend increasing your activity levels to an average or higher level';
-        
+
         if (activity === 'average') activityMessage = '\n\nActivity levels are at a good standard, Keep going! ';
-        
+
         if (activity === 'high') activityMessage = '\n\nActivity Levels are at a great standard, Keep it up!';
-    
+
         return activityMessage;
     };
 
@@ -292,9 +302,8 @@ export default function BMICalculator({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
 
-            <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-            colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
-            style={[styling.dashboard, styles.boxShadow]}>
+            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0, 0.9]}
+                style={[styling.dashboard, styles.boxShadow]}>
 
                 <View style={{ width: '100%', paddingTop: 50, 
                 paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -315,148 +324,178 @@ export default function BMICalculator({navigation}) {
                 </View>
             </LinearGradient>
 
-            <ScrollView  showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
-            style={{height: '90%',}}>
-             
-                <Text style={[styling.blackText,BMIstyles.sectionHeading,]}>Enter Height: </Text>
+            <ScrollView style={{height: '90%',}}>
 
-                <View style={{ flexDirection: 'row'}}>
-                <View style={{ flexDirection: 'column', alignItems: 'center',}}>  
-                    {heightType === 'feet' ? (<TextInput
-                        keyboardType='numeric'
-                        style={[BMIstyles.input, BMIstyles.shortInput]}
-                        placeholder='Feet'
-                        onChangeText={(height) => setHeightFeet(height)}
-                    />) : null}
+                <Text style={[styling.blackText, BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
-                    {heightType === 'feet' ? (<TextInput
-                        keyboardType='numeric'
-                        style={[BMIstyles.input, BMIstyles.shortInput]}
-                        placeholder='Inches'
-                        onChangeText={(height2) => setHeightInches(height2)}
-                    />) : null}
+                <View style={{flexDirection: 'row'}}>
+                    <View style={{flexDirection: 'column', alignItems: 'center',}}>
+                        {heightType === 'feet' ? (<TextInput
+                            keyboardType='numeric'
+                            style={[BMIstyles.input, BMIstyles.shortInput]}
+                            placeholder='Feet'
+                            onChangeText={(height) => setHeightFeet(height)}
+                        />) : null}
+
+                        {heightType === 'feet' ? (<TextInput
+                            keyboardType='numeric'
+                            style={[BMIstyles.input, BMIstyles.shortInput]}
+                            placeholder='Inches'
+                            onChangeText={(height2) => setHeightInches(height2)}
+                        />) : null}
+
+
+                    </View>
+
 
                     <View>
-                        {heightFeet === 0 ? (
-                            <Text style={BMIstyles.errorMessage}>Please fill Feet input box with a positive
-                                integer</Text>) : null}
-                    </View>
-                </View>
+                        {heightType === 'cm' ? (<TextInput
+                            keyboardType='numeric'
+                            style={[BMIstyles.input,]}
+                            placeholder='Centimeters '
+                            onChangeText={(height) => setHeightCm(height)}
+                        />) : null}
 
+
+                    </View>
+
+                    <View style={BMIstyles.radio}>
+                        <RadioButton.Group onValueChange={heightType => resetHeightValue(heightType)}
+                                           value={heightType}>
+                            <RadioButton.Item label="Feet" value="feet"/>
+                            <RadioButton.Item label="CM" value="cm"/>
+                        </RadioButton.Group>
+                    </View>
+
+                </View>
 
                 <View>
-                    {heightType === 'cm' ? (<TextInput
-                        keyboardType='numeric'
-                        style={[BMIstyles.input,]}
-                        placeholder='Centimeters '
-                        onChangeText={(height) => setHeightCm(height)}
-                    />) : null}
-
-                    <View>
-                        {heightCm === 0 ? (<Text style={BMIstyles.errorMessage}>Please fill CM input box with a positive
+                    {heightFeet === 0 ? (
+                        <Text style={BMIstyles.errorMessage}>Please fill Feet input box with a positive
                             integer</Text>) : null}
-                    </View>
-
                 </View>
 
-                <View style={BMIstyles.radio}>
-                    <RadioButton.Group onValueChange={heightType => resetHeightValue(heightType)} value={heightType}>
-                        <RadioButton.Item label="Feet" value="feet"/>
-                        <RadioButton.Item label="CM" value="cm"/>
-                    </RadioButton.Group>
-                </View>
+                <View>
+                    {heightCm === 0 ? (
+                        <Text style={BMIstyles.errorMessage}>Please fill CM input box with a positive
+                            integer</Text>) : null}
                 </View>
 
                 <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Enter Weight: </Text>
 
-                <View style={{ flexDirection: 'row'}}>
-                <View style={{ flexDirection: 'column', alignItems: 'center',}}>  
-                    {(weightType === 'stone') ? (<TextInput
-                        keyboardType='numeric'
-                        style={BMIstyles.input}
-                        placeholder='Stone'
-                        onChangeText={(Weight) => setMassStone(Weight)}
-                    />) : null}
+                <View style={{flexDirection: 'row'}}>
+                    <View style={{flexDirection: 'column', alignItems: 'center',}}>
+                        {(weightType === 'stone') ? (<TextInput
+                            keyboardType='numeric'
+                            style={BMIstyles.input}
+                            placeholder='Stone'
+                            onChangeText={(Weight) => setMassStone(Weight)}
+                        />) : null}
 
-                    {(weightType === 'stone') ? (<TextInput
-                        keyboardType='numeric'
-                        style={[BMIstyles.input]}
-                        placeholder='Pounds'
-                        onChangeText={(Weight2) => setMassStoneLbs(Weight2)}
-                    />) : null}
+                        {(weightType === 'stone') ? (<TextInput
+                            keyboardType='numeric'
+                            style={[BMIstyles.input]}
+                            placeholder='Pounds'
+                            onChangeText={(Weight2) => setMassStoneLbs(Weight2)}
+                        />) : null}
+
+
+                    </View>
 
                     <View>
-                        {massStone === 0 ? (
-                            <Text style={BMIstyles.errorMessage}>Please fill Stone input box with a positive
-                                integer</Text>) : null}
+                        {(weightType === 'LBS') ? (<TextInput
+                            keyboardType='numeric'
+                            style={BMIstyles.input}
+                            placeholder='Pounds'
+                            onChangeText={(Weight) => setMassLBS(Weight)}
+                        />) : null}
+
+
                     </View>
+
+                    <View>
+                        {weightType === "KG" ? (<TextInput
+                            keyboardType='numeric'
+                            style={BMIstyles.input}
+                            placeholder='Kilograms'
+                            onChangeText={(Weight) => setMassKG(Weight)}
+                        />) : null}
+
+
+                    </View>
+
+
+                    <View>
+                        <RadioButton.Group style={BMIstyles.radio}
+                                           onValueChange={weightType => resetWeightValue(weightType)}
+                                           value={weightType}>
+                            <RadioButton.Item label="Stone" value="stone"/>
+                            <RadioButton.Item label="Pounds" value="LBS"/>
+                            <RadioButton.Item label="Kilograms" value="KG"/>
+                        </RadioButton.Group>
+                    </View>
+
                 </View>
 
-                <View>
-                    {(weightType === 'LBS') ? (<TextInput
-                        keyboardType='numeric'
-                        style={BMIstyles.input}
-                        placeholder='Pounds'
-                        onChangeText={(Weight) => setMassLBS(Weight)}
-                    />) : null}
 
-                    {massLBS === 0 ? (
-                        <Text style={BMIstyles.errorMessage}>Please fill Pounds input box with a positive
+                <View>
+                    {massStone === 0 ? (
+                        <Text style={BMIstyles.errorMessage}>Please fill Stone input box with a positive
                             integer</Text>) : null}
                 </View>
 
                 <View>
-                    {weightType === "KG" ? (<TextInput
-                        keyboardType='numeric'
-                        style={BMIstyles.input}
-                        placeholder='Kilograms'
-                        onChangeText={(Weight) => setMassKG(Weight)}
-                    />) : null}
+                    {massLBS === 0 ? (
+                    <Text style={BMIstyles.errorMessage}>Please fill Pounds input box with a positive
+                        integer</Text>) : null}
+                </View>
 
+                <View>
                     {massKG === 0 ? (
                         <Text style={BMIstyles.errorMessage}>Please fill Kilogram input box with a positive
                             integer</Text>) : null}
+
                 </View>
 
 
-                <View>
-                    <RadioButton.Group style={BMIstyles.radio} onValueChange={weightType => resetWeightValue(weightType)}
-                                       value={weightType}>
-                        <RadioButton.Item label="Stone" value="stone"/>
-                        <RadioButton.Item label="Pounds" value="LBS"/>
-                        <RadioButton.Item label="Kilograms" value="KG"/>
-                    </RadioButton.Group>
-                </View>
-                </View>
 
                 <View>
                     <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Enter Age (Optional): </Text>
-                    <TextInput
-                        keyboardType='numeric'
-                        style={[BMIstyles.input,]}
-                        placeholder='Age'
-                        onChangeText={(Age) => setAge(Age)}
-                    />
 
-                    {age === -1 ? (
-                        <Text style={BMIstyles.errorMessage}>Please fill age with a positive
-                            integer between 1-120</Text>) : null}
+                    <View style={{
+                        width: '100%', flex: 1, flexDirection: 'row',
+                        justifyContent: 'center',
+                    }}>
+                        <TextInput
+                            keyboardType='numeric'
+                            style={[BMIstyles.input,]}
+                            placeholder='Age'
+                            onChangeText={(Age) => setAge(Age)}
+                        />
+                    </View>
+
+                    <View>
+                        {age === -1 ? (
+                            <Text style={BMIstyles.errorMessage}>Please fill age with a positive
+                                integer between 1-120</Text>) : null}
+                    </View>
                 </View>
 
                 
                 <View>
                     <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Choose your Sex: </Text>
-                        
-                    <View style={{ width: '100%',flex: 1, flexDirection: 'row', 
-                    justifyContent: 'center', }}> 
+
+                    <View style={{
+                        width: '100%', flex: 1, flexDirection: 'row',
+                        justifyContent: 'center',
+                    }}>
                         <RadioButton.Group
                             onValueChange={checked => setChecked(checked)} value={checked}>
-                            <RadioButton.Item style={{}}label="Male" value="first"/>
+                            <RadioButton.Item style={{}} label="Male" value="first"/>
                             <RadioButton.Item label="Female" value="second"/>
                         </RadioButton.Group>
                     </View>
-                    
+
                 </View>
 
                 <View>
@@ -481,8 +520,6 @@ export default function BMICalculator({navigation}) {
 
             </ScrollView>
 
-
-
         </SafeAreaView>
     );
 }
@@ -490,10 +527,10 @@ export default function BMICalculator({navigation}) {
 
 const BMIstyles = StyleSheet.create({
     input: {
-        borderWidth: 1, 
-        borderColor: '#777', 
-        padding: 8, 
-        margin: 10, 
+        borderWidth: 1,
+        borderColor: '#777',
+        padding: 8,
+        margin: 10,
         width: 150,
         alignItems: 'center',
     },
@@ -517,18 +554,21 @@ const BMIstyles = StyleSheet.create({
     sectionHeading: { 
         textAlign: 'center',
         margin: 25,
-        fontSize: 19,   
+        fontSize: 19,
         color: '#4356FF',
     },
 
     activity: {
         flex: 1,
-        marginBottom: 25, 
-        textAlign: 'center', 
-        paddingRight: 150, 
+        marginBottom: 25,
+        textAlign: 'center',
+        paddingRight: 150,
         paddingBottom: 60,
     },
 
+    alignText:{
+        textAlign: 'center',
+    },
 
     errorMessage: {
         color: '#d90f32',
@@ -553,5 +593,6 @@ const BMIstyles = StyleSheet.create({
 
     radio: {
         justifyContent: 'flex-start',
-    }, 
-});
+
+    },
+})
