@@ -310,6 +310,7 @@ export default function BMICalculator({navigation}) {
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flexDirection: 'column', alignItems: 'center',}}>
                         {heightType === 'feet' ? (<TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={[BMIstyles.input, BMIstyles.shortInput]}
                             placeholder='Feet'
@@ -317,6 +318,7 @@ export default function BMICalculator({navigation}) {
                         />) : null}
 
                         {heightType === 'feet' ? (<TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={[BMIstyles.input, BMIstyles.shortInput]}
                             placeholder='Inches'
@@ -329,6 +331,7 @@ export default function BMICalculator({navigation}) {
 
                     <View>
                         {heightType === 'cm' ? (<TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={[BMIstyles.input,]}
                             placeholder='Centimeters '
@@ -365,6 +368,7 @@ export default function BMICalculator({navigation}) {
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flexDirection: 'column', alignItems: 'center',}}>
                         {(weightType === 'stone') ? (<TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={BMIstyles.input}
                             placeholder='Stone'
@@ -372,6 +376,7 @@ export default function BMICalculator({navigation}) {
                         />) : null}
 
                         {(weightType === 'stone') ? (<TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={[BMIstyles.input]}
                             placeholder='Pounds'
@@ -383,6 +388,7 @@ export default function BMICalculator({navigation}) {
 
                     <View>
                         {(weightType === 'LBS') ? (<TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={BMIstyles.input}
                             placeholder='Pounds'
@@ -394,6 +400,7 @@ export default function BMICalculator({navigation}) {
 
                     <View>
                         {weightType === "KG" ? (<TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={BMIstyles.input}
                             placeholder='Kilograms'
@@ -446,6 +453,7 @@ export default function BMICalculator({navigation}) {
                         justifyContent: 'center',
                     }}>
                         <TextInput
+                            contextMenuHidden={true}
                             keyboardType='numeric'
                             style={[BMIstyles.input,]}
                             placeholder='Age'
@@ -470,7 +478,7 @@ export default function BMICalculator({navigation}) {
                     }}>
                         <RadioButton.Group
                             onValueChange={checked => setChecked(checked)} value={checked}>
-                            <RadioButton.Item style={{}} label="Male" value="first"/>
+                            <RadioButton.Item label="Male" value="first"/>
                             <RadioButton.Item label="Female" value="second"/>
                         </RadioButton.Group>
                     </View>
