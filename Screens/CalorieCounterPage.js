@@ -224,7 +224,7 @@ export default function CalorieCounter({navigation}) {
                     </View>
                 </View>
             </LinearGradient>
-            <ScrollView style={{height: '90%',}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{height: '90%',}}>
                 <View style={caloriesStyles.caloriesInfo}>
 
                     <View style={{

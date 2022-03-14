@@ -49,6 +49,7 @@ export default class StepCounter extends React.Component {
 
     displaySetGoalConfirmation(dailyStepCountGoal) {
         alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
+        this.setState({dailyGoalSet: true})
     }
 
     _onFormSubmit() {
@@ -57,6 +58,18 @@ export default class StepCounter extends React.Component {
     }
 
     _subscribe = () => {
+        //Check for pedometer permissions
+        Pedometer.getPermissionsAsync().then(
+            result => {
+                if(!result.granted) {
+                    Pedometer.requestPermissionsAsync()
+                }
+            },
+            error => {
+                Alert.alert("Something went wrong when getting permissions: " + error)
+            }
+        )
+
         //Sets the current number of steps in the state
         this._subscription = Pedometer.watchStepCount(result => {
             this.setState({
