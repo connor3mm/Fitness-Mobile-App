@@ -122,6 +122,8 @@ export default class StepCounter extends ValidationComponent {
     render() {
         return (
             <SafeAreaView style={styles.container}>
+                
+                <DashBoard/>
 
                 <Modal
                     animationType={"slide"}

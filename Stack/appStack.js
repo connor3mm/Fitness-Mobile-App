@@ -17,7 +17,8 @@ import legsPage from "../Screens/legsPage";
 import tricepsPage from "../Screens/tricepsPage";
 import chestPage from "../Screens/chestPage";
 import bicepsCorePage from "../Screens/bicepsCorePage";
-
+import DashBoard from "../CustomComponents/dashboard";
+import FoodDetails from '../Screens/FoodDetails';
 
 
 const screen = {
@@ -133,22 +134,26 @@ const screen = {
         }
 
     },
+
+
+    DashBoard: {
+        screen: DashBoard, 
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+
+    FoodDetails: {
+        screen: FoodDetails, 
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+
+    
 };
 
 export const AppStack = createStackNavigator(screen);
-const nav = createBottomTabNavigator();
-
-// export const Bottomnavbar = function bottomNavBar() {
-//     return ( 
-//         <NavigationContainer>          
-//             <nav.Navigator >
-//                 <nav.Screen name="Home" component={Homepage}/>
-//                 <nav.Screen name="Yahallo" component={Welcomepage}/>
-//             </nav.Navigator>
-//         </NavigationContainer>
-//     );
-// };
-
-
-
 export default createAppContainer(AppStack);

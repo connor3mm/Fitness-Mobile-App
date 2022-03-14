@@ -7,19 +7,19 @@ import { useFonts } from 'expo-font';
 
 export default function backPage({navigation}) {
 
-    const [shouldShow1, setshouldShow1] = useState(true)
-    const [shouldShow2, setshouldShow2] = useState(false)
-    const [shouldShow3, setshouldShow3] = useState(false)
-    const [shouldShow4, setshouldShow4] = useState(false)
-    const [shouldShow5, setshouldShow5] = useState(false)
-    const [shouldShow6, setshouldShow6] = useState(false)
-    const [btnTitle, setbtnTitle] = useState("Next")
+    const [shouldShow1, setshouldShow1] = useState(true);
+    const [shouldShow2, setshouldShow2] = useState(false);
+    const [shouldShow3, setshouldShow3] = useState(false);
+    const [shouldShow4, setshouldShow4] = useState(false);
+    const [shouldShow5, setshouldShow5] = useState(false);
+    const [shouldShow6, setshouldShow6] = useState(false);
+    const [btnTitle, setbtnTitle] = useState("Next");
 
-    const [numTimesClicked, setnumTimesClicked] = useState(1)
+    const [numTimesClicked, setnumTimesClicked] = useState(1);
 
 
     function showNextExercise(){
-        setnumTimesClicked(numTimesClicked +1)
+        setnumTimesClicked(numTimesClicked +1);
 
         switch(numTimesClicked){
 
