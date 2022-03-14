@@ -35,14 +35,13 @@ export default function Home({navigation}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
     
 
-
     return(
         <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
-
+    
             <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
             colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
             style={[styling.dashboard, styles.boxShadow]}>
-
+                
                 <View style={{ width: '100%', paddingTop: 50, 
                 paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={[styling.smallText, styling.profileName]}>Connor M.</Text>
@@ -94,7 +93,9 @@ export default function Home({navigation}) {
                 </View>
             </LinearGradient>
 
-            <ScrollView style={{width: '95%',}}>
+            <ScrollView showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
+            style={{width: '95%',}}>
 
             <View style={[styling.menu,]}>
                 <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
@@ -106,7 +107,7 @@ export default function Home({navigation}) {
                 <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
                 styling.menuIcon ]} 
                 onPress={goalsAchievementsPressedHandler}>
-                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/target.png')}/>
+                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/goal.png')}/>
                     <Text  style={[styles.buttonText, styling.blackText]}>Goals & Achievements</Text>
                 </TouchableOpacity>
             </View>
@@ -121,7 +122,7 @@ export default function Home({navigation}) {
                 <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
                 styling.menuIcon ]} 
                 onPress={calorieCounterPressedHandler}>
-                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/kcal.png')}/>
+                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/calories.png')}/>
                     <Text  style={[styles.buttonText, styling.blackText]}>Calorie Counter</Text>
                 </TouchableOpacity>
             </View>
@@ -130,13 +131,13 @@ export default function Home({navigation}) {
                <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
                 styling.menuIcon ]} 
                 onPress={stepCounterPressedHandler}>
-                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/human-footprint.png')}/>
+                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/jogging.png')}/>
                     <Text  style={[styles.buttonText, styling.blackText]}>Step Counter</Text>
                 </TouchableOpacity>
                <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
                 styling.menuIcon ]} 
                 onPress={workoutsPressedHandler}>
-                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/dumbbells.png')}/>
+                    <Image style={[styling.menuIconImage, ]} source={require('../assets/img/barbell.png')}/>
                     <Text  style={[styles.buttonText, styling.blackText]}>Your Workouts</Text>
                 </TouchableOpacity>
             </View>
@@ -178,9 +179,10 @@ export const styling = StyleSheet.create({
 
     dashboard: { 
         padding: 3,
-        width: '102%',
-        marginTop: -3,
-        borderRadius: 30, 
+        width: '103%',
+        marginTop: -5,
+        borderBottomLeftRadius: 35,
+        borderBottomRightRadius: 35,        
         backgroundColor: '#4356FF',
     },
 
@@ -214,15 +216,20 @@ export const styling = StyleSheet.create({
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
+        elevation: 3,
+        borderWidth: .5,
+        borderRadius: 10,
+        borderColor: '#FFF',
     },
 
     menuIconImage: {
         width: 60,
-        height: 60,
+        height: 60, 
         margin: 10,
     },
 
     blackText: {
+        fontFamily: 'Righteous_400Regular',
         color: '#424242',
     },  
 
@@ -234,7 +241,6 @@ export const styling = StyleSheet.create({
 
     whiteText: {
         color: '#FFF',
-        fontWeight: "700",
         fontFamily: 'Righteous_400Regular',
         fontSize: 17.5,
     },  
@@ -247,14 +253,16 @@ export const styling = StyleSheet.create({
 
     footer: { 
         shadowOffset: { width: 10, height: 10 },
-        shadowColor: '#b3b3b3',
         shadowOpacity: 1,
-        shadowRadius: 22.5,
-        elevation: 3,
+        shadowColor: '#4356FF',
+        elevation: 10,
+
+        borderColor: '#FFF',
+        borderWidth: .5,
 
         backgroundColor : "#4356FF", 
         height: '9%', 
-        width: '95%',
+        width: '92.5%',
         marginBottom: 10,
         borderRadius: 10,
         flexDirection: 'row',

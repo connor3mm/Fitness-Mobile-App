@@ -10,7 +10,7 @@ export default function Welcome( {navigation} ) {
     });
 
     const buttonPressedHandler = () => navigation.navigate('Homepage');
-    if (!fontsLoaded) return <AppLoading/>
+    if (!fontsLoaded) return <AppLoading/>;
 
 return (
     <SafeAreaView style={styles.container}>
@@ -21,7 +21,7 @@ return (
                 <Text style={styles.title}>Welcome to Fit
                     <Text style={styles.blueText}>Me</Text>
                 </Text>
-                <Image style={styles.logo} source={require('../assets/img/barbell.png')}/>
+                <Image style={styles.logo} source={require('../assets/img/logo.png')}/>
             </View>
            
             <Text style={styles.slogan}>Upgrade your fitness to the next level!</Text>
