@@ -48,6 +48,12 @@ export default class StepCounter extends ValidationComponent {
     }
 
     displaySetGoalConfirmation(dailyStepCountGoal) {
+        if(this.state.dailyStepCountGoal === 0) {
+            alert("No daily goal set. Please set a daily goal if you wish to save it.")
+            return
+        }
+
+        this.state.dailyGoalSet = true
         alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
     }
 
@@ -134,6 +140,7 @@ export default class StepCounter extends ValidationComponent {
                     }}>
                     <TextInput style={styles.input}
                                underlineColorAndroid="transparent"
+                               contextMenuHidden={true}
                                keyboardType='numeric'
                                placeholder="Daily Step Count"
                                placeholderTextColor="#9a73ef"
@@ -141,7 +148,7 @@ export default class StepCounter extends ValidationComponent {
                                onChangeText={(dailyStepCountGoal) => {
                                    this.setState({dailyStepCountGoal}, () => {
                                        this.validate({
-                                           dailyStepCountGoal: { required: true, minlength: 1, maxlength: 5}
+                                           dailyStepCountGoal: { required: true, minlength: 1, maxlength: 5, numbers: true}
                                        })
                                    })
                                }}/>
@@ -176,7 +183,6 @@ export default class StepCounter extends ValidationComponent {
                     <Text
                         style={styles.closeText}
                         onPress={() => {
-                            //
                             this.displayErrorModal(!this.state.noPedometerModalVisible);
                         }}>Return home</Text>
                 </Modal>
