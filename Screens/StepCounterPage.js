@@ -14,8 +14,8 @@ import {
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import {Pedometer} from 'expo-sensors';
 import ValidationComponent from 'react-native-form-validator';
-import DashBoard from '../CustomComponents/dashboard';
-export default class StepCounter extends React.Component {
+
+export default class StepCounter extends ValidationComponent {
     state = {
         isPedometerAvailable: 'checking',
         pastStepCount: 0,
@@ -44,17 +44,11 @@ export default class StepCounter extends React.Component {
     }
 
     setDailyStepCount = (text) => {
-        this.setState({dailyStepCountGoal: text})
+        this.setState({ dailyStepCountGoal: text})
     }
 
     displaySetGoalConfirmation(dailyStepCountGoal) {
         alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
-        this.setState({dailyGoalSet: true})
-    }
-
-    _onFormSubmit() {
-        //Validation of the form
-        this.validate();
     }
 
     _subscribe = () => {
@@ -140,10 +134,19 @@ export default class StepCounter extends React.Component {
                     }}>
                     <TextInput style={styles.input}
                                underlineColorAndroid="transparent"
+                               keyboardType='numeric'
                                placeholder="Daily Step Count"
                                placeholderTextColor="#9a73ef"
                                autoCapitalize="none"
-                               onChangeText={this.setDailyStepCount}/>
+                               onChangeText={(dailyStepCountGoal) => {
+                                   this.setState({dailyStepCountGoal}, () => {
+                                       this.validate({
+                                           dailyStepCountGoal: { required: true, minlength: 1, maxlength: 5}
+                                       })
+                                   })
+                               }}/>
+                               {this.isFieldInError('dailyStepCountGoal') && this.getErrorsInField('dailyStepCountGoal').map(errorMessage => <Text key={errorMessage}>{errorMessage}</Text>)}
+
 
                     <TouchableOpacity
                         style={styles.button}
