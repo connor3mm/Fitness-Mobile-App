@@ -13,9 +13,9 @@ import {
 } from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import {Pedometer} from 'expo-sensors';
-import { useNavigation } from '@react-navigation/native';
+import ValidationComponent from 'react-native-form-validator';
 
-export default class StepCounter extends React.Component {
+export default class StepCounter extends React.Component, ValidationComponent {
     state = {
         isPedometerAvailable: 'checking',
         pastStepCount: 0,
@@ -48,6 +48,11 @@ export default class StepCounter extends React.Component {
 
     displaySetGoalConfirmation(dailyStepCountGoal) {
         alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
+    }
+
+    _onFormSubmit() {
+        //Validation of the form
+        this.validate();
     }
 
     _subscribe = () => {
