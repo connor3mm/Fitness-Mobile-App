@@ -10,7 +10,7 @@ const validation = yup.object({
     test('not-negative', 'Please enter a positive number', (val) => {return parseInt(val) > 0;}), //if this returns falls, the validation fails and it will display the message
     Quantity: yup.string().required().min(1).
     test('not-negative', 'Please enter a positive number', (val) => {return parseInt(val) > 0;}),
-})
+});
 
 export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemainingCalories, getTotalBreakfastCalories, getTotalLunchCalories, getTotalDinnerCalories} ) {
 

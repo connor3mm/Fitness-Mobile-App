@@ -8,7 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { TabRouter } from 'react-navigation';
 
 
-export default function DashBoard({ navigation }) {
+export default function DashBoard({navigation}) {
 
     const homePressedHandler = () => navigation.navigate('Homepage');
 
@@ -34,8 +34,6 @@ export default function DashBoard({ navigation }) {
                 </View>
             </View>
         </LinearGradient>
-
-    )
-
-}
+    );
+};
 

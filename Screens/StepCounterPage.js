@@ -128,8 +128,7 @@ export default class StepCounter extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                
-                <DashBoard/>
+            
 
                 <Modal
                     animationType={"slide"}

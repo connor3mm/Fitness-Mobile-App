@@ -3,10 +3,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Bottomnavbar } from '../Stack/appStack';
 import { NavigationContainer } from '@react-navigation/native';
 import { styles } from "./Welcomepage";
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { TabRouter } from 'react-navigation';
-import { Righteous_400Regular} from '@expo-google-fonts/righteous';
+import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 
 
@@ -17,7 +17,7 @@ export default function Home({navigation}) {
     });
 
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
-    
+
     const gymsNearMePressedHandler = () => navigation.navigate('GymsNearMePage');
     
     const goalsAchievementsPressedHandler = () => navigation.navigate('GoalsAchievementsPage');
