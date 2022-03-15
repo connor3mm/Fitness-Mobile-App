@@ -341,7 +341,7 @@ export default function CalorieCounter({navigation}) {
                                 />
                             </View>
                         </TouchableWithoutFeedback>
-                        <Text style={{ color: "black", }}>{goalCalories1}</Text>
+
 
                     </View>                 
 
@@ -515,6 +515,8 @@ export const caloriesStyles = StyleSheet.create({
         width: 100,
         maxWidth: 100,
         marginVertical: 10,
+        textAlign: 'center',
+
     },
 
 
