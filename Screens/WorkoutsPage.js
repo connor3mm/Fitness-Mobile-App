@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from "react-native";
+import {LinearGradient, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';

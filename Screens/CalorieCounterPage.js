@@ -31,34 +31,7 @@ import { circle } from 'react-native/Libraries/Animated/Easing';
 
 
 export default function CalorieCounter({navigation}) {
-    const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-    const AnimatedValue = React.useRef(new Animated.Value(0)).current;
-    const circleRef = React.useRef();
-    let percentage = 75;
-    let max = 100;
 
-    const animation = (toValue) => {
-        return Animated.timing(AnimatedValue, {
-            toValue,
-            duration : 1000,
-            delay : 100,
-            useNativeDriver: true,
-        }).start();
-    };  
-
-    React.useEffect(() => {
-        animation(percentage);
-
-        AnimatedValue.addListener((v) => {
-            if (circleRef?.current) {
-                let maxPerc = 100 * (v.value) / max;
-                const strokeDashoffset = (2 * Math.PI * 50) - ((2 * Math.PI * 50) * maxPerc) / 100;
-                circleRef.current.setNativeProps({
-                    strokeDashoffset,
-                });
-            }
-        });
-    });
 
     const homePressedHandler = () => navigation.navigate('Homepage');
 
@@ -239,6 +212,37 @@ export default function CalorieCounter({navigation}) {
         getRemainingCalories();
     };
 
+    /*  adding svg animation */
+    const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+    const AnimatedValue = React.useRef(new Animated.Value(0)).current;
+    const circleRef = React.useRef();
+    let percentage = (isNaN(goalCalories1 / totalCalories)) ? 0 : (totalCalories / goalCalories1)*100 ;
+    console.log(percentage);
+    let max = 100;
+
+    const animation = (toValue) => {
+        return Animated.timing(AnimatedValue, {
+            toValue,
+            duration : 1000,
+            delay : 100,
+            useNativeDriver: true,
+        }).start();
+    };  
+
+    React.useEffect(() => {
+        animation(percentage);
+
+        AnimatedValue.addListener((v) => {
+            if (circleRef?.current) {
+                let maxPerc = 100 * (v.value) / max;
+                const strokeDashoffset = (2 * Math.PI * 50) - ((2 * Math.PI * 50) * maxPerc) / 100;
+                circleRef.current.setNativeProps({
+                    strokeDashoffset,
+                });
+            }
+        });
+    });
+
     return (
         <SafeAreaView style={styles.container}>
 
@@ -337,7 +341,7 @@ export default function CalorieCounter({navigation}) {
                                 />
                             </View>
                         </TouchableWithoutFeedback>
-                        <Text style={{ color: "white", }}>{goalCalories1}</Text>
+                        <Text style={{ color: "black", }}>{goalCalories1}</Text>
 
                     </View>                 
 
@@ -434,7 +438,7 @@ export default function CalorieCounter({navigation}) {
     )
 }
 
-const caloriesStyles = StyleSheet.create({
+export const caloriesStyles = StyleSheet.create({
 
     item: {
         fontSize: 16.5,

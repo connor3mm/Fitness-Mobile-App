@@ -6,7 +6,7 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Image,
+    Image,  
     Modal,
     TextInput,
     Alert
@@ -28,11 +28,11 @@ export default class StepCounter extends ValidationComponent {
     };
 
     displayModal(show) {
-        this.setState({modalVisible: show})
+        this.setState({modalVisible: show});
     }
 
     displayErrorModal(show) {
-        this.setState({noPedometerModalVisible: show})
+        this.setState({noPedometerModalVisible: show});
     }
 
     componentDidMount() {
@@ -77,11 +77,11 @@ export default class StepCounter extends ValidationComponent {
             });
 
             //Checks if the daily goal is set and if it is then checks if it has been reached and notifies the user.
-            if (this.state.dailyGoalSet === false) return
-            if (this.state.dailyGoalReached === true) return
+            if (this.state.dailyGoalSet === false) return;
+            if (this.state.dailyGoalReached === true) return;
             if (this.state.currentStepCount >= this.state.dailyStepCountGoal) {
                 this.state.dailyGoalReached = true
-                alert("The daily goal has been reached!")
+                alert("The daily goal has been reached!");
             }
         });
 
