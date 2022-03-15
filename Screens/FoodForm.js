@@ -36,7 +36,7 @@ export default function FoodFormPage({
 
     return (
         <SafeAreaView style={formStyles.container}>
-            <ScrollView showsHorizontalScrollIndicator={false}>
+            <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                 <Formik
                     initialValues={{Food: '', Calories: '', Quantity: ''}}
                     validationSchema={validation}
