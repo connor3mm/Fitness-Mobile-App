@@ -45,7 +45,7 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                             Add Food Item
                         </Text>
                         
-                        <View style={{ flexDirection: 'row', marginVertical: 7.5, width: '100%',}}>
+                        <View style={{ flexDirection: 'row', marginVertical: 7.5, width: '100%', marginLeft: 10,}}>
                             <Image style={{ height: 35, width: 35, alignSelf: 'center'}} source={require('../assets/img/diet.png')}/>
 
                             <TextInput
@@ -60,7 +60,7 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', marginVertical: 7.5, width: '100%',}}>
+                        <View style={{ flexDirection: 'row', marginVertical: 7.5, width: '100%', marginLeft: 10,}}>
                             <Image style={{ height: 35, width: 35, alignSelf: 'center'}} source={require('../assets/img/calories.png')}/>
                             <TextInput
                                 style = {[formStyles.inputStyle, caloriesStyles.caloriesItemsText]}
@@ -74,7 +74,7 @@ export default function FoodFormPage( {addFood, getTotalCaloriesIntake, getRemai
                             </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', marginVertical: 7.5, width: '100%',}}>
+                        <View style={{ flexDirection: 'row', marginVertical: 7.5, width: '100%', marginLeft: 10,}}>
                             <Image style={{ height: 35, width: 35, alignSelf: 'center'}} source={require('../assets/img/numbers.png')}/>
                             <TextInput
                                 style = {[formStyles.inputStyle, caloriesStyles.caloriesItemsText]}
@@ -149,6 +149,7 @@ const formStyles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 5,
         elevation: 3,
+        shadowOffset: {width: 3, height: 3},
         shadowColor: '#3584e4',
         marginVertical: 10,
     },

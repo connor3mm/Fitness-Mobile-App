@@ -216,7 +216,8 @@ export default function CalorieCounter({navigation}) {
     const AnimatedCircle = Animated.createAnimatedComponent(Circle);
     const AnimatedValue = React.useRef(new Animated.Value(0)).current;
     const circleRef = React.useRef();
-    let percentage = (isNaN(goalCalories1 / totalCalories)) ? 0 : (totalCalories / goalCalories1)*100 ;
+    let percentage = isNaN(totalCalories / goalCalories1) || (isFinite(totalCalories/goalCalories1)) == false ? 
+    0 : (totalCalories / goalCalories1)*100 ;
     console.log(percentage);
     let max = 100;
 
@@ -231,7 +232,6 @@ export default function CalorieCounter({navigation}) {
 
     React.useEffect(() => {
         animation(percentage);
-
         AnimatedValue.addListener((v) => {
             if (circleRef?.current) {
                 let maxPerc = 100 * (v.value) / max;
