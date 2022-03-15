@@ -14,8 +14,8 @@ import {
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import {Pedometer} from 'expo-sensors';
 import ValidationComponent from 'react-native-form-validator';
-import DashBoard from '../CustomComponents/dashboard';
-export default class StepCounter extends React.Component {
+
+export default class StepCounter extends ValidationComponent {
     state = {
         isPedometerAvailable: 'checking',
         pastStepCount: 0,
@@ -44,17 +44,17 @@ export default class StepCounter extends React.Component {
     }
 
     setDailyStepCount = (text) => {
-        this.setState({dailyStepCountGoal: text})
+        this.setState({ dailyStepCountGoal: text})
     }
 
     displaySetGoalConfirmation(dailyStepCountGoal) {
-        alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
-        this.setState({dailyGoalSet: true})
-    }
+        if(this.state.dailyStepCountGoal === 0) {
+            alert("No daily goal set. Please set a daily goal if you wish to save it.")
+            return
+        }
 
-    _onFormSubmit() {
-        //Validation of the form
-        this.validate();
+        this.state.dailyGoalSet = true
+        alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
     }
 
     _subscribe = () => {
@@ -139,10 +139,20 @@ export default class StepCounter extends React.Component {
                     }}>
                     <TextInput style={styles.input}
                                underlineColorAndroid="transparent"
+                               contextMenuHidden={true}
+                               keyboardType='numeric'
                                placeholder="Daily Step Count"
                                placeholderTextColor="#9a73ef"
                                autoCapitalize="none"
-                               onChangeText={this.setDailyStepCount}/>
+                               onChangeText={(dailyStepCountGoal) => {
+                                   this.setState({dailyStepCountGoal}, () => {
+                                       this.validate({
+                                           dailyStepCountGoal: { required: true, minlength: 1, maxlength: 5, numbers: true}
+                                       })
+                                   })
+                               }}/>
+                               {this.isFieldInError('dailyStepCountGoal') && this.getErrorsInField('dailyStepCountGoal').map(errorMessage => <Text key={errorMessage}>{errorMessage}</Text>)}
+
 
                     <TouchableOpacity
                         style={styles.button}
@@ -172,7 +182,6 @@ export default class StepCounter extends React.Component {
                     <Text
                         style={styles.closeText}
                         onPress={() => {
-                            //
                             this.displayErrorModal(!this.state.noPedometerModalVisible);
                         }}>Return home</Text>
                 </Modal>
