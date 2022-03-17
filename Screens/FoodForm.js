@@ -123,23 +123,23 @@ export default function FoodFormPage({
                                 <Text style={[styles.buttonText,]}> + Add Food</Text>
                             </TouchableOpacity>
 
-                            <View
-                                style={{flexDirection: 'row', alignSelf: 'center', position: 'absolute', bottom: -100}}>
-                                <Text style={{color: '#4356FF', fontFamily: 'Righteous_400Regular', fontSize: 17.5,}}>
-                                    FitMe
-                                </Text>
-                                <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-                            </View>
 
                         </View>
                     )}
                 </Formik>
             </ScrollView>
+
+            <View style={{flexDirection: 'row', alignSelf: 'center', position: 'absolute', bottom: 15, }}>
+                <Text style={{color: '#4356FF', fontFamily: 'Righteous_400Regular', fontSize: 16,}}>
+                    FitMe
+                </Text>
+                <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
+            </View>
         </SafeAreaView>
     )
 }
 
-const formStyles = StyleSheet.create({
+export const formStyles = StyleSheet.create({
 
     container: {
         flex: 1,
@@ -147,8 +147,8 @@ const formStyles = StyleSheet.create({
     },
 
     inputStyle: {
-        borderBottomColor: '#4356FF',
-        borderBottomWidth: 2.5,
+        borderBottomColor: '#424242',
+        borderBottomWidth: 2,
         fontSize: 15,
         marginVertical: 12.5,
         padding: 7.5,

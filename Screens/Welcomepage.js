@@ -15,7 +15,7 @@ export default function Welcome( {navigation} ) {
 return (
     <SafeAreaView style={styles.container}>
 
-        <View style={{ flex: 2.5, justifyContent: 'center', alignItems: 'stretch'}}>
+        <View style={{ flex: 4, justifyContent: 'center', alignItems: 'stretch'}}>
 
             <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent:'center'}}>
                 <Text style={styles.title}>Welcome to Fit
@@ -23,15 +23,32 @@ return (
                 </Text>
                 <Image style={styles.logo} source={require('../assets/img/logo.png')}/>
             </View>
-           
             <Text style={styles.slogan}>Upgrade your fitness to the next level!</Text>
+
+            <View style={{ alignSelf: 'center', justifyContent: 'space-between', marginTop: 100, }}>
+                <View style={{ flexDirection: 'row', margin: 17,}}>
+                    <Image style={{ height: 50, width: 50}} source={require('../assets/img/diet.png')} />
+                    <Text style={[styles.slogan, { fontSize: 17.5, marginHorizontal: 12.5}, ]}>Track what you eat</Text>
+                </View>
+
+                <View style={{ flexDirection: 'row', margin: 17,}}>
+                    <Image style={{ height: 50, width: 50}} source={require('../assets/img/barbell.png')}/>
+                    <Text style={[styles.slogan, { fontSize: 17.5, marginHorizontal: 12.5}]}>Follow a routine</Text>
+                </View>
+
+                <View style={{ flexDirection: 'row', margin: 17,}}>
+                    <Image style={{ height: 50, width: 50}} source={require('../assets/img/goal.png')}/>
+                    <Text style={[styles.slogan, { fontSize: 17.5, marginHorizontal: 12.5}]}>Achieve your goals</Text>
+                </View>
+            </View>
+                
         </View>
 
         <View style={{ flex: 1, justifyContent: 'flex-end', width: '80%', marginBottom: 1, }}>
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
             onPress={buttonPressedHandler}>
-                <Text style={[styles.buttonText,]}>New! Get Started </Text>
+                <Text style={[styles.buttonText,]}>New? Get Started </Text>
             </TouchableOpacity>
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, ]} 
@@ -54,13 +71,13 @@ export const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 40.5,
+        fontSize: 38.5,
         color: '#424242',
         fontFamily: 'Righteous_400Regular',
     },
 
     slogan: {
-        fontSize: 15.5,
+        fontSize: 14,
         fontFamily: 'Righteous_400Regular',
         color: '#424242',
         alignSelf: 'center',
@@ -71,8 +88,8 @@ export const styles = StyleSheet.create({
     },
 
     logo: {
-        width: 45,
-        height: 45,
+        width: 40,
+        height: 40,
         transform: [{ rotate: '45deg'}, {translateX: -20}]
     },
 

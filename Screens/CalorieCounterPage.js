@@ -21,8 +21,8 @@ import {LinearGradient} from 'expo-linear-gradient';
 import {MaterialIcons} from '@expo/vector-icons';
 import FoodForm from './FoodForm';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {styling} from './Homepage';
-import {styles} from "./Welcomepage";
+import { styling } from './Homepage';
+import { styles } from "./Welcomepage";
 import { BMIstyles } from './BMICalculatorPage';
 import SVG, {G, Circle} from 'react-native-svg'; 
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
@@ -31,8 +31,6 @@ import { circle } from 'react-native/Libraries/Animated/Easing';
 
 
 export default function CalorieCounter({navigation}) {
-
-
     const homePressedHandler = () => navigation.navigate('Homepage');
 
     //to set the modal open or close
@@ -90,7 +88,7 @@ export default function CalorieCounter({navigation}) {
 
         let temp = new Date(current);
         let formatted = temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear();
-        setDateText(formatted);
+        setDateText(formatte);
     };
 
     /**
@@ -218,7 +216,6 @@ export default function CalorieCounter({navigation}) {
     const circleRef = React.useRef();
     let percentage = isNaN(totalCalories / goalCalories1) || (isFinite(totalCalories/goalCalories1)) == false ? 
     0 : (totalCalories / goalCalories1)*100 ;
-    console.log(percentage);
     let max = 100;
 
     const animation = (toValue) => {
