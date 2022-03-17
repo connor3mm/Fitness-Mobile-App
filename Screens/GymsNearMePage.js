@@ -1,7 +1,8 @@
 import * as React from 'react';
 import MapView, {Marker, Callout} from 'react-native-maps';
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import * as Location from 'expo-location';
 
 export default function App() {
     const [pin, setPin] = React.useState({
@@ -9,12 +10,35 @@ export default function App() {
         longitude: -122.4324
     });
 
-    const [place, setPlace] = React.useState({
+    const [region, setRegion] = React.useState({
         latitude: 37.78825,
         longitude: -122.4324,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
     });
+
+    const [location, setLocation] = React.useState(null);
+    const [errorMsg, setErrorMsg] = React.useState(null);
+
+    React.useEffect(() => {
+        (async () => {
+
+            let {status} = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+
+            // setPin({
+            //     latitude: location.coordinate.latitude,
+            //     longitude: location.coordinate.longitude
+            // })
+
+        })();
+    }, []);
     return (
         <View style={{marginTop: 50, flex: 1}}>
             <GooglePlacesAutocomplete
@@ -26,7 +50,7 @@ export default function App() {
                 onPress={(data, details = null) => {
                     // 'details' is provided when fetchDetails = true
                     console.log(data, details);
-                    setPlace({
+                    setRegion({
                         latitude: details.geometry.location.lat,
                         longitude: details.geometry.location.lng,
                         latitudeDelta: 0.0922,
@@ -39,12 +63,14 @@ export default function App() {
                     components: "country:us",
                     types: "establishment",
                     radius: 30000,
-                    location: `${place.latitude}, ${place.longitude}`
+                    location: `${region.latitude}, ${region.longitude}`
                 }}
+
                 styles={{
                     container: {flex: 0, position: "absolute", width: "100%", zIndex: 1},
                     listView: {backgroundColor: "white"}
                 }}
+
             />
             <MapView style={styles.map}
                      initialRegion={{
@@ -54,13 +80,11 @@ export default function App() {
                          longitudeDelta: 0.0421
                      }}
                      provider="google"
+                     showUserLocation={true}
             >
-                <Marker coordinate={{latitude: place.latitude, longitude: place.longitude}}/>
+                <Marker coordinate={{latitude: region.latitude, longitude: region.longitude}}/>
                 <Marker
-                    coordinate={{
-                        latitude: 37.78825,
-                        longitude: -122.4324
-                    }}
+                    coordinate={pin}
                     draggable={true}
                     onDragStart={(e) => {
                         console.log("Drag start", e.nativeEvent.coordinates)
