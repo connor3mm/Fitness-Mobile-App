@@ -36,7 +36,7 @@ export default function App() {
                 query={{
                     key: "AIzaSyDWtmCdM1fnzsjtw2xKsQGJBPoooW3wl8s",
                     language: "en",
-                    components: "country:uk",
+                    components: "country:us",
                     types: "establishment",
                     radius: 30000,
                     location: `${place.latitude}, ${place.longitude}`
