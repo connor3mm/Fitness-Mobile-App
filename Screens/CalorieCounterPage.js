@@ -11,7 +11,7 @@ import {
     Keyboard,
     TextInput,
     Platform,
-    SafeAreaView, 
+    SafeAreaView,
     Image,
     Animated,
 } from "react-native";
@@ -19,15 +19,15 @@ import {
 import CardComponent from "../CustomComponents/CardComponent";
 import {LinearGradient} from 'expo-linear-gradient';
 import {MaterialIcons} from '@expo/vector-icons';
+import {AntDesign} from '@expo/vector-icons';
 import FoodForm from './FoodForm';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { styling } from './Homepage';
-import { styles } from "./Welcomepage";
-import { BMIstyles } from './BMICalculatorPage';
-import SVG, {G, Circle} from 'react-native-svg'; 
+import {styling} from './Homepage';
+import {styles} from "./Welcomepage";
+import {BMIstyles} from './BMICalculatorPage';
+import SVG, {G, Circle} from 'react-native-svg';
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
-import { circle } from 'react-native/Libraries/Animated/Easing';
-
+import {circle} from 'react-native/Libraries/Animated/Easing';
 
 
 export default function CalorieCounter({navigation}) {
@@ -75,6 +75,8 @@ export default function CalorieCounter({navigation}) {
         {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
 
     ]);
+
+    const [goalAchieved, setGoalAchieved] = useState("");
 
     /**
      * handler used for date picker
@@ -200,6 +202,13 @@ export default function CalorieCounter({navigation}) {
 
     };
 
+    const getGoalAchievedMessage = () => {
+        const message = "You have achieved your daily calorie goal!";
+        if (remaining === 0) {
+            setGoalAchieved(message);
+        }
+    };
+
     /**
      * this function combines remaining calories calculation and setting daily goal
      * so both functions are called when the user submits the button so when daily goal is changed
@@ -214,18 +223,18 @@ export default function CalorieCounter({navigation}) {
     const AnimatedCircle = Animated.createAnimatedComponent(Circle);
     const AnimatedValue = React.useRef(new Animated.Value(0)).current;
     const circleRef = React.useRef();
-    let percentage = isNaN(totalCalories / goalCalories1) || (isFinite(totalCalories/goalCalories1)) == false ? 
-    0 : (totalCalories / goalCalories1)*100 ;
+    let percentage = isNaN(totalCalories / goalCalories1) || (isFinite(totalCalories / goalCalories1)) == false ?
+        0 : (totalCalories / goalCalories1) * 100;
     let max = 100;
 
     const animation = (toValue) => {
         return Animated.timing(AnimatedValue, {
             toValue,
-            duration : 1000,
-            delay : 100,
+            duration: 1000,
+            delay: 100,
             useNativeDriver: true,
         }).start();
-    };  
+    };
 
     React.useEffect(() => {
         animation(percentage);
@@ -243,22 +252,27 @@ export default function CalorieCounter({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
 
-            <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
-            style={[styling.dashboard, styles.boxShadow]}>
+            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0, 0.9]}
+                            style={[styling.dashboard, styles.boxShadow]}>
 
-                <View style={{ width: '100%', paddingTop: 50, 
-                paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
-                    
-                    <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
+                <View style={{
+                    width: '100%', paddingTop: 50,
+                    paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'
+                }}>
+
+                    <TouchableOpacity style={{alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
                         <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                        <Text style={{ color: '#FFF'}}>Menu</Text>
+                        <Text style={{color: '#FFF'}}>Menu</Text>
                     </TouchableOpacity>
 
-                    <Text style={[styling.smallText, BMIstyles.sectionTitle, caloriesStyles.sectionTitle]}>Calorie Counter</Text>
+                    <Text style={[styling.smallText, BMIstyles.sectionTitle, caloriesStyles.sectionTitle]}>Calorie
+                        Counter</Text>
 
                     <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                        <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
-                        alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text>
+                        <Text style={{
+                            color: 'white', fontFamily: 'Righteous_400Regular',
+                            alignSelf: 'center', margin: 5, fontSize: 20,
+                        }}>Fit<Text style={[styles.blueText]}>Me</Text>
                         </Text>
                         <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
                     </View>
@@ -266,51 +280,63 @@ export default function CalorieCounter({navigation}) {
             </LinearGradient>
 
             <ScrollView showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
-            style={{width: '95%',}}>
+                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
+                        style={{width: '95%',}}>
 
-                <View style={{ flexDirection: 'row', 
-                justifyContent: 'space-between', alignItems: 'center', marginTop: 2.5, padding: 10,}}>
+                <View style={{marginTop: 15}}>
+                    {remaining === 0 && totalCalories > 0 && goalCalories > 0 ? (
+                        <AntDesign name="checkcircle" size={24} color="blue">
+                            <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie goal!</Text>
+                        </AntDesign>
+                    ) : null}
+                </View>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between', alignItems: 'center', marginTop: 2.5, padding: 10,
+                }}>
 
-                    <SVG width={175} height={175}> 
-                        <G rotation="-90" origin={[62.5,62.5]}> 
-                            <Circle cx='25%' cy='50%' stroke={'#CEE4FF'} strokeWidth={12.5} r={50} 
-                            strokeOpacity={.75} fill="transparent"></Circle>
+                    <SVG width={175} height={175}>
+                        <G rotation="-90" origin={[62.5, 62.5]}>
+                            <Circle cx='25%' cy='50%' stroke={'#CEE4FF'} strokeWidth={12.5} r={50}
+                                    strokeOpacity={.75} fill="transparent"></Circle>
 
-                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#4356FF'} strokeWidth={12.5} r={50} 
-                            strokeOpacity={.75} fill="transparent" strokeDasharray={2 * Math.PI * 50}
-                            strokeDashoffset={2 * Math.PI * 50} strokeLinecap={'round'}>
+                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#4356FF'} strokeWidth={12.5}
+                                            r={50}
+                                            strokeOpacity={.75} fill="transparent" strokeDasharray={2 * Math.PI * 50}
+                                            strokeDashoffset={2 * Math.PI * 50} strokeLinecap={'round'}>
                             </AnimatedCircle>
                         </G>
                     </SVG>
 
                     <View style={caloriesStyles.caloriesInfo}>
-                        <View style={{ flexDirection: 'row', }}>
-                            <Image style={{ width: 10, height: 10, alignSelf: 'center'}} 
-                            source={require('../assets/img/indicator-1.png')} />
-                            <Text style={caloriesStyles.caloriesItems}>Consumed calories</Text>    
+                        <View style={{flexDirection: 'row',}}>
+                            <Image style={{width: 10, height: 10, alignSelf: 'center'}}
+                                   source={require('../assets/img/indicator-1.png')}/>
+                            <Text style={caloriesStyles.caloriesItems}>Consumed calories</Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row'}}>
-                            <Image style={{ width: 10, height: 10,alignSelf: 'center'}} 
-                            source={require('../assets/img/indicator-2.png')} />
+                        <View style={{flexDirection: 'row'}}>
+                            <Image style={{width: 10, height: 10, alignSelf: 'center'}}
+                                   source={require('../assets/img/indicator-2.png')}/>
                             <Text style={caloriesStyles.caloriesItems}>Leftover calories</Text>
                         </View>
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', 
-                width: '95%', alignSelf: 'center', marginVertical: 30,}}>
-                    
-                    <View >
+                <View style={{
+                    flexDirection: 'row', justifyContent: 'space-between',
+                    width: '95%', alignSelf: 'center', marginVertical: 30,
+                }}>
+
+                    <View>
                         <Text style={[caloriesStyles.caloriesItemsText, {textAlign: 'center'}]}>Goal KCal</Text>
-                        <View style={[caloriesStyles.buttonContainer,  {alignSelf: 'center', width: 100,}]}>
+                        <View style={[caloriesStyles.buttonContainer, {alignSelf: 'center', width: 100,}]}>
                             <Text style={[caloriesStyles.caloriesItemsText]}>{goalCalories1}</Text>
                         </View>
                     </View>
 
                     <View>
-                        <Text style={[caloriesStyles.caloriesItemsText,{textAlign: 'center'}]}>Consumed KCal</Text>
+                        <Text style={[caloriesStyles.caloriesItemsText, {textAlign: 'center'}]}>Consumed KCal</Text>
                         <View style={[caloriesStyles.buttonContainer, {alignSelf: 'center', width: 100,}]}>
                             <Text style={[caloriesStyles.caloriesItemsText]}>{totalCalories}</Text>
                         </View>
@@ -325,8 +351,8 @@ export default function CalorieCounter({navigation}) {
 
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <View style={{ marginVertical: 15, alignItems: 'center'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                    <View style={{marginVertical: 15, alignItems: 'center'}}>
                         <Text style={caloriesStyles.caloriesItemsText}>Set a calorie goal:</Text>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                             <View>
@@ -340,12 +366,12 @@ export default function CalorieCounter({navigation}) {
                         </TouchableWithoutFeedback>
 
 
-                    </View>                 
+                    </View>
 
-                    <View style={{ marginVertical: 15, alignItems: 'center',}}>
+                    <View style={{marginVertical: 15, alignItems: 'center',}}>
                         <Text style={caloriesStyles.caloriesItemsText}>Pick a day to meet the goal:</Text>
                         <TouchableOpacity style={caloriesStyles.buttonContainer} onPress={() => modeShow('date')}>
-                            <Image  style={caloriesStyles.button} source={require('../assets/img/calendar.png')}/>
+                            <Image style={caloriesStyles.button} source={require('../assets/img/calendar.png')}/>
                             <Text style={[caloriesStyles.caloriesItemsText]}>{dateText}</Text>
                         </TouchableOpacity>
                     </View>
@@ -362,11 +388,9 @@ export default function CalorieCounter({navigation}) {
                     />
                 )}
 
-  
-
                 <TouchableOpacity style={BMIstyles.submit}
-                    onPress={clickHandler}>
-                        <Text style={[styling.whiteText,{ textAlign: 'center'}]}>Set Target</Text>
+                                  onPress={clickHandler}>
+                    <Text style={[styling.whiteText, {textAlign: 'center'}]}>Set Target</Text>
                 </TouchableOpacity>
 
                 <Modal visible={openModal} animationType='slide'>
@@ -447,7 +471,7 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     buttonContainer: {
-        shadowOffset: { width: 5, height: 5},
+        shadowOffset: {width: 5, height: 5},
         elevation: 5,
         shadowColor: '#000',
         width: 60,
@@ -464,7 +488,7 @@ export const caloriesStyles = StyleSheet.create({
         width: 45,
         height: 45,
     },
-    
+
     modalStyle: {
         marginBottom: 10,
         borderWidth: 2,
@@ -475,7 +499,7 @@ export const caloriesStyles = StyleSheet.create({
         alignSelf: 'center',
     },
 
-    sectionTitle : {
+    sectionTitle: {
         fontSize: 25,
     },
 
@@ -532,7 +556,7 @@ export const caloriesStyles = StyleSheet.create({
         borderColor: '#FFF',
         borderWidth: 1,
         backgroundColor: '#FFF',
-        shadowOffset: { width: 10, height: 10 },
+        shadowOffset: {width: 10, height: 10},
         shadowColor: '#000',
         elevation: 3,
         width: '45%',
