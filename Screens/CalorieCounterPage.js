@@ -286,7 +286,8 @@ export default function CalorieCounter({navigation}) {
                 <View style={{marginTop: 15}}>
                     {remaining === 0 && totalCalories > 0 && goalCalories > 0 ? (
                         <AntDesign name="checkcircle" size={24} color="blue">
-                            <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie goal!</Text>
+                            <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie
+                                goal!</Text>
                         </AntDesign>
                     ) : null}
                 </View>
@@ -421,34 +422,43 @@ export default function CalorieCounter({navigation}) {
                     style={caloriesStyles.modalStyle}
                     onPress={() => setOpenModal(true)}
                 />
-                <Text>Breakfast: {totalCaloriesBreakfast}</Text>
+                <Text style={caloriesStyles.titleStyle}>Breakfast: {totalCaloriesBreakfast}</Text>
                 {breakfastFood.map(item => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
-                                <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                    <AntDesign name="right" size={15} color="black"/>
+                                </View>
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
                 ))}
 
-                <Text>Lunch: {totalCaloriesLunch}</Text>
+                <Text style={caloriesStyles.titleStyle}>Lunch: {totalCaloriesLunch}</Text>
                 {lunchFood.map(item => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
-                                <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                    <AntDesign name="right" size={15} color="black"/>
+                                </View>
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
                 ))}
 
-                <Text>Dinner: {totalCaloriesDinner}</Text>
+                <Text style={caloriesStyles.titleStyle}>Dinner: {totalCaloriesDinner}</Text>
                 {dinnerFood.map(item => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
-                                <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                    <AntDesign name="right" size={15} color="black"/>
+                                </View>
                             </CardComponent>
                         </TouchableOpacity>
                     </View>
@@ -524,7 +534,6 @@ export const caloriesStyles = StyleSheet.create({
         alignSelf: 'center',
     },
 
-
     input: {
         borderWidth: 0,
         borderBottomWidth: 3,
@@ -539,7 +548,6 @@ export const caloriesStyles = StyleSheet.create({
         textAlign: 'center',
 
     },
-
 
     caloriesItems: {
         paddingVertical: 15,
@@ -563,5 +571,16 @@ export const caloriesStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex-start',
         paddingHorizontal: 10,
-    }
+    },
+
+    titleStyle: {
+        fontWeight: 'bold',
+        fontFamily: 'Righteous_400Regular',
+        backgroundColor: '#f1f2fc',
+        padding: 10,
+        fontSize: 18,
+        marginTop: 20,
+
+    },
+
 })
