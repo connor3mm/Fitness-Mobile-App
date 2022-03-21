@@ -1,44 +1,108 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
-import { styles } from "./Welcomepage";
-import { styling } from './Homepage';
+import React, { useState } from 'react';
+import Toggle from 'react-native-toggle-element';
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
+import FooterLogo from '../CustomComponents/footerLogo';
+import { caloriesStyles } from "./CalorieCounterPage";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 
+export default function SettingsPage({navigation}) {   
 
-export default function GoalsAchievements({navigation}) {   
-
-    const settingsPressedHandler = () => navigation.navigate('SettingsPage');
-
-    const profilePressedHandler = () => navigation.navigate('ProfilePage');
-
-    const homePressedHandler = () => navigation.navigate('Homepage');
+    const homePressedHandler = () => navigation.navigate('Homepage', {transition: 'vertical'});
+    const [toggleValue, setToggleValue] = useState(false);
 
     return(
-        <SafeAreaView style = {[styles.container,]}>
-            <Text>Settings hello</Text>
+        
+        <SafeAreaView style = {[setttingStyles.container]}>
 
-            <View style={[styling.footer]}>
-                <TouchableOpacity  onPress={homePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/homepage.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Home</Text>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={homePressedHandler}>
+                <Image style={{ width: 30, height: 30, margin: 30, marginLeft: 0,}} source={require('../assets/img/angle-left.png')}/>
+            </TouchableOpacity>
 
-                <TouchableOpacity onPress={profilePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Profile</Text>
-                </TouchableOpacity>
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Settings</Text>  
+    
+            <ScrollView showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={{ marginHorizontal: 2.5, marginVertical: 10, }}>
 
-                <TouchableOpacity onPress={settingsPressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/settings.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Settings</Text>
-                </TouchableOpacity>
-            </View> 
+                <View style={[setttingStyles.settingsSection,]}>
+
+                    <View style={{ flexDirection: 'row', alignSelf: 'center'}}>
+                        <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/language.png')}/>
+                        <Text style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>Language</Text>
+                    </View>
+
+                    <TouchableOpacity style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
+                        <Image style={{ width: 15, height: 15, transform: [{ rotate: '180deg'}],}} 
+                        source={require('../assets/img/angle-left.png')}/>
+                    </TouchableOpacity>
+                    
+                </View>
+
+                <View style={[setttingStyles.settingsSection,]}>
+                    <View style={{ flexDirection: 'row', alignSelf: 'center'}}>
+                        <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/notifcations.png')}/>
+                        <Text  style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>Notification</Text>
+                    </View>
+                    <TouchableOpacity style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
+                        <Image style={{ width: 15, height: 15, transform: [{ rotate: '180deg'}],}} 
+                        source={require('../assets/img/angle-left.png')}/>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={[setttingStyles.settingsSection,]}>
+                    <View style={{ flexDirection: 'row', alignSelf: 'center'}}>
+                        <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/darkmode.png')}/>
+                        <Text  style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>Dark Mode</Text>
+                    </View>
+                    {/* <Toggle value={toggleValue} onValueChange={(toggleValue) => setToggleValue(toggleValue)} /> */}
+
+                </View>
+
+                <View style={[setttingStyles.settingsSection,]}>
+                    <View style={{ flexDirection: 'row', alignSelf: 'center'}}>
+                        <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/help.png')}/>
+                        <Text  style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>About</Text>
+                    </View>
+                    <TouchableOpacity style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
+                        <Image style={{ width: 15, height: 15, transform: [{ rotate: '180deg'}],}} 
+                        source={require('../assets/img/angle-left.png')}/>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+            
+            <FooterLogo/>
+            
         </SafeAreaView>        
     )
 }
 
-const setttingStyles = StyleSheet.create({ 
+export const setttingStyles = StyleSheet.create({ 
+    container: {
+        padding: 30,
+        backgroundColor: '#FFF',
+        height: '100%',
+    },
 
+    title: {
+        fontSize: 45,
+        color: '#4356FF',
+        marginVertical: 45,
+    },
+    
+    settingsSection: { 
+        flexDirection: 'row',
+        marginVertical: 17.5,
+        justifyContent: 'space-between', 
+    },
+
+    settingsButton: {
+        width: 40,
+        height: 40,
+        backgroundColor: '#efefef',
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
 })
 
