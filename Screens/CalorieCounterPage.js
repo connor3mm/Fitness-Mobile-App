@@ -93,6 +93,18 @@ export default function CalorieCounter({navigation}) {
         setDateText(formatted);
     };
 
+
+    const vibrate = () => {
+        if (Platform.OS === "ios") {
+            const interval = setInterval(() => Vibration.vibrate(), 500);
+            setTimeout(() => clearInterval(interval), 1000);
+        } else {
+
+            Vibration.vibrate(500);
+        }
+    };
+
+
     /**
      * to show the picked date
      * @param current
@@ -202,13 +214,6 @@ export default function CalorieCounter({navigation}) {
 
     };
 
-    const getGoalAchievedMessage = () => {
-        const message = "You have achieved your daily calorie goal!";
-        if (remaining === 0) {
-            setGoalAchieved(message);
-        }
-    };
-
     /**
      * this function combines remaining calories calculation and setting daily goal
      * so both functions are called when the user submits the button so when daily goal is changed
@@ -284,7 +289,7 @@ export default function CalorieCounter({navigation}) {
                         style={{width: '95%',}}>
 
                 <View style={{marginTop: 15}}>
-                    {remaining === 0 && totalCalories > 0 && goalCalories > 0 ? (
+                    {(remaining === 0 || remaining < 0) && totalCalories > 0 && goalCalories > 0 ? (
                         <AntDesign name="checkcircle" size={24} color="blue">
                             <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie
                                 goal!</Text>

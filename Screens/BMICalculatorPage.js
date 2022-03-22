@@ -8,7 +8,9 @@ import {
     Alert,
     ScrollView,
     TouchableOpacity,
-    Image
+    Image,
+    Vibration,
+    Platform
 } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import DashBoard  from "../CustomComponents/dashboard";
@@ -46,6 +48,17 @@ export default function BMICalculator({navigation}) {
     //BMI value
     let [bmi, setBmi] = useState(0);
 
+
+
+    const vibrate = () => {
+        if (Platform.OS === "ios") {
+            const interval = setInterval(() => Vibration.vibrate(), 500);
+            setTimeout(() => clearInterval(interval), 1000);
+        } else {
+
+            Vibration.vibrate(500);
+        }
+    };
 
     /**
      * checks the form to validate inputs
@@ -167,7 +180,7 @@ export default function BMICalculator({navigation}) {
 
         //create final message
         let message = "\nYour BMI calculation is: " + bmi + "\n\n This puts you into the category of: " + weight + ageMessage + activityMessage;
-
+        vibrate();
         //Output for the Alert
         Alert.alert("BMI Results!", message, [
 
