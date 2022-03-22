@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import {caloriesStyles} from './CalorieCounterPage';
 import {styles} from './Welcomepage';
 import {styling} from './Homepage';
+import FooterLogo from '../CustomComponents/footerLogo';
 
 const validation = yup.object({
     Food: yup.string().required().min(2),
@@ -129,12 +130,7 @@ export default function FoodFormPage({
                 </Formik>
             </ScrollView>
 
-            <View style={{flexDirection: 'row', alignSelf: 'center', position: 'absolute', bottom: 15, }}>
-                <Text style={{color: '#4356FF', fontFamily: 'Righteous_400Regular', fontSize: 16,}}>
-                    FitMe
-                </Text>
-                <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-            </View>
+            <FooterLogo/>
         </SafeAreaView>
     )
 }

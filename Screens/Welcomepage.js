@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, StatusBar} from "react-native";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -14,6 +14,8 @@ export default function Welcome( {navigation} ) {
 
 return (
     <SafeAreaView style={styles.container}>
+
+        <StatusBar backgroundColor="#FFF" barStyle='dark-content'/>
 
         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'stretch'}}>
 
@@ -115,7 +117,7 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 1,
         // add box shadows to android devices
-        elevation: 1,
+        elevation: 2.5,
     },
 
     signup: {

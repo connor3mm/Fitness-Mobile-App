@@ -90,7 +90,7 @@ export default function CalorieCounter({navigation}) {
 
         let temp = new Date(current);
         let formatted = temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear();
-        setDateText(formatte);
+        setDateText(formatted);
     };
 
     /**

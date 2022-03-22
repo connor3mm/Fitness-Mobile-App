@@ -1,11 +1,7 @@
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Bottomnavbar } from '../Stack/appStack';
-import { NavigationContainer } from '@react-navigation/native';
 import { styles } from "./Welcomepage";
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
-import { TabRouter } from 'react-navigation';
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 
@@ -30,16 +26,15 @@ export default function Home({navigation}) {
 
     const settingsPressedHandler = () => navigation.navigate('SettingsPage');
 
-    const profilePressedHandler = () => navigation.navigate('ProfilePage');
-
     const homePressedHandler = () => navigation.navigate('Homepage');
-    
 
+    const profilePressedHandler = () => navigation.navigate('ProfilePage');
+        
     return(
         <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
-    
+            
             <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-            colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
+            colors={['#4356FF', '#649eef']} locations={[0,0.9]} 
             style={[styling.dashboard, styles.boxShadow]}>
                 
                 <View style={{ width: '100%', paddingTop: 50, 
@@ -49,12 +44,13 @@ export default function Home({navigation}) {
                     <View style={{flexDirection: 'row',}}>
                         <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
                         alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text></Text>
-                        <Image style={styling.logo} source={require('../assets/img/barbell.png')}/>
+                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
                     </View>
                  
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
+                    
                 <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
                         <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
                         source={require('../assets/img/equality.png')} />
@@ -141,25 +137,26 @@ export default function Home({navigation}) {
                     <Text  style={[styles.buttonText, styling.blackText]}>Your Workouts</Text>
                 </TouchableOpacity>
             </View>
+
             </ScrollView>
-
-            <View style={[styling.footer]}>
-                <TouchableOpacity  onPress={homePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/homepage.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Home</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={profilePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Profile</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={settingsPressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/settings.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Settings</Text>
-                </TouchableOpacity>
-            </View> 
             
+            <View style={[styling.footer]}>
+
+                <View>
+                    <TouchableOpacity onPress={profilePressedHandler} style={{ margin: 15,}}>
+                        <Image style={[styling.footerIcon, ]} source={require('../assets/img/profile.png')} />
+                        <Text style={[styles.buttonText, ]}>My Profile</Text>
+                    </TouchableOpacity>
+                </View> 
+                
+                <View></View>
+                <View>
+                    <TouchableOpacity onPress={settingsPressedHandler} style={{ margin: 15,}}>
+                        <Image style={[styling.footerIcon, ]} source={require('../assets/img/settings.png')} />
+                        <Text style={[styles.buttonText, ]}>Settings</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </SafeAreaView>
         
     )
@@ -179,7 +176,7 @@ export const styling = StyleSheet.create({
 
     dashboard: { 
         padding: 3,
-        width: '103%',
+        width: '102%',
         marginTop: -5,
         borderBottomLeftRadius: 35,
         borderBottomRightRadius: 35,        
@@ -199,7 +196,7 @@ export const styling = StyleSheet.create({
     menu: {
         flexDirection: 'row', 
         justifyContent: 'center', 
-        height: '20%',  
+        height: '22.5%',  
         marginVertical: 5,
     },
 
@@ -211,15 +208,19 @@ export const styling = StyleSheet.create({
     },
 
     menuIcon: {
-        width: '45%',
+        width: '47.5%',
         height: '100%',
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 3,
         borderWidth: .5,
         borderRadius: 10,
         borderColor: '#FFF',
+
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 1,
+        shadowColor: '#4356FF',
+        elevation: 10,
     },
 
     menuIconImage: {
@@ -234,7 +235,7 @@ export const styling = StyleSheet.create({
     },  
 
     greyText: {
-        color: '#FFF',
+        color: '#424242',
         fontSize: 14,
         marginTop: 5,
     },
@@ -251,26 +252,23 @@ export const styling = StyleSheet.create({
         color: '#FFF',
     },  
 
-    footer: { 
+    footer: {
+        flexDirection: 'row', 
+        backgroundColor: '#4356FF', 
+        width: '95%', 
+        borderRadius: 10, 
+        margin: 10, 
+        justifyContent: 'space-evenly',
+
         shadowOffset: { width: 10, height: 10 },
-        shadowOpacity: 1,
-        shadowColor: '#4356FF',
-        elevation: 10,
-
-        borderColor: '#FFF',
-        borderWidth: .5,
-
-        backgroundColor : "#4356FF", 
-        height: '9%', 
-        width: '92.5%',
-        marginBottom: 10,
-        borderRadius: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
+        shadowColor: '#000',
+        elevation: 15,
     },
 
     footerIcon: {
         width: 23,
         height: 23,
+        alignSelf: 'center',
+        margin: 10,
     },
 })
