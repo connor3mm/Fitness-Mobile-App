@@ -60,13 +60,13 @@ export default class StepCounter extends ValidationComponent {
 
     _subscribe = () => {
         //Check for pedometer permissions
-        PermissionsAndroid.check(PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION).then(result => {
+        PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION).then(result => {
             switch(result) {
                 case PermissionsAndroid.RESULTS.GRANTED:
                     console.log("The permission is already granted.")
                 case PermissionsAndroid.RESULTS.DENIED:
                     console.log("The permission is not granted, requesting permission...")
-                    PermissionsAndroid.request(PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION).then(result => {
+                    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION).then(result => {
                         switch(result) {
                             case PermissionsAndroid.RESULTS.GRANTED:
                                 console.log("The permission is now granted, step counter should work...")
@@ -76,6 +76,7 @@ export default class StepCounter extends ValidationComponent {
                     });
             }
         })
+
 
         Pedometer.getPermissionsAsync().then(
             result => {
