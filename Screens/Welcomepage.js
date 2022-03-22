@@ -27,7 +27,7 @@ return (
             </View>
             <Text style={styles.slogan}>Upgrade your fitness to the next level!</Text>
 
-            <View style={{ alignSelf: 'center', justifyContent: 'space-between', marginTop: 100, }}>
+            <View style={{ alignSelf: 'center', justifyContent: 'space-between', marginTop: 50, }}>
                 <View style={{ flexDirection: 'row', margin: 17,}}>
                     <Image style={{ height: 50, width: 50}} source={require('../assets/img/diet.png')} />
                     <Text style={[styles.slogan, { fontSize: 17.5, marginHorizontal: 12.5}, ]}>Track what you eat</Text>
@@ -129,7 +129,7 @@ export const styles = StyleSheet.create({
     login: {
         backgroundColor: '#FFF',
         borderColor: '#b3b3b3',
-        marginBottom: 75,
+        marginBottom: 50,
         marginTop: 15,
         shadowColor: 'black',
     },
