@@ -14,6 +14,7 @@ import {
     SafeAreaView,
     Image,
     Animated,
+    Vibration,
 } from "react-native";
 
 import CardComponent from "../CustomComponents/CardComponent";
@@ -32,6 +33,7 @@ import {circle} from 'react-native/Libraries/Animated/Easing';
 
 export default function CalorieCounter({navigation}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
+    const [vibration, setVibration] = useState(false);
 
     //to set the modal open or close
     const [openModal, setOpenModal] = useState(false);
@@ -78,6 +80,7 @@ export default function CalorieCounter({navigation}) {
 
     const [goalAchieved, setGoalAchieved] = useState("");
 
+
     /**
      * handler used for date picker
      * @param event
@@ -95,6 +98,11 @@ export default function CalorieCounter({navigation}) {
 
 
     const vibrate = () => {
+        if(vibration == true){
+            return
+        }
+
+        setVibration(true);
         if (Platform.OS === "ios") {
             const interval = setInterval(() => Vibration.vibrate(), 500);
             setTimeout(() => clearInterval(interval), 1000);
@@ -204,6 +212,7 @@ export default function CalorieCounter({navigation}) {
      */
     const setDailyGoal = () => {
         setGoal1(goalCalories);
+        setVibration(false);
     };
 
     /**
@@ -290,11 +299,11 @@ export default function CalorieCounter({navigation}) {
 
                 <View style={{marginTop: 15}}>
                     {(remaining === 0 || remaining < 0) && totalCalories > 0 && goalCalories > 0 ? (
-                        <AntDesign name="checkcircle" size={24} color="blue">
+                        <AntDesign onTextLayout = {vibrate()} name="checkcircle" size={24} color="blue">
                             <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie
                                 goal!</Text>
                         </AntDesign>
-                    ) : null}
+                    )  : null}
                 </View>
                 <View style={{
                     flexDirection: 'row',
