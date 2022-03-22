@@ -143,7 +143,7 @@ export default function Home({navigation}) {
             <View style={[styling.footer]}>
 
                 <View>
-                    <TouchableOpacity onPress={profilePressedHandler} style={{ margin: 15,}}>
+                    <TouchableOpacity onPress={profilePressedHandler} style={{ marginVertical: 15,}}>
                         <Image style={[styling.footerIcon, ]} source={require('../assets/img/profile.png')} />
                         <Text style={[styles.buttonText, ]}>My Profile</Text>
                     </TouchableOpacity>
@@ -151,7 +151,7 @@ export default function Home({navigation}) {
                 
                 <View></View>
                 <View>
-                    <TouchableOpacity onPress={settingsPressedHandler} style={{ margin: 15,}}>
+                    <TouchableOpacity onPress={settingsPressedHandler} style={{ marginVertical: 15,}}>
                         <Image style={[styling.footerIcon, ]} source={require('../assets/img/settings.png')} />
                         <Text style={[styles.buttonText, ]}>Settings</Text>
                     </TouchableOpacity>
