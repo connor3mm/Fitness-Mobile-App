@@ -13,7 +13,6 @@ export default function Welcome( {navigation} ) {
     const loginPressedHandler = () => navigation.navigate('loginPage');
     const registerPressedHandler = () => navigation.navigate('registerPage');
     
-    const [test, setTest] = useState("")
     if (!fontsLoaded) return <AppLoading/>;
 
 return (
@@ -49,11 +48,6 @@ return (
         </View>
 
         <View style={{ flex: 1, justifyContent: 'flex-end', width: '80%', marginBottom: 1, }}>
-
-            <TextInput style ={styles.input} placeholder='test' value={test} 
-                        onChangeText={text => setTest(text)}
-                    >
-            </TextInput>
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
             onPress={registerPressedHandler}>

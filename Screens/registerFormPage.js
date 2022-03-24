@@ -22,6 +22,7 @@ export default function registerFormPage({navigation}) {
 
 
     const setData = async () => {
+        //creates doc with the user info
         await setDoc(doc(db,"users",uid),{
             uid: uid,
             firstName: firstName,
@@ -34,6 +35,18 @@ export default function registerFormPage({navigation}) {
             age: age,
             sex: sex,
         })
+        //creates a doc for each type food that we are storing in the calories counter
+        await setDoc(doc(db,"foodlists",uid + "-breakfast"),{
+            uid: uid, 
+        })
+
+        await setDoc(doc(db,"foodlists",uid + "-lunch"),{
+            uid: uid,
+        })
+
+        await setDoc(doc(db,"foodlists",uid + "-dinner"),{
+            uid: uid,
+        })    
     }
 
     

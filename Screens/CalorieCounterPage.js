@@ -36,8 +36,6 @@ import { collections, updateDoc, doc, setDoc, arrayUnion } from "firebase/firest
 
 export default function CalorieCounter({navigation}) {
 
-
-    
     const uid = authentication.currentUser.uid;
 
 
@@ -45,8 +43,19 @@ export default function CalorieCounter({navigation}) {
         await updateDoc(doc(db,"users",uid),{
             targetCalories: goalCalories,
             dailyCalories: totalCalories,
-            breakfast:arrayUnion(breakfastFood),
         })
+
+        
+        await updateDoc(doc(db,"foodlists",uid + "-breakfast"),{
+            //{Food: 'Pasta', Calories: 58, Quantity: 1, key: '1'},
+        
+            /*for (let i = 0; i < breakfastFood.length; i++) {
+                total += (parseInt(breakfastFood[i].Calories) * parseInt(breakfastFood[i].Quantity));
+            }*/
+
+        },
+        { merge: true })
+
     }
 
     useEffect(() => {
