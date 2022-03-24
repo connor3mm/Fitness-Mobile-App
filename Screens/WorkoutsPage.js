@@ -7,6 +7,7 @@ import { useFonts } from 'expo-font';
 import { caloriesStyles } from './CalorieCounterPage';
 import { styling } from './Homepage';
 import { BMIstyles } from './BMICalculatorPage';
+import CustomStatusBar from '../CustomComponents/statusBar';
 
 
 export default function Workouts({navigation}) {
@@ -19,26 +20,22 @@ export default function Workouts({navigation}) {
     return(
         <SafeAreaView style={styles.container}>
 
-        <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
-            style={[styling.dashboard, styles.boxShadow]}>
+        <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#3777D9', '#649eef']} locations={[0,0.9]} style={[styling.dashboard, styles.boxShadow]}>
 
-                <View style={{ width: '100%', paddingTop: 50, 
-                paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
-                    
-                    <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
-                        <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                        <Text style={{ color: '#FFF'}}>Menu</Text>
-                    </TouchableOpacity>
+            <View style={{ width: '100%', paddingTop: 50, paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
+                    <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
+                    <Text style={{ color: '#FFF'}}>Menu</Text>
+                </TouchableOpacity>
 
-                    <Text style={[styling.smallText, BMIstyles.sectionTitle, caloriesStyles.sectionTitle]}>Workouts</Text>
+                <Text style={[styling.smallText, BMIstyles.sectionTitle]}>Workouts</Text>
 
-                    <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                        <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
-                        alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text>
-                        </Text>
-                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-                    </View>
+                <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
+                    <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', alignSelf: 'center', margin: 15, marginTop: 0, fontSize: 15,}}>
+                        Fit<Text style={[styles.blueText]}>Me</Text>
+                    </Text>
                 </View>
+            </View>
         </LinearGradient>
 
         <ScrollView style = {styles.workoutMain}> 
@@ -121,14 +118,18 @@ export const styles = StyleSheet.create({
         width: '70%',
         borderWidth: .5,
         borderRadius: 5,
-        backgroundColor: '#4356FF',
-        borderColor: '#4356FF',
+        backgroundColor: '#3777D9',
+        borderColor: '#3777D9',
         shadowColor: 'black',
     },
 
     btnBack:{
         marginTop:50,
         width:"100%"
+    },
+
+    blueText: {
+        color: '#3777D9',
     },
 
     boxShadow: {

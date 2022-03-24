@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-    Button,
     StyleSheet,
     Text,
     View,
@@ -27,8 +26,7 @@ import {styling} from './Homepage';
 import {styles} from "./Welcomepage";
 import {BMIstyles} from './BMICalculatorPage';
 import SVG, {G, Circle} from 'react-native-svg';
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
-import {circle} from 'react-native/Libraries/Animated/Easing';
+import CustomStatusBar from '../CustomComponents/statusBar';
 
 
 export default function CalorieCounter({navigation}) {
@@ -264,31 +262,23 @@ export default function CalorieCounter({navigation}) {
     });
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container]}>
+            
+            <CustomStatusBar/>
 
-            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0, 0.9]}
-                            style={[styling.dashboard, styles.boxShadow]}>
-
-                <View style={{
-                    width: '100%', paddingTop: 50,
-                    paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'
-                }}>
-
-                    <TouchableOpacity style={{alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
+            <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#3777D9', '#649eef']} locations={[0,0.9]} style={[styling.dashboard, styles.boxShadow]}>
+                <View style={{ width: '100%', paddingTop: 50, paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
                         <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                        <Text style={{color: '#FFF'}}>Menu</Text>
+                        <Text style={{ color: '#FFF'}}>Menu</Text>
                     </TouchableOpacity>
 
-                    <Text style={[styling.smallText, BMIstyles.sectionTitle, caloriesStyles.sectionTitle]}>Calorie
-                        Counter</Text>
+                    <Text style={[styling.smallText, BMIstyles.sectionTitle]}>Calorie Counter</Text>
 
                     <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                        <Text style={{
-                            color: 'white', fontFamily: 'Righteous_400Regular',
-                            alignSelf: 'center', margin: 5, fontSize: 20,
-                        }}>Fit<Text style={[styles.blueText]}>Me</Text>
+                        <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', alignSelf: 'center', margin: 15, marginTop: 0, fontSize: 15,}}>
+                            Fit<Text style={[styles.blueText]}>Me</Text>
                         </Text>
-                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
                     </View>
                 </View>
             </LinearGradient>
@@ -315,7 +305,7 @@ export default function CalorieCounter({navigation}) {
                             <Circle cx='25%' cy='50%' stroke={'#CEE4FF'} strokeWidth={12.5} r={50}
                                     strokeOpacity={.75} fill="transparent"></Circle>
 
-                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#4356FF'} strokeWidth={12.5}
+                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#3777D9'} strokeWidth={12.5}
                                             r={50}
                                             strokeOpacity={.75} fill="transparent" strokeDasharray={2 * Math.PI * 50}
                                             strokeDashoffset={2 * Math.PI * 50} strokeLinecap={'round'}>
@@ -528,7 +518,7 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     foodAddTitle: {
-        color: '#4356FF',
+        color: '#3777D9',
         marginBottom: 10,
         padding: 10,
         borderRadius: 10,
@@ -551,7 +541,7 @@ export const caloriesStyles = StyleSheet.create({
     input: {
         borderWidth: 0,
         borderBottomWidth: 3,
-        borderBottomColor: '#4356FF',
+        borderBottomColor: '#3777D9',
         padding: 10,
         backgroundColor: '#FFF',
         marginHorizontal: 1,
@@ -588,13 +578,11 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     titleStyle: {
-        fontWeight: 'bold',
         fontFamily: 'Righteous_400Regular',
         backgroundColor: '#f1f2fc',
-        padding: 10,
-        fontSize: 18,
-        marginTop: 20,
-
+        padding: 15,
+        fontSize: 15,
+        marginTop: 22.5,
     },
 
 })

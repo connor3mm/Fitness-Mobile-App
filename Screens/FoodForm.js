@@ -52,7 +52,7 @@ export default function FoodFormPage({
                     {(formikProps) => (
                         <View>
                             <Text style={[caloriesStyles.caloriesItemsText,
-                                {textAlign: 'center', color: '#4356FF', marginVertical: 12.5, fontSize: 22.5,}]}>
+                                {textAlign: 'center', color: '#3777D9', marginVertical: 12.5, fontSize: 22.5,}]}>
                                 Add Food Item
                             </Text>
 
@@ -161,7 +161,7 @@ export const formStyles = StyleSheet.create({
     },
 
     radioInput: {
-        borderColor: '#4356FF',
+        borderColor: '#3777D9',
         borderWidth: 2,
         borderRadius: 5,
         elevation: 3,

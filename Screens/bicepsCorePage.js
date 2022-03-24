@@ -147,8 +147,8 @@ export const styles = StyleSheet.create({
         width: '70%',
         borderWidth: .5,
         borderRadius: 5,
-        backgroundColor: '#4356FF',
-        borderColor: '#4356FF',
+        backgroundColor: '#3777D9',
+        borderColor: '#3777D9',
         shadowColor: 'black',
     },
 
