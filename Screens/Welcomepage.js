@@ -1,5 +1,5 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
+import React, { useState } from 'react';
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, TextInput} from "react-native";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -10,6 +10,10 @@ export default function Welcome( {navigation} ) {
     });
 
     const buttonPressedHandler = () => navigation.navigate('Homepage');
+    const loginPressedHandler = () => navigation.navigate('loginPage');
+    const registerPressedHandler = () => navigation.navigate('registerPage');
+    
+    const [test, setTest] = useState("")
     if (!fontsLoaded) return <AppLoading/>;
 
 return (
@@ -46,15 +50,26 @@ return (
 
         <View style={{ flex: 1, justifyContent: 'flex-end', width: '80%', marginBottom: 1, }}>
 
+            <TextInput style ={styles.input} placeholder='test' value={test} 
+                        onChangeText={text => setTest(text)}
+                    >
+            </TextInput>
+
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
-            onPress={buttonPressedHandler}>
+            onPress={registerPressedHandler}>
                 <Text style={[styles.buttonText,]}>New? Get Started </Text>
             </TouchableOpacity>
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, ]} 
-            onPress={buttonPressedHandler}>
+            onPress={loginPressedHandler}>
                 <Text  style={[styles.buttonText, styles.blueText]}>Existing user? Log In</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
+            onPress={buttonPressedHandler}>
+                <Text style={[styles.buttonText,]}>Go to menu no users</Text>
+            </TouchableOpacity>
+
 
         </View>
     </SafeAreaView>

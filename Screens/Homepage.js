@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Bottomnavbar } from '../Stack/appStack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,6 +8,9 @@ import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { TabRouter } from 'react-navigation';
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import { doc, getDoc} from 'firebase/firestore/lite';
 
 
 export default function Home({navigation}) {
@@ -17,22 +20,52 @@ export default function Home({navigation}) {
     });
 
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
-
     const gymsNearMePressedHandler = () => navigation.navigate('GymsNearMePage');
-    
     const goalsAchievementsPressedHandler = () => navigation.navigate('GoalsAchievementsPage');
-    
     const stepCounterPressedHandler = () => navigation.navigate('StepCounterPage');
-    
     const workoutsPressedHandler = () => navigation.navigate('WorkoutsPage');
-    
     const calorieCounterPressedHandler = () => navigation.navigate('CalorieCounterPage');
-
     const settingsPressedHandler = () => navigation.navigate('SettingsPage');
-
     const profilePressedHandler = () => navigation.navigate('ProfilePage');
-
     const homePressedHandler = () => navigation.navigate('Homepage');
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [age, setAge] = useState("")
+    const [sex, setSex] = useState("")
+    const [targetCalories, setTargetCalories] = useState("")
+    const [dailyCalories, setDailyCalories] = useState("")
+    const [targetSteps, setTargetSteps] = useState("")
+    const [dailySteps, setDailySteps] = useState("")
+    const [weight, setWeight] = useState("")
+
+    const getUserData = async () =>{
+
+        const docRef = doc(db, "users", authentication.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+            setFirstName(docSnap.get("firstName"));
+            setSex(docSnap.get("sex"));
+            setWeight(docSnap.get("weight"))
+            setLastName(docSnap.get("lastName"));
+            setTargetCalories(docSnap.get("targetCalories"));
+            setDailyCalories(docSnap.get("dailyCalories"));
+            setTargetSteps(docSnap.get("targetSteps"));
+            setDailySteps(docSnap.get("dailySteps"));
+            console.log("get user data finished")
+            console.log("-----------------------------------------------------------------------")
+            console.log(" " + sex)
+    }
+
+    
+    useEffect(() => {
+        getUserData();
+    },[])
     
 
     return(
@@ -44,7 +77,7 @@ export default function Home({navigation}) {
                 
                 <View style={{ width: '100%', paddingTop: 50, 
                 paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={[styling.smallText, styling.profileName]}>Connor M.</Text>
+                    <Text style={[styling.smallText, styling.profileName]}>{firstName}</Text>
 
                     <View style={{flexDirection: 'row',}}>
                         <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
@@ -60,7 +93,7 @@ export default function Home({navigation}) {
                         source={require('../assets/img/equality.png')} />
                         <View>
                             <Text style={[styling.smallText]}>Sex</Text>
-                            <Text style={[styling.whiteText]}>Male</Text>
+                            <Text style={[styling.whiteText]}>{sex}</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
@@ -68,7 +101,7 @@ export default function Home({navigation}) {
                         source={require('../assets/img/weight.png')} />
                         <View>
                             <Text style={[styling.smallText]}>Weight</Text>
-                            <Text style={[styling.whiteText]}>89 KG</Text>
+                            <Text style={[styling.whiteText]}>{weight} KG</Text>
                         </View>
                     </View>
                 </View>
@@ -79,7 +112,7 @@ export default function Home({navigation}) {
                         source={require('../assets/img/runner.png')} />
                         <View>
                             <Text style={[styling.smallText]}>Daily Steps</Text>
-                            <Text style={[styling.whiteText]}>1000/8000</Text>
+                            <Text style={[styling.whiteText]}>{dailySteps}/{targetSteps}</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
@@ -87,7 +120,7 @@ export default function Home({navigation}) {
                         source={require('../assets/img/diet.png')} />
                         <View>
                             <Text style={[styling.smallText]}>Daily Calories</Text>
-                            <Text style={[styling.whiteText]}>1000/2900</Text>
+                            <Text style={[styling.whiteText]}>{dailyCalories}/{targetCalories}</Text>
                         </View>
                     </View> 
                 </View>

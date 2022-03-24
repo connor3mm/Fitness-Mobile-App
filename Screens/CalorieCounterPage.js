@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import {
     Button,
     StyleSheet,
@@ -29,25 +29,48 @@ import SVG, {G, Circle} from 'react-native-svg';
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import {circle} from 'react-native/Libraries/Animated/Easing';
 
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import { collections, updateDoc, doc, setDoc, arrayUnion } from "firebase/firestore/lite";
+
 
 export default function CalorieCounter({navigation}) {
+
+
+    
+    const uid = authentication.currentUser.uid;
+
+
+    const setData = async () => {
+        await updateDoc(doc(db,"users",uid),{
+            targetCalories: goalCalories,
+            dailyCalories: totalCalories,
+            breakfast:arrayUnion(breakfastFood),
+        })
+    }
+
+    useEffect(() => {
+        setData();
+    },[])
+
+
     const homePressedHandler = () => navigation.navigate('Homepage');
 
     //to set the modal open or close
     const [openModal, setOpenModal] = useState(false);
 
     //goal calories values
-    const [goalCalories, setGoal] = useState(0);
+    const [goalCalories, setGoal] = useState(0);//izpozlvai tova za DB
     const [goalCalories1, setGoal1] = useState(0);
 
     //values for remaining calories
     const [remaining, setRemaining] = useState(0);
 
     //values for total/for each section calories
-    const [totalCalories, setTotal] = useState(0);
-    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState('');
-    const [totalCaloriesLunch, setTotalLunchCalories] = useState('');
-    const [totalCaloriesDinner, setTotalDinnerCalories] = useState('');
+    const [totalCalories, setTotal] = useState(0);//current callories - reset every 24 hours
+    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState('');//reset every 24 hours
+    const [totalCaloriesLunch, setTotalLunchCalories] = useState('');//reset every 24 hours
+    const [totalCaloriesDinner, setTotalDinnerCalories] = useState('');//reset every 24 hours
 
     //values for date picker
     const [date, setDate] = useState(new Date());
