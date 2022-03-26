@@ -12,6 +12,7 @@ export default function Welcome( {navigation} ) {
     const buttonPressedHandler = () => navigation.navigate('Homepage');
     const loginPressedHandler = () => navigation.navigate('loginPage');
     const registerPressedHandler = () => navigation.navigate('registerPage');
+
     
     if (!fontsLoaded) return <AppLoading/>;
 

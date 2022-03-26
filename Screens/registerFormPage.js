@@ -35,18 +35,6 @@ export default function registerFormPage({navigation}) {
             age: age,
             sex: sex,
         })
-        //creates a doc for each type food that we are storing in the calories counter
-        await setDoc(doc(db,"foodlists",uid + "-breakfast"),{
-            uid: uid, 
-        })
-
-        await setDoc(doc(db,"foodlists",uid + "-lunch"),{
-            uid: uid,
-        })
-
-        await setDoc(doc(db,"foodlists",uid + "-dinner"),{
-            uid: uid,
-        })    
     }
 
     
@@ -66,9 +54,40 @@ export default function registerFormPage({navigation}) {
     );
 
 
+    const alertAgeNaN = () =>
+    Alert.alert(
+      "",
+      "Age is invalid, please use a positive number",
+      [
+        {
+          text: "Okay",
+          style: "cancel"
+        },
+      ]
+    );
+
+
+    const alertWeightNaN = () =>
+    Alert.alert(
+      "",
+      "Weight is invalid, please use a positive number",
+      [
+        {
+          text: "Okay",
+          style: "cancel"
+        },
+      ]
+    );
+
+
+
     const combinedHandler = () => {
-        setData();
-        createTwoButtonAlert();
+        if(isNaN(age) || age < 0 || age === "") alertAgeNaN()
+            else if(isNaN(weight) || weight < 0 || weight === "") alertWeightNaN()
+                    else{
+                        setData();
+                        createTwoButtonAlert();
+                    }
     }
 
 

@@ -12,31 +12,68 @@ export default function loginPage({navigation}) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isSignedIn, setIsSignedIn] = useState("false")
 
 
     const signInUser = () => {
         signInWithEmailAndPassword(authentication, email, password)
         .then((result) => {
             console.log(result)
-            setIsSignedIn("true");
+            alertLogin();
         })
         .catch((error) => {
             console.log(error);
+            if(error.code === "auth/invalid-email") alertInvalidEmail();
+            if(error.code === "auth/wrong-password") alertWrongPassword();
+            if(error.code === "auth/user-not-found") alertUserNotFound();
+            
         })
         console.log("entered sign in functions");
     }
 
-    const createTwoButtonAlert = () =>
+
+    const alertInvalidEmail = () =>
+    Alert.alert(
+      "",
+      "The email you've selected is invalid, please choose another one",
+      [
+        {
+          text: "Okay",
+          style: "cancel"
+        },
+      ]
+    );
+
+
+    const alertUserNotFound = () =>
+    Alert.alert(
+      "",
+      "User not found",
+      [
+        {
+          text: "Okay",
+          style: "cancel"
+        },
+      ]
+    );
+
+
+    const alertWrongPassword = () =>
+    Alert.alert(
+      "",
+      "Incorrect password",
+      [
+        {
+          text: "Okay",
+          style: "cancel"
+        },
+      ]
+    );
+
+    const alertLogin = () =>
     Alert.alert(
       "",
       "You've been logged in",
       [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
         { text: "Continue", onPress: () => {
             navigation.navigate('Homepage');} }
       ]
@@ -44,7 +81,6 @@ export default function loginPage({navigation}) {
 
     const combinedHandler = () => {
         signInUser();
-        createTwoButtonAlert()
     }
 
 

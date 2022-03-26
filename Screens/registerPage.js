@@ -12,20 +12,34 @@ export default function registerPage({navigation}) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isSignedIn, setIsSignedIn] = useState("false")
 
     const registerUser = () => {
         createUserWithEmailAndPassword(authentication, email, password)
         .then((result) => {
             console.log(result);
-            setIsSignedIn("true");
+            alertRegisterUser();
         })
         .catch((error) => {
             console.log(error);
+            if(error.code === "auth/invalid-email") alertInvalidEmail();
         })
     }
 
-    const createTwoButtonAlert = () =>
+
+    const alertInvalidEmail = () =>
+    Alert.alert(
+      "",
+      "The email you've selected is invalid, please choose another one",
+      [
+        {
+          text: "Okay",
+          style: "cancel"
+        },
+      ]
+    );
+
+
+    const alertRegisterUser = () =>
     Alert.alert(
       "Attention!",
       "Your registration is almost complete. Please click on the \"Next\" button to continue the registration process, otherwise your account will be fully not created",
@@ -39,7 +53,6 @@ export default function registerPage({navigation}) {
             signInWithEmailAndPassword(authentication, email, password)
             .then((result) => {
                 console.log(result);
-                setIsSignedIn("true");
             })
             .catch((error) => {
                 console.log(error);
@@ -50,7 +63,6 @@ export default function registerPage({navigation}) {
 
     const combinedHandler = () => {
         registerUser();
-        createTwoButtonAlert();
     }
 
 

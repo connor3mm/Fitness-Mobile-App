@@ -39,6 +39,8 @@ export default function Home({navigation}) {
     const [dailySteps, setDailySteps] = useState("")
     const [weight, setWeight] = useState("")
 
+    const [breakfastFood, setBreakfastFood] = useState([])
+
     const getUserData = async () =>{
 
         const docRef = doc(db, "users", authentication.currentUser.uid);
@@ -57,9 +59,10 @@ export default function Home({navigation}) {
             setDailyCalories(docSnap.get("dailyCalories"));
             setTargetSteps(docSnap.get("targetSteps"));
             setDailySteps(docSnap.get("dailySteps"));
+            setBreakfastFood(docSnap.get("Food"))
             console.log("get user data finished")
             console.log("-----------------------------------------------------------------------")
-            console.log(" " + sex)
+            console.log(" " + breakfastFood)
     }
 
     

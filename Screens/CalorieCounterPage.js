@@ -31,7 +31,7 @@ import {circle} from 'react-native/Libraries/Animated/Easing';
 
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
-import { collections, updateDoc, doc, setDoc, arrayUnion } from "firebase/firestore/lite";
+import { collections, updateDoc, doc, setDoc, arrayUnion, getDoc} from "firebase/firestore/lite";
 
 
 export default function CalorieCounter({navigation}) {
@@ -39,27 +39,77 @@ export default function CalorieCounter({navigation}) {
     const uid = authentication.currentUser.uid;
 
 
-    const setData = async () => {
+    /*const setData = async () => {
+        
         await updateDoc(doc(db,"users",uid),{
             targetCalories: goalCalories,
             dailyCalories: totalCalories,
         })
 
-        
-        await updateDoc(doc(db,"foodlists",uid + "-breakfast"),{
-            //{Food: 'Pasta', Calories: 58, Quantity: 1, key: '1'},
-        
-            /*for (let i = 0; i < breakfastFood.length; i++) {
-                total += (parseInt(breakfastFood[i].Calories) * parseInt(breakfastFood[i].Quantity));
-            }*/
 
-        },
-        { merge: true })
+        const updatedMapBreakfast = breakfastFood.reduce((a, b) => {
+            a[b.Food] = b;
+            return a; 
+          }, {})
+          
+        await updateDoc(doc(db,"users",uid), { breakfast: updatedMapBreakfast })
+
+
+        const updatedMapLunch = lunchFood.reduce((a, b) => {
+            a[b.Food] = b;
+            return a; 
+          }, {})
+          
+        await updateDoc(doc(db,"users",uid), { breakfast: updatedMapLunch })
+
+
+        const updatedMapDinner = dinnerFood.reduce((a, b) => {
+            a[b.Food] = b;
+            return a; 
+          }, {})
+          
+        await updateDoc(doc(db,"users",uid), { breakfast: updatedMapDinner })
+
+    }*/
+
+
+    const [food, setFood] = useState()
+
+
+    const getUserData = async () =>{
+
+        const docRef = doc(db, "users", authentication.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+            /*setFood(docSnap.get("Food.Cheese.Calories"))
+            console.log("breakfast food has been taken")
+            console.log("-----------------------------------------------------------------------")
+            console.log(food);
+            console.log("array " + food + "    " + docSnap.get("Food.Cheese.Calories"));*/
+
+            const foodMap = docSnap.data().Food
+
+            const result = Object.keys(foodMap).map(key => ({ food: key, ...foodMap[key] }))
+            //console.log("results "+result);
+            setFood(result);
 
     }
+//----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+   
 
     useEffect(() => {
-        setData();
+        getUserData();
     },[])
 
 
