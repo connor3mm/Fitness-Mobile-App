@@ -73,35 +73,79 @@ export default function CalorieCounter({navigation}) {
     }*/
 
 
-    const [food, setFood] = useState()
+    //array for breakfast foods
+    const [breakfastFood, setBreakfastFood] = useState([]);
+
+    //array for lunch foods
+    const [lunchFood, setLunchFood] = useState([]);
+
+    //array for dinner foods
+    const [dinnerFood, setDinnerFood] = useState([
+        {Food: 'Pasta', Calories: 58, Quantity: 1, key: '1'},
+        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
+
+    ]);
 
 
-    const getUserData = async () =>{
 
-        const docRef = doc(db, "users", authentication.currentUser.uid);
-        const docSnap = await getDoc(docRef);
-        
-        if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
-        } else {
-          console.log("No such document!");
-        }
-            /*setFood(docSnap.get("Food.Cheese.Calories"))
-            console.log("breakfast food has been taken")
-            console.log("-----------------------------------------------------------------------")
-            console.log(food);
-            console.log("array " + food + "    " + docSnap.get("Food.Cheese.Calories"));*/
+const getUserData = async () => {
+    const docRef = doc(db, "users", authentication.currentUser.uid);
+    const docSnap = await getDoc(docRef);
 
-            const foodMap = docSnap.data().Food
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
 
-            const result = Object.keys(foodMap).map(key => ({ food: key, ...foodMap[key] }))
-            //console.log("results "+result);
-            setFood(result);
+      //getting breakfast food items from DB
+      const foodMapBreakfast = docSnap.data().breakfastFood;
 
+      const arrayResultBreakfast = Object.keys(foodMapBreakfast).map((item) => {
+        const foodMapItemBreakfast = foodMapBreakfast[item];
+        return {
+          Food: item,
+          Calories: foodMapItemBreakfast.Calories,
+          Quantity: foodMapItemBreakfast.Quantity,
+          key: foodMapItemBreakfast.key,
+        };
+      });
+      console.log("arrayResult", arrayResultBreakfast);
+      setBreakfastFood(arrayResultBreakfast);
+
+
+      
+      //getting lunch food items from DB
+      const foodMapLunch = docSnap.data().lunchFood;
+
+      const arrayResultLunch = Object.keys(foodMapLunch).map((item) => {
+        const foodMapItemLunch = foodMapLunch[item];
+        return {
+          Food: item,
+          Calories: foodMapItemLunch.Calories,
+          Quantity: foodMapItemLunch.Quantity,
+          key: foodMapItemLunch.key,
+        };
+      });
+      console.log("arrayResult", arrayResultLunch);
+      setLunchFood(arrayResultLunch);
+
+
+      //getting dinner food items from DB
+      const foodMapDinner = docSnap.data().dinnerFood;
+
+      const arrayResultDinner = Object.keys(foodMapDinner).map((item) => {
+        const foodMapItemDinner = foodMapDinner[item];
+        return {
+          Food: item,
+          Calories: foodMapItemDinner.Calories,
+          Quantity: foodMapItemDinner.Quantity,
+          key: foodMapItemDinner.key,
+        };
+      });
+      console.log("arrayResult", arrayResultDinner);
+      setDinnerFood(arrayResultDinner);
+    } else {
+      console.log("No such document!");
     }
-//----------------------------------------------------------------------------------------------------------------
-
-
+  };
 
 
 
@@ -137,26 +181,7 @@ export default function CalorieCounter({navigation}) {
     const [showed, setShowed] = useState(false);
     const [dateText, setDateText] = useState('');
 
-    //array for breakfast foods
-    const [breakfastFood, setBreakfastFood] = useState([
-        {Food: 'Eggs', Calories: 58, Quantity: 1, key: '1'},
-        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
-
-    ]);
-
-    //array for lunch foods
-    const [lunchFood, setLunchFood] = useState([
-        {Food: 'Apple', Calories: 58, Quantity: 1, key: '1'},
-        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
-
-    ]);
-
-    //array for dinner foods
-    const [dinnerFood, setDinnerFood] = useState([
-        {Food: 'Pasta', Calories: 58, Quantity: 1, key: '1'},
-        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
-
-    ]);
+    
 
     const [goalAchieved, setGoalAchieved] = useState("");
 
@@ -505,21 +530,21 @@ export default function CalorieCounter({navigation}) {
                     onPress={() => setOpenModal(true)}
                 />
                 <Text style={caloriesStyles.titleStyle}>Breakfast: {totalCaloriesBreakfast}</Text>
-                {breakfastFood.map(item => (
+                {breakfastFood && breakfastFood?.map((item) => (
                     <View key={item.key}>
-                        <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
-                            <CardComponent>
-                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={caloriesStyles.item}>{item.Food}</Text>
-                                    <AntDesign name="right" size={15} color="black"/>
-                                </View>
-                            </CardComponent>
-                        </TouchableOpacity>
-                    </View>
-                ))}
+                    <TouchableOpacity onPress={() => navigation.navigate("FoodDetails", item)}>
+                        <CardComponent>
+                        <View style={{flexDirection: "row",justifyContent: "space-between",}}>
+                            <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                            <AntDesign name="right" size={15} color="black"/>
+                                        </View>
+                                    </CardComponent>
+                                </TouchableOpacity>
+                            </View>
+                        ))}
 
                 <Text style={caloriesStyles.titleStyle}>Lunch: {totalCaloriesLunch}</Text>
-                {lunchFood.map(item => (
+                {lunchFood && lunchFood?.map((item) => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
@@ -533,7 +558,7 @@ export default function CalorieCounter({navigation}) {
                 ))}
 
                 <Text style={caloriesStyles.titleStyle}>Dinner: {totalCaloriesDinner}</Text>
-                {dinnerFood.map(item => (
+                {dinnerFood && dinnerFood?.map((item) => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
