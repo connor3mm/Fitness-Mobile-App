@@ -31,19 +31,24 @@ import {circle} from 'react-native/Libraries/Animated/Easing';
 
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
-import { collections, updateDoc, doc, setDoc, arrayUnion, getDoc} from "firebase/firestore/lite";
+import { updateDoc, doc, getDoc} from "firebase/firestore/lite";
 
 
 export default function CalorieCounter({navigation}) {
     const uid = authentication.currentUser.uid;
 
 
+    //setting the goalCalories, consumedCalories and lefover calories into DB
     const setUserCalories = async () => {
-        
         await updateDoc(doc(db,"users",uid),{
-            targetCalories: goalCalories,
+            targetCalories: goalCalories1,
             dailyCalories: totalCalories,
+            consumedCalories: remaining,
         })
+        console.log("#*#**#*#*#**#**#*#*#**#*#**#*#*#**#*#*#**#*#**#*#**#*#**#*#")
+        console.log("setting the remaining: " + remaining);
+        console.log("setting the total : " + totalCalories);
+        console.log("setting the goal: " + goalCalories);
     }
 
 
@@ -112,6 +117,9 @@ const getUserData = async () => {
       });
       console.log("arrayResult", arrayResultDinner);
       setDinnerFood(arrayResultDinner);
+      setGoal(goalCalories)
+      setRemaining(remaining)
+      setTotal(totalCalories)
     } else {
       console.log("No such document!");
     }
@@ -131,14 +139,14 @@ const getUserData = async () => {
     const [openModal, setOpenModal] = useState(false);
 
     //goal calories values
-    const [goalCalories, setGoal] = useState(0);//izpozlvai tova za DB
-    const [goalCalories1, setGoal1] = useState(0);
+    const [goalCalories, setGoal] = useState();//izpozlvai tova za DB
+    const [goalCalories1, setGoal1] = useState();
 
     //values for remaining calories
-    const [remaining, setRemaining] = useState(0);
+    const [remaining, setRemaining] = useState();
 
     //values for total/for each section calories
-    const [totalCalories, setTotal] = useState(0);//current callories - reset every 24 hours
+    const [totalCalories, setTotal] = useState();//current callories - reset every 24 hours
     const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState('');//reset every 24 hours
     const [totalCaloriesLunch, setTotalLunchCalories] = useState('');//reset every 24 hours
     const [totalCaloriesDinner, setTotalDinnerCalories] = useState('');//reset every 24 hours
@@ -273,8 +281,9 @@ const getUserData = async () => {
      * remaining calories calculation
      */
     const getRemainingCalories = () => {
+        
         setRemaining(goalCalories - totalCalories);
-
+        setUserCalories();
     };
 
     const getGoalAchievedMessage = () => {
@@ -292,7 +301,6 @@ const getUserData = async () => {
     const clickHandler = () => {
         setDailyGoal();
         getRemainingCalories();
-        setUserCalories();
     };
 
     /*  adding svg animation */

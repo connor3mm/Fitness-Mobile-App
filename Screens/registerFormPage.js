@@ -29,8 +29,9 @@ export default function registerFormPage({navigation}) {
             lastName: lastName,
             targetCalories: 0,
             dailyCalories: 0,
-            targetSteps: targetSteps,
-            dailySteps: 0,
+            consumedCalories: 0,
+            goalSteps: 0,
+            currentSteps: 0,
             weight: weight,
             age: age,
             sex: sex,
@@ -116,11 +117,6 @@ export default function registerFormPage({navigation}) {
 
                     <TextInput style ={styles.input} placeholder='Sex' value={sex} 
                         onChangeText={text => setSex(text)}
-                    >
-                    </TextInput>
-
-                    <TextInput style ={styles.input} placeholder='Target steps per day' value={targetSteps} 
-                        onChangeText={text => setTargetSteps(text)}
                     >
                     </TextInput>
 

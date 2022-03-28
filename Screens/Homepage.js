@@ -31,7 +31,6 @@ export default function Home({navigation}) {
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
-    const [age, setAge] = useState("")
     const [sex, setSex] = useState("")
     const [targetCalories, setTargetCalories] = useState("")
     const [dailyCalories, setDailyCalories] = useState("")
@@ -57,12 +56,12 @@ export default function Home({navigation}) {
             setLastName(docSnap.get("lastName"));
             setTargetCalories(docSnap.get("targetCalories"));
             setDailyCalories(docSnap.get("dailyCalories"));
-            setTargetSteps(docSnap.get("targetSteps"));
-            setDailySteps(docSnap.get("dailySteps"));
+            setTargetSteps(docSnap.get("goalSteps"));
+            //console.log("logging the goalSteps: " + setTargetSteps(docSnap.get("goalSteps")));
+            setDailySteps(docSnap.get("currentSteps"));
             setBreakfastFood(docSnap.get("Food"))
             console.log("get user data finished")
             console.log("-----------------------------------------------------------------------")
-            console.log(" " + breakfastFood)
     }
 
     
