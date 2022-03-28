@@ -35,41 +35,15 @@ import { collections, updateDoc, doc, setDoc, arrayUnion, getDoc} from "firebase
 
 
 export default function CalorieCounter({navigation}) {
-
     const uid = authentication.currentUser.uid;
 
 
-    const setData = async () => {
+    const setUserCalories = async () => {
         
         await updateDoc(doc(db,"users",uid),{
             targetCalories: goalCalories,
             dailyCalories: totalCalories,
         })
-
-
-        const updatedMapBreakfast = breakfastFood.reduce((a, b) => {
-            a[b.Food] = b;
-            return a; 
-          }, {})
-          
-        await updateDoc(doc(db,"users",uid), { breakfastFood: updatedMapBreakfast })
-
-
-        const updatedMapLunch = lunchFood.reduce((a, b) => {
-            a[b.Food] = b;
-            return a; 
-          }, {})
-          
-        await updateDoc(doc(db,"users",uid), { lunchFood: updatedMapLunch })
-
-
-        const updatedMapDinner = dinnerFood.reduce((a, b) => {
-            a[b.Food] = b;
-            return a; 
-          }, {})
-          
-        await updateDoc(doc(db,"users",uid), { lunchFood: updatedMapDinner })
-
     }
 
 
@@ -144,10 +118,8 @@ const getUserData = async () => {
   };
 
 
-
-
-   
-
+    
+    //Load data from DB for the card components into the App
     useEffect(() => {
         getUserData();
     },[])
@@ -315,11 +287,12 @@ const getUserData = async () => {
     /**
      * this function combines remaining calories calculation and setting daily goal
      * so both functions are called when the user submits the button so when daily goal is changed
-     * the remaining calories change too
+     * the remaining calories change too. It also adds the target and goal calories in the DB
      */
     const clickHandler = () => {
         setDailyGoal();
         getRemainingCalories();
+        setUserCalories();
     };
 
     /*  adding svg animation */

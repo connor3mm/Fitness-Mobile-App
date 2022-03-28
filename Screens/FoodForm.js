@@ -59,7 +59,7 @@ export default function FoodFormPage({
             
         } catch (error) {
         console.log("error adding document", error.message);
-        }
+            }
         };
     
 
