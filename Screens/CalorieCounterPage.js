@@ -39,7 +39,7 @@ export default function CalorieCounter({navigation}) {
     const uid = authentication.currentUser.uid;
 
 
-    /*const setData = async () => {
+    const setData = async () => {
         
         await updateDoc(doc(db,"users",uid),{
             targetCalories: goalCalories,
@@ -52,7 +52,7 @@ export default function CalorieCounter({navigation}) {
             return a; 
           }, {})
           
-        await updateDoc(doc(db,"users",uid), { breakfast: updatedMapBreakfast })
+        await updateDoc(doc(db,"users",uid), { breakfastFood: updatedMapBreakfast })
 
 
         const updatedMapLunch = lunchFood.reduce((a, b) => {
@@ -60,7 +60,7 @@ export default function CalorieCounter({navigation}) {
             return a; 
           }, {})
           
-        await updateDoc(doc(db,"users",uid), { breakfast: updatedMapLunch })
+        await updateDoc(doc(db,"users",uid), { lunchFood: updatedMapLunch })
 
 
         const updatedMapDinner = dinnerFood.reduce((a, b) => {
@@ -68,9 +68,9 @@ export default function CalorieCounter({navigation}) {
             return a; 
           }, {})
           
-        await updateDoc(doc(db,"users",uid), { breakfast: updatedMapDinner })
+        await updateDoc(doc(db,"users",uid), { lunchFood: updatedMapDinner })
 
-    }*/
+    }
 
 
     //array for breakfast foods
@@ -80,11 +80,7 @@ export default function CalorieCounter({navigation}) {
     const [lunchFood, setLunchFood] = useState([]);
 
     //array for dinner foods
-    const [dinnerFood, setDinnerFood] = useState([
-        {Food: 'Pasta', Calories: 58, Quantity: 1, key: '1'},
-        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
-
-    ]);
+    const [dinnerFood, setDinnerFood] = useState([]);
 
 
 

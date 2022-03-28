@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Image, ScrollView} from "react-native";
 import {RadioButton} from 'react-native-paper';
-import {Formik} from 'formik';
+import {Formik, useFormik} from 'formik';
 import * as yup from 'yup';
 import {caloriesStyles} from './CalorieCounterPage';
 import {styles} from './Welcomepage';
 import {styling} from './Homepage';
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import {updateDoc, doc} from "firebase/firestore/lite";
+
 
 const validation = yup.object({
     Food: yup.string().required().min(2),
@@ -32,6 +36,35 @@ export default function FoodFormPage({
     getTotalLunchCalories();
     getTotalDinnerCalories();
 
+
+    const uid = authentication.currentUser.uid;        
+
+    const setData = async (foodItem, foodType) => {
+        try {      
+            if(foodType ==="Breakfast"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`breakfastFood.${foodItem.Food}`]: foodItem,});
+            }
+
+            if(foodType ==="Lunch"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`lunchFood.${foodItem.Food}`]: foodItem,});
+            }
+            if(foodType ==="Dinner"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`dinnerFood.${foodItem.Food}`]: foodItem,});
+            }
+
+            console.log("added successfully");
+            
+        } catch (error) {
+        console.log("error adding document", error.message);
+        }
+        };
+    
+
+    
+
     const [foodType, setFoodType] = useState('0');
 
     return (
@@ -45,6 +78,8 @@ export default function FoodFormPage({
                             setFoodType('');
                             returns
                         }
+                        setData(values, foodType);
+                        console.log(values);
                         addFood(values, foodType);
                     }}>
 
@@ -119,7 +154,7 @@ export default function FoodFormPage({
 
                             <TouchableOpacity activeOpacity={.7}
                                               style={[styles.button, styles.boxShadow, styles.signup,]}
-                                              onPress={formikProps.handleSubmit}>
+                                              onPress={formikProps.handleSubmit }>
                                 <Text style={[styles.buttonText,]}> + Add Food</Text>
                             </TouchableOpacity>
 
