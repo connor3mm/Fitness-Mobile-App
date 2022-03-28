@@ -5,6 +5,7 @@ import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollVi
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import CustomStatusBar from '../CustomComponents/statusBar';
+import AppLoading from 'expo-app-loading';
 
 
 export default function Home({navigation}) {
@@ -12,6 +13,9 @@ export default function Home({navigation}) {
     let [fontsLoaded, error] = useFonts ({
         Righteous_400Regular,
     });
+
+    if (!fontsLoaded) return <AppLoading/>;
+
 
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
 
@@ -32,9 +36,9 @@ export default function Home({navigation}) {
     const profilePressedHandler = () => navigation.navigate('ProfilePage');
         
     return(
-        <SafeAreaView style = {[styles.container, styling.menuContainer, {backgroundColor: '#f9fbfc'}]}>
-            
-            <CustomStatusBar/>
+        <SafeAreaView style = {[styles.container, styling.menuContainer, {backgroundColor: '#f9fbfc'}]}>      
+
+            <CustomStatusBar />
 
             <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
             colors={['#3777D9', '#649eef']} locations={[0,0.9]} 
@@ -73,7 +77,7 @@ export default function Home({navigation}) {
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
-                <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
+                    <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
                         <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
                         source={require('../assets/img/runner.png')} />
                         <View>
@@ -92,7 +96,7 @@ export default function Home({navigation}) {
                 </View>
             </LinearGradient>
 
-            <ScrollView showsHorizontalScrollIndicator={false}
+            <ScrollView vertical={true} showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
             style={{width: '95%',}}>
 
@@ -197,7 +201,7 @@ export const styling = StyleSheet.create({
     menu: {
         flexDirection: 'row', 
         justifyContent: 'center', 
-        height: '24.5%',  
+        height: '24%',  
         marginVertical: 5,
     },
 
@@ -260,6 +264,8 @@ export const styling = StyleSheet.create({
         borderRadius: 10, 
         marginBottom: -3,
         justifyContent: 'space-around',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
 
         shadowOffset: { width: 10, height: 10 },
         shadowColor: '#000',

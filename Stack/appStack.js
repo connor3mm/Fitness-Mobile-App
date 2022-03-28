@@ -21,13 +21,6 @@ import FoodDetails from '../Screens/FoodDetails';
 
 
 const screen = {
-    
-    Welcome:{
-        screen: Welcomepage,
-        navigationOptions: {
-            headerShown: false,
-        }
-    },
 
     Homepage:{
         screen: Homepage,
@@ -94,6 +87,17 @@ const screen = {
 
     },
 
+
+
+    tricepsPage: {
+        screen: tricepsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+
     backPage: {
         screen: backPage, 
         navigationOptions: {
@@ -110,13 +114,6 @@ const screen = {
 
     },
 
-    tricepsPage: {
-        screen: tricepsPage, 
-        navigationOptions: {
-            headerShown: false,
-        }
-
-    },
 
     chestPage: {
         screen: chestPage, 

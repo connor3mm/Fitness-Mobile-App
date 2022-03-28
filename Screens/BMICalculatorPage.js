@@ -12,10 +12,11 @@ import {
     Vibration,
     Platform
 } from "react-native";
-import {LinearGradient} from 'expo-linear-gradient';
-import {styling} from './Homepage';
-import { RadioButton} from 'react-native-paper';
-import {styles} from "./Welcomepage";
+import { styling } from './Homepage';
+import { RadioButton } from 'react-native-paper';
+import { styles } from "./Welcomepage";
+import { caloriesStyles } from './CalorieCounterPage';
+import { setttingStyles } from './SettingsPage';
 import CustomStatusBar from '../CustomComponents/statusBar';
 
 export default function BMICalculator({navigation}) {
@@ -314,26 +315,20 @@ export default function BMICalculator({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
         
-        <CustomStatusBar/>
-        
-        <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#3777D9', '#649eef']} locations={[0,0.9]} style={[styling.dashboard, styles.boxShadow]}>
-            <View style={{ width: '100%', paddingTop: 50, paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
-                <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
-                    <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                    <Text style={{ color: '#FFF'}}>Menu</Text>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
+                source={require('../assets/img/angle-left.png')}/>
 
-                <Text style={[styling.smallText, BMIstyles.sectionTitle]}>BMI</Text>
+                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
+                fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                    Dashboard
+                </Text>
+            </TouchableOpacity>
 
-                <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                    <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', alignSelf: 'center', margin: 15, marginTop: 0, fontSize: 15,}}>
-                        Fit<Text style={[styles.blueText]}>Me</Text>
-                    </Text>
-                </View>
-            </View>
-        </LinearGradient>
 
             <ScrollView showsVerticalScrollIndicator={false} style={{height: '90%',}}>
+
+                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>BMI Calculator</Text>  
 
                 <Text style={[styling.blackText, BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
