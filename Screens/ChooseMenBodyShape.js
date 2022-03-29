@@ -30,25 +30,25 @@ const {width, height} = Dimensions.get('screen');
 const backgrounds = ['#7fb4fa', '#A5BBFF', '#6a7cb3', '#3584E4'];
 const imagesData = [
     {
-        "key": "3571572",
+        "key": "1",
         "title": "Multi-lateral intermediate moratorium",
         "description": "I'll back up the multi-byte XSS matrix, that should feed the SCSI application!",
         "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
     },
     {
-        "key": "3571747",
+        "key": "2",
         "title": "Automated radical data-warehouse",
         "description": "Use the optical SAS system, then you can navigate the auxiliary alarm!",
         "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
     },
     {
-        "key": "3571680",
+        "key": "3",
         "title": "Inverse attitude-oriented system engine",
         "description": "The ADP array is down, compress the online sensor so we can input the HTTP panel!",
         "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
     },
     {
-        "key": "3571603",
+        "key": "4",
         "title": "Monitored global data-warehouse",
         "description": "We need to program the open-source IB interface!",
         "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
@@ -142,8 +142,19 @@ const Square = ({scrollX}) => {
 export default function MenBodyShape({navigation}) {
 
     const backToGoalsPage = () => navigation.navigate('GoalsAchievementsPage');
+
+    const choiceHandler = () => {
+        setKey(key);
+
+        //alert choice selected!yeehaw
+        console.log(key);
+        backToGoalsPage();
+    };
+
+
     //for react native to keep track of this value and whenever we rerender this component, the value will not change
     const scrollX = React.useRef(new Animated.Value(0)).current;
+    const [key, setKey] = useState('0');
 
     return (
 
@@ -159,7 +170,7 @@ export default function MenBodyShape({navigation}) {
                 scrollEventThrottle={32}
                 onScroll={Animated.event(
                     [{nativeEvent: {contentOffset: {x: scrollX}}}],
-                    {useNativeDriver: false}
+                    {useNativeDriver: false},
                 )}
                 contentContainerStyle={{paddingBottom: 100}}
                 showsHorizontalScrollIndicator={false}
@@ -192,6 +203,7 @@ export default function MenBodyShape({navigation}) {
             <View>
                 <TouchableOpacity
                     style={menbodyShapeStyles.buttonStyle}
+                    onPress={choiceHandler}
                 >
                     <Text style={goalsStyles.buttonTextStyle}>Choose</Text>
                 </TouchableOpacity>
