@@ -43,7 +43,7 @@ export default function FoodFormPage({
                     onSubmit={(values) => {
                         if (foodType <= '0') {
                             setFoodType('');
-                            returns
+                            return
                         }
                         addFood(values, foodType);
                     }}>
