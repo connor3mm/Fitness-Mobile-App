@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
     Button,
     SafeAreaView,
@@ -30,25 +30,25 @@ const {width, height} = Dimensions.get('screen');
 const backgrounds = ['#e8cef6', '#caa6e0', '#a36ab3', '#e4aef3'];
 const imagesData = [
     {
-        "key": "3571572",
+        "key": "0",
         "title": "Multi-lateral intermediate moratorium",
         "description": "I'll back up the multi-byte XSS matrix, that should feed the SCSI application!",
         "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
     },
     {
-        "key": "3571747",
+        "key": "1",
         "title": "Automated radical data-warehouse",
         "description": "Use the optical SAS system, then you can navigate the auxiliary alarm!",
         "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
     },
     {
-        "key": "3571680",
+        "key": "2",
         "title": "Inverse attitude-oriented system engine",
         "description": "The ADP array is down, compress the online sensor so we can input the HTTP panel!",
         "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
     },
     {
-        "key": "3571603",
+        "key": "3",
         "title": "Monitored global data-warehouse",
         "description": "We need to program the open-source IB interface!",
         "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
@@ -145,6 +145,22 @@ export default function WomenBodyShape({navigation}) {
     //for react native to keep track of this value and whenever we rerender this component, the value will not change
     const scrollX = React.useRef(new Animated.Value(0)).current;
 
+    const choiceHandler = () => {
+        setKey(key);
+
+        //alert choice selected!yeehaw
+        console.log(key);
+        backToGoalsPage();
+    };
+
+    const [key, setKey] = useState('0');
+    const itemsChanged = useRef(({viewableItems}) => {
+        setKey(viewableItems[0].index);
+    }).current;
+
+    const viewConfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
+    const slides = useRef(null);
+
     return (
 
         <View style={womenbodyShapeStyles.listView}>
@@ -161,6 +177,9 @@ export default function WomenBodyShape({navigation}) {
                     [{nativeEvent: {contentOffset: {x: scrollX}}}],
                     {useNativeDriver: false}
                 )}
+                onViewableItemsChanged={itemsChanged}
+                viewabilityConfig={viewConfig}
+                ref={slides}
                 contentContainerStyle={{paddingBottom: 100}}
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled
@@ -192,6 +211,7 @@ export default function WomenBodyShape({navigation}) {
             <View>
                 <TouchableOpacity
                     style={womenbodyShapeStyles.buttonStyle}
+                    onPress={choiceHandler}
                 >
                     <Text style={goalsStyles.buttonTextStyle}>Choose</Text>
                 </TouchableOpacity>
