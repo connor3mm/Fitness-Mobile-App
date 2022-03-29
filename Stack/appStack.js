@@ -29,6 +29,15 @@ const screen = {
         }
     },
 
+    WorkoutsPage:{
+        screen: WorkoutsPage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+
+
     BMICalculatorPage:{
         screen: BMICalculatorPage,
         navigationOptions: {
@@ -52,13 +61,6 @@ const screen = {
 
     StepCounterPage:{
         screen: StepCounterPage,
-        navigationOptions: {
-            headerShown: false,
-        }
-    },
-
-    WorkoutsPage:{
-        screen: WorkoutsPage,
         navigationOptions: {
             headerShown: false,
         }

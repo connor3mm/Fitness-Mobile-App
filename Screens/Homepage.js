@@ -149,12 +149,13 @@ export default function Home({navigation}) {
             
             <View style={[styling.footer]}>
 
-                <TouchableOpacity onPress={homePressedHandler} style={{ marginVertical: 17.5,}}>
-                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/homepage.png')} />
-                </TouchableOpacity>
-
                 <TouchableOpacity onPress={profilePressedHandler} style={{ marginVertical: 17.5,}}>
                     <Image style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={homePressedHandler} 
+                style={{ marginVertical: 17.5, backgroundColor: '#3777D9', borderRadius: 30, transform: [{translateY: -35}, {scale: 1.5}]}}>
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/white-homepage.png')} />
                 </TouchableOpacity>
                 
                 <TouchableOpacity onPress={settingsPressedHandler} style={{ marginVertical: 17.5,}}>

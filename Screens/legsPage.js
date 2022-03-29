@@ -269,7 +269,8 @@ export const styles = StyleSheet.create({
 
     workoutIconImage: {
         flex: 10,
-        width: 420,
+        width: 300,
+        alignSelf: 'center',
     },
 
     ImageContainer:{

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from "react-native";
+import CustomStatusBar from '../CustomComponents/statusBar'; 
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
@@ -68,10 +69,12 @@ export default function bicepsCorePage({navigation}) {
                 {
                     shouldShow1 ? (
                         <>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/Crunches.gif')} />
+                        <View style={[styles.workoutIconImage]}>
+                            <Image style={{ width: 400,}} source={require('../assets/img/workoutsImages/biceps+core/Crunches.gif')} />
+                        </View>
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
-                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 30, textAlign: 'center'}}>
                             Crunches
                             </Text>
                         </View>
@@ -99,10 +102,12 @@ export default function bicepsCorePage({navigation}) {
                 {
                     shouldShow2 ? (
                         <>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/declineCrunches.gif')} />
+                        <View style={[styles.workoutIconImage]}>
+                            <Image style={{ width: 400,}} source={require('../assets/img/workoutsImages/biceps+core/declineCrunches.gif')} />
+                        </View>
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
-                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 30, textAlign: 'center'}}>
                             Decline Crunches
                             </Text>
                         </View>
@@ -130,7 +135,9 @@ export default function bicepsCorePage({navigation}) {
                 {
                     shouldShow3 ? (
                         <>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/SAD.gif')} />
+                        <View style={[styles.workoutIconImage]}>
+                            <Image style={{ width: 400,}} source={require('../assets/img/workoutsImages/biceps+core/SAD.gif')} />
+                        </View>
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
                             <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
@@ -160,9 +167,10 @@ export default function bicepsCorePage({navigation}) {
 
                 {
                     shouldShow4 ? (
-                        <><Text style={styles.exerText}>Incline Dumbbell Curls</Text>
-                        <Text>5 x 10</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/IDC.gif')} />
+                        <>
+                        <View style={[styles.workoutIconImage]}>
+                            <Image style={{ width: 400,}} source={require('../assets/img/workoutsImages/biceps+core/IDC.gif')} />
+                        </View>
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
                             <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
@@ -192,9 +200,10 @@ export default function bicepsCorePage({navigation}) {
 
                 {
                     shouldShow5 ? (
-                        <><Text style={styles.exerText}>Seated Dumbbell Curls</Text>
-                        <Text>5 x 10</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/SDC.gif')} />
+                        <>
+                        <View style={[styles.workoutIconImage]}>
+                            <Image style={{ width: 400,}} style={{ width: 300, height: 300}} source={require('../assets/img/workoutsImages/biceps+core/SDC.gif')} />
+                        </View>
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
                             <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
@@ -227,7 +236,9 @@ export default function bicepsCorePage({navigation}) {
                 {
                     shouldShow6 ? (
                         <>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/biceps+core/WGSBC.gif')} />
+                        <View style={[styles.workoutIconImage]}>
+                            <Image style={{ width: 400,}} source={require('../assets/img/workoutsImages/biceps+core/WGSBC.gif')} />
+                        </View>
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
                             <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>

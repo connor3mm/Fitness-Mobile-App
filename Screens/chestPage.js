@@ -170,14 +170,14 @@ export default function chestPage({navigation}) {
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
                             <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
-                            Dumbbell Step Ups
+                            Chest Dip
                             </Text>
                         </View>
 
                         <View style={{flexDirection: 'row', justifyContent: 'space-evenly',}}>
                             <View style={{alignSelf: 'center'}}>
                                 <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign:'center'}}>
-                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>5</Text>
+                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>4</Text>
                                 </Text>
                             </View>
 
@@ -186,7 +186,7 @@ export default function chestPage({navigation}) {
 
                             <View style={{alignSelf: 'center'}}>
                                 <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign: 'center'}}>
-                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>5</Text>
+                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>8</Text>
                                 </Text>
                             </View>
                         </View>

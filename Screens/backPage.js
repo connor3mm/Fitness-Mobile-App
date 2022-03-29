@@ -131,7 +131,7 @@ export default function backPage({navigation}) {
                 {
                     shouldShow3 ? (
                         <>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/back/scR.gif')} />
+                        <Image style={[styles.workoutIconImage, {width: 300}]} source={require('../assets/img/workoutsImages/back/scR.gif')} />
                         <View style={[styles.footer]}>
                         <View style={{ paddingVertical: 10, }}>
                             <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
