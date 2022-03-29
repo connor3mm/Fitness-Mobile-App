@@ -14,6 +14,7 @@ import {
     SafeAreaView,
     Image,
     Animated,
+    Alert,
 } from "react-native";
 
 import CardComponent from "../CustomComponents/CardComponent";
@@ -31,7 +32,7 @@ import {circle} from 'react-native/Libraries/Animated/Easing';
 
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
-import { updateDoc, doc, getDoc} from "firebase/firestore/lite";
+import { updateDoc, doc, getDoc, deleteField } from "firebase/firestore/lite";
 
 
 export default function CalorieCounter({navigation}) {
@@ -41,14 +42,14 @@ export default function CalorieCounter({navigation}) {
     //setting the goalCalories, consumedCalories and lefover calories into DB
     const setUserCalories = async () => {
         await updateDoc(doc(db,"users",uid),{
-            targetCalories: goalCalories1,
+            targetCalories: parseInt(goalCalories),
             dailyCalories: totalCalories,
             consumedCalories: remaining,
+
+            totalCaloriesBreakfast: totalCaloriesBreakfast,
+            totalCaloriesLunch: totalCaloriesLunch,
+            totalCaloriesDinner: totalCaloriesDinner
         })
-        console.log("#*#**#*#*#**#**#*#*#**#*#**#*#*#**#*#*#**#*#**#*#**#*#**#*#")
-        console.log("setting the remaining: " + remaining);
-        console.log("setting the total : " + totalCalories);
-        console.log("setting the goal: " + goalCalories);
     }
 
 
@@ -70,6 +71,15 @@ const getUserData = async () => {
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
 
+      setGoal(docSnap.get("targetCalories"))
+      setGoal1(docSnap.get("targetCalories"))
+      setRemaining(docSnap.get("consumedCalories"))
+      setTotal(docSnap.get("dailyCalories"))
+
+      setTotalBreakfastCalories(docSnap.get("totalCaloriesBreakfast"))
+      setTotalLunchCalories(docSnap.get("totalCaloriesLunch"))
+      setTotalDinnerCalories(docSnap.get("totalCaloriesDinner"))
+
       //getting breakfast food items from DB
       const foodMapBreakfast = docSnap.data().breakfastFood;
 
@@ -82,7 +92,7 @@ const getUserData = async () => {
           key: foodMapItemBreakfast.key,
         };
       });
-      console.log("arrayResult", arrayResultBreakfast);
+      //console.log("arrayResult", arrayResultBreakfast);
       setBreakfastFood(arrayResultBreakfast);
 
 
@@ -99,7 +109,7 @@ const getUserData = async () => {
           key: foodMapItemLunch.key,
         };
       });
-      console.log("arrayResult", arrayResultLunch);
+      //console.log("arrayResult", arrayResultLunch);
       setLunchFood(arrayResultLunch);
 
 
@@ -115,15 +125,42 @@ const getUserData = async () => {
           key: foodMapItemDinner.key,
         };
       });
-      console.log("arrayResult", arrayResultDinner);
+      //console.log("arrayResult", arrayResultDinner);
       setDinnerFood(arrayResultDinner);
-      setGoal(goalCalories)
-      setRemaining(remaining)
-      setTotal(totalCalories)
+
     } else {
       console.log("No such document!");
     }
   };
+
+
+    // resets the list of foods and calories, stored into the DB
+    const resetUserCalories = async () => {
+        await updateDoc(doc(db,"users",uid),{
+            targetCalories: 0,
+            dailyCalories: 0,
+            consumedCalories: 0,
+            totalCaloriesBreakfast: 0,
+            totalCaloriesDinner: 0,
+            totalCaloriesLunch: 0,
+
+            breakfastFood: deleteField(),
+            lunchFood: deleteField(),
+            dinnerFood: deleteField(),
+        })
+        createTwoButtonAlert();
+    }
+
+    //Alert for resetting the counter
+    const createTwoButtonAlert = () =>
+    Alert.alert(
+      "",
+      "Counter has been reset",
+      [
+        { text: "Okay", onPress: () => {
+            navigation.navigate('Homepage');} }
+      ]
+    );
 
 
     
@@ -140,16 +177,16 @@ const getUserData = async () => {
 
     //goal calories values
     const [goalCalories, setGoal] = useState();//izpozlvai tova za DB
-    const [goalCalories1, setGoal1] = useState();
+    const [goalCalories1, setGoal1] = useState(0);
 
     //values for remaining calories
-    const [remaining, setRemaining] = useState();
+    const [remaining, setRemaining] = useState(0);
 
     //values for total/for each section calories
-    const [totalCalories, setTotal] = useState();//current callories - reset every 24 hours
-    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState('');//reset every 24 hours
-    const [totalCaloriesLunch, setTotalLunchCalories] = useState('');//reset every 24 hours
-    const [totalCaloriesDinner, setTotalDinnerCalories] = useState('');//reset every 24 hours
+    const [totalCalories, setTotal] = useState(0);//current callories - reset every 24 hours
+    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState(0);//reset every 24 hours
+    const [totalCaloriesLunch, setTotalLunchCalories] = useState(0);//reset every 24 hours
+    const [totalCaloriesDinner, setTotalDinnerCalories] = useState(0);//reset every 24 hours
 
     //values for date picker
     const [date, setDate] = useState(new Date());
@@ -454,9 +491,9 @@ const getUserData = async () => {
                     </View>
 
                     <View style={{marginVertical: 15, alignItems: 'center',}}>
-                        <Text style={caloriesStyles.caloriesItemsText}>Pick a day to meet the goal:</Text>
-                        <TouchableOpacity style={caloriesStyles.buttonContainer} onPress={() => modeShow('date')}>
-                            <Image style={caloriesStyles.button} source={require('../assets/img/calendar.png')}/>
+                        <Text style={caloriesStyles.caloriesItemsText}>Reset Calorie Counter</Text>
+                        <TouchableOpacity style={caloriesStyles.buttonContainer} onPress={() => resetUserCalories()}>
+                            <Image style={caloriesStyles.button} source={require('../assets/img/reset.png')}/>
                             <Text style={[caloriesStyles.caloriesItemsText]}>{dateText}</Text>
                         </TouchableOpacity>
                     </View>
@@ -579,6 +616,7 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     button: {
+        marginTop: 15,
         width: 45,
         height: 45,
     },

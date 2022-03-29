@@ -11,6 +11,7 @@ import { useFonts } from 'expo-font';
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
 import { doc, getDoc} from 'firebase/firestore/lite';
+import { useIsFocused } from "@react-navigation/native";
 
 
 export default function Home({navigation}) {
@@ -32,13 +33,15 @@ export default function Home({navigation}) {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [sex, setSex] = useState("")
-    const [targetCalories, setTargetCalories] = useState("")
-    const [dailyCalories, setDailyCalories] = useState("")
-    const [targetSteps, setTargetSteps] = useState("")
-    const [dailySteps, setDailySteps] = useState("")
+    const [targetCalories, setTargetCalories] = useState()
+    const [dailyCalories, setDailyCalories] = useState()
+    const [targetSteps, setTargetSteps] = useState()
+    const [dailySteps, setDailySteps] = useState()
     const [weight, setWeight] = useState("")
 
     const [breakfastFood, setBreakfastFood] = useState([])
+    const isFocused = navigation.useIsFocused;
+   
 
     const getUserData = async () =>{
 
@@ -62,13 +65,17 @@ export default function Home({navigation}) {
             setBreakfastFood(docSnap.get("Food"))
             console.log("get user data finished")
             console.log("-----------------------------------------------------------------------")
+            console.log('====================================');
+            console.log(targetCalories);
+            console.log('====================================');
     }
 
-    
-    useEffect(() => {
-        getUserData();
-    },[])
-    
+        useEffect(() => { 
+      
+                getUserData();      
+            }, []);
+
+
 
     return(
         <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
