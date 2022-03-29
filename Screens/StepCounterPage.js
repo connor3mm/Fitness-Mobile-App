@@ -26,7 +26,8 @@ export default class StepCounter extends ValidationComponent {
         dailyStepCountGoal: 0,
         dailyGoalReached: false,
         dailyGoalSet: false,
-        noPedometerModalVisible: false
+        noPedometerModalVisible: false,
+        averageWeeklySteps: 0
     };
 
     displayModal(show) {
@@ -61,24 +62,6 @@ export default class StepCounter extends ValidationComponent {
 
     _subscribe = () => {
         //Check for pedometer permissions
-        PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION).then(result => {
-            switch(result) {
-                case PermissionsAndroid.RESULTS.GRANTED:
-                    console.log("The permission is already granted.")
-                case PermissionsAndroid.RESULTS.DENIED:
-                    console.log("The permission is not granted, requesting permission...")
-                    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION).then(result => {
-                        switch(result) {
-                            case PermissionsAndroid.RESULTS.GRANTED:
-                                console.log("The permission is now granted, step counter should work...")
-                            case PermissionsAndroid.RESULTS.DENIED:
-                                console.log("Permission denied. Step counter will not work.")
-                        }
-                    });
-            }
-        })
-
-
         Pedometer.getPermissionsAsync().then(
             result => {
                 if(!result.granted) {
@@ -131,6 +114,21 @@ export default class StepCounter extends ValidationComponent {
         Pedometer.getStepCountAsync(start, end).then(
             result => {
                 this.setState({pastStepCount: result.steps});
+            },
+            error => {
+                this.setState({
+                    pastStepCount: 'Could not get stepCount: ' + error,
+                });
+            }
+        );
+
+        //Get last 7 days of data to display weekly average
+        const endAverage = new Date();
+        const startAverage = new Date();
+        startAverage.setDate(endAverage.getDate() - 7);
+        Pedometer.getStepCountAsync(startAverage, endAverage).then(
+            result => {
+                this.setState({averageWeeklySteps: Math.round(result.steps / 7)})
             },
             error => {
                 this.setState({
@@ -210,6 +208,7 @@ export default class StepCounter extends ValidationComponent {
                 <Text>Number of steps in the last 24 hours: {this.state.pastStepCount}</Text>
                 <Text>Current step count: {this.state.currentStepCount}</Text>
                 <Text>Daily Step Goal: {this.state.currentStepCount} / {this.state.dailyStepCountGoal}</Text>
+                <Text>Average Weekly Step Count: {this.state.averageWeeklySteps}</Text>
 
                 <TouchableOpacity
                     style={styles.button}
