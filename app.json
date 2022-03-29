@@ -20,7 +20,6 @@
       "supportsTablet": true
     },
     "android": {
-      "permissions": ["com.google.android.gms.permission.ACTIVITY_RECOGNITION"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
