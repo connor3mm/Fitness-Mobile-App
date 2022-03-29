@@ -17,18 +17,10 @@ import legsPage from "../Screens/legsPage";
 import tricepsPage from "../Screens/tricepsPage";
 import chestPage from "../Screens/chestPage";
 import bicepsCorePage from "../Screens/bicepsCorePage";
-import dashboard from "../CustomComponents/dashboard";
 import FoodDetails from '../Screens/FoodDetails';
 
 
 const screen = {
-    
-    Welcome:{
-        screen: Welcomepage,
-        navigationOptions: {
-            headerShown: false,
-        }
-    },
 
     Homepage:{
         screen: Homepage,
@@ -95,6 +87,17 @@ const screen = {
 
     },
 
+
+
+    tricepsPage: {
+        screen: tricepsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+
     backPage: {
         screen: backPage, 
         navigationOptions: {
@@ -111,13 +114,6 @@ const screen = {
 
     },
 
-    tricepsPage: {
-        screen: tricepsPage, 
-        navigationOptions: {
-            headerShown: false,
-        }
-
-    },
 
     chestPage: {
         screen: chestPage, 
@@ -133,14 +129,6 @@ const screen = {
             headerShown: false,
         }
 
-    },
-
-
-    dashboard: {
-        screen: dashboard, 
-        navigationOptions: {
-            headerShown: false,
-        }
     },
 
 

@@ -85,8 +85,8 @@ export const setttingStyles = StyleSheet.create({
 
     title: {
         fontSize: 45,
-        color: '#4356FF',
-        marginVertical: 45,
+        color: '#3777D9',
+        marginVertical: 30
     },
     
     settingsSection: { 

@@ -25,6 +25,7 @@ return (
                 </Text>
                 <Image style={styles.logo} source={require('../assets/img/logo.png')}/>
             </View>
+            
             <Text style={styles.slogan}>Upgrade your fitness to the next level!</Text>
 
             <View style={{ alignSelf: 'center', justifyContent: 'space-between', marginTop: 50, }}>
@@ -70,6 +71,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         alignItems: 'center',
+        padding: 15
     },
 
     title: {
@@ -86,7 +88,7 @@ export const styles = StyleSheet.create({
     },
 
     blueText: {
-        color: '#4356FF',
+        color: '#3777D9',
     },
 
     logo: {
@@ -121,8 +123,8 @@ export const styles = StyleSheet.create({
     },
 
     signup: {
-        backgroundColor: '#4356FF',
-        borderColor: '#4356FF',
+        backgroundColor: '#3777D9',
+        borderColor: '#3777D9',
         shadowColor: 'black',
     },
 

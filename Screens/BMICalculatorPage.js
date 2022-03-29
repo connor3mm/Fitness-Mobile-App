@@ -8,13 +8,16 @@ import {
     Alert,
     ScrollView,
     TouchableOpacity,
-    Image
+    Image,
+    Vibration,
+    Platform
 } from "react-native";
-import {LinearGradient} from 'expo-linear-gradient';
-import DashBoard  from "../CustomComponents/dashboard";
-import {styling} from './Homepage';
-import {Button, RadioButton} from 'react-native-paper';
-import {styles} from "./Welcomepage";
+import { styling } from './Homepage';
+import { RadioButton } from 'react-native-paper';
+import { styles } from "./Welcomepage";
+import { caloriesStyles } from './CalorieCounterPage';
+import { setttingStyles } from './SettingsPage';
+import CustomStatusBar from '../CustomComponents/statusBar';
 
 export default function BMICalculator({navigation}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
@@ -46,6 +49,17 @@ export default function BMICalculator({navigation}) {
     //BMI value
     let [bmi, setBmi] = useState(0);
 
+
+
+    const vibrate = () => {
+        if (Platform.OS === "ios") {
+            const interval = setInterval(() => Vibration.vibrate(), 500);
+            setTimeout(() => clearInterval(interval), 1000);
+        } else {
+
+            Vibration.vibrate(500);
+        }
+    };
 
     /**
      * checks the form to validate inputs
@@ -167,7 +181,7 @@ export default function BMICalculator({navigation}) {
 
         //create final message
         let message = "\nYour BMI calculation is: " + bmi + "\n\n This puts you into the category of: " + weight + ageMessage + activityMessage;
-
+        vibrate();
         //Output for the Alert
         Alert.alert("BMI Results!", message, [
 
@@ -300,30 +314,21 @@ export default function BMICalculator({navigation}) {
 
     return (
         <SafeAreaView style={styles.container}>
+        
+            <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
+                source={require('../assets/img/angle-left.png')}/>
 
-        <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
-        style={[styling.dashboard, styles.boxShadow]}>
+                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
+                fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                    Dashboard
+                </Text>
+            </TouchableOpacity>
 
-            <View style={{ width: '100%', paddingTop: 50, 
-            paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
-                
-                <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
-                    <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                    <Text style={{ color: '#FFF'}}>Menu</Text>
-                </TouchableOpacity>
-
-                <Text style={[styling.smallText, BMIstyles.sectionTitle]}>BMI</Text>
-
-                <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                    <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
-                    alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text>
-                    </Text>
-                    <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-                </View>
-            </View>
-        </LinearGradient>
 
             <ScrollView showsVerticalScrollIndicator={false} style={{height: '90%',}}>
+
+                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>BMI Calculator</Text>  
 
                 <Text style={[styling.blackText, BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
@@ -553,16 +558,15 @@ export const BMIstyles = StyleSheet.create({
     },
 
     sectionTitle: {
-        fontSize: 40,
-        margin: 20,
-
+        fontSize: 30,
+        margin: 20.5,
     },
 
     sectionHeading: { 
         textAlign: 'center',
         margin: 25,
         fontSize: 19,
-        color: '#4356FF',
+        color: '#3777D9',
     },
 
     activity: {
@@ -594,7 +598,7 @@ export const BMIstyles = StyleSheet.create({
 
         padding: 15,
         marginVertical: 20,
-        backgroundColor: '#4356FF',
+        backgroundColor: '#3777D9',
         borderRadius: 5,
     },
 

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-    Button,
     StyleSheet,
     Text,
     View,
@@ -14,10 +13,10 @@ import {
     SafeAreaView,
     Image,
     Animated,
+    Vibration,
 } from "react-native";
 
 import CardComponent from "../CustomComponents/CardComponent";
-import {LinearGradient} from 'expo-linear-gradient';
 import {MaterialIcons} from '@expo/vector-icons';
 import {AntDesign} from '@expo/vector-icons';
 import FoodForm from './FoodForm';
@@ -26,12 +25,13 @@ import {styling} from './Homepage';
 import {styles} from "./Welcomepage";
 import {BMIstyles} from './BMICalculatorPage';
 import SVG, {G, Circle} from 'react-native-svg';
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
-import {circle} from 'react-native/Libraries/Animated/Easing';
+import CustomStatusBar from '../CustomComponents/statusBar';
+import { setttingStyles } from './SettingsPage';
 
 
 export default function CalorieCounter({navigation}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
+    const [vibration, setVibration] = useState(false);
 
     //to set the modal open or close
     const [openModal, setOpenModal] = useState(false);
@@ -78,6 +78,7 @@ export default function CalorieCounter({navigation}) {
 
     const [goalAchieved, setGoalAchieved] = useState("");
 
+
     /**
      * handler used for date picker
      * @param event
@@ -92,6 +93,23 @@ export default function CalorieCounter({navigation}) {
         let formatted = temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear();
         setDateText(formatted);
     };
+
+
+    const vibrate = () => {
+        if(vibration == true){
+            return
+        }
+
+        setVibration(true);
+        if (Platform.OS === "ios") {
+            const interval = setInterval(() => Vibration.vibrate(), 500);
+            setTimeout(() => clearInterval(interval), 1000);
+        } else {
+
+            Vibration.vibrate(500);
+        }
+    };
+
 
     /**
      * to show the picked date
@@ -192,6 +210,7 @@ export default function CalorieCounter({navigation}) {
      */
     const setDailyGoal = () => {
         setGoal1(goalCalories);
+        setVibration(false);
     };
 
     /**
@@ -200,13 +219,6 @@ export default function CalorieCounter({navigation}) {
     const getRemainingCalories = () => {
         setRemaining(goalCalories - totalCalories);
 
-    };
-
-    const getGoalAchievedMessage = () => {
-        const message = "You have achieved your daily calorie goal!";
-        if (remaining === 0) {
-            setGoalAchieved(message);
-        }
     };
 
     /**
@@ -250,46 +262,34 @@ export default function CalorieCounter({navigation}) {
     });
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container]}>
+            
+            <CustomStatusBar/>
 
-            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0, 0.9]}
-                            style={[styling.dashboard, styles.boxShadow]}>
+            <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
+                source={require('../assets/img/angle-left.png')}/>
 
-                <View style={{
-                    width: '100%', paddingTop: 50,
-                    paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'
-                }}>
+                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
+                fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                    Dashboard
+                </Text>
+            </TouchableOpacity>
 
-                    <TouchableOpacity style={{alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
-                        <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                        <Text style={{color: '#FFF'}}>Menu</Text>
-                    </TouchableOpacity>
-
-                    <Text style={[styling.smallText, BMIstyles.sectionTitle, caloriesStyles.sectionTitle]}>Calorie
-                        Counter</Text>
-
-                    <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                        <Text style={{
-                            color: 'white', fontFamily: 'Righteous_400Regular',
-                            alignSelf: 'center', margin: 5, fontSize: 20,
-                        }}>Fit<Text style={[styles.blueText]}>Me</Text>
-                        </Text>
-                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-                    </View>
-                </View>
-            </LinearGradient>
 
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
                         style={{width: '95%',}}>
+                
+                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>  
 
                 <View style={{marginTop: 15}}>
-                    {remaining === 0 && totalCalories > 0 && goalCalories > 0 ? (
-                        <AntDesign name="checkcircle" size={24} color="blue">
+                    {(remaining === 0 || remaining < 0) && totalCalories > 0 && goalCalories > 0 ? (
+                        <AntDesign onTextLayout = {vibrate()} name="checkcircle" size={24} color="blue">
                             <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie
                                 goal!</Text>
                         </AntDesign>
-                    ) : null}
+                    )  : null}
                 </View>
                 <View style={{
                     flexDirection: 'row',
@@ -301,7 +301,7 @@ export default function CalorieCounter({navigation}) {
                             <Circle cx='25%' cy='50%' stroke={'#CEE4FF'} strokeWidth={12.5} r={50}
                                     strokeOpacity={.75} fill="transparent"></Circle>
 
-                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#4356FF'} strokeWidth={12.5}
+                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#3777D9'} strokeWidth={12.5}
                                             r={50}
                                             strokeOpacity={.75} fill="transparent" strokeDasharray={2 * Math.PI * 50}
                                             strokeDashoffset={2 * Math.PI * 50} strokeLinecap={'round'}>
@@ -514,7 +514,7 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     foodAddTitle: {
-        color: '#4356FF',
+        color: '#3777D9',
         marginBottom: 10,
         padding: 10,
         borderRadius: 10,
@@ -537,7 +537,7 @@ export const caloriesStyles = StyleSheet.create({
     input: {
         borderWidth: 0,
         borderBottomWidth: 3,
-        borderBottomColor: '#4356FF',
+        borderBottomColor: '#3777D9',
         padding: 10,
         backgroundColor: '#FFF',
         marginHorizontal: 1,
@@ -574,13 +574,11 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     titleStyle: {
-        fontWeight: 'bold',
         fontFamily: 'Righteous_400Regular',
         backgroundColor: '#f1f2fc',
-        padding: 10,
-        fontSize: 18,
-        marginTop: 20,
-
+        padding: 15,
+        fontSize: 15,
+        marginTop: 22.5,
     },
 
 })

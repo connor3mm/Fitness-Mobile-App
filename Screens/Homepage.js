@@ -1,9 +1,11 @@
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from "./Welcomepage";
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, StatusBar} from "react-native";
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
+import CustomStatusBar from '../CustomComponents/statusBar';
+import AppLoading from 'expo-app-loading';
 
 
 export default function Home({navigation}) {
@@ -11,6 +13,9 @@ export default function Home({navigation}) {
     let [fontsLoaded, error] = useFonts ({
         Righteous_400Regular,
     });
+
+    if (!fontsLoaded) return <AppLoading/>;
+
 
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
 
@@ -31,14 +36,15 @@ export default function Home({navigation}) {
     const profilePressedHandler = () => navigation.navigate('ProfilePage');
         
     return(
-        <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
-            
+        <SafeAreaView style = {[styles.container, styling.menuContainer, {backgroundColor: '#f9fbfc'}]}>      
+
+            <CustomStatusBar />
+
             <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-            colors={['#4356FF', '#649eef']} locations={[0,0.9]} 
+            colors={['#3777D9', '#649eef']} locations={[0,0.9]} 
             style={[styling.dashboard, styles.boxShadow]}>
                 
-                <View style={{ width: '100%', paddingTop: 50, 
-                paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{ width: '100%', paddingTop: 50, paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={[styling.smallText, styling.profileName]}>Connor M.</Text>
 
                     <View style={{flexDirection: 'row',}}>
@@ -51,14 +57,15 @@ export default function Home({navigation}) {
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
                     
-                <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
-                        <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
-                        source={require('../assets/img/equality.png')} />
-                        <View>
-                            <Text style={[styling.smallText]}>Sex</Text>
-                            <Text style={[styling.whiteText]}>Male</Text>
-                        </View>
+                    <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
+                            <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
+                            source={require('../assets/img/equality.png')} />
+                            <View>
+                                <Text style={[styling.smallText]}>Sex</Text>
+                                <Text style={[styling.whiteText]}>Male</Text>
+                            </View>
                     </View>
+                    
                     <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
                         <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
                         source={require('../assets/img/weight.png')} />
@@ -70,7 +77,7 @@ export default function Home({navigation}) {
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
-                <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
+                    <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
                         <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
                         source={require('../assets/img/runner.png')} />
                         <View>
@@ -89,7 +96,7 @@ export default function Home({navigation}) {
                 </View>
             </LinearGradient>
 
-            <ScrollView showsHorizontalScrollIndicator={false}
+            <ScrollView vertical={true} showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
             style={{width: '95%',}}>
 
@@ -142,20 +149,17 @@ export default function Home({navigation}) {
             
             <View style={[styling.footer]}>
 
-                <View>
-                    <TouchableOpacity onPress={profilePressedHandler} style={{ marginVertical: 15,}}>
-                        <Image style={[styling.footerIcon, ]} source={require('../assets/img/profile.png')} />
-                        <Text style={[styles.buttonText, ]}>My Profile</Text>
-                    </TouchableOpacity>
-                </View> 
+                <TouchableOpacity onPress={homePressedHandler} style={{ marginVertical: 17.5,}}>
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/homepage.png')} />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={profilePressedHandler} style={{ marginVertical: 17.5,}}>
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
+                </TouchableOpacity>
                 
-                <View></View>
-                <View>
-                    <TouchableOpacity onPress={settingsPressedHandler} style={{ marginVertical: 15,}}>
-                        <Image style={[styling.footerIcon, ]} source={require('../assets/img/settings.png')} />
-                        <Text style={[styles.buttonText, ]}>Settings</Text>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity onPress={settingsPressedHandler} style={{ marginVertical: 17.5,}}>
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/gear.png')} />
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
         
@@ -177,10 +181,11 @@ export const styling = StyleSheet.create({
     dashboard: { 
         padding: 3,
         width: '102%',
-        marginTop: -5,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 35,        
-        backgroundColor: '#4356FF',
+        marginTop: -10,
+        borderBottomLeftRadius: 45,
+        borderBottomRightRadius: 45,        
+        backgroundColor: '#3777D9',
+        marginBottom: 10,
     },
 
     profileName: {
@@ -196,7 +201,7 @@ export const styling = StyleSheet.create({
     menu: {
         flexDirection: 'row', 
         justifyContent: 'center', 
-        height: '22.5%',  
+        height: '24%',  
         marginVertical: 5,
     },
 
@@ -219,7 +224,7 @@ export const styling = StyleSheet.create({
 
         shadowOffset: { width: 10, height: 10 },
         shadowOpacity: 1,
-        shadowColor: '#4356FF',
+        shadowColor: '#3777D9',
         elevation: 10,
     },
 
@@ -254,11 +259,13 @@ export const styling = StyleSheet.create({
 
     footer: {
         flexDirection: 'row', 
-        backgroundColor: '#4356FF', 
-        width: '95%', 
+        backgroundColor: '#FFF', 
+        width: '105%', 
         borderRadius: 10, 
-        margin: 10, 
-        justifyContent: 'space-evenly',
+        marginBottom: -3,
+        justifyContent: 'space-around',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
 
         shadowOffset: { width: 10, height: 10 },
         shadowColor: '#000',
