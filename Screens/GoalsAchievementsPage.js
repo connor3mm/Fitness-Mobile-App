@@ -1,5 +1,19 @@
 import React, {useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Modal, Animated, FlatList, Dimensions} from "react-native";
+import {
+    Button,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Image,
+    ScrollView,
+    Modal,
+    Animated,
+    FlatList,
+    Dimensions,
+    TouchableWithoutFeedback
+} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import {LinearGradient} from 'expo-linear-gradient';
 import {styling} from './Homepage';
@@ -9,6 +23,8 @@ import {formStyles} from './FoodForm';
 import {caloriesStyles} from './CalorieCounterPage';
 import {RadioButton} from 'react-native-paper';
 import {MaterialIcons} from '@expo/vector-icons';
+import CardComponent from "../CustomComponents/CardComponent";
+import GoalsAchievementsForm from "./GoalsAchievementsForm";
 
 export default function GoalsAchievements({navigation}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
@@ -17,6 +33,34 @@ export default function GoalsAchievements({navigation}) {
 
     const [goalChoice, setGoalChoice] = useState('0');
     const [openModal, setOpenModal] = useState(false);
+
+    const [fitnessGoals, setFitnessGoals] = useState([
+        {GoalAchievement: 'Loose weight', key: '1'},
+        {GoalAchievement: 'Get fit', key: '2'},
+
+    ]);
+
+    const [fitnessAchievements, setFitnessAchievements] = useState([
+        {GoalAchievement: 'Walked 10 km', key: '1'},
+        {GoalAchievement: 'Lost 10 kg', key: '2'},
+
+    ]);
+
+    const addGoalsAchievements = (name, type) => {
+        name.key = Math.random().toString();
+        if (type === 'Goals') {
+            setFitnessGoals((current) => {
+                return [name, ...current];
+            });
+        }
+        if (type === 'Achievements') {
+            setFitnessAchievements((current) => {
+                return [name, ...current];
+            });
+        }
+
+        setOpenModal(false);
+    };
 
 
     return (
@@ -53,37 +97,6 @@ export default function GoalsAchievements({navigation}) {
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
                         style={{width: '95%',}}>
 
-                <View style={{marginVertical: 35,}}>
-                    <Text>What is your fitness goal?</Text>
-                    <RadioButton.Group onValueChange={goalChoice => setGoalChoice(goalChoice)} value={goalChoice}
-                                       id='radioGroup'>
-                        <RadioButton.Item style={[formStyles.radioInput,]} label="Lose Weight"
-                                          value="LoseWeight"/>
-                        <RadioButton.Item style={[formStyles.radioInput,]} label="Gain Muscles" value="GainMuscles"/>
-                        <RadioButton.Item style={[formStyles.radioInput,]} label="Stay Fit" value="StayFit"/>
-                        <RadioButton.Item style={[formStyles.radioInput,]} label="Maintain Weight"
-                                          value="MaintainWeight"/>
-                    </RadioButton.Group>
-
-                    <Modal visible={openModal} animationType='slide'>
-
-                        <View style={caloriesStyles.modalText}>
-                            <MaterialIcons
-                                name='close'
-                                size={24}
-                                style={caloriesStyles.modalCloseStyle}
-                                onPress={() => setOpenModal(false)}
-                            />
-                        </View>
-                    </Modal>
-                    <TouchableOpacity
-                        style={goalsStyles.buttonStyle}
-                        onPress={() => setOpenModal(true)}
-                    >
-                        <Text style={goalsStyles.buttonTextStyle}>Add custom goal</Text>
-                    </TouchableOpacity>
-                </View>
-
                 <View>
                     <Text>What body shape would you like to achieve?</Text>
                     <TouchableOpacity
@@ -99,8 +112,54 @@ export default function GoalsAchievements({navigation}) {
                     >
                         <Text style={goalsStyles.buttonTextStyle}>Choose body shape for women</Text>
                     </TouchableOpacity>
-
                 </View>
+
+                <Modal visible={openModal} animationType='slide'>
+                    <TouchableWithoutFeedback>
+                        <View style={caloriesStyles.modalText}>
+                            <MaterialIcons
+                                name='close'
+                                size={24}
+                                style={caloriesStyles.modalCloseStyle}
+                                onPress={() => setOpenModal(false)}
+                            />
+                            <GoalsAchievementsForm addGoalsAchievements={addGoalsAchievements}/>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
+
+                <Text style={caloriesStyles.foodAddTitle}>Record your fitness goals and achievements</Text>
+
+                <MaterialIcons
+                    name='add'
+                    size={24}
+                    style={caloriesStyles.modalStyle}
+                    onPress={() => setOpenModal(true)}
+                />
+
+
+                <Text style={caloriesStyles.titleStyle}>Goals</Text>
+                {fitnessGoals.map(item => (
+                    <View key={item.key}>
+
+                        <CardComponent>
+                            <Text style={caloriesStyles.item}>{item.GoalAchievement}</Text>
+                        </CardComponent>
+
+                    </View>
+                ))}
+
+                <Text style={caloriesStyles.titleStyle}>Achievements</Text>
+                {fitnessAchievements.map(item => (
+                    <View key={item.key}>
+
+                        <CardComponent>
+                            <Text style={caloriesStyles.item}>{item.GoalAchievement}</Text>
+                        </CardComponent>
+
+                    </View>
+                ))}
+
 
             </ScrollView>
         </SafeAreaView>
