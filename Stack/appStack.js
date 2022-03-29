@@ -12,6 +12,8 @@ import WorkoutsPage from "../Screens/WorkoutsPage";
 import CalorieCounterPage from "../Screens/CalorieCounterPage";
 import ProfilePage from "../Screens/ProfilePage";
 import SettingsPage from "../Screens/SettingsPage";
+import ChooseMenBodyShape from "../Screens/ChooseMenBodyShape";
+import ChooseWomenBodyShape from "../Screens/ChooseWomenBodyShape";
 import backPage from "../Screens/backPage";
 import legsPage from "../Screens/legsPage";
 import tricepsPage from "../Screens/tricepsPage";
@@ -135,7 +137,6 @@ const screen = {
 
     },
 
-
     dashboard: {
         screen: dashboard, 
         navigationOptions: {
@@ -143,9 +144,22 @@ const screen = {
         }
     },
 
-
     FoodDetails: {
         screen: FoodDetails, 
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    ChooseMenBodyShape: {
+        screen: ChooseMenBodyShape,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    ChooseWomenBodyShape: {
+        screen: ChooseWomenBodyShape,
         navigationOptions: {
             headerShown: false,
         }
