@@ -4,7 +4,7 @@ import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import { authentication } from '../firebase/firebase-config';
-import { collections, getDocs, doc, setDoc } from "firebase/firestore/lite";
+import { doc, setDoc } from "firebase/firestore/lite";
 import { db } from '../firebase/firebase-config';
 
 

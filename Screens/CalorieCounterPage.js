@@ -176,17 +176,17 @@ const getUserData = async () => {
     const [openModal, setOpenModal] = useState(false);
 
     //goal calories values
-    const [goalCalories, setGoal] = useState();//izpozlvai tova za DB
+    const [goalCalories, setGoal] = useState();
     const [goalCalories1, setGoal1] = useState(0);
 
     //values for remaining calories
     const [remaining, setRemaining] = useState(0);
 
     //values for total/for each section calories
-    const [totalCalories, setTotal] = useState(0);//current callories - reset every 24 hours
-    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState(0);//reset every 24 hours
-    const [totalCaloriesLunch, setTotalLunchCalories] = useState(0);//reset every 24 hours
-    const [totalCaloriesDinner, setTotalDinnerCalories] = useState(0);//reset every 24 hours
+    const [totalCalories, setTotal] = useState(0);
+    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState(0);
+    const [totalCaloriesLunch, setTotalLunchCalories] = useState(0);
+    const [totalCaloriesDinner, setTotalDinnerCalories] = useState(0);
 
     //values for date picker
     const [date, setDate] = useState(new Date());

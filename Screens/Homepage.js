@@ -39,7 +39,7 @@ export default function Home({navigation}) {
     const [dailySteps, setDailySteps] = useState()
     const [weight, setWeight] = useState("")
 
-    const [breakfastFood, setBreakfastFood] = useState([])
+    //const [breakfastFood, setBreakfastFood] = useState([])
     const isFocused = navigation.useIsFocused;
    
 
@@ -60,20 +60,14 @@ export default function Home({navigation}) {
             setTargetCalories(docSnap.get("targetCalories"));
             setDailyCalories(docSnap.get("dailyCalories"));
             setTargetSteps(docSnap.get("goalSteps"));
-            //console.log("logging the goalSteps: " + setTargetSteps(docSnap.get("goalSteps")));
             setDailySteps(docSnap.get("currentSteps"));
-            setBreakfastFood(docSnap.get("Food"))
             console.log("get user data finished")
-            console.log("-----------------------------------------------------------------------")
-            console.log('====================================');
-            console.log(targetCalories);
-            console.log('====================================');
     }
 
-        useEffect(() => { 
-      
-                getUserData();      
-            }, []);
+
+    useEffect(() => { 
+            getUserData();      
+        }, []);
 
 
 
