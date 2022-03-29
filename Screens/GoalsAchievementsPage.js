@@ -35,7 +35,7 @@ export default function GoalsAchievements({navigation}) {
     const [openModal, setOpenModal] = useState(false);
 
     const [fitnessGoals, setFitnessGoals] = useState([
-        {GoalAchievement: 'Loose weight', key: '1'},
+        {GoalAchievement: 'Lose weight', key: '1'},
         {GoalAchievement: 'Get fit', key: '2'},
 
     ]);
