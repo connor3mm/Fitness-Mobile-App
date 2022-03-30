@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+
 import {
     Button,
     SafeAreaView,
@@ -142,6 +143,7 @@ const Square = ({scrollX}) => {
 export default function WomenBodyShape({navigation}) {
 
     const backToGoalsPage = () => navigation.navigate('GoalsAchievementsPage');
+
     //for react native to keep track of this value and whenever we rerender this component, the value will not change
     const scrollX = React.useRef(new Animated.Value(0)).current;
 
