@@ -86,7 +86,7 @@ export default function SettingsPage({navigation}) {
 export const setttingStyles = StyleSheet.create({ 
     container: {
         padding: 30,
-        backgroundColor: '#FFF',
+        backgroundColor: '#f9fbfc',
         height: '100%',
     },
 
