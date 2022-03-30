@@ -28,29 +28,68 @@ import { setttingStyles } from './SettingsPage';
 import GoalsAchievementsForm from "./GoalsAchievementsForm";
 import CustomStatusBar from "../CustomComponents/statusBar";
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
-import {doc, getDoc} from "firebase/firestore/lite";
 import {authentication, db} from "../firebase/firebase-config";
+import { useRoute } from '@react-navigation/native';
+import { doc, getDoc, } from "firebase/firestore/lite";
 
 export default function GoalsAchievements({navigation, route}) {
+
+    const uid = authentication.currentUser.uid;
+
+    const getUserData = async () => {
+        const docRef = doc(db, "users", authentication.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+    
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+
+          setSex(docSnap.get("sex"))
+    
+          //getting goals food items from DB
+          const fitnessMapGoals = docSnap.data().goals;
+    
+          const arrayResultGoals = Object.keys(fitnessMapGoals).map((item) => {
+            const fitnessMapItemGoals = fitnessMapGoals[item];
+            return {
+              GoalAchievement: item,
+            };
+          });
+          setFitnessGoals(arrayResultGoals);
+
+
+          const fitnessMapAchievements = docSnap.data().achievements;
+    
+          const arrayResultAchievements = Object.keys(fitnessMapAchievements).map((item) => {
+            const fitnessMapItemAchievements = fitnessMapAchievements[item];
+            return {
+              GoalAchievement: item,
+            };
+          });
+          setFitnessAchievements(arrayResultAchievements);
+        } else {
+          console.log("No such document!");
+        }
+      };
+
+
+
+          //Load data from DB for the card components into the App
+    useEffect(() => {
+        getUserData();
+    },[])
+
+
     const homePressedHandler = () => navigation.navigate('Homepage');
     const menBodyShapePressedHandler = () => navigation.navigate('ChooseMenBodyShape');
     const womenBodyShapePressedHandler = () => navigation.navigate('ChooseWomenBodyShape');
 
     const [openModal, setOpenModal] = useState(false);
 
-    const [sex, setSex] = React.useState('Male');
+    const [sex, setSex] = React.useState();
 
-    const [fitnessGoals, setFitnessGoals] = useState([
-        {GoalAchievement: 'Lose weight', key: '1'},
-        {GoalAchievement: 'Get fit', key: '2'},
+    const [fitnessGoals, setFitnessGoals] = useState([]);
 
-    ]);
-
-    const [fitnessAchievements, setFitnessAchievements] = useState([
-        {GoalAchievement: 'Walked 10 km', key: '1'},
-        {GoalAchievement: 'Lost 10 kg', key: '2'},
-
-    ]);
+    const [fitnessAchievements, setFitnessAchievements] = useState([]);
 
     const addGoalsAchievements = (name, type) => {
         name.key = Math.random().toString();
@@ -67,26 +106,6 @@ export default function GoalsAchievements({navigation, route}) {
 
         setOpenModal(false);
     };
-    const getUserData = async () =>{
-
-        const docRef = doc(db, "users", authentication.currentUser.uid);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-        } else {
-            console.log("No such document!");
-        }
-
-        setSex(docSnap.get("sex"));
-
-        console.log("get user data finished")
-    }
-
-
-    useEffect(() => {
-        getUserData();
-    }, []);
 
     return (
 
@@ -121,7 +140,7 @@ export default function GoalsAchievements({navigation, route}) {
                         style={goalsStyles.buttonStyle}
                         onPress={menBodyShapePressedHandler}
                     >
-                        <Text style={[goalsStyles.buttonTextStyle]}>Choose body shape for men</Text>
+                        <Text style={goalsStyles.buttonTextStyle}>Choose body shape for men</Text>
                     </TouchableOpacity>) : null}
                 </View>
 
@@ -131,7 +150,7 @@ export default function GoalsAchievements({navigation, route}) {
                         style={goalsStyles.buttonStyleWoman}
                         onPress={womenBodyShapePressedHandler}
                     >
-                        <Text style={[goalsStyles.buttonTextStyle]}>Choose body shape for women</Text>
+                        <Text style={goalsStyles.buttonTextStyle}>Choose body shape for women</Text>
                     </TouchableOpacity>) : null}
                 </View>
 
@@ -226,7 +245,8 @@ export const goalsStyles = StyleSheet.create({
 
     buttonTextStyle: {
         fontFamily: 'Righteous_400Regular',
-        color: 'white',
+        fontWeight: 'bold',
+        color: 'white'
     },
 
 })
