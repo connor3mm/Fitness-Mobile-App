@@ -270,7 +270,7 @@ export default function chestPage({navigation}) {
                 <TouchableOpacity style={[styles.button, styles.boxShadow, styles.btnNext]} onPress={showNextExercise}>
                     <Text style={{fontFamily: 'Righteous_400Regular'}}>{btnTitle}</Text>
                 </TouchableOpacity>
-            </View>>
+            </View>
 
         </SafeAreaView>
 
