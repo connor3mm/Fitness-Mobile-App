@@ -1,71 +1,33 @@
 import * as React from 'react';
 import MapView, {Marker, Callout} from 'react-native-maps';
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import * as Location from 'expo-location';
+import { TextInput } from 'react-native-gesture-handler';
 
-export default function App() {
-    const [pin, setPin] = React.useState({
-        latitude: 37.78825,
-        longitude: -122.4324
-    });
+export default class GymsNearMe extends React.Component {
+    state = {
+        region: {latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421
+            },
+        pin: {
+            latitude: 37.78825,
+            longitude: -122.4324
+        },
+        results: [],
+        selectedResult: null,
+        location: "",
+        errorMsg: ""
+    }
 
-    const [region, setRegion] = React.useState({
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-    });
+    onRegionChange = (region) => {
+        this.setState({ region });
+    }
 
-    const [location, setLocation] = React.useState(null);
-    const [errorMsg, setErrorMsg] = React.useState(null);
-
-    React.useEffect(() => {
-        (async () => {
-
-            let {status} = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-            }
-
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
-        })();
-    }, []);
-    return (
-        <View style={{marginTop: 50, flex: 1}}>
-            <GooglePlacesAutocomplete
-                placeholder="Search"
-                fetchDetails={true}
-                GooglePlacesSearchQuery={{
-                    rankby: "distance"
-                }}
-                onPress={(data, details = null) => {
-                    // 'details' is provided when fetchDetails = true
-                    console.log(data, details);
-                    setRegion({
-                        latitude: details.geometry.location.lat,
-                        longitude: details.geometry.location.lng,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421
-                    })
-                }}
-                query={{
-                    key: "AIzaSyDWtmCdM1fnzsjtw2xKsQGJBPoooW3wl8s",
-                    language: "en",
-                    components: "country:us",
-                    types: "establishment",
-                    radius: 30000,
-                    location: `${region.latitude}, ${region.longitude}`
-                }}
-
-                styles={{
-                    container: {flex: 0, position: "absolute", width: "100%", zIndex: 1},
-                    listView: {backgroundColor: "white"}
-                }}
-
-            />
+    render () {
+        return (
+            <View style={{marginTop: 50, flex: 1}}>
             <MapView style={styles.map}
                      initialRegion={{
                          latitude: 37.78825,
@@ -75,12 +37,28 @@ export default function App() {
                      }}
                      provider="google"
                      showUserLocation={true}
-                     region={region}
-                     onRegionChange={setRegion}
+                     region={this.state.region}
+                     onRegionChange={this.onRegionChange}
+                     
             >
-                <Marker coordinate={{latitude: region.latitude, longitude: region.longitude}}/>
+                <TextInput
+                    style={{
+                        borderRadius: 10,
+                        margin: 10,
+                        color: '#000',
+                        borderColor: '#666',
+                        backgroundColor: '#FFF',
+                        borderWidth: 1,
+                        height: 45,
+                        paddingHorizontal: 10,
+                        fontSize: 18,
+                      }} 
+                    placeholder={'Search'}
+                    placeholderTextColor={'#666'}>
+                </TextInput>
+                <Marker coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}/>
                 <Marker
-                    coordinate={pin}
+                    coordinate={this.state.pin}
                     draggable={true}
                     onDragStart={(e) => {
                         console.log("Drag start", e.nativeEvent.coordinates)
@@ -99,7 +77,8 @@ export default function App() {
 
             </MapView>
         </View>
-    );
+        );
+    }
 }
 
 const styles = StyleSheet.create({
