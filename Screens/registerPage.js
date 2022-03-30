@@ -10,7 +10,6 @@ import {
     KeyboardAvoidingView,
     Image
 } from "react-native";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import { authentication } from '../firebase/firebase-config';
@@ -20,9 +19,9 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword,} from "fire
 
 export default function registerPage({navigation}) {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [password2, setPassword2] = useState("")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
 
     const registerUser = () => {
         if(password !== password2){

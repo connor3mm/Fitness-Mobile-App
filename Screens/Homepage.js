@@ -163,11 +163,12 @@ export default function Home({navigation}) {
             style={{width: '95%',}}>
 
             <View style={[styling.menu,]}>
-                <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
-                styling.menuIcon ]} 
+                <TouchableOpacity disabled={true} activeOpacity={.7} style={[styles.button, styles.login, styling.menuIcon,
+                {backgroundColor: 'pink', borderColor: 'pink', fontSize: 20}]} 
                 onPress={gymsNearMePressedHandler}>
+                    <Text  style={[styles.buttonText, styling.blackText, {color: 'red'}]}>Coming Soon!</Text>
                     <Image style={[styling.menuIconImage, ]} source={require('../assets/img/location.png')}/>
-                    <Text  style={[styles.buttonText, styling.blackText]}>Gyms Near Me</Text>
+                    <Text  style={[styles.buttonText]}>Gyms Near Me</Text>
                 </TouchableOpacity>
                 <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, 
                 styling.menuIcon ]} 

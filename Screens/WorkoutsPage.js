@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from "react-native";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
+import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView, StatusBar} from "react-native";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import { caloriesStyles } from './CalorieCounterPage';
@@ -19,7 +18,11 @@ export default function Workouts({navigation}) {
 
     const homePressedHandler = () => navigation.navigate('Homepage');
 
-    return( <SafeAreaView style={styles.container}>
+    return( 
+        <SafeAreaView style={styles.container}>
+
+            <StatusBar backgroundColor={'#f9fbfc'} barStyle='dark-content' />
+
             <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row',}}>
                 <Image style={{ width: 30, height: 30, marginVertical: 30, marginRight: 10,}}
                        source={require('../assets/img/angle-left.png')}/>
@@ -48,7 +51,7 @@ export default function Workouts({navigation}) {
 
                 <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('bicepsCorePage')}>
 
-                    <Text style = {styles.workoutText}>Biceps {"\n"}and{"\n"}Core</Text>
+                    <Text style = {styles.workoutText}>Biceps {"\n"}&{"\n"}Core</Text>
                     <Image style = {{height:135, width: 180,}} source={require('../assets/img/workoutsImages/icons/icon_bicepsCore.png')}/>
 
                 </TouchableOpacity>
@@ -97,7 +100,8 @@ export default function Workouts({navigation}) {
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
+        backgroundColor: '#f9fbfc',
+        padding: 20,
     },
 
     workoutMain:{
@@ -109,12 +113,18 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         flexDirection: 'row',
         flex:1,
-        marginTop:'10%',
-        marginLeft:'10%',
-        marginRight:'10%',
+        marginTop:'7.5%',
+        marginLeft:'2.5%',
+        marginRight:'2.5%',
         justifyContent:"space-around",
         alignItems:"center",
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        borderColor: '#FFF',
+        borderWidth: 1,
+
+        elevation: 5,
+        shadowColor: '#424242',
+        shadowOffset: {width: 5, height: 5}
     },
 
     workoutIconImage:{

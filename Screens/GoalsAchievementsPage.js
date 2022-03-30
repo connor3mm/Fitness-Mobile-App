@@ -12,6 +12,7 @@ import {
     Animated,
     FlatList,
     Dimensions,
+    StatusBar,
     TouchableWithoutFeedback, TextInput
 } from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
@@ -111,7 +112,7 @@ export default function GoalsAchievements({navigation, route}) {
 
         <SafeAreaView style={styles.container}>
 
-            <CustomStatusBar/>
+            <StatusBar backgroundColor={'#FFF'} barStyle='dark-content' />
 
             <TouchableOpacity onPress={homePressedHandler} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
                 <Image style={{width: 25, height: 25, marginVertical: 30, marginRight: 10,}}

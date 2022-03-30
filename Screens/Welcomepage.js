@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, TextInput, StatusBar} from "react-native";
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, StatusBar} from "react-native";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { getAuth } from "firebase/auth";
+import CustomStatusBar from '../CustomComponents/statusBar';
 
 
 export default function Welcome( {navigation} ) {
-    let [fontsLoaded, error] = useFonts ({
-        Righteous_400Regular,
-    });
+    let [fontsLoaded, error] = useFonts ({Righteous_400Regular,});
 
     const buttonPressedHandler = () => navigation.navigate('Homepage');
     const loginPressedHandler = () => navigation.navigate('loginPage');
@@ -19,11 +18,11 @@ export default function Welcome( {navigation} ) {
     const user = auth.currentUser;
 
     if (user) {
-        console.log("user is logged in")
+        console.log("user is logged in");
         buttonPressedHandler();
 
     } else {
-        console.log("user is not logged in")
+        console.log("user is not logged in");
     }
 
     
@@ -32,7 +31,8 @@ export default function Welcome( {navigation} ) {
 return (
     <SafeAreaView style={styles.container}>
 
-        <StatusBar backgroundColor="#FFF" barStyle='dark-content'/>
+        <CustomStatusBar/>
+
 
         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'stretch'}}>
 

@@ -12,6 +12,7 @@ import {
     PermissionsAndroid,
     Platform,
     ScrollView,
+    StatusBar,
 } from "react-native";
 import { styles } from './Welcomepage';
 import { caloriesStyles } from './CalorieCounterPage';
@@ -172,7 +173,9 @@ export default class StepCounter extends ValidationComponent {
     render() {
         return (
             <SafeAreaView style={[styles.container, stepStyles.container]}>
-                       
+                
+                <StatusBar backgroundColor={'#f9fbfc'} barStyle='dark-content' />
+ 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Homepage')} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
                     <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
                     source={require('../assets/img/angle-left.png')}/>
