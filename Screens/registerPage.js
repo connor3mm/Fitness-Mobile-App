@@ -22,7 +22,7 @@ export default function registerPage({navigation}) {
         .catch((error) => {
             console.log(error);
             if(error.code === "auth/invalid-email") alertInvalidEmail();
-            if(error.code === "email-already-in-use") alertEmailInUse();
+            if(error.code === "auth/email-already-in-use") alertEmailInUse();
         })
     }
 
