@@ -22,6 +22,7 @@ export default function registerPage({navigation}) {
         .catch((error) => {
             console.log(error);
             if(error.code === "auth/invalid-email") alertInvalidEmail();
+            if(error.code === "email-already-in-use") alertEmailInUse();
         })
     }
 
@@ -30,6 +31,18 @@ export default function registerPage({navigation}) {
     Alert.alert(
       "",
       "The email you've selected is invalid, please choose another one",
+      [
+        {
+          text: "Okay",
+          style: "cancel"
+        },
+      ]
+    );
+
+    const alertEmailInUse = () =>
+    Alert.alert(
+      "",
+      "The email you've entered already, please choose another one",
       [
         {
           text: "Okay",

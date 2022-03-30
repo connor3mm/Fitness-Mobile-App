@@ -18,7 +18,7 @@ export default function Home({navigation}) {
         Righteous_400Regular,
     });
 
-    //if (!fontsLoaded) return <AppLoading/>; // evenrualno moje da ti sanaloji da go premanhnesh
+    //if (!fontsLoaded) return <AppLoading/>;
 
 
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
