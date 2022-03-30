@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import { authentication } from '../firebase/firebase-config';
 import { doc, setDoc } from "firebase/firestore/lite";
 import { db } from '../firebase/firebase-config';
+import {RadioButton} from "react-native-paper";
 
 
 
@@ -118,15 +119,23 @@ export default function registerFormPage({navigation}) {
                     >
                     </TextInput>
 
-                    <TextInput style ={styles.input} placeholder='Sex' value={sex} 
-                        onChangeText={text => setSex(text)}
+                    <TextInput style ={styles.input} placeholder='Current weight in KG' value={weight}
+                               onChangeText={text => setWeight(text)}
                     >
                     </TextInput>
 
-                    <TextInput style ={styles.input} placeholder='Current weight' value={weight} 
-                        onChangeText={text => setWeight(text)}
-                    >
-                    </TextInput>
+                    {/*<TextInput style ={styles.input} placeholder='Sex' value={sex} */}
+                    {/*    onChangeText={text => setSex(text)}*/}
+                    {/*>*/}
+                    {/*</TextInput>*/}
+
+                    <RadioButton.Group
+                        onValueChange={sex => setSex(sex)} value={sex}>
+                        <RadioButton.Item label="Male" value="Male"/>
+                        <RadioButton.Item label="Female" value="Female"/>
+                    </RadioButton.Group>
+
+
                 </View>
 
                 
