@@ -219,7 +219,7 @@ export default class StepCounter extends ValidationComponent {
                         style={stepStyles.closeText}
                         onPress={() => {
                             this.displayModal(!this.state.modalVisible);
-                        }}>x</Text>
+                        }}>✔</Text>
                 </Modal>
 
                 <Modal
@@ -355,7 +355,7 @@ export const stepStyles = StyleSheet.create({
 
     input: {
         margin: 15,
-        marginTop: 50,
+        marginTop: "75%",
         height: 40,
         borderWidth: 0,
         borderColor: '#3777D9',
