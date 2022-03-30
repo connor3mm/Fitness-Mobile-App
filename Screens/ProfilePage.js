@@ -111,7 +111,11 @@ export default function ProfilePage({navigation}) {
                     </View>
                 </View>
 
-        
+
+                <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]}
+                                   onPress={combinedHandler}>
+                    <Text style={[styles.buttonText,]}>Sign Out</Text>
+                </TouchableOpacity>
 
             </ScrollView>
                         
