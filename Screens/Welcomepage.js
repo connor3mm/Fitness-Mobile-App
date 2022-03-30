@@ -31,9 +31,6 @@ export default function Welcome( {navigation} ) {
 return (
     <SafeAreaView style={styles.container}>
 
-        <CustomStatusBar/>
-
-
         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'stretch'}}>
 
             <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent:'center'}}>
