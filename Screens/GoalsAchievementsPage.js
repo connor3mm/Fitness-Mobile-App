@@ -66,7 +66,6 @@ export default function GoalsAchievements({navigation, route}) {
 
         setOpenModal(false);
     };
-
     const getUserData = async () =>{
 
         const docRef = doc(db, "users", authentication.currentUser.uid);
