@@ -9,10 +9,13 @@ import { setttingStyles } from './SettingsPage';
 
 
 
+
+
 export default function Workouts({navigation}) {
     let [fontsLoaded, error] = useFonts ({
         Righteous_400Regular,
     });
+
 
     const homePressedHandler = () => navigation.navigate('Homepage');
 
