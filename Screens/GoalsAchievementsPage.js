@@ -12,7 +12,7 @@ import {
     Animated,
     FlatList,
     Dimensions,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback, TextInput
 } from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import {LinearGradient} from 'expo-linear-gradient';
@@ -33,6 +33,8 @@ export default function GoalsAchievements({navigation}) {
 
     const [goalChoice, setGoalChoice] = useState('0');
     const [openModal, setOpenModal] = useState(false);
+
+    const [sex, setSex] = React.useState('Male');
 
     const [fitnessGoals, setFitnessGoals] = useState([
         {GoalAchievement: 'Lose weight', key: '1'},
@@ -98,20 +100,26 @@ export default function GoalsAchievements({navigation}) {
                         style={{width: '95%',}}>
 
                 <View>
-                    <Text>What body shape would you like to achieve?</Text>
-                    <TouchableOpacity
+                    <Text style={caloriesStyles.foodAddTitle}>What body shape would you like to achieve?</Text>
+                </View>
+
+                <View>
+                    {sex === 'Male' ? (<TouchableOpacity
                         style={goalsStyles.buttonStyle}
                         onPress={menBodyShapePressedHandler}
                     >
                         <Text style={goalsStyles.buttonTextStyle}>Choose body shape for men</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>) : null}
+                </View>
 
-                    <TouchableOpacity
-                        style={goalsStyles.buttonStyle}
+
+                <View>
+                    {sex === 'Female' ? (<TouchableOpacity
+                        style={goalsStyles.buttonStyleWoman}
                         onPress={womenBodyShapePressedHandler}
                     >
                         <Text style={goalsStyles.buttonTextStyle}>Choose body shape for women</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>) : null}
                 </View>
 
                 <Modal visible={openModal} animationType='slide'>
@@ -181,6 +189,23 @@ export const goalsStyles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#4356FF',
         shadowColor: '#4356FF',
+        shadowOpacity: 0.5,
+        shadowOffset: {
+            height: 10,
+            width: 0
+        },
+        shadowRadius: 25,
+    },
+
+    buttonStyleWoman: {
+        display: 'flex',
+        height: 60,
+        borderRadius: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        backgroundColor: '#a259b6',
+        shadowColor: '#580961',
         shadowOpacity: 0.5,
         shadowOffset: {
             height: 10,

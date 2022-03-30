@@ -31,21 +31,21 @@ const backgrounds = ['#7fb4fa', '#A5BBFF', '#6a7cb3', '#3584E4'];
 const imagesData = [
     {
         "key": "0",
-        "title": "Multi-lateral intermediate moratorium",
-        "description": "I'll back up the multi-byte XSS matrix, that should feed the SCSI application!",
+        "title": "Low Body Fat",
+        "description": "The body goal of reducing overall body fat.",
         "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
     },
     {
         "key": "1",
-        "title": "Automated radical data-warehouse",
-        "description": "Use the optical SAS system, then you can navigate the auxiliary alarm!",
-        "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
+        "title": "Tarzan",
+        "description": "Keeping current weight with slight muscle gain/fat loss.",
+        "image": 'https://content.api.news/v3/images/bin/a474c67722579474d7daed2a3a85c981'
     },
     {
         "key": "2",
-        "title": "Inverse attitude-oriented system engine",
-        "description": "The ADP array is down, compress the online sensor so we can input the HTTP panel!",
-        "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
+        "title": "The Rock",
+        "description": "",
+        "image": 'https://www.borntoworkout.com/wp-content/uploads/2019/05/Dwayne-Johnson-Body.jpg'
     },
     {
         "key": "3",
