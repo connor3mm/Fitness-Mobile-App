@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Bottomnavbar } from '../Stack/appStack';
-import { NavigationContainer } from '@react-navigation/native';
 import { styles } from "./Welcomepage";
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
-import { TabRouter } from 'react-navigation';
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, StatusBar} from "react-native";
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
+import CustomStatusBar from '../CustomComponents/statusBar';
+import AppLoading from 'expo-app-loading';
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import { doc, getDoc} from 'firebase/firestore/lite';
+import { useIsFocused } from "@react-navigation/native";
 
 
 export default function Home({navigation}) {
@@ -16,70 +18,109 @@ export default function Home({navigation}) {
         Righteous_400Regular,
     });
 
+    //if (!fontsLoaded) return <AppLoading/>;
+
+
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
-
     const gymsNearMePressedHandler = () => navigation.navigate('GymsNearMePage');
-    
     const goalsAchievementsPressedHandler = () => navigation.navigate('GoalsAchievementsPage');
-    
     const stepCounterPressedHandler = () => navigation.navigate('StepCounterPage');
-    
     const workoutsPressedHandler = () => navigation.navigate('WorkoutsPage');
-    
     const calorieCounterPressedHandler = () => navigation.navigate('CalorieCounterPage');
-
     const settingsPressedHandler = () => navigation.navigate('SettingsPage');
-
     const profilePressedHandler = () => navigation.navigate('ProfilePage');
-
     const homePressedHandler = () => navigation.navigate('Homepage');
-    
 
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [sex, setSex] = useState("")
+    const [targetCalories, setTargetCalories] = useState()
+    const [dailyCalories, setDailyCalories] = useState()
+    const [targetSteps, setTargetSteps] = useState()
+    const [dailySteps, setDailySteps] = useState()
+    const [weight, setWeight] = useState("")
+
+    //const [breakfastFood, setBreakfastFood] = useState([])
+    const isFocused = navigation.useIsFocused;
+   
+
+    const getUserData = async () =>{
+
+        const docRef = doc(db, "users", authentication.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+            setFirstName(docSnap.get("firstName"));
+            setSex(docSnap.get("sex"));
+            setWeight(docSnap.get("weight"))
+            setLastName(docSnap.get("lastName"));
+            setTargetCalories(docSnap.get("targetCalories"));
+            setDailyCalories(docSnap.get("dailyCalories"));
+            setTargetSteps(docSnap.get("goalSteps"));
+            setDailySteps(docSnap.get("currentSteps"));
+            console.log("get user data finished")
+    }
+
+
+    useEffect(() => { 
+            getUserData();      
+        }, []);
+
+
+
+        
     return(
-        <SafeAreaView style = {[styles.container, styling.menuContainer,]}>
-    
+        <SafeAreaView style = {[styles.container, styling.menuContainer, {backgroundColor: '#f9fbfc'}]}>      
+
+            <CustomStatusBar />
+
             <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-            colors={['#4356FF', '#3584e4']} locations={[0,0.9]} 
+            colors={['#3777D9', '#649eef']} locations={[0,0.9]} 
             style={[styling.dashboard, styles.boxShadow]}>
                 
-                <View style={{ width: '100%', paddingTop: 50, 
-                paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={[styling.smallText, styling.profileName]}>Connor M.</Text>
+                <View style={{ width: '100%', paddingTop: 50, paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <Text style={[styling.smallText, styling.profileName]}>{firstName}</Text>
 
                     <View style={{flexDirection: 'row',}}>
                         <Text style={{color: 'white', fontFamily: 'Righteous_400Regular', 
                         alignSelf: 'center', margin: 5, fontSize: 20,}}>Fit<Text style={[styles.blueText]}>Me</Text></Text>
-                        <Image style={styling.logo} source={require('../assets/img/barbell.png')}/>
+                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
                     </View>
                  
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
-                <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
-                        <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
-                        source={require('../assets/img/equality.png')} />
-                        <View>
-                            <Text style={[styling.smallText]}>Sex</Text>
-                            <Text style={[styling.whiteText]}>Male</Text>
-                        </View>
+                    
+                    <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
+                            <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
+                            source={require('../assets/img/equality.png')} />
+                            <View>
+                                <Text style={[styling.smallText]}>Sex</Text>
+                                <Text style={[styling.whiteText]}>{sex}</Text>
+                            </View>
                     </View>
+                    
                     <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
                         <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
                         source={require('../assets/img/weight.png')} />
                         <View>
                             <Text style={[styling.smallText]}>Weight</Text>
-                            <Text style={[styling.whiteText]}>89 KG</Text>
+                            <Text style={[styling.whiteText]}>{weight} KG</Text>
                         </View>
                     </View>
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between',}}>
-                <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
+                    <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
                         <Image style={{ width: 40, height: 40, alignSelf: 'center', marginRight: 10,}} 
                         source={require('../assets/img/runner.png')} />
                         <View>
                             <Text style={[styling.smallText]}>Daily Steps</Text>
-                            <Text style={[styling.whiteText]}>1000/8000</Text>
+                            <Text style={[styling.whiteText]}>{dailySteps}/{targetSteps}</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', width: '45%', margin: 15,}}>
@@ -87,13 +128,13 @@ export default function Home({navigation}) {
                         source={require('../assets/img/diet.png')} />
                         <View>
                             <Text style={[styling.smallText]}>Daily Calories</Text>
-                            <Text style={[styling.whiteText]}>1000/2900</Text>
+                            <Text style={[styling.whiteText]}>{dailyCalories}/{targetCalories}</Text>
                         </View>
                     </View> 
                 </View>
             </LinearGradient>
 
-            <ScrollView showsHorizontalScrollIndicator={false}
+            <ScrollView vertical={true} showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
             style={{width: '95%',}}>
 
@@ -141,25 +182,24 @@ export default function Home({navigation}) {
                     <Text  style={[styles.buttonText, styling.blackText]}>Your Workouts</Text>
                 </TouchableOpacity>
             </View>
+
             </ScrollView>
-
-            <View style={[styling.footer]}>
-                <TouchableOpacity  onPress={homePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/homepage.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Home</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={profilePressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Profile</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={settingsPressedHandler} style={{ width: '33.3%', alignItems: 'center' }}>
-                    <Image  style={[styling.footerIcon, ]} source={require('../assets/img/settings.png')} />
-                    <Text  style={[styles.buttonText, styling.greyText]}>Settings</Text>
-                </TouchableOpacity>
-            </View> 
             
+            <View style={[styling.footer]}>
+
+                <TouchableOpacity onPress={profilePressedHandler} style={{ marginVertical: 17.5,}}>
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={homePressedHandler} 
+                style={{ marginVertical: 17.5, backgroundColor: '#3777D9', borderRadius: 30, transform: [{translateY: -35}, {scale: 1.5}]}}>
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/white-homepage.png')} />
+                </TouchableOpacity>
+                
+                <TouchableOpacity onPress={settingsPressedHandler} style={{ marginVertical: 17.5,}}>
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/gear.png')} />
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
         
     )
@@ -179,11 +219,12 @@ export const styling = StyleSheet.create({
 
     dashboard: { 
         padding: 3,
-        width: '103%',
-        marginTop: -5,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 35,        
-        backgroundColor: '#4356FF',
+        width: '102%',
+        marginTop: -10,
+        borderBottomLeftRadius: 45,
+        borderBottomRightRadius: 45,        
+        backgroundColor: '#3777D9',
+        marginBottom: 10,
     },
 
     profileName: {
@@ -199,7 +240,7 @@ export const styling = StyleSheet.create({
     menu: {
         flexDirection: 'row', 
         justifyContent: 'center', 
-        height: '20%',  
+        height: '24%',  
         marginVertical: 5,
     },
 
@@ -211,15 +252,19 @@ export const styling = StyleSheet.create({
     },
 
     menuIcon: {
-        width: '45%',
+        width: '47.5%',
         height: '100%',
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 3,
         borderWidth: .5,
         borderRadius: 10,
         borderColor: '#FFF',
+
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 1,
+        shadowColor: '#3777D9',
+        elevation: 10,
     },
 
     menuIconImage: {
@@ -234,7 +279,7 @@ export const styling = StyleSheet.create({
     },  
 
     greyText: {
-        color: '#FFF',
+        color: '#424242',
         fontSize: 14,
         marginTop: 5,
     },
@@ -251,26 +296,25 @@ export const styling = StyleSheet.create({
         color: '#FFF',
     },  
 
-    footer: { 
+    footer: {
+        flexDirection: 'row', 
+        backgroundColor: '#FFF', 
+        width: '105%', 
+        borderRadius: 10, 
+        marginBottom: -3,
+        justifyContent: 'space-around',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+
         shadowOffset: { width: 10, height: 10 },
-        shadowOpacity: 1,
-        shadowColor: '#4356FF',
-        elevation: 10,
-
-        borderColor: '#FFF',
-        borderWidth: .5,
-
-        backgroundColor : "#4356FF", 
-        height: '9%', 
-        width: '92.5%',
-        marginBottom: 10,
-        borderRadius: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
+        shadowColor: '#000',
+        elevation: 15,
     },
 
     footerIcon: {
         width: 23,
         height: 23,
+        alignSelf: 'center',
+        margin: 10,
     },
 })

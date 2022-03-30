@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import {
-    Button,
     StyleSheet,
     Text,
     View,
@@ -14,10 +13,11 @@ import {
     SafeAreaView,
     Image,
     Animated,
+    Vibration,
+    Alert,
 } from "react-native";
 
 import CardComponent from "../CustomComponents/CardComponent";
-import {LinearGradient} from 'expo-linear-gradient';
 import {MaterialIcons} from '@expo/vector-icons';
 import {AntDesign} from '@expo/vector-icons';
 import FoodForm from './FoodForm';
@@ -26,18 +26,157 @@ import {styling} from './Homepage';
 import {styles} from "./Welcomepage";
 import {BMIstyles} from './BMICalculatorPage';
 import SVG, {G, Circle} from 'react-native-svg';
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
-import {circle} from 'react-native/Libraries/Animated/Easing';
+import CustomStatusBar from '../CustomComponents/statusBar';
+import {setttingStyles} from './SettingsPage';
+
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import { updateDoc, doc, getDoc, deleteField } from "firebase/firestore/lite";
 
 
 export default function CalorieCounter({navigation}) {
+    const uid = authentication.currentUser.uid;
+
+
+    //setting the goalCalories, consumedCalories and lefover calories into DB
+    const setUserCalories = async () => {
+        await updateDoc(doc(db,"users",uid),{
+            targetCalories: parseInt(goalCalories),
+            dailyCalories: totalCalories,
+            consumedCalories: remaining,
+
+            totalCaloriesBreakfast: totalCaloriesBreakfast,
+            totalCaloriesLunch: totalCaloriesLunch,
+            totalCaloriesDinner: totalCaloriesDinner
+        })
+    }
+
+
+    //array for breakfast foods
+    const [breakfastFood, setBreakfastFood] = useState([]);
+
+    //array for lunch foods
+    const [lunchFood, setLunchFood] = useState([]);
+
+    //array for dinner foods
+    const [dinnerFood, setDinnerFood] = useState([]);
+
+
+
+const getUserData = async () => {
+    const docRef = doc(db, "users", authentication.currentUser.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+
+      setGoal(docSnap.get("targetCalories"))
+      setGoal1(docSnap.get("targetCalories"))
+      setRemaining(docSnap.get("consumedCalories"))
+      setTotal(docSnap.get("dailyCalories"))
+
+      setTotalBreakfastCalories(docSnap.get("totalCaloriesBreakfast"))
+      setTotalLunchCalories(docSnap.get("totalCaloriesLunch"))
+      setTotalDinnerCalories(docSnap.get("totalCaloriesDinner"))
+
+      //getting breakfast food items from DB
+      const foodMapBreakfast = docSnap.data().breakfastFood;
+
+      const arrayResultBreakfast = Object.keys(foodMapBreakfast).map((item) => {
+        const foodMapItemBreakfast = foodMapBreakfast[item];
+        return {
+          Food: item,
+          Calories: foodMapItemBreakfast.Calories,
+          Quantity: foodMapItemBreakfast.Quantity,
+          key: foodMapItemBreakfast.key,
+        };
+      });
+      //console.log("arrayResult", arrayResultBreakfast);
+      setBreakfastFood(arrayResultBreakfast);
+
+
+      
+      //getting lunch food items from DB
+      const foodMapLunch = docSnap.data().lunchFood;
+
+      const arrayResultLunch = Object.keys(foodMapLunch).map((item) => {
+        const foodMapItemLunch = foodMapLunch[item];
+        return {
+          Food: item,
+          Calories: foodMapItemLunch.Calories,
+          Quantity: foodMapItemLunch.Quantity,
+          key: foodMapItemLunch.key,
+        };
+      });
+      //console.log("arrayResult", arrayResultLunch);
+      setLunchFood(arrayResultLunch);
+
+
+      //getting dinner food items from DB
+      const foodMapDinner = docSnap.data().dinnerFood;
+
+      const arrayResultDinner = Object.keys(foodMapDinner).map((item) => {
+        const foodMapItemDinner = foodMapDinner[item];
+        return {
+          Food: item,
+          Calories: foodMapItemDinner.Calories,
+          Quantity: foodMapItemDinner.Quantity,
+          key: foodMapItemDinner.key,
+        };
+      });
+      //console.log("arrayResult", arrayResultDinner);
+      setDinnerFood(arrayResultDinner);
+
+    } else {
+      console.log("No such document!");
+    }
+  };
+
+
+    // resets the list of foods and calories, stored into the DB
+    const resetUserCalories = async () => {
+        await updateDoc(doc(db,"users",uid),{
+            targetCalories: 0,
+            dailyCalories: 0,
+            consumedCalories: 0,
+            totalCaloriesBreakfast: 0,
+            totalCaloriesDinner: 0,
+            totalCaloriesLunch: 0,
+
+            breakfastFood: deleteField(),
+            lunchFood: deleteField(),
+            dinnerFood: deleteField(),
+        })
+        createTwoButtonAlert();
+    }
+
+    //Alert for resetting the counter
+    const createTwoButtonAlert = () =>
+    Alert.alert(
+      "",
+      "Counter has been reset",
+      [
+        { text: "Okay", onPress: () => {
+            navigation.navigate('Homepage');} }
+      ]
+    );
+
+
+    
+    //Load data from DB for the card components into the App
+    useEffect(() => {
+        getUserData();
+    },[])
+
+
     const homePressedHandler = () => navigation.navigate('Homepage');
+    const [vibration, setVibration] = useState(false);
 
     //to set the modal open or close
     const [openModal, setOpenModal] = useState(false);
 
     //goal calories values
-    const [goalCalories, setGoal] = useState(0);
+    const [goalCalories, setGoal] = useState();
     const [goalCalories1, setGoal1] = useState(0);
 
     //values for remaining calories
@@ -45,9 +184,9 @@ export default function CalorieCounter({navigation}) {
 
     //values for total/for each section calories
     const [totalCalories, setTotal] = useState(0);
-    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState('');
-    const [totalCaloriesLunch, setTotalLunchCalories] = useState('');
-    const [totalCaloriesDinner, setTotalDinnerCalories] = useState('');
+    const [totalCaloriesBreakfast, setTotalBreakfastCalories] = useState(0);
+    const [totalCaloriesLunch, setTotalLunchCalories] = useState(0);
+    const [totalCaloriesDinner, setTotalDinnerCalories] = useState(0);
 
     //values for date picker
     const [date, setDate] = useState(new Date());
@@ -55,28 +194,10 @@ export default function CalorieCounter({navigation}) {
     const [showed, setShowed] = useState(false);
     const [dateText, setDateText] = useState('');
 
-    //array for breakfast foods
-    const [breakfastFood, setBreakfastFood] = useState([
-        {Food: 'Eggs', Calories: 58, Quantity: 1, key: '1'},
-        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
-
-    ]);
-
-    //array for lunch foods
-    const [lunchFood, setLunchFood] = useState([
-        {Food: 'Apple', Calories: 58, Quantity: 1, key: '1'},
-        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
-
-    ]);
-
-    //array for dinner foods
-    const [dinnerFood, setDinnerFood] = useState([
-        {Food: 'Pasta', Calories: 58, Quantity: 1, key: '1'},
-        {Food: 'Cheese', Calories: 50, Quantity: 1, key: '2'},
-
-    ]);
+    
 
     const [goalAchieved, setGoalAchieved] = useState("");
+
 
     /**
      * handler used for date picker
@@ -90,8 +211,25 @@ export default function CalorieCounter({navigation}) {
 
         let temp = new Date(current);
         let formatted = temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear();
-        setDateText(formatte);
+        setDateText(formatted);
     };
+
+
+    const vibrate = () => {
+        if (vibration == true) {
+            return
+        }
+
+        setVibration(true);
+        if (Platform.OS === "ios") {
+            const interval = setInterval(() => Vibration.vibrate(), 500);
+            setTimeout(() => clearInterval(interval), 1000);
+        } else {
+
+            Vibration.vibrate(500);
+        }
+    };
+
 
     /**
      * to show the picked date
@@ -192,27 +330,22 @@ export default function CalorieCounter({navigation}) {
      */
     const setDailyGoal = () => {
         setGoal1(goalCalories);
+        setVibration(false);
     };
 
     /**
      * remaining calories calculation
      */
     const getRemainingCalories = () => {
+        
         setRemaining(goalCalories - totalCalories);
-
-    };
-
-    const getGoalAchievedMessage = () => {
-        const message = "You have achieved your daily calorie goal!";
-        if (remaining === 0) {
-            setGoalAchieved(message);
-        }
+        setUserCalories();
     };
 
     /**
      * this function combines remaining calories calculation and setting daily goal
      * so both functions are called when the user submits the button so when daily goal is changed
-     * the remaining calories change too
+     * the remaining calories change too. It also adds the target and goal calories in the DB
      */
     const clickHandler = () => {
         setDailyGoal();
@@ -225,6 +358,11 @@ export default function CalorieCounter({navigation}) {
     const circleRef = React.useRef();
     let percentage = isNaN(totalCalories / goalCalories1) || (isFinite(totalCalories / goalCalories1)) == false ?
         0 : (totalCalories / goalCalories1) * 100;
+
+    if (percentage > 100) {
+        percentage = 100;
+    }
+
     let max = 100;
 
     const animation = (toValue) => {
@@ -250,42 +388,32 @@ export default function CalorieCounter({navigation}) {
     });
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container]}>
 
-            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0, 0.9]}
-                            style={[styling.dashboard, styles.boxShadow]}>
+            <CustomStatusBar/>
 
-                <View style={{
-                    width: '100%', paddingTop: 50,
-                    paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'
+            <TouchableOpacity onPress={homePressedHandler} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <Image style={{width: 25, height: 25, marginVertical: 30, marginRight: 10,}}
+                       source={require('../assets/img/angle-left.png')}/>
+
+                <Text style={{
+                    textDecorationLine: 'underline', alignSelf: 'center',
+                    fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,
                 }}>
+                    Dashboard
+                </Text>
+            </TouchableOpacity>
 
-                    <TouchableOpacity style={{alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
-                        <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                        <Text style={{color: '#FFF'}}>Menu</Text>
-                    </TouchableOpacity>
-
-                    <Text style={[styling.smallText, BMIstyles.sectionTitle, caloriesStyles.sectionTitle]}>Calorie
-                        Counter</Text>
-
-                    <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                        <Text style={{
-                            color: 'white', fontFamily: 'Righteous_400Regular',
-                            alignSelf: 'center', margin: 5, fontSize: 20,
-                        }}>Fit<Text style={[styles.blueText]}>Me</Text>
-                        </Text>
-                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-                    </View>
-                </View>
-            </LinearGradient>
 
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
                         style={{width: '95%',}}>
 
+                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>
+
                 <View style={{marginTop: 15}}>
-                    {remaining === 0 && totalCalories > 0 && goalCalories > 0 ? (
-                        <AntDesign name="checkcircle" size={24} color="blue">
+                    {(remaining === 0 || remaining < 0) && totalCalories > 0 && goalCalories > 0 ? (
+                        <AntDesign onTextLayout={vibrate()} name="checkcircle" size={24} color="blue">
                             <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie
                                 goal!</Text>
                         </AntDesign>
@@ -301,7 +429,7 @@ export default function CalorieCounter({navigation}) {
                             <Circle cx='25%' cy='50%' stroke={'#CEE4FF'} strokeWidth={12.5} r={50}
                                     strokeOpacity={.75} fill="transparent"></Circle>
 
-                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#4356FF'} strokeWidth={12.5}
+                            <AnimatedCircle ref={circleRef} cx='25%' cy='50%' stroke={'#3777D9'} strokeWidth={12.5}
                                             r={50}
                                             strokeOpacity={.75} fill="transparent" strokeDasharray={2 * Math.PI * 50}
                                             strokeDashoffset={2 * Math.PI * 50} strokeLinecap={'round'}>
@@ -366,13 +494,12 @@ export default function CalorieCounter({navigation}) {
                             </View>
                         </TouchableWithoutFeedback>
 
-
                     </View>
 
                     <View style={{marginVertical: 15, alignItems: 'center',}}>
-                        <Text style={caloriesStyles.caloriesItemsText}>Pick a day to meet the goal:</Text>
-                        <TouchableOpacity style={caloriesStyles.buttonContainer} onPress={() => modeShow('date')}>
-                            <Image style={caloriesStyles.button} source={require('../assets/img/calendar.png')}/>
+                        <Text style={caloriesStyles.caloriesItemsText}>Reset Calorie Counter</Text>
+                        <TouchableOpacity style={caloriesStyles.buttonContainer} onPress={() => resetUserCalories()}>
+                            <Image style={caloriesStyles.button} source={require('../assets/img/reset.png')}/>
                             <Text style={[caloriesStyles.caloriesItemsText]}>{dateText}</Text>
                         </TouchableOpacity>
                     </View>
@@ -423,21 +550,21 @@ export default function CalorieCounter({navigation}) {
                     onPress={() => setOpenModal(true)}
                 />
                 <Text style={caloriesStyles.titleStyle}>Breakfast: {totalCaloriesBreakfast}</Text>
-                {breakfastFood.map(item => (
+                {breakfastFood && breakfastFood?.map((item) => (
                     <View key={item.key}>
-                        <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
-                            <CardComponent>
-                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={caloriesStyles.item}>{item.Food}</Text>
-                                    <AntDesign name="right" size={15} color="black"/>
-                                </View>
-                            </CardComponent>
-                        </TouchableOpacity>
-                    </View>
-                ))}
+                    <TouchableOpacity onPress={() => navigation.navigate("FoodDetails", item)}>
+                        <CardComponent>
+                        <View style={{flexDirection: "row",justifyContent: "space-between",}}>
+                            <Text style={caloriesStyles.item}>{item.Food}</Text>
+                                            <AntDesign name="right" size={15} color="black"/>
+                                        </View>
+                                    </CardComponent>
+                                </TouchableOpacity>
+                            </View>
+                        ))}
 
                 <Text style={caloriesStyles.titleStyle}>Lunch: {totalCaloriesLunch}</Text>
-                {lunchFood.map(item => (
+                {lunchFood && lunchFood?.map((item) => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
@@ -451,7 +578,7 @@ export default function CalorieCounter({navigation}) {
                 ))}
 
                 <Text style={caloriesStyles.titleStyle}>Dinner: {totalCaloriesDinner}</Text>
-                {dinnerFood.map(item => (
+                {dinnerFood && dinnerFood?.map((item) => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
                             <CardComponent>
@@ -495,6 +622,7 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     button: {
+        marginTop: 15,
         width: 45,
         height: 45,
     },
@@ -514,7 +642,7 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     foodAddTitle: {
-        color: '#4356FF',
+        color: '#3777D9',
         marginBottom: 10,
         padding: 10,
         borderRadius: 10,
@@ -537,7 +665,7 @@ export const caloriesStyles = StyleSheet.create({
     input: {
         borderWidth: 0,
         borderBottomWidth: 3,
-        borderBottomColor: '#4356FF',
+        borderBottomColor: '#3777D9',
         padding: 10,
         backgroundColor: '#FFF',
         marginHorizontal: 1,
@@ -574,13 +702,11 @@ export const caloriesStyles = StyleSheet.create({
     },
 
     titleStyle: {
-        fontWeight: 'bold',
         fontFamily: 'Righteous_400Regular',
         backgroundColor: '#f1f2fc',
-        padding: 10,
-        fontSize: 18,
-        marginTop: 20,
-
+        padding: 15,
+        fontSize: 15,
+        marginTop: 22.5,
     },
 
 })

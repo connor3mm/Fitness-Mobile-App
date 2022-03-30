@@ -15,7 +15,7 @@ export default function FoodDetails({navigation}) {
         <SafeAreaView style={[formStyles.container, styles.container]}>
             <AntDesign name="close" size={24} color="black" onPress={calorieCounterPressedHandler} style={styles.formCloseStyle}/>
             <Text style={[caloriesStyles.caloriesItemsText,
-                {color: '#4356FF', fontSize: 20, textAlign: 'center', marginTop: 25,}]}>Food Details</Text>
+                {color: '#3777D9', fontSize: 20, textAlign: 'center', marginTop: 25,}]}>Food Details</Text>
             <CardComponent>
 
                 <View style={{flexDirection: 'row', marginVertical: 7.5, width: '100%',}}>

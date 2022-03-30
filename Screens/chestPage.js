@@ -7,20 +7,21 @@ import { useFonts } from 'expo-font';
 
 export default function chestPage({navigation}) {
 
-    const [shouldShow1, setshouldShow1] = useState(true)
-    const [shouldShow2, setshouldShow2] = useState(false)
-    const [shouldShow3, setshouldShow3] = useState(false)
-    const [shouldShow4, setshouldShow4] = useState(false)
-    const [shouldShow5, setshouldShow5] = useState(false)
-    const [shouldShow6, setshouldShow6] = useState(false)
-    const [shouldShow7, setshouldShow7] = useState(false)
-    const [btnTitle, setbtnTitle] = useState("Next")
+    const [shouldShow1, setshouldShow1] = useState(true);
+    const [shouldShow2, setshouldShow2] = useState(false);
+    const [shouldShow3, setshouldShow3] = useState(false);
+    const [shouldShow4, setshouldShow4] = useState(false);
+    const [shouldShow5, setshouldShow5] = useState(false);
+    const [shouldShow6, setshouldShow6] = useState(false);
+    const [shouldShow7, setshouldShow7] = useState(false);
 
-    const [numTimesClicked, setnumTimesClicked] = useState(1)
+    const [btnTitle, setbtnTitle] = useState("►");
+    const [btnPrevious, setbtnPrevious] = useState("◄");
+    const [numTimesClicked, setnumTimesClicked] = useState(1);
 
 
     function showNextExercise(){
-        setnumTimesClicked(numTimesClicked +1)
+        setnumTimesClicked(numTimesClicked +1);
 
         switch(numTimesClicked){
 
@@ -51,60 +52,214 @@ export default function chestPage({navigation}) {
     return(
         <SafeAreaView style={styles.container}>
 
-
-            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.btnBack,]} 
-            onPress={() => navigation.navigate('WorkoutsPage')}>
-                <Text style={[styles.buttonText,]}>Back to workouts</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('WorkoutsPage')} 
+            style={{ flexDirection: 'row', alignSelf: 'flex-start', margin: 20,}}>
+                <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
+                source={require('../assets/img/angle-left.png')}/>
+                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
+                fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                    Workouts
+                </Text>
             </TouchableOpacity>
             
             <View style={styles.ImageContainer}>
 
                 {
                     shouldShow1 ? (
-                        <><Text style={styles.exerText}>Bench Press</Text>
-                        <Text>5 x 10</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/benchPress.gif')} /></>
+                        <>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/benchPress.gif')} />
+                        <View style={[styles.footer]}>
+                        <View style={{ paddingVertical: 10, }}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            Bench Press
+                            </Text>
+                        </View>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'space-evenly',}}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign:'center'}}>
+                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>5</Text>
+                                </Text>
+                            </View>
+
+                            <View style={{ borderColor: '#FFF', borderWidth: 3, borderRadius: 20, margin:10, alignSelf: 'center'}}>                        
+                            </View>
+
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign: 'center'}}>
+                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>10</Text>
+                                </Text>
+                            </View>
+                        </View>
+                        </View>
+                        
+                        </>
                     ):null
                 }
 
                 {
                     shouldShow2 ? (
-                        <><Text style={styles.exerText}>Butterfly Machine</Text>
-                        <Text>5 x 10</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/buttMachine.gif')} /></>
+                        <>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/buttMachine.gif')} />
+                        <View style={[styles.footer]}>
+                        <View style={{ paddingVertical: 10, }}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            Butterfly Machine
+                            </Text>
+                        </View>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'space-evenly',}}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign:'center'}}>
+                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>5</Text>
+                                </Text>
+                            </View>
+
+                            <View style={{ borderColor: '#FFF', borderWidth: 3, borderRadius: 20, margin:10, alignSelf: 'center'}}>                        
+                            </View>
+
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign: 'center'}}>
+                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>10</Text>
+                                </Text>
+                            </View>
+                        </View>
+                        </View>
+                        
+                        </>
                     ):null
                 }
 
                 {
                     shouldShow3 ? (
-                        <><Text style={styles.exerText}>Cable Flys</Text>
-                        <Text>3 x 10</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/cableFly.gif')} /></>
+                        <>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/cableFly.gif')} />
+                        <View style={[styles.footer]}>
+                        <View style={{ paddingVertical: 10, }}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            Cable Flys
+                            </Text>
+                        </View>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'space-evenly',}}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign:'center'}}>
+                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>3</Text>
+                                </Text>
+                            </View>
+
+                            <View style={{ borderColor: '#FFF', borderWidth: 3, borderRadius: 20, margin:10, alignSelf: 'center'}}>                        
+                            </View>
+
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign: 'center'}}>
+                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>10</Text>
+                                </Text>
+                            </View>
+                        </View>
+                        </View>
+                        
+                        </>
                     ):null
                 }
 
                 {
                     shouldShow4 ? (
-                        <><Text style={styles.exerText}>Chest Dips</Text>
-                        <Text>5 x 5</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/chestDips.gif')} /></>
+                        <>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/chestDips.gif')} />
+                        <View style={[styles.footer]}>
+                        <View style={{ paddingVertical: 10, }}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            Chest Dip
+                            </Text>
+                        </View>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'space-evenly',}}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign:'center'}}>
+                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>4</Text>
+                                </Text>
+                            </View>
+
+                            <View style={{ borderColor: '#FFF', borderWidth: 3, borderRadius: 20, margin:10, alignSelf: 'center'}}>                        
+                            </View>
+
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign: 'center'}}>
+                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>8</Text>
+                                </Text>
+                            </View>
+                        </View>
+                        </View>
+                        
+                        </>
                     ):null
                 }
 
                 {
                     shouldShow5 ? (
-                        <><Text style={styles.exerText}>Decline Machine Chest Press</Text>
-                        <Text>3 x 10</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DMCP.gif')} /></>
+                        <>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DMCP.gif')} />
+                        <View style={[styles.footer]}>
+                        <View style={{ paddingVertical: 10, }}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            Decline Machine Chest Press
+                            </Text>
+                        </View>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'space-evenly',}}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign:'center'}}>
+                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>3</Text>
+                                </Text>
+                            </View>
+
+                            <View style={{ borderColor: '#FFF', borderWidth: 3, borderRadius: 20, margin:10, alignSelf: 'center'}}>                        
+                            </View>
+
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign: 'center'}}>
+                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>10</Text>
+                                </Text>
+                            </View>
+                        </View>
+                        </View>
+                        
+                        </>
                     ):null
                 }
 
 
                 {
                     shouldShow6 ? (
-                        <><Text style={styles.exerText}>Dumbbell Bent Arm Pullover</Text>
-                        <Text>3 x 10</Text>
-                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DBAP.gif')} /></>
+                        <>
+                        <Image style={styles.workoutIconImage} source={require('../assets/img/workoutsImages/chestW/DBAP.gif')} />
+                        <View style={[styles.footer]}>
+                        <View style={{ paddingVertical: 10, }}>
+                            <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 25, textAlign: 'center'}}>
+                            Dumbbell Bent Arm Pullover
+                            </Text>
+                        </View>
+
+                        <View style={{flexDirection: 'row', justifyContent: 'space-evenly',}}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign:'center'}}>
+                                    Sets {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>3</Text>
+                                </Text>
+                            </View>
+
+                            <View style={{ borderColor: '#FFF', borderWidth: 3, borderRadius: 20, margin:10, alignSelf: 'center'}}>                        
+                            </View>
+
+                            <View style={{alignSelf: 'center'}}>
+                                <Text style={{color:'#FFF', fontFamily:'Righteous_400Regular', fontSize: 15, textAlign: 'center'}}>
+                                    Reps {"\n"}<Text style={{fontSize: 40, marginVertical: 5}}>10</Text>
+                                </Text>
+                            </View>
+                        </View>
+                        </View>
+                        
+                        </>
                     ):null
                 }
 
@@ -115,10 +270,15 @@ export default function chestPage({navigation}) {
                 }
             </View>
 
-            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.btnNext,]} 
-            onPress={showNextExercise}>
-                <Text style={[styles.buttonText,]}>{btnTitle}</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+                <TouchableOpacity style={[styles.button, styles.boxShadow, styles.btnNext]}>
+                    <Text style={{fontFamily: 'Righteous_400Regular'}}>{btnPrevious}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.button, styles.boxShadow, styles.btnNext]} onPress={showNextExercise}>
+                    <Text style={{fontFamily: 'Righteous_400Regular'}}>{btnTitle}</Text>
+                </TouchableOpacity>
+            </View>
 
         </SafeAreaView>
 
@@ -129,14 +289,37 @@ export default function chestPage({navigation}) {
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
         alignItems: 'center',
+        backgroundColor: '#FFF',
+    },
+
+    footer: {
+        width: '97.5%',
+        alignSelf: 'center',
+        margin: 10,
+        borderRadius: 15,
+        backgroundColor: '#3777D9',
+        padding: 15,
+        flex: 4,
+        justifyContent: 'space-around',
+
+         // add box shadow to iOS devices
+         shadowOffset: {width: 6, height: 6},
+         shadowOpacity: 0.5,
+         shadowRadius: 1,
+         // add box shadows to android devices
+         elevation: 6,
+         shadowColor: '#000',
+    },
+
+    workoutIconImage: {
+        flex: 10,
+        width: 420,
     },
 
     ImageContainer:{
         flex: 1,
-        justifyContent:"center",
-        alignItems: 'center',
+        width: '100%',
     },
 
     button:{
@@ -145,18 +328,26 @@ export const styles = StyleSheet.create({
         width: '70%',
         borderWidth: .5,
         borderRadius: 5,
-        backgroundColor: '#4356FF',
-        borderColor: '#4356FF',
+        backgroundColor: '#3777D9',
+        borderColor: '#3777D9',
         shadowColor: 'black',
     },
 
     btnNext:{
         justifyContent:'flex-end', 
-        marginBottom:'5%'
-    },
-
-    btnBack:{
-        marginTop:50
+        backgroundColor: '#FFF',
+        width: '47.5%',
+        margin: 5,
+        borderRadius: 15,
+        // add box shadow to iOS devices
+        shadowOffset: {width: 10, height: 10},
+        shadowOpacity: 0.5,
+        shadowRadius: 1,
+        // add box shadows to android devices
+        elevation: 10,
+        shadowColor: '#000',
+        borderWidth: 1,
+        borderColor: '#FFF'
     },
 
     boxShadow: {

@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Image, ScrollView} from "react-native";
 import {RadioButton} from 'react-native-paper';
-import {Formik} from 'formik';
+import {Formik, useFormik} from 'formik';
 import * as yup from 'yup';
 import {caloriesStyles} from './CalorieCounterPage';
 import {styles} from './Welcomepage';
 import {styling} from './Homepage';
+import FooterLogo from '../CustomComponents/footerLogo';
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import {updateDoc, doc} from "firebase/firestore/lite";
+
 
 const validation = yup.object({
     Food: yup.string().required().min(2),
@@ -32,6 +37,35 @@ export default function FoodFormPage({
     getTotalLunchCalories();
     getTotalDinnerCalories();
 
+
+    const uid = authentication.currentUser.uid;        
+
+    const setData = async (foodItem, foodType) => {
+        try {      
+            if(foodType ==="Breakfast"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`breakfastFood.${foodItem.Food}`]: foodItem,});
+            }
+
+            if(foodType ==="Lunch"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`lunchFood.${foodItem.Food}`]: foodItem,});
+            }
+            if(foodType ==="Dinner"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`dinnerFood.${foodItem.Food}`]: foodItem,});
+            }
+
+            console.log("added successfully");
+            
+        } catch (error) {
+        console.log("error adding document", error.message);
+            }
+        };
+    
+
+    
+
     const [foodType, setFoodType] = useState('0');
 
     return (
@@ -45,13 +79,15 @@ export default function FoodFormPage({
                             setFoodType('');
                             return
                         }
+                        setData(values, foodType);
+                        console.log(values);
                         addFood(values, foodType);
                     }}>
 
                     {(formikProps) => (
                         <View>
                             <Text style={[caloriesStyles.caloriesItemsText,
-                                {textAlign: 'center', color: '#4356FF', marginVertical: 12.5, fontSize: 22.5,}]}>
+                                {textAlign: 'center', color: '#3777D9', marginVertical: 12.5, fontSize: 22.5,}]}>
                                 Add Food Item
                             </Text>
 
@@ -65,7 +101,9 @@ export default function FoodFormPage({
                                     onChangeText={formikProps.handleChange('Food')}
                                     value={formikProps.values.Food}
                                     onBlur={formikProps.handleBlur('Food')}/>
+                            </View>
 
+                            <View>
                                 <Text style={[formStyles.errorMessage, caloriesStyles.caloriesItemsText]}>
                                     {formikProps.touched.Food && formikProps.errors.Food}
                                 </Text>
@@ -81,6 +119,9 @@ export default function FoodFormPage({
                                     value={formikProps.values.Calories}
                                     keyboardType='numeric'
                                     onBlur={formikProps.handleBlur('Calories')}/>
+                            </View>
+
+                            <View>
                                 <Text style={[formStyles.errorMessage, caloriesStyles.caloriesItemsText]}>
                                     {formikProps.touched.Calories && formikProps.errors.Calories}
                                 </Text>
@@ -96,6 +137,9 @@ export default function FoodFormPage({
                                     value={formikProps.values.Quantity}
                                     keyboardType='numeric'
                                     onBlur={formikProps.handleBlur('Quantity')}/>
+                            </View>
+
+                            <View>
                                 <Text style={[formStyles.errorMessage, caloriesStyles.caloriesItemsText]}> {
                                     formikProps.touched.Quantity && formikProps.errors.Quantity}
                                 </Text>
@@ -119,7 +163,7 @@ export default function FoodFormPage({
 
                             <TouchableOpacity activeOpacity={.7}
                                               style={[styles.button, styles.boxShadow, styles.signup,]}
-                                              onPress={formikProps.handleSubmit}>
+                                              onPress={formikProps.handleSubmit }>
                                 <Text style={[styles.buttonText,]}> + Add Food</Text>
                             </TouchableOpacity>
 
@@ -128,13 +172,6 @@ export default function FoodFormPage({
                     )}
                 </Formik>
             </ScrollView>
-
-            <View style={{flexDirection: 'row', alignSelf: 'center', position: 'absolute', bottom: 15, }}>
-                <Text style={{color: '#4356FF', fontFamily: 'Righteous_400Regular', fontSize: 16,}}>
-                    FitMe
-                </Text>
-                <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-            </View>
         </SafeAreaView>
     )
 }
@@ -165,7 +202,7 @@ export const formStyles = StyleSheet.create({
     },
 
     radioInput: {
-        borderColor: '#4356FF',
+        borderColor: '#3777D9',
         borderWidth: 2,
         borderRadius: 5,
         elevation: 3,

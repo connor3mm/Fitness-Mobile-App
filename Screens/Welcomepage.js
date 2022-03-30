@@ -1,5 +1,5 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
+import React, { useState } from 'react';
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, TextInput, StatusBar} from "react-native";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -10,10 +10,16 @@ export default function Welcome( {navigation} ) {
     });
 
     const buttonPressedHandler = () => navigation.navigate('Homepage');
+    const loginPressedHandler = () => navigation.navigate('loginPage');
+    const registerPressedHandler = () => navigation.navigate('registerPage');
+
+    
     if (!fontsLoaded) return <AppLoading/>;
 
 return (
     <SafeAreaView style={styles.container}>
+
+        <StatusBar backgroundColor="#FFF" barStyle='dark-content'/>
 
         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'stretch'}}>
 
@@ -23,9 +29,10 @@ return (
                 </Text>
                 <Image style={styles.logo} source={require('../assets/img/logo.png')}/>
             </View>
+            
             <Text style={styles.slogan}>Upgrade your fitness to the next level!</Text>
 
-            <View style={{ alignSelf: 'center', justifyContent: 'space-between', marginTop: 100, }}>
+            <View style={{ alignSelf: 'center', justifyContent: 'space-between', marginTop: 50, }}>
                 <View style={{ flexDirection: 'row', margin: 17,}}>
                     <Image style={{ height: 50, width: 50}} source={require('../assets/img/diet.png')} />
                     <Text style={[styles.slogan, { fontSize: 17.5, marginHorizontal: 12.5}, ]}>Track what you eat</Text>
@@ -47,14 +54,20 @@ return (
         <View style={{ flex: 1, justifyContent: 'flex-end', width: '80%', marginBottom: 1, }}>
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
-            onPress={buttonPressedHandler}>
+            onPress={registerPressedHandler}>
                 <Text style={[styles.buttonText,]}>New? Get Started </Text>
             </TouchableOpacity>
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login, ]} 
-            onPress={buttonPressedHandler}>
+            onPress={loginPressedHandler}>
                 <Text  style={[styles.buttonText, styles.blueText]}>Existing user? Log In</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
+            onPress={buttonPressedHandler}>
+                <Text style={[styles.buttonText,]}>Go to menu no users</Text>
+            </TouchableOpacity>
+
 
         </View>
     </SafeAreaView>
@@ -68,6 +81,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         alignItems: 'center',
+        padding: 15
     },
 
     title: {
@@ -84,7 +98,7 @@ export const styles = StyleSheet.create({
     },
 
     blueText: {
-        color: '#4356FF',
+        color: '#3777D9',
     },
 
     logo: {
@@ -115,19 +129,19 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 1,
         // add box shadows to android devices
-        elevation: 1,
+        elevation: 2.5,
     },
 
     signup: {
-        backgroundColor: '#4356FF',
-        borderColor: '#4356FF',
+        backgroundColor: '#3777D9',
+        borderColor: '#3777D9',
         shadowColor: 'black',
     },
 
     login: {
         backgroundColor: '#FFF',
         borderColor: '#b3b3b3',
-        marginBottom: 75,
+        marginBottom: 50,
         marginTop: 15,
         shadowColor: 'black',
     },
