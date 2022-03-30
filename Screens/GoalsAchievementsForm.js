@@ -6,12 +6,36 @@ import * as yup from 'yup';
 import {caloriesStyles} from './CalorieCounterPage';
 import {styles} from './Welcomepage';
 import {styling} from './Homepage';
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import {updateDoc, doc} from "firebase/firestore/lite";
 
 const validation = yup.object({
     GoalAchievement: yup.string().required().min(2),
 });
 
 export default function GoalsAchievementsFormPage({addGoalsAchievements}) {
+
+    const uid = authentication.currentUser.uid;        
+
+    const setData = async (values, type) => {
+        try {      
+            if(type ==="Goals"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`goals.${values.GoalAchievement}`]: values,});
+            }
+
+            if(type ==="Achievements"){
+                await updateDoc(doc(db, "users", uid), {
+                    [`achievements.${values.GoalAchievement}`]: values,});
+            }
+
+            console.log("added successfully");
+            
+        } catch (error) {
+        console.log("error adding document", error.message);
+            }
+        };
 
     const [type, setType] = useState('0');
 
@@ -29,6 +53,7 @@ export default function GoalsAchievementsFormPage({addGoalsAchievements}) {
                             setType('');
                             return
                         }
+                        setData(values, type);
                         addGoalsAchievements(values, type);
                     }}>
 

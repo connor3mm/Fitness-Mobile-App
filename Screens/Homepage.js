@@ -12,6 +12,7 @@ import { doc, getDoc} from 'firebase/firestore/lite';
 import { useIsFocused } from "@react-navigation/native";
 
 
+
 export default function Home({navigation}) {
 
     let [fontsLoaded, error] = useFonts ({
@@ -44,6 +45,8 @@ export default function Home({navigation}) {
 
     //const [breakfastFood, setBreakfastFood] = useState([])
     const isFocused = navigation.useIsFocused;
+
+    //const isFocused = useIsFocused();
    
 
     const getUserData = async () =>{
@@ -68,16 +71,35 @@ export default function Home({navigation}) {
     }
 
 
-    useEffect(() => { 
-            getUserData();      
-        }, []);
+    useEffect(() => {
+        // Interval to update count
+        getUserData();
+        const interval = setInterval(() => {
+            getUserData();
+        }, 1500);
 
+        // Subscribe for the focus Listener
+        const unsubscribe = navigation.addListener('focus', () => {
+            getUserData();
+        });
 
+        return () => {
+            // Clear setInterval in case of screen unmount
+            getUserData();
+            clearTimeout(interval);
+            // Unsubscribe for the focus Listener
+            unsubscribe;
+        };
+    }, [navigation]);
 
         
     return(
-        <SafeAreaView style = {[styles.container, styling.menuContainer, {backgroundColor: '#f9fbfc'}]}>      
+        <SafeAreaView style = {[styles.container, styling.menuContainer, {backgroundColor: '#f9fbfc'}]}>
 
+
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text>{isFocused ? 'focused' : 'unfocused'}</Text>
+            </View>
             <CustomStatusBar />
 
             <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 

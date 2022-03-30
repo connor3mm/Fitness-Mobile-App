@@ -213,9 +213,10 @@ export default class StepCounter extends ValidationComponent {
 
 
                     <TouchableOpacity
-                        style={stepStyles.button}
+                        style={stepStyles.closeButton}
                         onPress={() => {
                             this.displaySetGoalConfirmation(this.state.dailyStepCountGoal);
+                            this.displayModal(!this.state.modalVisible);
                         }}>
                         <Text style={stepStyles.buttonText}>Set Daily Step Goal</Text>
                     </TouchableOpacity>
@@ -224,7 +225,7 @@ export default class StepCounter extends ValidationComponent {
                         style={stepStyles.closeText}
                         onPress={() => {
                             this.displayModal(!this.state.modalVisible);
-                        }}>✔</Text>
+                        }}>X</Text>
                 </Modal>
 
                 <Modal
@@ -356,6 +357,7 @@ export const stepStyles = StyleSheet.create({
         fontSize: 24,
         color: '#00479e',
         textAlign: 'center',
+        marginTop: 20,
     },
 
     input: {
@@ -365,5 +367,6 @@ export const stepStyles = StyleSheet.create({
         borderWidth: 0,
         borderColor: '#3777D9',
         borderBottomWidth: 3,
+        textAlign: 'center',
     }
 });
