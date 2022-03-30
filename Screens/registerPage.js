@@ -12,8 +12,13 @@ export default function registerPage({navigation}) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [password2, setPassword2] = useState("")
 
     const registerUser = () => {
+        if(password !== password2){
+            alertPasswordMatchError();
+            return;
+        }
         createUserWithEmailAndPassword(authentication, email, password)
         .then((result) => {
             console.log(result);
@@ -21,11 +26,35 @@ export default function registerPage({navigation}) {
         })
         .catch((error) => {
             console.log(error);
-            if(error.code === "auth/invalid-email") alertInvalidEmail();
-            if(error.code === "auth/email-already-in-use") alertEmailInUse();
+            if(error.code === "auth/invalid-email" || email === "") {alertInvalidEmail(); return;}
+            if(error.code === "auth/email-already-in-use") {alertEmailInUse(); return;}
+            if(password === "") {alertPasswordError(); return;}
         })
     }
 
+    const alertPasswordError = () =>
+        Alert.alert(
+            "",
+            "Please input a password.",
+            [
+                {
+                    text: "Okay",
+                    style: "cancel"
+                },
+            ]
+        );
+
+    const alertPasswordMatchError = () =>
+        Alert.alert(
+            "",
+            "Passwords do not match, try again.",
+            [
+                {
+                    text: "Okay",
+                    style: "cancel"
+                },
+            ]
+        );
 
     const alertInvalidEmail = () =>
     Alert.alert(
@@ -85,22 +114,28 @@ export default function registerPage({navigation}) {
             <KeyboardAvoidingView behavior='padding'>
 
                 <View style={styles.inputText}>
-                    <TextInput style ={styles.input} placeholder='Email' value={email} 
+                    <TextInput style ={styles.input} placeholder='Email' value={email}
                         onChangeText={text => setEmail(text)}
                     >
                     </TextInput>
 
-                    <TextInput style ={styles.input} placeholder='Password' value={password} 
+                    <TextInput style ={styles.input} placeholder='Password' value={password}
                         onChangeText={text => setPassword(text)}
                         secureTextEntry
                     >
                     </TextInput>
+
+                    <TextInput style ={styles.input} placeholder='Confirm Password' value={password2}
+                               onChangeText={text => setPassword2(text)}
+                               secureTextEntry
+                    >
+                    </TextInput>
                 </View>
 
-                
+
                 <View style={{flexDirection:'row', justifyContent:'space-evenly', marginTop:'15%'}}>
-                    <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
-                        onPress={combinedHandler}>  
+                    <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]}
+                        onPress={combinedHandler}>
                     <Text style={[styles.buttonText,]}>Register</Text>
                     </TouchableOpacity>
 
@@ -140,8 +175,8 @@ export const styles = StyleSheet.create({
     },
 
     buttonText: {
-        color: 'white', 
-        textAlign: 'center', 
+        color: 'white',
+        textAlign: 'center',
         fontFamily: 'Righteous_400Regular'
     },
 
@@ -161,5 +196,5 @@ export const styles = StyleSheet.create({
     },
 
 
-    
+
 });
