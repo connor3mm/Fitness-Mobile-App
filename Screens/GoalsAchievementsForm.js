@@ -11,11 +11,7 @@ const validation = yup.object({
     GoalAchievement: yup.string().required().min(2),
 });
 
-export default function GoalsAchievementsFormPage({
-                                                      addGoalsAchievements
-                                     }) {
-
-
+export default function GoalsAchievementsFormPage({addGoalsAchievements}) {
 
     const [type, setType] = useState('0');
 
@@ -50,7 +46,9 @@ export default function GoalsAchievementsFormPage({
                                     onChangeText={formikProps.handleChange('GoalAchievement')}
                                     value={formikProps.values.GoalAchievement}
                                     onBlur={formikProps.handleBlur('GoalAchievement')}/>
+                            </View>
 
+                            <View>
                                 <Text style={[formStyles.errorMessage, caloriesStyles.caloriesItemsText]}>
                                     {formikProps.touched.GoalAchievement && formikProps.errors.GoalAchievement}
                                 </Text>
@@ -62,7 +60,8 @@ export default function GoalsAchievementsFormPage({
                                                    id='radioGroup'>
                                     <RadioButton.Item style={[formStyles.radioInput,]} label="Goals"
                                                       value="Goals"/>
-                                    <RadioButton.Item style={[formStyles.radioInput,]} label="Achievements" value="Achievements"/>
+                                    <RadioButton.Item style={[formStyles.radioInput,]} label="Achievements"
+                                                      value="Achievements"/>
                                 </RadioButton.Group>
                             </View>
 
@@ -84,7 +83,7 @@ export default function GoalsAchievementsFormPage({
                 </Formik>
             </ScrollView>
 
-            <View style={{flexDirection: 'row', alignSelf: 'center', position: 'absolute', bottom: 15, }}>
+            <View style={{flexDirection: 'row', alignSelf: 'center', position: 'absolute', bottom: 15,}}>
                 <Text style={{color: '#4356FF', fontFamily: 'Righteous_400Regular', fontSize: 16,}}>
                     FitMe
                 </Text>

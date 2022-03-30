@@ -35,7 +35,7 @@ export default function GoalsAchievements({navigation, route}) {
     const [goalChoice, setGoalChoice] = useState('0');
     const [openModal, setOpenModal] = useState(false);
 
-    const [sex, setSex] = React.useState('Male');
+    const [sex, setSex] = React.useState('Female');
 
     const [fitnessGoals, setFitnessGoals] = useState([
         {GoalAchievement: 'Lose weight', key: '1'},
