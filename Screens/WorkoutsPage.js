@@ -1,9 +1,12 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, ImageBackground} from "react-native";
+import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from "react-native";
+import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import { caloriesStyles } from './CalorieCounterPage';
 import { setttingStyles } from './SettingsPage';
+
+
 
 
 export default function Workouts({navigation}) {
@@ -13,29 +16,26 @@ export default function Workouts({navigation}) {
 
     const homePressedHandler = () => navigation.navigate('Homepage');
 
-    return(
-        <SafeAreaView style={workoutStyles.container}>
-            
+    return( <SafeAreaView style={styles.container}>
             <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row',}}>
-                <Image style={{ width: 30, height: 30, marginVertical: 30, marginRight: 10,}} 
-                source={require('../assets/img/angle-left.png')}/>
+                <Image style={{ width: 30, height: 30, marginVertical: 30, marginRight: 10,}}
+                       source={require('../assets/img/angle-left.png')}/>
 
-                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
-                fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center',
+                    fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
                     Dashboard
                 </Text>
             </TouchableOpacity>
 
-            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Workouts</Text>  
-
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title,styles.alignText ]}>Workouts</Text>
 
             <ScrollView showsHorizontalScrollIndicator={false}
-                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={workoutStyles.workoutMain}>
+                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={styles.workoutMain}>
 
-                <View style={[workoutStyles.infoBoard,]}> 
-                    <Image style={{ opacity: .25, width: 200, height: 250,position: 'absolute', top: -10, left: -49,}} 
-                    source={require('../assets/img/muscle.png')}/>
-                    
+                <View style={[styles.infoBoard,]}>
+                    <Image style={{ opacity: .25, width: 200, height: 250,position: 'absolute', top: -10, left: -49,}}
+                           source={require('../assets/img/muscle.png')}/>
+
                     <Text style={{ color: 'white', fontFamily: 'Righteous_400Regular', lineHeight: 40, fontSize: 15}}>
                         Welcome to the FitMe workout page! {"\n"}
                         Find a variety of workouts GIFs that demo the exercise!{"\n"}
@@ -43,56 +43,117 @@ export default function Workouts({navigation}) {
                     </Text>
                 </View>
 
-                <TouchableOpacity style = {[workoutStyles.workoutBox]} onPress={() => navigation.navigate('bicepsCorePage')}>
-                    <Text style = {workoutStyles.workoutText}>Biceps{"\n"}&{"\n"}Core</Text>
-                    <Image style = {{height: 135, width: 220}} source={require('../assets/img/workoutsImages/icons/icon_bicepsCore.png')}/>
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('bicepsCorePage')}>
+
+                    <Text style = {styles.workoutText}>Biceps {"\n"}and{"\n"}Core</Text>
+                    <Image style = {{height:135, width: 180,}} source={require('../assets/img/workoutsImages/icons/icon_bicepsCore.png')}/>
+
                 </TouchableOpacity>
-                
-                <View style={{ flexDirection: 'row', width: '100%', alignSelf: 'center', justifyContent:'space-between'}}>
-                    <TouchableOpacity style = {[workoutStyles.workoutBox, {width: '48.5%'}]} onPress={() => navigation.navigate('tricepsPage')}>
-                        <Text style = {workoutStyles.workoutText}>Tric{"\n"}eps</Text>
-                        <Image style = {workoutStyles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_triceps2.png')}/>
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style = {[workoutStyles.workoutBox, {width: '48.5%'}]} onPress={() => navigation.navigate('chestPage')}>
-                        <Text style = {workoutStyles.workoutText}>Chest</Text>
-                        <Image style = {workoutStyles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_chest.png')}/>
-                    </TouchableOpacity>
-                </View>
 
-                <View style={{ flexDirection: 'row', width: '100%', alignSelf: 'center', justifyContent:'space-between'}}>
-                    <TouchableOpacity style = {[workoutStyles.workoutBox, {width: '48.5%'}]} onPress={() => navigation.navigate('backPage')}>
-                        <Text style = {workoutStyles.workoutText}>Ba{"\n"}ck</Text>
-                        <Image style = {workoutStyles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_back.png')}/>
-                    </TouchableOpacity>
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('tricepsPage')}>
 
-                    <TouchableOpacity style = {[workoutStyles.workoutBox, {width: '48.5%'}]} onPress={() => navigation.navigate('legsPage')}>
-                        <Text style = {workoutStyles.workoutText}>Legs</Text>
-                        <Image style = {workoutStyles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_legs.png')}/>
-                    </TouchableOpacity>
-                </View>
-                
+                    <Text style = {styles.workoutText}>Triceps</Text>
+                    <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_triceps2.png')}/>
+
+                </TouchableOpacity>
+
+
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('chestPage')}>
+
+                    <Text style = {styles.workoutText}>Chest</Text>
+                    <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_chest.png')}/>
+
+                </TouchableOpacity>
+
+
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('backPage')}>
+
+                    <Text style = {styles.workoutText}>Back</Text>
+                    <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_back.png')}/>
+
+                </TouchableOpacity>
+
+
+                <TouchableOpacity style = {[styles.workoutBox,]} onPress={() => navigation.navigate('legsPage')}>
+
+                    <Text style = {styles.workoutText}>Legs</Text>
+                    <Image style = {styles.workoutIconImage} source={require('../assets/img/workoutsImages/icons/icon_legs.png')}/>
+
+                </TouchableOpacity>
             </ScrollView>
-            
+
         </SafeAreaView>
 
     )
+
+
 }
 
 
-export const workoutStyles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#f9fbfc',
-        height: '100%',
-        padding: 15,
+        flex: 1,
+        backgroundColor: '#FFF',
     },
 
     workoutMain:{
-        flex: 3,
-        width: '97.5%'
+        flex: 1,
     },
 
-    infoBoard: { 
+    workoutBox:{
+        borderWidth: 1,
+        borderRadius: 10,
+        flexDirection: 'row',
+        flex:1,
+        marginTop:'10%',
+        marginLeft:'10%',
+        marginRight:'10%',
+        justifyContent:"space-around",
+        alignItems:"center",
+        backgroundColor: '#fff'
+    },
+
+    workoutIconImage:{
+        width: 135,
+        height: 135,
+        marginLeft: 40,
+        //backgroundColor:"black",
+    },
+
+    workoutText:{
+        //padding: 5,
+        fontFamily: 'Righteous_400Regular',
+        fontSize:20,
+    },
+
+
+    button:{
+        alignItems: 'center',
+        padding: 15,
+        width: '70%',
+        borderWidth: .5,
+        borderRadius: 5,
+        backgroundColor: '#4356FF',
+        borderColor: '#4356FF',
+        shadowColor: 'black',
+    },
+
+    btnBack:{
+        marginTop:50,
+        width:"100%"
+    },
+
+    boxShadow: {
+        // add box shadow to iOS devices
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+        // add box shadows to android devices
+        elevation: 1,
+    },
+
+    infoBoard: {
         backgroundColor: '#3777D9',
         width: '100%',
         alignSelf: 'center',
@@ -106,69 +167,8 @@ export const workoutStyles = StyleSheet.create({
         flex: 1,
     },
 
-    workoutBox:{
-        borderWidth: 1,
-        borderColor: '#FFF',
-        borderRadius: 10,
-        flexDirection: 'row', 
-        padding: 10,        
-        justifyContent:"flex-end",
-        alignItems:"center",
-        backgroundColor: '#FFF',
-
-        shadowOffset: { width: 10, height: 10 },
-        shadowOpacity: 1,
-        shadowColor: '#3777D9',
-        elevation: 10,
-        marginVertical: 5,
+    alignText:{
+        textAlign: 'center',
     },
-
-    workoutIconImage:{
-        width: 105,
-        height: 105,
-        marginLeft: 40,
-    },
-
-    workoutText:{
-        fontFamily: 'Righteous_400Regular',
-        fontSize: 45,
-        color:  '#B3B3B3',
-        opacity: .2,
-        textAlign: 'left',
-        position: 'absolute',
-        left: -2.5,
-        top: -10,
-    },
-
-
-    button:{
-        alignItems: 'center',
-        padding: 15,
-        width: '70%',
-        borderWidth: .5,
-        borderRadius: 5,
-        backgroundColor: '#3777D9',
-        borderColor: '#3777D9',
-        shadowColor: 'black',
-    },
-
-    btnBack:{
-        marginTop:50,
-        width:"100%"
-    },
-
-    blueText: {
-        color: '#3777D9',
-    },
-
-    boxShadow: {
-        // add box shadow to iOS devices
-        shadowOffset: {width: 0, height: 1},
-        shadowOpacity: 0.2,
-        shadowRadius: 1,
-        // add box shadows to android devices
-        elevation: 1,
-    },
-
 
 });
