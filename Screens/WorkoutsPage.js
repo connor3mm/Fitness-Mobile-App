@@ -27,7 +27,7 @@ export default function Workouts({navigation}) {
                 </Text>
             </TouchableOpacity>
 
-            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Workouts</Text>
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title,styles.alignText ]}>Workouts</Text>
 
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={styles.workoutMain}>
@@ -167,5 +167,8 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
 
+    alignText:{
+        textAlign: 'center',
+    },
 
 });
