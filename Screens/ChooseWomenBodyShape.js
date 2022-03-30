@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 
 import {
     Button,
@@ -25,6 +25,9 @@ import {goalsStyles} from './GoalsAchievementsPage';
 import {RadioButton} from 'react-native-paper';
 import {MaterialIcons} from '@expo/vector-icons';
 import {AntDesign} from '@expo/vector-icons';
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import {updateDoc, doc, getDoc} from "firebase/firestore/lite";
 
 const {width, height} = Dimensions.get('screen');
 
@@ -148,6 +151,23 @@ const Square = ({scrollX}) => {
 
 export default function WomenBodyShape({navigation}) {
 
+    const uid = authentication.currentUser.uid;        
+    //setting the bodyShape in DB
+    const setData = async () =>{
+        await updateDoc(doc(db,"users",uid),{
+            bodyType: bodyType,
+        })
+    }
+
+
+    //getting the bodyShape from DB
+    const getUserData = async () => {
+        const docRef = doc(db, "users", authentication.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        setBodyType(docSnap.get("bodyType"))
+    }
+
+
     const backToGoalsPage = () => navigation.navigate('GoalsAchievementsPage');
 
     //for react native to keep track of this value and whenever we rerender this component, the value will not change
@@ -162,9 +182,39 @@ export default function WomenBodyShape({navigation}) {
     };
 
     const [key, setKey] = useState('0');
+    const [bodyType, setBodyType] = useState();
+
+    setData();
+
     const itemsChanged = useRef(({viewableItems}) => {
         setKey(viewableItems[0].index);
     }).current;
+
+    const combinedhandler = () =>{
+        choiceHandler();
+
+            switch (key) {
+                case 0:
+                    setBodyType(imagesData[0].title);
+                    break;
+                case 1:
+                    setBodyType(imagesData[1].title);
+                    break;  
+                case 2:
+                    setBodyType(imagesData[2].title);
+                    break;  
+                case 3:
+                    setBodyType(imagesData[3].title);
+                    break;        
+            
+                default:setBodyType("no body type selected")
+                    break;
+            }
+    }
+
+    useEffect(() => {
+        getUserData();
+    },[])
 
     const viewConfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
     const slides = useRef(null);
@@ -219,7 +269,7 @@ export default function WomenBodyShape({navigation}) {
             <View>
                 <TouchableOpacity
                     style={womenbodyShapeStyles.buttonStyle}
-                    onPress={choiceHandler}
+                    onPress={combinedhandler}
                 >
                     <Text style={goalsStyles.buttonTextStyle}>Choose</Text>
                 </TouchableOpacity>

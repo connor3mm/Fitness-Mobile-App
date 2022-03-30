@@ -31,15 +31,17 @@ export default function Home({navigation}) {
     const settingsPressedHandler = () => navigation.navigate('SettingsPage');
     const profilePressedHandler = () => navigation.navigate('ProfilePage');
     const homePressedHandler = () => navigation.navigate('Homepage');
+    const WelcomepressedHandler = () => navigation.navigate('Welcome');
 
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [sex, setSex] = useState("")
-    const [targetCalories, setTargetCalories] = useState()
-    const [dailyCalories, setDailyCalories] = useState()
-    const [targetSteps, setTargetSteps] = useState()
-    const [dailySteps, setDailySteps] = useState()
-    const [weight, setWeight] = useState("")
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [sex, setSex] = useState("");
+    const [targetCalories, setTargetCalories] = useState();
+    const [dailyCalories, setDailyCalories] = useState();
+    const [targetSteps, setTargetSteps] = useState();
+    const [dailySteps, setDailySteps] = useState();
+    const [weight, setWeight] = useState("");
 
     //const [breakfastFood, setBreakfastFood] = useState([])
     const isFocused = navigation.useIsFocused;
@@ -213,7 +215,7 @@ export default function Home({navigation}) {
                     <Image style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={homePressedHandler} 
+                <TouchableOpacity onPress={WelcomepressedHandler} 
                 style={{ marginVertical: 17.5, backgroundColor: '#3777D9', borderRadius: 30, transform: [{translateY: -35}, {scale: 1.5}]}}>
                     <Image style={[styling.footerIcon, ]} source={require('../assets/img/white-homepage.png')} />
                 </TouchableOpacity>
