@@ -10,17 +10,27 @@ import WorkoutsPage from "../Screens/WorkoutsPage";
 import CalorieCounterPage from "../Screens/CalorieCounterPage";
 import ProfilePage from "../Screens/ProfilePage";
 import SettingsPage from "../Screens/SettingsPage";
+import ChooseMenBodyShape from "../Screens/ChooseMenBodyShape";
+import ChooseWomenBodyShape from "../Screens/ChooseWomenBodyShape";
 import backPage from "../Screens/backPage";
 import legsPage from "../Screens/legsPage";
 import tricepsPage from "../Screens/tricepsPage";
 import chestPage from "../Screens/chestPage";
 import bicepsCorePage from "../Screens/bicepsCorePage";
 import FoodDetails from '../Screens/FoodDetails';
-import AboutPage from '../Screens/AboutPage';
-import { FAB } from 'react-native-paper';
+import loginPage from "../Screens/loginPage";
+import registerFormPage from "../Screens/registerFormPage";
+import registerPage from "../Screens/registerPage";
 
 
 const screen = {
+    
+    Welcome:{
+        screen: Welcomepage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
 
     Homepage:{
         screen: Homepage,
@@ -28,30 +38,6 @@ const screen = {
             headerShown: false,
         }
     },
-
-    SettingsPage: {
-        screen: SettingsPage, 
-        navigationOptions: {
-            headerShown: false,
-        }
-
-    },
-
-
-    WorkoutsPage:{
-        screen: WorkoutsPage,
-        navigationOptions: {
-            headerShown: false,
-        }
-    },
-
-    AboutPage: {
-        screen: AboutPage,
-        navigationOptions: {
-            headerShown: false,
-        }
-    },
-
 
     BMICalculatorPage:{
         screen: BMICalculatorPage,
@@ -81,6 +67,13 @@ const screen = {
         }
     },
 
+    WorkoutsPage:{
+        screen: WorkoutsPage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
     CalorieCounterPage:{
         screen: CalorieCounterPage,
         navigationOptions: {
@@ -88,6 +81,13 @@ const screen = {
         }
     },
 
+    SettingsPage: {
+        screen: SettingsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
 
     ProfilePage: {
         screen: ProfilePage, 
@@ -96,17 +96,6 @@ const screen = {
         }
 
     },
-
-
-
-    tricepsPage: {
-        screen: tricepsPage, 
-        navigationOptions: {
-            headerShown: false,
-        }
-
-    },
-
 
     backPage: {
         screen: backPage, 
@@ -124,6 +113,13 @@ const screen = {
 
     },
 
+    tricepsPage: {
+        screen: tricepsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
 
     chestPage: {
         screen: chestPage, 
@@ -141,13 +137,47 @@ const screen = {
 
     },
 
-
     FoodDetails: {
         screen: FoodDetails, 
         navigationOptions: {
             headerShown: false,
         }
     },
+
+    ChooseMenBodyShape: {
+        screen: ChooseMenBodyShape,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    ChooseWomenBodyShape: {
+        screen: ChooseWomenBodyShape,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    loginPage: {
+        screen: loginPage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    registerPage: {
+        screen: registerPage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    registerFormPage: {
+        screen: registerFormPage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    }
 
 };
 

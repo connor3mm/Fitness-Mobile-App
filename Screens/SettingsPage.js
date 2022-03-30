@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Toggle from 'react-native-toggle-element';
+//import Toggle from 'react-native-toggle-element';
 import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
 import FooterLogo from '../CustomComponents/footerLogo';
 import { caloriesStyles } from "./CalorieCounterPage";

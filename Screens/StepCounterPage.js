@@ -19,7 +19,26 @@ import {Pedometer} from 'expo-sensors';
 import ValidationComponent from 'react-native-form-validator';
 import { setttingStyles } from './SettingsPage';
 
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import {updateDoc, doc} from "firebase/firestore/lite";
+
+
 export default class StepCounter extends ValidationComponent {
+    
+    //const uid = authentication.currentUser.uid;
+
+
+    setData = async () => {
+        //creates doc with the user info
+        const uid = authentication.currentUser.uid;
+        await updateDoc(doc(db,"users",uid),{
+            uid: uid,
+            currentSteps: this.state.currentStepCount,
+            goalSteps: this.state.dailyStepCountGoal,
+        })
+    }
+    
 
     state = {
         isPedometerAvailable: 'checking',
@@ -62,6 +81,7 @@ export default class StepCounter extends ValidationComponent {
         }
 
         this.state.dailyGoalSet = true
+        this.setData()
         alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
     }
     _subscribe = () => {
@@ -201,7 +221,7 @@ export default class StepCounter extends ValidationComponent {
                         style={stepStyles.closeText}
                         onPress={() => {
                             this.displayModal(!this.state.modalVisible);
-                        }}>x</Text>
+                        }}>✔</Text>
                 </Modal>
 
                 <Modal
@@ -337,7 +357,7 @@ export const stepStyles = StyleSheet.create({
 
     input: {
         margin: 15,
-        marginTop: 50,
+        marginTop: "75%",
         height: 40,
         borderWidth: 0,
         borderColor: '#3777D9',
