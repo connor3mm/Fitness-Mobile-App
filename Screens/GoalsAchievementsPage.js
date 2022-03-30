@@ -35,7 +35,7 @@ export default function GoalsAchievements({navigation, route}) {
     const [goalChoice, setGoalChoice] = useState('0');
     const [openModal, setOpenModal] = useState(false);
 
-    const [sex, setSex] = React.useState('Female');
+    const [sex, setSex] = React.useState('Male');
 
     const [fitnessGoals, setFitnessGoals] = useState([
         {GoalAchievement: 'Lose weight', key: '1'},
@@ -103,7 +103,7 @@ export default function GoalsAchievements({navigation, route}) {
                         style={{width: '95%',}}>
 
                 <View>
-                    <Text style={caloriesStyles.foodAddTitle}>What body shape would you like to achieve?</Text>
+                    <Text style={[caloriesStyles.foodAddTitle, {marginTop: 15, textAlign: 'center'}]}>What body shape would you like to achieve?</Text>
                 </View>
 
                 <View>
@@ -139,7 +139,7 @@ export default function GoalsAchievements({navigation, route}) {
                     </TouchableWithoutFeedback>
                 </Modal>
 
-                <Text style={caloriesStyles.foodAddTitle}>Record your fitness goals and achievements</Text>
+                <Text style={[caloriesStyles.foodAddTitle, {marginTop: 40, textAlign: 'center'}]}>Record your fitness goals and achievements</Text>
 
                 <MaterialIcons
                     name='add'
@@ -147,7 +147,6 @@ export default function GoalsAchievements({navigation, route}) {
                     style={caloriesStyles.modalStyle}
                     onPress={() => setOpenModal(true)}
                 />
-
 
                 <Text style={caloriesStyles.titleStyle}>Goals</Text>
                 {fitnessGoals.map(item => (
@@ -170,8 +169,6 @@ export default function GoalsAchievements({navigation, route}) {
 
                     </View>
                 ))}
-
-
             </ScrollView>
         </SafeAreaView>
 
@@ -207,7 +204,7 @@ export const goalsStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        backgroundColor: '#a259b6',
+        backgroundColor: '#4e2f9e',
         shadowColor: '#580961',
         shadowOpacity: 0.5,
         shadowOffset: {
