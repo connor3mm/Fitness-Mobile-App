@@ -17,7 +17,26 @@ import {Pedometer} from 'expo-sensors';
 import ValidationComponent from 'react-native-form-validator';
 import CustomStatusBar from '../CustomComponents/statusBar';
 
+import { authentication } from '../firebase/firebase-config';
+import { db } from '../firebase/firebase-config';
+import {updateDoc, doc} from "firebase/firestore/lite";
+
+
 export default class StepCounter extends ValidationComponent {
+    
+    //const uid = authentication.currentUser.uid;
+
+
+    setData = async () => {
+        //creates doc with the user info
+        const uid = authentication.currentUser.uid;
+        await updateDoc(doc(db,"users",uid),{
+            uid: uid,
+            currentSteps: this.state.currentStepCount,
+            goalSteps: this.state.dailyStepCountGoal,
+        })
+    }
+    
     state = {
         isPedometerAvailable: 'checking',
         pastStepCount: 0,
@@ -57,6 +76,7 @@ export default class StepCounter extends ValidationComponent {
         }
 
         this.state.dailyGoalSet = true
+        this.setData()
         alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
     }
 

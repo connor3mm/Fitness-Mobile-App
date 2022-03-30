@@ -18,9 +18,20 @@ import tricepsPage from "../Screens/tricepsPage";
 import chestPage from "../Screens/chestPage";
 import bicepsCorePage from "../Screens/bicepsCorePage";
 import FoodDetails from '../Screens/FoodDetails';
+import loginPage from '../Screens/loginPage';
+import registerPage from '../Screens/registerPage';
+import registerFormPage from '../Screens/registerFormPage';
 
 
 const screen = {
+
+    Welcome:{
+        screen: Welcomepage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
 
     Homepage:{
         screen: Homepage,
@@ -140,6 +151,28 @@ const screen = {
             headerShown: false,
         }
     },
+
+    loginPage: {
+        screen: loginPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    registerPage: {
+        screen: registerPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    registerFormPage: {
+        screen: registerFormPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
 
 };
 

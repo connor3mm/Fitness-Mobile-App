@@ -1,15 +1,48 @@
 import React, { useState } from 'react';
-import Toggle from 'react-native-toggle-element';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
+//import Toggle from 'react-native-toggle-element';
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert} from "react-native";
 import FooterLogo from '../CustomComponents/footerLogo';
 import { caloriesStyles } from "./CalorieCounterPage";
 import { setttingStyles } from './SettingsPage';
+import { signOut } from "firebase/auth";
+import { styles } from "./Welcomepage";
+import { authentication } from '../firebase/firebase-config';
 
 
 export default function ProfilePage({navigation}) {   
 
     const homePressedHandler = () => navigation.navigate('Homepage', {transition: 'vertical'});
     const [toggleValue, setToggleValue] = useState(false);
+    const settingsPressedHandler = () => navigation.navigate('SettingsPage');
+    const profilePressedHandler = () => navigation.navigate('ProfilePage');
+
+    const signOutUser = async() => {
+        console.log(authentication.currentUser.email);
+        const result = await signOut(authentication);
+        console.log("entered sign out functions");
+    }
+
+    const createTwoButtonAlert = () =>
+    Alert.alert(
+      "Signed out",
+      "You've been signed out. Please click on the \"Login\" button to redirect to the log page",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Welcome Page", onPress: () => {
+            navigation.navigate('Welcome');} }
+      ]
+    );
+
+
+    const combinedHandler = () => {
+        signOutUser();
+        createTwoButtonAlert();
+    }
+
 
     return(
         
@@ -30,6 +63,7 @@ export default function ProfilePage({navigation}) {
                         <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/language.png')}/>
                         <Text style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>Language</Text>
                     </View>
+
 
                     <TouchableOpacity style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
                         <Image style={{ width: 15, height: 15, transform: [{ rotate: '180deg'}],}} 
@@ -68,6 +102,11 @@ export default function ProfilePage({navigation}) {
                         source={require('../assets/img/angle-left.png')}/>
                     </TouchableOpacity>
                 </View>
+
+                <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
+                        onPress={combinedHandler}>
+                    <Text style={[styles.buttonText,]}>Sign Out</Text>
+                    </TouchableOpacity>
             </ScrollView>
             
             <FooterLogo/>
