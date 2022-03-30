@@ -21,6 +21,8 @@ import FoodDetails from '../Screens/FoodDetails';
 import loginPage from '../Screens/loginPage';
 import registerPage from '../Screens/registerPage';
 import registerFormPage from '../Screens/registerFormPage';
+import AboutPage from '../Screens/AboutPage';
+import { FAB } from 'react-native-paper';
 
 
 const screen = {
@@ -40,6 +42,15 @@ const screen = {
         }
     },
 
+    SettingsPage: {
+        screen: SettingsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+
     WorkoutsPage:{
         screen: WorkoutsPage,
         navigationOptions: {
@@ -47,6 +58,12 @@ const screen = {
         }
     },
 
+    AboutPage: {
+        screen: AboutPage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
 
 
     BMICalculatorPage:{
@@ -84,13 +101,6 @@ const screen = {
         }
     },
 
-    SettingsPage: {
-        screen: SettingsPage, 
-        navigationOptions: {
-            headerShown: false,
-        }
-
-    },
 
     ProfilePage: {
         screen: ProfilePage, 

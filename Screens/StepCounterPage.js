@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-    Button,
     SafeAreaView,
     StyleSheet,
     Text,
@@ -10,12 +9,15 @@ import {
     Modal,
     TextInput,
     Alert,
-    PermissionsAndroid
+    PermissionsAndroid,
+    Platform,
+    ScrollView,
 } from "react-native";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
+import { styles } from './Welcomepage';
+import { caloriesStyles } from './CalorieCounterPage';
 import {Pedometer} from 'expo-sensors';
 import ValidationComponent from 'react-native-form-validator';
-import CustomStatusBar from '../CustomComponents/statusBar';
+import { setttingStyles } from './SettingsPage';
 
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
@@ -37,6 +39,7 @@ export default class StepCounter extends ValidationComponent {
         })
     }
     
+
     state = {
         isPedometerAvailable: 'checking',
         pastStepCount: 0,
@@ -79,7 +82,6 @@ export default class StepCounter extends ValidationComponent {
         this.setData()
         alert("Daily step goal set to " + dailyStepCountGoal + " steps a day!")
     }
-
     _subscribe = () => {
         //Check for pedometer permissions
         Pedometer.getPermissionsAsync().then(
@@ -163,11 +165,23 @@ export default class StepCounter extends ValidationComponent {
         this._subscription = null;
     };
 
+
+
     render() {
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={[styles.container, stepStyles.container]}>
                        
-                <CustomStatusBar/>
+                <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
+                    <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
+                    source={require('../assets/img/angle-left.png')}/>
+
+                    <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
+                    fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                        Dashboard
+                    </Text>
+                </TouchableOpacity>
+
+                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Step Counter</Text>  
 
                 <Modal
                     animationType={"slide"}
@@ -176,7 +190,7 @@ export default class StepCounter extends ValidationComponent {
                     onRequestClose={() => {
                         Alert.alert('Modal has now been closed.');
                     }}>
-                    <TextInput style={styles.input}
+                    <TextInput style={stepStyles.input}
                                underlineColorAndroid="transparent"
                                contextMenuHidden={true}
                                keyboardType='numeric'
@@ -194,18 +208,18 @@ export default class StepCounter extends ValidationComponent {
 
 
                     <TouchableOpacity
-                        style={styles.button}
+                        style={stepStyles.button}
                         onPress={() => {
                             this.displaySetGoalConfirmation(this.state.dailyStepCountGoal);
                         }}>
-                        <Text style={styles.buttonText}>Set Daily Step Goal</Text>
+                        <Text style={stepStyles.buttonText}>Set Daily Step Goal</Text>
                     </TouchableOpacity>
 
                     <Text
-                        style={styles.closeText}
+                        style={stepStyles.closeText}
                         onPress={() => {
                             this.displayModal(!this.state.modalVisible);
-                        }}>Return home</Text>
+                        }}>x</Text>
                 </Modal>
 
                 <Modal
@@ -219,52 +233,88 @@ export default class StepCounter extends ValidationComponent {
                     <Text>This device does not have a Pedometer. This functionality is unavailable.</Text>
 
                     <Text
-                        style={styles.closeText}
+                        style={stepStyles.closeText}
                         onPress={() => {
                             this.displayErrorModal(!this.state.noPedometerModalVisible);
                         }}>Return home</Text>
                 </Modal>
+                
+                <ScrollView  alwaysBounceVertical={true} style={{marginVertical: 5, width: '100%'}}>
 
-                <Text>Number of steps in the last 24 hours: {this.state.pastStepCount}</Text>
-                <Text>Current step count: {this.state.currentStepCount}</Text>
-                <Text>Daily Step Goal: {this.state.currentStepCount} / {this.state.dailyStepCountGoal}</Text>
-                <Text>Average Weekly Step Count: {this.state.averageWeeklySteps}</Text>
+                    <View style={[stepStyles.section]}>
+                        <Text style={[caloriesStyles.caloriesItemsText, stepStyles.text]}>Number of steps in the last 24 hours</Text>
+                        <Text style={[caloriesStyles.caloriesItemsText, {fontSize: 20}]}>{this.state.pastStepCount}
+                        <Text style={{ fontSize: 14 }}> Steps</Text>
+                        </Text>
+                    </View>
 
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        this.displayModal(true);
-                    }}>
-                    <Text style={styles.buttonText}>Set Daily Step Goal</Text>
-                </TouchableOpacity>
+                    <View style={[stepStyles.section]}>
+                        <Text style={[caloriesStyles.caloriesItemsText, stepStyles.text]}>Current step count</Text>
+                        <Text style={[caloriesStyles.caloriesItemsText, {fontSize: 27.5}]}>{this.state.currentStepCount}
+                        <Text style={{ fontSize: 14 }}> Steps</Text>
+                        </Text>
+                        <Image style={{ opacity: .25, width: 75, height: 75,
+                        position: 'absolute', top: 45, right: -15, transform: [{ scaleX: -1}] }} 
+                            source={require('../assets/img/run.png')}/>
+                    </View>
+
+                    <View style={[stepStyles.section, {flexDirection: 'row', justifyContent: 'space-between'}]}>
+                        <View>
+                            <Text style={[caloriesStyles.caloriesItemsText, stepStyles.text]}>Daily Step Goal</Text>
+                            <Text style={[caloriesStyles.caloriesItemsText, {fontSize: 27.5}]}>
+                                {this.state.currentStepCount} / <Text style={{fontSize: 20}}>{this.state.dailyStepCountGoal}</Text>
+                            </Text> 
+                        </View>    
+
+                        <TouchableOpacity style={[styles.button, styles.signup, styles.boxShadow, {margin: 12.5, width: '30%', justifyContent: 'center', alignItems: 'center', borderRadius: 30}]} 
+                        onPress={() => {this.displayModal(true);}}>
+                        <Text style={[caloriesStyles.caloriesItemsText,stepStyles.buttonText, {fontSize: 15}]}>Set Goal</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={[stepStyles.section]}>
+                        <Text style={[caloriesStyles.caloriesItemsText, stepStyles.text]}>Average Weekly Step Count</Text>
+                        <Text style={[caloriesStyles.caloriesItemsText, {fontSize: 27.5}]}>{this.state.averageWeeklySteps}
+                        <Text style={{ fontSize: 14 }}> Steps</Text>
+                        </Text>
+                        <Image style={{ opacity: .25, width: 75, height: 75,
+                        position: 'absolute', top: 45, right: -15, transform: [{ scaleX: -1}] }} 
+                            source={require('../assets/img/run.png')}/>
+                    </View>
+
+                </ScrollView>
+
             </SafeAreaView>
         );
     }
 }
 
-const styles = StyleSheet.create({
+export const stepStyles = StyleSheet.create({
     container: {
-        padding: 25,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: '#f9fbfc',
+        padding: 22.5,
     },
 
-    button: {
-        display: 'flex',
-        height: 60,
-        borderRadius: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
+    text: {
+        marginVertical: 15,
+        fontSize: 16.5,
+        color: '#424242',
+    },
+
+    section: {
+        alignSelf: 'center', 
+        borderRadius: 10, 
+        backgroundColor: '#FFF',
         width: '100%',
-        backgroundColor: '#3777D9',
-        shadowColor: '#3777D9',
-        shadowOpacity: 0.5,
-        shadowOffset: {
-            height: 10,
-            width: 0
-        },
-        shadowRadius: 25,
+        margin: 10,
+        shadowOffset: {width: 5, height: 5},
+        elevation: 5,
+        shadowColor: '#000',
+        padding: 15,
+        borderEndColor: '#3777D9',
+        borderStartColor: '#3777D9',
+        borderEndWidth: 1,
+        borderStartWidth: 1,
     },
 
     closeButton: {
@@ -295,11 +345,7 @@ const styles = StyleSheet.create({
         height: 350,
     },
 
-    text: {
-        fontSize: 24,
-        marginBottom: 30,
-        padding: 40,
-    },
+
 
     closeText: {
         fontSize: 24,
@@ -309,8 +355,11 @@ const styles = StyleSheet.create({
 
     input: {
         margin: 15,
+        marginTop: 50,
         height: 40,
+        borderWidth: 0,
         borderColor: '#3777D9',
-        borderWidth: 1
+        borderBottomWidth: 3,
+
     }
 });

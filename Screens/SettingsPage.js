@@ -9,14 +9,21 @@ import styleSheet from "react-native-web/dist/exports/StyleSheet";
 export default function SettingsPage({navigation}) {   
 
     const homePressedHandler = () => navigation.navigate('Homepage', {transition: 'vertical'});
+    const aboutPressedHandler = () => navigation.navigate('AboutPage');
     const [toggleValue, setToggleValue] = useState(false);
 
     return(
         
         <SafeAreaView style = {[setttingStyles.container]}>
 
-            <TouchableOpacity onPress={homePressedHandler}>
-                <Image style={{ width: 30, height: 30, margin: 30, marginLeft: 0,}} source={require('../assets/img/angle-left.png')}/>
+            <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
+                source={require('../assets/img/angle-left.png')}/>
+
+                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
+                fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                    Dashboard
+                </Text>
             </TouchableOpacity>
 
             <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Settings</Text>  
@@ -63,7 +70,7 @@ export default function SettingsPage({navigation}) {
                         <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/help.png')}/>
                         <Text  style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>About</Text>
                     </View>
-                    <TouchableOpacity style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
+                    <TouchableOpacity onPress={aboutPressedHandler} style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
                         <Image style={{ width: 15, height: 15, transform: [{ rotate: '180deg'}],}} 
                         source={require('../assets/img/angle-left.png')}/>
                     </TouchableOpacity>
