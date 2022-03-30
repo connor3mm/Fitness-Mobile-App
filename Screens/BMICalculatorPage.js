@@ -328,12 +328,12 @@ export default function BMICalculator({navigation}) {
 
             <ScrollView showsVerticalScrollIndicator={false} style={{height: '90%',}}>
 
-                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>BMI Calculator</Text>  
+                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title, BMIstyles.alignText]}>BMI Calculator</Text>
 
                 <Text style={[styling.blackText, BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
-                <View style={{flexDirection: 'row'}}>
-                    <View style={{flexDirection: 'column', alignItems: 'center',}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flexDirection: 'column'}}>
                         {heightType === 'feet' ? (<TextInput
                             contextMenuHidden={true}
                             keyboardType='numeric'
@@ -390,7 +390,7 @@ export default function BMICalculator({navigation}) {
 
                 <Text style={[styling.blackText, BMIstyles.sectionHeading]}>Enter Weight: </Text>
 
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     <View style={{flexDirection: 'column', alignItems: 'center',}}>
                         {(weightType === 'stone') ? (<TextInput
                             contextMenuHidden={true}
@@ -605,4 +605,5 @@ export const BMIstyles = StyleSheet.create({
     radio: {
         justifyContent: 'flex-start',
     },
+
 })

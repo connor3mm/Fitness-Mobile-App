@@ -27,7 +27,7 @@ import {styles} from "./Welcomepage";
 import {BMIstyles} from './BMICalculatorPage';
 import SVG, {G, Circle} from 'react-native-svg';
 import CustomStatusBar from '../CustomComponents/statusBar';
-import { setttingStyles } from './SettingsPage';
+import {setttingStyles} from './SettingsPage';
 
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
@@ -216,7 +216,7 @@ const getUserData = async () => {
 
 
     const vibrate = () => {
-        if(vibration == true){
+        if (vibration == true) {
             return
         }
 
@@ -358,6 +358,11 @@ const getUserData = async () => {
     const circleRef = React.useRef();
     let percentage = isNaN(totalCalories / goalCalories1) || (isFinite(totalCalories / goalCalories1)) == false ?
         0 : (totalCalories / goalCalories1) * 100;
+
+    if (percentage > 100) {
+        percentage = 100;
+    }
+
     let max = 100;
 
     const animation = (toValue) => {
@@ -384,15 +389,17 @@ const getUserData = async () => {
 
     return (
         <SafeAreaView style={[styles.container]}>
-            
+
             <CustomStatusBar/>
 
-            <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
-                <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
-                source={require('../assets/img/angle-left.png')}/>
+            <TouchableOpacity onPress={homePressedHandler} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <Image style={{width: 25, height: 25, marginVertical: 30, marginRight: 10,}}
+                       source={require('../assets/img/angle-left.png')}/>
 
-                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center', 
-                fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                <Text style={{
+                    textDecorationLine: 'underline', alignSelf: 'center',
+                    fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,
+                }}>
                     Dashboard
                 </Text>
             </TouchableOpacity>
@@ -401,16 +408,16 @@ const getUserData = async () => {
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
                         style={{width: '95%',}}>
-                
-                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>  
+
+                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>
 
                 <View style={{marginTop: 15}}>
                     {(remaining === 0 || remaining < 0) && totalCalories > 0 && goalCalories > 0 ? (
-                        <AntDesign onTextLayout = {vibrate()} name="checkcircle" size={24} color="blue">
+                        <AntDesign onTextLayout={vibrate()} name="checkcircle" size={24} color="blue">
                             <Text style={{fontFamily: 'Righteous_400Regular'}}> You have achieved your daily calorie
                                 goal!</Text>
                         </AntDesign>
-                    )  : null}
+                    ) : null}
                 </View>
                 <View style={{
                     flexDirection: 'row',
@@ -486,7 +493,6 @@ const getUserData = async () => {
                                 />
                             </View>
                         </TouchableWithoutFeedback>
-
 
                     </View>
 
