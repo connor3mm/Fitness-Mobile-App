@@ -269,7 +269,7 @@ export default class StepCounter extends ValidationComponent {
     }
 }
 
-const stepStyles = StyleSheet.create({
+export const stepStyles = StyleSheet.create({
     container: {
         backgroundColor: '#f9fbfc',
         padding: 22.5,

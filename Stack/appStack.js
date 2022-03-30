@@ -18,6 +18,8 @@ import tricepsPage from "../Screens/tricepsPage";
 import chestPage from "../Screens/chestPage";
 import bicepsCorePage from "../Screens/bicepsCorePage";
 import FoodDetails from '../Screens/FoodDetails';
+import AboutPage from '../Screens/AboutPage';
+import { FAB } from 'react-native-paper';
 
 
 const screen = {
@@ -29,6 +31,15 @@ const screen = {
         }
     },
 
+    SettingsPage: {
+        screen: SettingsPage, 
+        navigationOptions: {
+            headerShown: false,
+        }
+
+    },
+
+
     WorkoutsPage:{
         screen: WorkoutsPage,
         navigationOptions: {
@@ -36,6 +47,12 @@ const screen = {
         }
     },
 
+    AboutPage: {
+        screen: AboutPage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
 
 
     BMICalculatorPage:{
@@ -73,13 +90,6 @@ const screen = {
         }
     },
 
-    SettingsPage: {
-        screen: SettingsPage, 
-        navigationOptions: {
-            headerShown: false,
-        }
-
-    },
 
     ProfilePage: {
         screen: ProfilePage, 
