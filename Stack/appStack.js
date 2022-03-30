@@ -185,7 +185,7 @@ const screen = {
         navigationOptions: {
             headerShown: false,
         }
-    }
+    },
 
 };
 

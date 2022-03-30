@@ -28,7 +28,8 @@ import { setttingStyles } from './SettingsPage';
 import GoalsAchievementsForm from "./GoalsAchievementsForm";
 import CustomStatusBar from "../CustomComponents/statusBar";
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
-
+import {doc, getDoc} from "firebase/firestore/lite";
+import {authentication, db} from "../firebase/firebase-config";
 
 export default function GoalsAchievements({navigation, route}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
@@ -66,7 +67,26 @@ export default function GoalsAchievements({navigation, route}) {
 
         setOpenModal(false);
     };
+    const getUserData = async () =>{
 
+        const docRef = doc(db, "users", authentication.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+        } else {
+            console.log("No such document!");
+        }
+
+        setSex(docSnap.get("sex"));
+
+        console.log("get user data finished")
+    }
+
+
+    useEffect(() => {
+        getUserData();
+    }, []);
 
     return (
 

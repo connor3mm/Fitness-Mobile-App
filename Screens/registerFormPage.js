@@ -124,25 +124,18 @@ export default function registerFormPage({navigation}) {
                     >
                     </TextInput>
 
-                    {/*<TextInput style ={styles.input} placeholder='Sex' value={sex} */}
-                    {/*    onChangeText={text => setSex(text)}*/}
-                    {/*>*/}
-                    {/*</TextInput>*/}
-
                     <RadioButton.Group
                         onValueChange={sex => setSex(sex)} value={sex}>
                         <RadioButton.Item label="Male" value="Male"/>
                         <RadioButton.Item label="Female" value="Female"/>
                     </RadioButton.Group>
 
-
                 </View>
 
-                
                 <View style={{flexDirection:'row', justifyContent:'space-evenly', marginTop:'15%'}}>
                     <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
                         onPress={combinedHandler}>  
-                    <Text style={[styles.buttonText,]}>Finish Registration</Text>
+                    <Text style={[styles.buttonText,]}>Finish</Text>
                     </TouchableOpacity>
 
                 </View>

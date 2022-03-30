@@ -3,6 +3,8 @@ import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, TextInput
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { getAuth } from "firebase/auth";
+
 
 export default function Welcome( {navigation} ) {
     let [fontsLoaded, error] = useFonts ({
@@ -12,6 +14,17 @@ export default function Welcome( {navigation} ) {
     const buttonPressedHandler = () => navigation.navigate('Homepage');
     const loginPressedHandler = () => navigation.navigate('loginPage');
     const registerPressedHandler = () => navigation.navigate('registerPage');
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+        console.log("user is logged in")
+        buttonPressedHandler();
+
+    } else {
+        console.log("user is not logged in")
+    }
 
     
     if (!fontsLoaded) return <AppLoading/>;
