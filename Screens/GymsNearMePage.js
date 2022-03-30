@@ -3,6 +3,8 @@ import MapView, {Marker, Callout} from 'react-native-maps';
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import * as Location from 'expo-location';
 import { TextInput } from 'react-native-gesture-handler';
+import { Search } from "semantic-ui-react";
+import _ from "lodash";
 
 export default class GymsNearMe extends React.Component {
     state = {
@@ -20,6 +22,27 @@ export default class GymsNearMe extends React.Component {
         location: "",
         errorMsg: ""
     }
+
+    handleSearchChange = async (event, { value }) => {
+        try {
+          const response = await fetch(
+            `https://api.cognitive.microsoft.com/bing/v7.0/suggestions?mkt=fr-FR&q=${value}`,
+            {
+              headers: {
+                "Ocp-Apim-Subscription-Key": "917c08bb69d34a30a95f237a1832b1a3"
+              }
+            }
+          );
+          const data = await response.json();
+          const resultsRaw = data.suggestionGroups[0].searchSuggestions;
+          const results = resultsRaw.map(result => ({ title: result.displayText, url: result.url }));
+          this.setState({ results });
+        } catch (error) {
+          console.error(`Error fetching search ${value}`);
+        }
+      };
+
+    handleResultSelect = (e, { result }) => this.setState({ selectedResult: result });
 
     onRegionChange = (region) => {
         this.setState({ region });
@@ -54,8 +77,14 @@ export default class GymsNearMe extends React.Component {
                         fontSize: 18,
                       }} 
                     placeholder={'Search'}
-                    placeholderTextColor={'#666'}>
+                    placeholderTextColor={'#666'}
+                    onChangeText={_.debounce(this.handleSearchChange, 1000, {
+                        leading: true
+                      })}
+                    >
                 </TextInput>
+
+
                 <Marker coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}/>
             </MapView>
         </View>

@@ -45,6 +45,7 @@
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
     "react-router-dom": "^6.2.2",
+    "semantic-ui-react": "^2.1.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
