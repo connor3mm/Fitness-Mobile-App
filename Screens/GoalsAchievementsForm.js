@@ -38,7 +38,7 @@ export default function GoalsAchievementsFormPage({addGoalsAchievements}) {
 
                             <View style={{flexDirection: 'row', marginVertical: 7.5, width: '100%',}}>
                                 <Image style={{height: 35, width: 35, alignSelf: 'center'}}
-                                       source={require('../assets/img/diet.png')}/>
+                                       source={require('../assets/img/GoalsPictures/success.png')}/>
 
                                 <TextInput
                                     style={[formStyles.inputStyle, caloriesStyles.caloriesItemsText]}
@@ -72,7 +72,7 @@ export default function GoalsAchievementsFormPage({addGoalsAchievements}) {
                             </View>
 
                             <TouchableOpacity activeOpacity={.7}
-                                              style={[styles.button, styles.boxShadow, styles.signup,]}
+                                              style={[styles.button, styles.boxShadow, styles.signup, ]}
                                               onPress={formikProps.handleSubmit}>
                                 <Text style={[styles.buttonText,]}> + Add Goals and Achievements</Text>
                             </TouchableOpacity>

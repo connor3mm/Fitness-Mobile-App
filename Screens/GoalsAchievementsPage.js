@@ -26,13 +26,13 @@ import {MaterialIcons} from '@expo/vector-icons';
 import CardComponent from "../CustomComponents/CardComponent";
 import GoalsAchievementsForm from "./GoalsAchievementsForm";
 import { useRoute } from '@react-navigation/native';
+import CustomStatusBar from "../CustomComponents/statusBar";
 
 export default function GoalsAchievements({navigation, route}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
     const menBodyShapePressedHandler = () => navigation.navigate('ChooseMenBodyShape');
     const womenBodyShapePressedHandler = () => navigation.navigate('ChooseWomenBodyShape');
 
-    const [goalChoice, setGoalChoice] = useState('0');
     const [openModal, setOpenModal] = useState(false);
 
     const [sex, setSex] = React.useState('Male');
@@ -48,8 +48,6 @@ export default function GoalsAchievements({navigation, route}) {
         {GoalAchievement: 'Lost 10 kg', key: '2'},
 
     ]);
-
-    const [imageDisplay, setImageDisplay] = useState("");
 
     const addGoalsAchievements = (name, type) => {
         name.key = Math.random().toString();
@@ -71,32 +69,20 @@ export default function GoalsAchievements({navigation, route}) {
     return (
 
         <SafeAreaView style={styles.container}>
-            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4356FF', '#3584e4']} locations={[0, 0.9]}
-                            style={[styling.dashboard, styles.boxShadow]}>
 
-                <View style={{
-                    width: '100%', paddingTop: 50,
-                    paddingLeft: 10, flexDirection: 'row', justifyContent: 'space-between'
+            <CustomStatusBar/>
+
+            <TouchableOpacity onPress={homePressedHandler} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <Image style={{width: 25, height: 25, marginVertical: 30, marginRight: 10,}}
+                       source={require('../assets/img/angle-left.png')}/>
+
+                <Text style={{
+                    textDecorationLine: 'underline', alignSelf: 'center',
+                    fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,
                 }}>
-
-                    <TouchableOpacity style={{alignSelf: 'center', marginLeft: 20,}} onPress={homePressedHandler}>
-                        <Image style={BMIstyles.homeButton} source={require('../assets/img/option.png')}/>
-                        <Text style={{color: '#FFF'}}>Menu</Text>
-                    </TouchableOpacity>
-
-                    <Text style={[styling.smallText, BMIstyles.sectionTitle, goalsStyles.sectionTitle]}>Goals &
-                        Achievements</Text>
-
-                    <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                        <Text style={{
-                            color: 'white', fontFamily: 'Righteous_400Regular',
-                            alignSelf: 'center', margin: 5, fontSize: 20,
-                        }}>Fit<Text style={[styles.blueText]}>Me</Text>
-                        </Text>
-                        <Image style={styling.logo} source={require('../assets/img/logo.png')}/>
-                    </View>
-                </View>
-            </LinearGradient>
+                    Dashboard
+                </Text>
+            </TouchableOpacity>
 
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}

@@ -74,7 +74,6 @@ return (
 );
 }
 
-
 //  styles
 export const styles = StyleSheet.create({
     container: {
