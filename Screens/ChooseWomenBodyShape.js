@@ -32,32 +32,38 @@ const backgrounds = ['#e8cef6', '#caa6e0', '#a36ab3', '#e4aef3'];
 const imagesData = [
     {
         "key": "0",
-        "title": "Multi-lateral intermediate moratorium",
-        "description": "I'll back up the multi-byte XSS matrix, that should feed the SCSI application!",
-        "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
+        "title": "She-Hulk",
+        "description": "She-Hulk is extraordinarily strong and tough, able to leap great heights, and hold her own in a physical fight against some of the most formidable powerhouses on Earth. " +
+            "Follow this workout routine to become strong like She-Hulk: Day 1: Bench Press, Day 2: Deadlift, Day 3: Military Press, Day 4: Squat Day, Day 5: Activity, Parkour and MMA, " +
+            "Day 6: Full Body, Day 7: Rest Day.",
+        "image": 'https://www.writeups.org/wp-content/uploads/She-Hulk-Marvel-Comics-Avengers-Fantastic-Four-Gisted.jpg'
     },
     {
         "key": "1",
-        "title": "Automated radical data-warehouse",
-        "description": "Use the optical SAS system, then you can navigate the auxiliary alarm!",
-        "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
+        "title": "Wonder Woman",
+        "description": "Wonder Woman is known for her confidence, bravery and physical strength. Follow this five-day workout routine to achieve that 'If No One Else Will Defend The World, Then I Must' look: " +
+            "Day 1: HIIT, Legs, Core, Day 2: Chest, Back, Core, Day 3: HIIT arms, Outside shoulders, Core, Day 4: HIIT lower body, Core, " +
+            "Day 5: Upper Body, Core, Day 6: Rest Day, Day 7: Rest Day.",
+        "image": 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/87775/89500/Wonder-Woman-DC-Comics-Justice-League-Lifesize-Cardboard-Cutout-available-now-at-starstills__73279.1461157082.jpg?c=2'
     },
     {
         "key": "2",
-        "title": "Inverse attitude-oriented system engine",
-        "description": "The ADP array is down, compress the online sensor so we can input the HTTP panel!",
-        "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
+        "title": "Luisa Madrigal",
+        "description": "A disney princess with big arms who can bench press. To look like her, you don't need magical strength. Try this Encanto-inspired workout: " +
+            "Snatch: 4 x 6, Single-Arm Push Press: 4 x 6 per side, Overhead Suitcase Carry: 4 x 30 seconds per side, Front-Loaded Lateral Lunge: 4 x 10 per side, Kettlebell Flow: Row into Clean into Overhead Press into Overhead Squat: 2 x 3 flows per side.",
+        "image": 'https://cdn11.bigcommerce.com/s-5ylnei6or5/images/stencil/500x659/products/2723/9018/3837_Luisa_DE_40__93267.1644958910.jpg?c=2'
     },
     {
         "key": "3",
-        "title": "Monitored global data-warehouse",
-        "description": "We need to program the open-source IB interface!",
-        "image": 'https://us.123rf.com/450wm/alexxorrlove/alexxorrlove1903/alexxorrlove190300035/122392784-fitness-strong-girl-posing.jpg?ver=6'
+        "title": "Mrs Incredible",
+        "description": "Strong legs and elastic body, that's all we need! Follow these exercises in your workout to achieve that Elastigirl look: " +
+            "Day 1: Total-body, Arms, Abs and Legs, Day 2: Outer-thighs, Glutes, Inner-thighs, Day 3: Legs and Glutes, Day 4: Inner-thighs and Mental Focus, Day 5: Rest Day, Day 6: Spinning 30 minutes, Day 7: Rest Day.",
+        "image": 'https://static.wikia.nocookie.net/the-incredibles/images/c/c4/Elastigirl_Transparent.png/revision/latest?cb=20220216212432'
     }
 ]
 const Indicator = ({scrollX}) => {
     return (
-        <View style={{position: 'absolute', bottom: 170, flexDirection: 'row'}}>
+        <View style={{position: 'absolute', bottom: 120, flexDirection: 'row'}}>
             {imagesData.map((_, index) => {
                 //prev slide, current slide and next slide
                 const inputRange = [(index - 1) * width, index * width, (index + 1) * width];

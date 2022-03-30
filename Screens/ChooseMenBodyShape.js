@@ -60,7 +60,7 @@ const imagesData = [
 ]
 const Indicator = ({scrollX}) => {
     return (
-        <View style={{position: 'absolute', bottom: 170, flexDirection: 'row'}}>
+        <View style={{position: 'absolute', bottom: 120, flexDirection: 'row'}}>
             {imagesData.map((_, index) => {
                 //prev slide, current slide and next slide
                 const inputRange = [(index - 1) * width, index * width, (index + 1) * width];
