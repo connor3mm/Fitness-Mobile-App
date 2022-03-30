@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text,TextInput, View, TouchableOpacity,Alert, KeyboardAvoidingView} from "react-native";
+import {
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    TouchableOpacity,
+    Alert,
+    KeyboardAvoidingView,
+    Image
+} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
@@ -110,6 +120,17 @@ export default function registerPage({navigation}) {
 
     return(
         <SafeAreaView style={styles.container}>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Welcome')}
+                              style={{ flexDirection: 'row', alignSelf: 'flex-start', margin: 20,}}>
+                <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}}
+                       source={require('../assets/img/angle-left.png')}/>
+                <Text style={{ textDecorationLine: 'underline', alignSelf: 'center',
+                    fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                    Welcome
+                </Text>
+            </TouchableOpacity>
+
             <Text style ={{marginBottom:'15%',fontFamily: 'Righteous_400Regular',fontSize:20, textAlign:'center'}}>Please enter your new registration credentials bellow</Text>
             <KeyboardAvoidingView behavior='padding'>
 
@@ -152,7 +173,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         alignItems: 'center',
-        justifyContent: 'center',
     },
 
     input:{
