@@ -276,13 +276,12 @@ export default function CalorieCounter({navigation}) {
                 </Text>
             </TouchableOpacity>
 
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>  
 
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
                         style={{width: '95%',}}>
                 
-                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>  
-
                 <View style={{marginTop: 15}}>
                     {(remaining === 0 || remaining < 0) && totalCalories > 0 && goalCalories > 0 ? (
                         <AntDesign onTextLayout = {vibrate()} name="checkcircle" size={24} color="blue">
@@ -422,6 +421,7 @@ export default function CalorieCounter({navigation}) {
                     style={caloriesStyles.modalStyle}
                     onPress={() => setOpenModal(true)}
                 />
+                
                 <Text style={caloriesStyles.titleStyle}>Breakfast: {totalCaloriesBreakfast}</Text>
                 {breakfastFood.map(item => (
                     <View key={item.key}>
@@ -564,10 +564,10 @@ export const caloriesStyles = StyleSheet.create({
         borderColor: '#FFF',
         borderWidth: 1,
         backgroundColor: '#FFF',
-        shadowOffset: {width: 10, height: 10},
+        shadowOffset: {width: 3, height: 3},
         shadowColor: '#000',
         elevation: 3,
-        width: '45%',
+        width: '50%',
         justifyContent: 'center',
         alignItems: 'flex-start',
         paddingHorizontal: 10,
@@ -578,7 +578,7 @@ export const caloriesStyles = StyleSheet.create({
         backgroundColor: '#f1f2fc',
         padding: 15,
         fontSize: 15,
-        marginTop: 22.5,
+        marginTop: 25,
     },
 
 })

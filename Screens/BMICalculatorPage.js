@@ -17,7 +17,6 @@ import { RadioButton } from 'react-native-paper';
 import { styles } from "./Welcomepage";
 import { caloriesStyles } from './CalorieCounterPage';
 import { setttingStyles } from './SettingsPage';
-import CustomStatusBar from '../CustomComponents/statusBar';
 
 export default function BMICalculator({navigation}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
@@ -48,7 +47,6 @@ export default function BMICalculator({navigation}) {
 
     //BMI value
     let [bmi, setBmi] = useState(0);
-
 
 
     const vibrate = () => {
@@ -325,11 +323,9 @@ export default function BMICalculator({navigation}) {
                 </Text>
             </TouchableOpacity>
 
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>BMI Calculator</Text>  
 
             <ScrollView showsVerticalScrollIndicator={false} style={{height: '90%',}}>
-
-                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>BMI Calculator</Text>  
-
                 <Text style={[styling.blackText, BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
                 <View style={{flexDirection: 'row'}}>
