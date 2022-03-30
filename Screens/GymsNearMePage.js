@@ -57,24 +57,6 @@ export default class GymsNearMe extends React.Component {
                     placeholderTextColor={'#666'}>
                 </TextInput>
                 <Marker coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}/>
-                <Marker
-                    coordinate={this.state.pin}
-                    draggable={true}
-                    onDragStart={(e) => {
-                        console.log("Drag start", e.nativeEvent.coordinates)
-                    }}
-                    onDragEnd={(e) => {
-                        setPin({
-                            latitude: e.nativeEvent.coordinate.latitude,
-                            longitude: e.nativeEvent.coordinate.longitude
-                        })
-                    }}
-                >
-                    <Callout>
-                        <Text>Your location</Text>
-                    </Callout>
-                </Marker>
-
             </MapView>
         </View>
         );
