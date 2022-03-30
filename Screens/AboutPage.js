@@ -11,7 +11,7 @@ import styleSheet from "react-native-web/dist/exports/StyleSheet";
 export default function AboutPage({navigation}) {   
 
     const homePressedHandler = () => navigation.navigate('Homepage');
-
+    const settingsPressedHandler = () => navigation.navigate('SettingsPage');
     return(
         
         <SafeAreaView style = {[setttingStyles.container, { padding: 10}]}>
@@ -24,7 +24,7 @@ export default function AboutPage({navigation}) {
                     </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row'}}>     
+                <TouchableOpacity onPress={settingsPressedHandler} style={{ flexDirection: 'row'}}>     
                     <Image style={{ width: 15, height: 15, marginVertical: 30, marginHorizontal: 10, transform: [{rotate: '180deg'}]}} 
                     source={require('../assets/img/angle-left.png')}/>
 
@@ -39,7 +39,7 @@ export default function AboutPage({navigation}) {
             <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title, {marginLeft: 15}]}>About</Text>  
     
             <ScrollView showsHorizontalScrollIndicator={false}
-                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={{ marginHorizontal: 2.5, marginVertical: 10, }}>
+                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={{ marginHorizontal: 2.5}}>
 
             <View style={[stepStyles.section, {width: '100%'}]}>
                 <Text style={[caloriesStyles.caloriesItemsText, {color: '#3777D9', fontSize: 20}]}>Group Members{"\n"}</Text>

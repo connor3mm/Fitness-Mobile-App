@@ -404,6 +404,7 @@ const getUserData = async () => {
                 </Text>
             </TouchableOpacity>
 
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>  
 
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
@@ -549,6 +550,7 @@ const getUserData = async () => {
                     style={caloriesStyles.modalStyle}
                     onPress={() => setOpenModal(true)}
                 />
+                
                 <Text style={caloriesStyles.titleStyle}>Breakfast: {totalCaloriesBreakfast}</Text>
                 {breakfastFood && breakfastFood?.map((item) => (
                     <View key={item.key}>
@@ -692,10 +694,10 @@ export const caloriesStyles = StyleSheet.create({
         borderColor: '#FFF',
         borderWidth: 1,
         backgroundColor: '#FFF',
-        shadowOffset: {width: 10, height: 10},
+        shadowOffset: {width: 3, height: 3},
         shadowColor: '#000',
         elevation: 3,
-        width: '45%',
+        width: '50%',
         justifyContent: 'center',
         alignItems: 'flex-start',
         paddingHorizontal: 10,
@@ -706,7 +708,7 @@ export const caloriesStyles = StyleSheet.create({
         backgroundColor: '#f1f2fc',
         padding: 15,
         fontSize: 15,
-        marginTop: 22.5,
+        marginTop: 25,
     },
 
 })

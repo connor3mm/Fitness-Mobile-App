@@ -52,6 +52,8 @@ export default class StepCounter extends ValidationComponent {
         averageWeeklySteps: 0
     };
 
+
+
     displayModal(show) {
         this.setState({modalVisible: show});
     }
@@ -171,7 +173,7 @@ export default class StepCounter extends ValidationComponent {
         return (
             <SafeAreaView style={[styles.container, stepStyles.container]}>
                        
-                <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Homepage')} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
                     <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
                     source={require('../assets/img/angle-left.png')}/>
 
@@ -219,7 +221,7 @@ export default class StepCounter extends ValidationComponent {
                         style={stepStyles.closeText}
                         onPress={() => {
                             this.displayModal(!this.state.modalVisible);
-                        }}>x</Text>
+                        }}>✔</Text>
                 </Modal>
 
                 <Modal
@@ -355,11 +357,10 @@ export const stepStyles = StyleSheet.create({
 
     input: {
         margin: 15,
-        marginTop: 50,
+        marginTop: "75%",
         height: 40,
         borderWidth: 0,
         borderColor: '#3777D9',
         borderBottomWidth: 3,
-
     }
 });

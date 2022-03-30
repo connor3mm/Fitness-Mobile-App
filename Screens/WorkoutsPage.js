@@ -79,7 +79,7 @@ export default function Workouts({navigation}) {
 
 export const workoutStyles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFF',
+        backgroundColor: '#f9fbfc',
         height: '100%',
         padding: 20,
     },

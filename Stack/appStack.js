@@ -1,7 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Welcomepage from '../Screens/Welcomepage';
 import Homepage from '../Screens/Homepage';
 import BMICalculatorPage from '../Screens/BMICalculatorPage';
