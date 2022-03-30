@@ -66,7 +66,9 @@ export default function FoodFormPage({
                                     onChangeText={formikProps.handleChange('Food')}
                                     value={formikProps.values.Food}
                                     onBlur={formikProps.handleBlur('Food')}/>
+                            </View>
 
+                            <View>
                                 <Text style={[formStyles.errorMessage, caloriesStyles.caloriesItemsText]}>
                                     {formikProps.touched.Food && formikProps.errors.Food}
                                 </Text>
@@ -82,6 +84,9 @@ export default function FoodFormPage({
                                     value={formikProps.values.Calories}
                                     keyboardType='numeric'
                                     onBlur={formikProps.handleBlur('Calories')}/>
+                            </View>
+
+                            <View>
                                 <Text style={[formStyles.errorMessage, caloriesStyles.caloriesItemsText]}>
                                     {formikProps.touched.Calories && formikProps.errors.Calories}
                                 </Text>
@@ -97,6 +102,9 @@ export default function FoodFormPage({
                                     value={formikProps.values.Quantity}
                                     keyboardType='numeric'
                                     onBlur={formikProps.handleBlur('Quantity')}/>
+                            </View>
+
+                            <View>
                                 <Text style={[formStyles.errorMessage, caloriesStyles.caloriesItemsText]}> {
                                     formikProps.touched.Quantity && formikProps.errors.Quantity}
                                 </Text>
@@ -129,8 +137,6 @@ export default function FoodFormPage({
                     )}
                 </Formik>
             </ScrollView>
-
-            <FooterLogo/>
         </SafeAreaView>
     )
 }

@@ -373,7 +373,6 @@ export default function CalorieCounter({navigation}) {
                             </View>
                         </TouchableWithoutFeedback>
 
-
                     </View>
 
                     <View style={{marginVertical: 15, alignItems: 'center',}}>
