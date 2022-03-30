@@ -25,14 +25,14 @@ export default function ProfilePage({navigation}) {
     const createTwoButtonAlert = () =>
     Alert.alert(
       "Signed out",
-      "You've been signed out. Please click on the \"Login\" button to redirect to the log page",
+      "Would you like to sign out?",
       [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Welcome Page", onPress: () => {
+        { text: "Yes", onPress: () => {
             navigation.navigate('Welcome');} }
       ]
     );

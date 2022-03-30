@@ -6,10 +6,6 @@ import { caloriesStyles } from './CalorieCounterPage';
 import { setttingStyles } from './SettingsPage';
 
 
-
-
-
-
 export default function Workouts({navigation}) {
     let [fontsLoaded, error] = useFonts ({
         Righteous_400Regular,
@@ -120,8 +116,6 @@ export const styles = StyleSheet.create({
         alignItems:"center",
         backgroundColor: '#fff',
         borderColor: '#FFF',
-        borderWidth: 1,
-
         elevation: 5,
         shadowColor: '#424242',
         shadowOffset: {width: 5, height: 5}
