@@ -31,27 +31,31 @@ const backgrounds = ['#7fb4fa', '#A5BBFF', '#6a7cb3', '#3584E4'];
 const imagesData = [
     {
         "key": "0",
-        "title": "Low Body Fat",
-        "description": "The body goal of reducing overall body fat.",
-        "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
+        "title": "Popeye",
+        "description": "The secret to getting this body shape is in the spinach! Popeye is known for his big forearms, add these exercises to your program to achieve that 'I am strong to the finich, because I eats me spinach' look: " +
+            "Exercise 1: Barbell wrist curls, Exercise 2: Barbell reverse curls, Exercise 3: Wrist curler.",
+        "image": 'https://static.wikia.nocookie.net/p__/images/0/00/Popeye_the_Sailor.png/revision/latest?cb=20200203002738&path-prefix=protagonist'
     },
     {
         "key": "1",
         "title": "Tarzan",
-        "description": "Keeping current weight with slight muscle gain/fat loss.",
-        "image": 'https://content.api.news/v3/images/bin/a474c67722579474d7daed2a3a85c981'
+        "description": "To get your body into Tarzan shape you need to follow the Tarzan 21 Weeks Workout Plan: " +
+            "Day 1: Lower Body, Day 2: Rest Day, Day 3: Chest and Front Delts, Day 4: Rest Day, Day 5: Back and Middle, Rear Delts, Day 6: Rest Day, Day 7: Arms.",
+        "image": 'https://static.wikia.nocookie.net/parody/images/e/e2/Tarzan_Character.png/revision/latest?cb=20151017214610'
     },
     {
         "key": "2",
-        "title": "The Rock",
-        "description": "",
-        "image": 'https://www.borntoworkout.com/wp-content/uploads/2019/05/Dwayne-Johnson-Body.jpg'
+        "title": "Hercules",
+        "description": "This 12-week routine will set you on the proper track to developing a body like the iconic Hercules: " +
+            "Day 1: Legs, Day 2: Back, Day 3: Shoulders, Day 4: Arms/Abs, Day 5: Legs, Day 6: Chest, Day 7: Rest Day.",
+        "image": 'https://static.wikia.nocookie.net/thedescendants/images/7/76/Hercules.png/revision/latest?cb=20160330210222'
     },
     {
         "key": "3",
-        "title": "Monitored global data-warehouse",
-        "description": "We need to program the open-source IB interface!",
-        "image": 'https://st.depositphotos.com/1967477/4960/v/600/depositphotos_49600071-stock-illustration-cartoon-bodybuilder.jpg'
+        "title": "Johny Bravo",
+        "description": "Johny Bravo is known for his big chest and big biceps. Include these exercises in your workout to make your biceps bigger: " +
+            "Weighted Chin-ups: 3 sets of 6-8, 8-10, 10-12 reps, Inverted Rows: 3 sets of 8-10 reps, Suspension Trainer Curls: 2 sets to failure (quick reps), Finisher: Isometric Bar Holds + Slow Eccentric: 1 set for max time.",
+        "image": 'https://m.media-amazon.com/images/I/41TdUT83mgL._AC_.jpg'
     }
 ]
 const Indicator = ({scrollX}) => {
