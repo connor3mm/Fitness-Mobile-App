@@ -10,7 +10,8 @@ import {
     TouchableOpacity,
     Image,
     Vibration,
-    Platform
+    Platform,
+    StatusBar
 } from "react-native";
 import { styling } from './Homepage';
 import { RadioButton } from 'react-native-paper';
@@ -312,7 +313,9 @@ export default function BMICalculator({navigation}) {
 
     return (
         <SafeAreaView style={styles.container}>
-        
+            
+            <StatusBar backgroundColor={'#f9fbfc'} barStyle='dark-content' />
+
             <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
                 <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
                 source={require('../assets/img/angle-left.png')}/>

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-//import Toggle from 'react-native-toggle-element';
-import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView} from "react-native";
+import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, StatusBar} from "react-native";
 import FooterLogo from '../CustomComponents/footerLogo';
 import { caloriesStyles } from "./CalorieCounterPage";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 
 export default function SettingsPage({navigation}) {   
@@ -15,6 +13,8 @@ export default function SettingsPage({navigation}) {
     return(
         
         <SafeAreaView style = {[setttingStyles.container]}>
+
+            <StatusBar backgroundColor={'#FFF'} barStyle='dark-content' />
 
             <TouchableOpacity onPress={homePressedHandler} style={{ flexDirection: 'row', alignSelf: 'flex-start'}}>
                 <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}} 
@@ -86,7 +86,7 @@ export default function SettingsPage({navigation}) {
 export const setttingStyles = StyleSheet.create({ 
     container: {
         padding: 30,
-        backgroundColor: '#f9fbfc',
+        backgroundColor: '#FFF',
         height: '100%',
     },
 

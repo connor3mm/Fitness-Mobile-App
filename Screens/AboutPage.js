@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Toggle from 'react-native-toggle-element';
 import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Linking} from "react-native";
-import FooterLogo from '../CustomComponents/footerLogo';
 import { caloriesStyles } from "./CalorieCounterPage";
 import { setttingStyles } from './SettingsPage';
 import { stepStyles } from './StepCounterPage';

@@ -15,6 +15,7 @@ import {
     Animated,
     Vibration,
     Alert,
+    StatusBar,
 } from "react-native";
 import CardComponent from "../CustomComponents/CardComponent";
 import {MaterialIcons} from '@expo/vector-icons';
@@ -25,7 +26,6 @@ import {styling} from './Homepage';
 import {styles} from "./Welcomepage";
 import {BMIstyles} from './BMICalculatorPage';
 import SVG, {G, Circle} from 'react-native-svg';
-import CustomStatusBar from '../CustomComponents/statusBar';
 import {setttingStyles} from './SettingsPage';
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
@@ -191,9 +191,6 @@ const getUserData = async () => {
     const [pickedMode, setPickedMode] = useState('date');
     const [showed, setShowed] = useState(false);
     const [dateText, setDateText] = useState('');
-
-    
-
     const [goalAchieved, setGoalAchieved] = useState("");
 
 
@@ -386,7 +383,7 @@ const getUserData = async () => {
     return (
         <SafeAreaView style={[styles.container]}>
 
-            <CustomStatusBar/>
+            <StatusBar backgroundColor={'#f9fbfc'} barStyle='dark-content' />
 
             <TouchableOpacity onPress={homePressedHandler} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
                 <Image style={{width: 25, height: 25, marginVertical: 30, marginRight: 10,}}
@@ -545,7 +542,7 @@ const getUserData = async () => {
                     onPress={() => setOpenModal(true)}
                 />
                 
-                <Text style={caloriesStyles.titleStyle}>Breakfast: {totalCaloriesBreakfast}</Text>
+                <Text style={caloriesStyles.titleStyle}>Breakfast: {totalCaloriesBreakfast} kcals</Text>
                 {breakfastFood && breakfastFood?.map((item) => (
                     <View key={item.key}>
                     <TouchableOpacity onPress={() => navigation.navigate("FoodDetails", item)}>
@@ -559,7 +556,7 @@ const getUserData = async () => {
                             </View>
                         ))}
 
-                <Text style={caloriesStyles.titleStyle}>Lunch: {totalCaloriesLunch}</Text>
+                <Text style={caloriesStyles.titleStyle}>Lunch: {totalCaloriesLunch} kcals</Text>
                 {lunchFood && lunchFood?.map((item) => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
@@ -573,7 +570,7 @@ const getUserData = async () => {
                     </View>
                 ))}
 
-                <Text style={caloriesStyles.titleStyle}>Dinner: {totalCaloriesDinner}</Text>
+                <Text style={caloriesStyles.titleStyle}>Dinner: {totalCaloriesDinner} kcals</Text>
                 {dinnerFood && dinnerFood?.map((item) => (
                     <View key={item.key}>
                         <TouchableOpacity onPress={() => navigation.navigate('FoodDetails', item)}>
