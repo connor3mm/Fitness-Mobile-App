@@ -27,19 +27,22 @@ export default function Workouts({navigation}) {
             </TouchableOpacity>
 
             <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Workouts</Text>  
-    
-            <View style={[workoutStyles.infoBoard,]}> 
-                <Image style={{ opacity: .25, width: 200, height: 250,position: 'absolute', top: -10, left: -49,}} 
-                source={require('../assets/img/muscle.png')}/>
-                
-                <Text style={{ color: 'white', fontFamily: 'Righteous_400Regular', lineHeight: 40, fontSize: 15}}>
-                    Welcome to the FitMe workout page! {"\n"}
-                    Find a variety of workouts GIFs that demo the exercise!{"\n"}
-                    Get the lean, muscular physique you are after!
-                </Text>
-            </View>
 
-            <View style={workoutStyles.workoutMain}> 
+
+            <ScrollView showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={workoutStyles.workoutMain}>
+
+                <View style={[workoutStyles.infoBoard,]}> 
+                    <Image style={{ opacity: .25, width: 200, height: 250,position: 'absolute', top: -10, left: -49,}} 
+                    source={require('../assets/img/muscle.png')}/>
+                    
+                    <Text style={{ color: 'white', fontFamily: 'Righteous_400Regular', lineHeight: 40, fontSize: 15}}>
+                        Welcome to the FitMe workout page! {"\n"}
+                        Find a variety of workouts GIFs that demo the exercise!{"\n"}
+                        Get the lean, muscular physique you are after!
+                    </Text>
+                </View>
+
                 <TouchableOpacity style = {[workoutStyles.workoutBox]} onPress={() => navigation.navigate('bicepsCorePage')}>
                     <Text style = {workoutStyles.workoutText}>Biceps{"\n"}&{"\n"}Core</Text>
                     <Image style = {{height: 135, width: 220}} source={require('../assets/img/workoutsImages/icons/icon_bicepsCore.png')}/>
@@ -69,7 +72,7 @@ export default function Workouts({navigation}) {
                     </TouchableOpacity>
                 </View>
                 
-            </View>
+            </ScrollView>
             
         </SafeAreaView>
 
@@ -81,11 +84,12 @@ export const workoutStyles = StyleSheet.create({
     container: {
         backgroundColor: '#f9fbfc',
         height: '100%',
-        padding: 20,
+        padding: 15,
     },
 
     workoutMain:{
         flex: 3,
+        width: '97.5%'
     },
 
     infoBoard: { 

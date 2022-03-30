@@ -24,9 +24,11 @@ import {caloriesStyles} from './CalorieCounterPage';
 import {RadioButton} from 'react-native-paper';
 import {MaterialIcons} from '@expo/vector-icons';
 import CardComponent from "../CustomComponents/CardComponent";
+import { setttingStyles } from './SettingsPage';
 import GoalsAchievementsForm from "./GoalsAchievementsForm";
-import { useRoute } from '@react-navigation/native';
 import CustomStatusBar from "../CustomComponents/statusBar";
+import { Righteous_400Regular } from '@expo-google-fonts/righteous';
+
 
 export default function GoalsAchievements({navigation, route}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
@@ -84,6 +86,8 @@ export default function GoalsAchievements({navigation, route}) {
                 </Text>
             </TouchableOpacity>
 
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title, {alignSelf: 'flex-start'}]}>Goals & Achievements</Text>  
+            
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
                         style={{width: '95%',}}>
@@ -97,7 +101,7 @@ export default function GoalsAchievements({navigation, route}) {
                         style={goalsStyles.buttonStyle}
                         onPress={menBodyShapePressedHandler}
                     >
-                        <Text style={goalsStyles.buttonTextStyle}>Choose body shape for men</Text>
+                        <Text style={[goalsStyles.buttonTextStyle]}>Choose body shape for men</Text>
                     </TouchableOpacity>) : null}
                 </View>
 
@@ -107,7 +111,7 @@ export default function GoalsAchievements({navigation, route}) {
                         style={goalsStyles.buttonStyleWoman}
                         onPress={womenBodyShapePressedHandler}
                     >
-                        <Text style={goalsStyles.buttonTextStyle}>Choose body shape for women</Text>
+                        <Text style={[goalsStyles.buttonTextStyle]}>Choose body shape for women</Text>
                     </TouchableOpacity>) : null}
                 </View>
 
@@ -202,8 +206,7 @@ export const goalsStyles = StyleSheet.create({
 
     buttonTextStyle: {
         fontFamily: 'Righteous_400Regular',
-        fontWeight: 'bold',
-        color: 'white'
+        color: 'white',
     },
 
 })

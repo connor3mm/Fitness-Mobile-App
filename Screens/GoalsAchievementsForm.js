@@ -33,7 +33,7 @@ export default function GoalsAchievementsFormPage({addGoalsAchievements}) {
                         <View>
                             <Text style={[caloriesStyles.caloriesItemsText,
                                 {textAlign: 'center', color: '#4356FF', marginVertical: 12.5, fontSize: 22.5,}]}>
-                                Add Goals and Achievements
+                                Add Goals & Achievements
                             </Text>
 
                             <View style={{flexDirection: 'row', marginVertical: 7.5, width: '100%',}}>

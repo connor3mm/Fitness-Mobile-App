@@ -15,10 +15,7 @@ export default function bicepsCorePage({navigation}) {
     const [shouldShow5, setshouldShow5] = useState(false);
     const [shouldShow6, setshouldShow6] = useState(false);
     const [shouldShow7, setshouldShow7] = useState(false);
-
     const [btnTitle, setbtnTitle] = useState("►");
-    const [btnPrevious, setbtnPrevious] = useState("◄");    
-
     const [numTimesClicked, setnumTimesClicked] = useState(1);
 
 
@@ -274,10 +271,6 @@ export default function bicepsCorePage({navigation}) {
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                <TouchableOpacity style={[styles.button, styles.boxShadow, styles.btnNext]}>
-                    <Text style={{fontFamily: 'Righteous_400Regular'}}>{btnPrevious}</Text>
-                </TouchableOpacity>
-
                 <TouchableOpacity style={[styles.button, styles.boxShadow, styles.btnNext]} onPress={showNextExercise}>
                     <Text style={{fontFamily: 'Righteous_400Regular'}}>{btnTitle}</Text>
                 </TouchableOpacity>

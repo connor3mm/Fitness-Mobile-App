@@ -5,7 +5,6 @@ import FooterLogo from '../CustomComponents/footerLogo';
 import { caloriesStyles } from "./CalorieCounterPage";
 import { setttingStyles } from './SettingsPage';
 import { stepStyles } from './StepCounterPage';
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
 
 
 export default function AboutPage({navigation}) {   

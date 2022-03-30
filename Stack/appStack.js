@@ -21,12 +21,20 @@ import FoodDetails from '../Screens/FoodDetails';
 import loginPage from "../Screens/loginPage";
 import registerFormPage from "../Screens/registerFormPage";
 import registerPage from "../Screens/registerPage";
+import AboutPage from '../Screens/AboutPage';
 
 
 const screen = {
     
     Welcome:{
         screen: Welcomepage,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    AboutPage:{
+        screen: AboutPage,
         navigationOptions: {
             headerShown: false,
         }

@@ -16,7 +16,6 @@ import {
     Vibration,
     Alert,
 } from "react-native";
-
 import CardComponent from "../CustomComponents/CardComponent";
 import {MaterialIcons} from '@expo/vector-icons';
 import {AntDesign} from '@expo/vector-icons';
@@ -28,7 +27,6 @@ import {BMIstyles} from './BMICalculatorPage';
 import SVG, {G, Circle} from 'react-native-svg';
 import CustomStatusBar from '../CustomComponents/statusBar';
 import {setttingStyles} from './SettingsPage';
-
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
 import { updateDoc, doc, getDoc, deleteField } from "firebase/firestore/lite";
@@ -48,8 +46,8 @@ export default function CalorieCounter({navigation}) {
             totalCaloriesBreakfast: totalCaloriesBreakfast,
             totalCaloriesLunch: totalCaloriesLunch,
             totalCaloriesDinner: totalCaloriesDinner
-        })
-    }
+        });
+    };
 
 
     //array for breakfast foods
@@ -70,14 +68,14 @@ const getUserData = async () => {
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
 
-      setGoal(docSnap.get("targetCalories"))
-      setGoal1(docSnap.get("targetCalories"))
-      setRemaining(docSnap.get("consumedCalories"))
-      setTotal(docSnap.get("dailyCalories"))
+      setGoal(docSnap.get("targetCalories"));
+      setGoal1(docSnap.get("targetCalories"));
+      setRemaining(docSnap.get("consumedCalories"));
+      setTotal(docSnap.get("dailyCalories"));
 
-      setTotalBreakfastCalories(docSnap.get("totalCaloriesBreakfast"))
-      setTotalLunchCalories(docSnap.get("totalCaloriesLunch"))
-      setTotalDinnerCalories(docSnap.get("totalCaloriesDinner"))
+      setTotalBreakfastCalories(docSnap.get("totalCaloriesBreakfast"));
+      setTotalLunchCalories(docSnap.get("totalCaloriesLunch"));
+      setTotalDinnerCalories(docSnap.get("totalCaloriesDinner"));
 
       //getting breakfast food items from DB
       const foodMapBreakfast = docSnap.data().breakfastFood;
@@ -146,9 +144,9 @@ const getUserData = async () => {
             breakfastFood: deleteField(),
             lunchFood: deleteField(),
             dinnerFood: deleteField(),
-        })
+        });
         createTwoButtonAlert();
-    }
+    };
 
     //Alert for resetting the counter
     const createTwoButtonAlert = () =>
@@ -166,7 +164,7 @@ const getUserData = async () => {
     //Load data from DB for the card components into the App
     useEffect(() => {
         getUserData();
-    },[])
+    },[]);
 
 
     const homePressedHandler = () => navigation.navigate('Homepage');
@@ -216,9 +214,7 @@ const getUserData = async () => {
 
 
     const vibrate = () => {
-        if (vibration == true) {
-            return
-        }
+        if (vibration == true) return;
 
         setVibration(true);
         if (Platform.OS === "ios") {
@@ -409,8 +405,6 @@ const getUserData = async () => {
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
                         style={{width: '95%',}}>
-
-                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Calorie Counter</Text>
 
                 <View style={{marginTop: 15}}>
                     {(remaining === 0 || remaining < 0) && totalCalories > 0 && goalCalories > 0 ? (

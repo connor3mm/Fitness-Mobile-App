@@ -327,8 +327,6 @@ export default function BMICalculator({navigation}) {
 
             <ScrollView showsVerticalScrollIndicator={false} style={{height: '90%',}}>
 
-                <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title, BMIstyles.alignText]}>BMI Calculator</Text>
-
                 <Text style={[styling.blackText, BMIstyles.sectionHeading,]}>Enter Height: </Text>
 
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>

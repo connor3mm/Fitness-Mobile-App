@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from "react-native";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 
 
 export default function legsPage({navigation}) {
-
     const [shouldShow1, setshouldShow1] = useState(true);
     const [shouldShow2, setshouldShow2] = useState(false);
     const [shouldShow3, setshouldShow3] = useState(false);
     const [shouldShow4, setshouldShow4] = useState(false);
     const [shouldShow5, setshouldShow5] = useState(false);
     const [shouldShow6, setshouldShow6] = useState(false);
-
     const [btnTitle, setbtnTitle] = useState("►");
-    const [btnPrevious, setbtnPrevious] = useState("◄");
     const [numTimesClicked, setnumTimesClicked] = useState(1);
 
 
@@ -226,11 +222,7 @@ export default function legsPage({navigation}) {
                 }
             </View>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-                <TouchableOpacity style={[styles.button, styles.boxShadow, styles.btnNext]}>
-                    <Text style={{fontFamily: 'Righteous_400Regular'}}>{btnPrevious}</Text>
-                </TouchableOpacity>
-
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end'}}>
                 <TouchableOpacity style={[styles.button, styles.boxShadow, styles.btnNext]} onPress={showNextExercise}>
                     <Text style={{fontFamily: 'Righteous_400Regular'}}>{btnTitle}</Text>
                 </TouchableOpacity>
