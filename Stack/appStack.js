@@ -23,6 +23,7 @@ import FoodDetails from '../Screens/FoodDetails';
 import loginPage from "../Screens/loginPage";
 import registerFormPage from "../Screens/registerFormPage";
 import registerPage from "../Screens/registerPage";
+import AboutPage from "../Screens/AboutPage";
 
 
 const screen = {
@@ -179,7 +180,7 @@ const screen = {
         navigationOptions: {
             headerShown: false,
         }
-    }
+    },
 
 };
 
