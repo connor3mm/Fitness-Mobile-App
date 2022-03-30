@@ -77,7 +77,7 @@ export default function FoodFormPage({
                     onSubmit={(values) => {
                         if (foodType <= '0') {
                             setFoodType('');
-                            returns
+                            return
                         }
                         setData(values, foodType);
                         console.log(values);
