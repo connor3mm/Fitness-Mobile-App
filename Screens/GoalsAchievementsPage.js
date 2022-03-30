@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Button,
     SafeAreaView,
@@ -25,8 +25,9 @@ import {RadioButton} from 'react-native-paper';
 import {MaterialIcons} from '@expo/vector-icons';
 import CardComponent from "../CustomComponents/CardComponent";
 import GoalsAchievementsForm from "./GoalsAchievementsForm";
+import { useRoute } from '@react-navigation/native';
 
-export default function GoalsAchievements({navigation}) {
+export default function GoalsAchievements({navigation, route}) {
     const homePressedHandler = () => navigation.navigate('Homepage');
     const menBodyShapePressedHandler = () => navigation.navigate('ChooseMenBodyShape');
     const womenBodyShapePressedHandler = () => navigation.navigate('ChooseWomenBodyShape');
@@ -45,6 +46,8 @@ export default function GoalsAchievements({navigation}) {
         {GoalAchievement: 'Lost 10 kg', key: '2'},
 
     ]);
+
+    const [imageDisplay, setImageDisplay] = useState("");
 
     const addGoalsAchievements = (name, type) => {
         name.key = Math.random().toString();
