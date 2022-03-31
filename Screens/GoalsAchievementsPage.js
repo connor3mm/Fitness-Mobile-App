@@ -84,7 +84,7 @@ export default function GoalsAchievements({navigation, route}) {
         getUserData();
         const interval = setInterval(() => {
             getUserData();
-        }, 1000);
+        }, 2000);
 
         // Subscribe for the focus Listener
         const unsubscribe = navigation.addListener('focus', () => {
