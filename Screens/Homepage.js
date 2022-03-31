@@ -61,7 +61,6 @@ export default function Home({navigation}) {
    
 
     const getUserData = async () =>{
-
         const docRef = doc(db, "users", authentication.currentUser.uid);
         const docSnap = await getDoc(docRef);
         
