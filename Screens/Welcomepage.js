@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth";
 
 
 export default function Welcome( {navigation} ) {
-    let [fontsLoaded, error] = useFonts ({Righteous_400Regular,});
+    //let [fontsLoaded, error] = useFonts ({Righteous_400Regular,});
 
     const buttonPressedHandler = () => navigation.navigate('Homepage');
     const loginPressedHandler = () => navigation.navigate('loginPage');
@@ -22,7 +22,7 @@ export default function Welcome( {navigation} ) {
         console.log("user is not logged in");
     }
 
-    if (!fontsLoaded) console.log("FONT NOT LOADED");
+    //if (!fontsLoaded) console.log("FONT NOT LOADED");
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const fadeAnimSlow = useRef(new Animated.Value(0)).current;
@@ -135,12 +135,12 @@ export const styles = StyleSheet.create({
     title: {
         fontSize: 38.5,
         color: '#424242',
-        fontFamily: 'Righteous_400Regular',
+       // fontFamily: 'Righteous_400Regular',
     },
 
     slogan: {
         fontSize: 14,
-        fontFamily: 'Righteous_400Regular',
+        //fontFamily: 'Righteous_400Regular',
         color: '#424242',
         alignSelf: 'center',
     },
@@ -157,7 +157,7 @@ export const styles = StyleSheet.create({
 
     button: {
         alignItems: 'center',
-        fontFamily: 'Righteous_400Regular',
+        //fontFamily: 'Righteous_400Regular',
         padding: 15,
         width: '100%',
         borderWidth: .5,
@@ -168,7 +168,7 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: 'white', 
         textAlign: 'center', 
-        fontFamily: 'Righteous_400Regular'
+        //fontFamily: 'Righteous_400Regular'
     },
 
     boxShadow: {

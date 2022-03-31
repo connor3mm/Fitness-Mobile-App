@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     Alert,
     KeyboardAvoidingView,
-    Image
+    Image,
 } from "react-native";
 import footerLogo from '../CustomComponents/footerLogo';
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
@@ -139,7 +139,7 @@ export default function registerPage({navigation}) {
                     color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Email</Text>
 
                     <View style={{ flexDirection: 'row'}}>
-                        <TextInput style ={styles.input} placeholder='example@mail.com' value={email} 
+                        <TextInput style ={styles.input} placeholder='example@gmail.com' value={email}
                             onChangeText={text => setEmail(text)}>
                         </TextInput>
                         <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/inbox.png')} />
@@ -195,7 +195,7 @@ export const styles = StyleSheet.create({
         margin: 30,
         marginTop: 20,
         marginRight: -20,
-        fontFamily: 'Righteous_400Regular',
+        //fontFamily: 'Righteous_400Regular',
         borderWidth: 0,
         borderBottomColor: '#4356FF',
         borderBottomWidth: 1.5,
@@ -205,7 +205,7 @@ export const styles = StyleSheet.create({
 
     button: {
         alignItems: 'center',
-        fontFamily: 'Righteous_400Regular',
+        //fontFamily: 'Righteous_400Regular',
         padding: 15,
         width: '60%',
         borderWidth: .5,
@@ -215,7 +215,7 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: 'white', 
         textAlign: 'center', 
-        fontFamily: 'Righteous_400Regular'
+        //fontFamily: 'Righteous_400Regular'
     },
 
     boxShadow: {
