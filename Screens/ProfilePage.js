@@ -24,7 +24,7 @@ export default function ProfilePage({navigation}) {
 
     const createTwoButtonAlert = () =>
     Alert.alert(
-      "Signed out",
+      "Sign out",
       "Would you like to sign out?",
       [
         {

@@ -111,7 +111,7 @@ export default function Home({navigation}) {
 
     const createTwoButtonAlert = () =>
         Alert.alert(
-            "Signed out",
+            "Sign out",
             "Would you like to sign out?",
             [
                 {
@@ -256,7 +256,7 @@ export default function Home({navigation}) {
 
                 <TouchableOpacity onPress={combinedHandler}
                 style={{ marginVertical: 17.5, backgroundColor: '#3777D9', borderRadius: 30, transform: [{translateY: -35}, {scale: 1.5}]}}>
-                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/logout.png')} />
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/log-out.png')} />
                 </TouchableOpacity>
                 
                 <TouchableOpacity onPress={settingsPressedHandler} style={{ marginVertical: 17.5,}}>
