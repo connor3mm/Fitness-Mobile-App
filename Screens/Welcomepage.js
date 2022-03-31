@@ -70,7 +70,7 @@ export default function Welcome( {navigation} ) {
 return (
     <SafeAreaView style={styles.container}>
         
-        <StatusBar backgroundColor={'#FFF'} barStyle='dark-content' />
+        <StatusBar backgroundColor={'#FFF'} barStyle='dark-content' />  
 
         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'stretch'}}>
 
