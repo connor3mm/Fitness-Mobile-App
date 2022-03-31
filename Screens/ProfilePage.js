@@ -33,15 +33,15 @@ export default function ProfilePage({navigation}) {
 
     const createTwoButtonAlert = () =>
     Alert.alert(
-      "Signed out",
-      "You've been signed out. Please click on the \"Login\" button to redirect to the log page",
+      "Sign out",
+      "Would you like to sign out?",
       [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Welcome Page", onPress: () => {
+        { text: "Yes", onPress: () => {
             navigation.navigate('Welcome');} }
       ]
     );
@@ -143,7 +143,11 @@ export default function ProfilePage({navigation}) {
                     </View>
                 </View>
 
-        
+
+                <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]}
+                                   onPress={combinedHandler}>
+                    <Text style={[styles.buttonText,]}>Sign Out</Text>
+                </TouchableOpacity>
 
             </ScrollView>
                         

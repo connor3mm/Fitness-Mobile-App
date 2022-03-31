@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from "./Welcomepage";
-import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, StatusBar} from "react-native";
+import {
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Image,
+    ScrollView,
+    StatusBar,
+    Alert
+} from "react-native";
 import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import CustomStatusBar from '../CustomComponents/statusBar';
@@ -10,6 +20,7 @@ import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
 import { doc, getDoc} from 'firebase/firestore/lite';
 import { useIsFocused } from "@react-navigation/native";
+import {signOut} from "firebase/auth";
 
 
 
@@ -91,6 +102,33 @@ export default function Home({navigation}) {
             unsubscribe;
         };
     }, [navigation]);
+
+    const signOutUser = async() => {
+        console.log(authentication.currentUser.email);
+        const result = await signOut(authentication);
+        console.log("entered sign out functions");
+    };
+
+    const createTwoButtonAlert = () =>
+        Alert.alert(
+            "Sign out",
+            "Would you like to sign out?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "Yes", onPress: () => {
+                        navigation.navigate('Welcome');} }
+            ]
+        );
+
+
+    const combinedHandler = () => {
+        signOutUser();
+        createTwoButtonAlert();
+    }
 
         
     return(
@@ -216,9 +254,9 @@ export default function Home({navigation}) {
                     <Image style={[styling.footerIcon, ]} source={require('../assets/img/avatar.png')} />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={WelcomepressedHandler} 
+                <TouchableOpacity onPress={combinedHandler}
                 style={{ marginVertical: 17.5, backgroundColor: '#3777D9', borderRadius: 30, transform: [{translateY: -35}, {scale: 1.5}]}}>
-                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/white-homepage.png')} />
+                    <Image style={[styling.footerIcon, ]} source={require('../assets/img/log-out.png')} />
                 </TouchableOpacity>
                 
                 <TouchableOpacity onPress={settingsPressedHandler} style={{ marginVertical: 17.5,}}>
