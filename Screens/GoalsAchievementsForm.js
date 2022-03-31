@@ -41,8 +41,6 @@ export default function GoalsAchievementsFormPage({addGoalsAchievements}) {
 
     return (
         <SafeAreaView style={formStyles.container}>
-        
-            <StatusBar backgroundColor={'#f9fbfc'} barStyle='dark-content' />
 
             <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                 <Formik
