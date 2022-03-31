@@ -23,15 +23,11 @@ import { useIsFocused } from "@react-navigation/native";
 import {signOut} from "firebase/auth";
 
 
-
 export default function Home({navigation}) {
 
     let [fontsLoaded, error] = useFonts ({
         Righteous_400Regular,
     });
-
-    //if (!fontsLoaded) return <AppLoading/>;
-
 
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
     const gymsNearMePressedHandler = () => navigation.navigate('GymsNearMePage');
@@ -54,11 +50,8 @@ export default function Home({navigation}) {
     const [dailySteps, setDailySteps] = useState();
     const [weight, setWeight] = useState("");
 
-    //const [breakfastFood, setBreakfastFood] = useState([])
     const isFocused = navigation.useIsFocused;
 
-    //const isFocused = useIsFocused();
-   
 
     const getUserData = async () =>{
         const docRef = doc(db, "users", authentication.currentUser.uid);
@@ -86,7 +79,7 @@ export default function Home({navigation}) {
         getUserData();
         const interval = setInterval(() => {
             getUserData();
-        }, 1500);
+        }, 2000);
 
         // Subscribe for the focus Listener
         const unsubscribe = navigation.addListener('focus', () => {
@@ -195,7 +188,7 @@ export default function Home({navigation}) {
             style={{width: '95%',}}>
 
             <View style={[styling.menu,]}>
-                <TouchableOpacity disabled={true} activeOpacity={.7} style={[styles.button, styles.login, styling.menuIcon,
+                <TouchableOpacity activeOpacity={.7} style={[styles.button, styles.login, styling.menuIcon,
                 {backgroundColor: 'pink', borderColor: 'pink', fontSize: 20}]} 
                 onPress={gymsNearMePressedHandler}>
                     <Text  style={[styles.buttonText, styling.blackText, {color: 'red'}]}>Coming Soon!</Text>
