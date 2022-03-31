@@ -112,8 +112,6 @@ export default function GoalsAchievements({navigation, route}) {
 
         <SafeAreaView style={styles.container}>
 
-            <StatusBar backgroundColor={'#FFF'} barStyle='dark-content' />
-
             <TouchableOpacity onPress={homePressedHandler} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
                 <Image style={{width: 25, height: 25, marginVertical: 30, marginRight: 10,}}
                        source={require('../assets/img/angle-left.png')}/>
@@ -126,7 +124,7 @@ export default function GoalsAchievements({navigation, route}) {
                 </Text>
             </TouchableOpacity>
 
-            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title, {alignSelf: 'flex-start'}]}>Goals & Achievements</Text>  
+            <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title, {textAlign: 'center'}]}>Goals & Achievements</Text>
             
             <ScrollView showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false} alwaysBounceVertical={true}
@@ -144,7 +142,6 @@ export default function GoalsAchievements({navigation, route}) {
                         <Text style={goalsStyles.buttonTextStyle}>Choose body shape for men</Text>
                     </TouchableOpacity>) : null}
                 </View>
-
 
                 <View>
                     {sex === 'Female' ? (<TouchableOpacity

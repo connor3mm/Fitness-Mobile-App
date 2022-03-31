@@ -119,13 +119,13 @@ export default function Home({navigation}) {
                     style: "cancel"
                 },
                 { text: "Yes", onPress: () => {
+                        signOutUser();
                         navigation.navigate('Welcome');} }
             ]
         );
 
 
     const combinedHandler = () => {
-        signOutUser();
         createTwoButtonAlert();
     }
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert} from "react-native";
 import { caloriesStyles } from "./CalorieCounterPage";
 import { setttingStyles } from './SettingsPage';
+import { styles } from "./Welcomepage";
 import { signOut } from "firebase/auth";
 import { doc, getDoc} from 'firebase/firestore/lite';
 import { db } from '../firebase/firebase-config';
@@ -13,16 +14,10 @@ import { styles } from './Welcomepage';
 export default function ProfilePage({navigation}) {   
 
     const homePressedHandler = () => navigation.navigate('Homepage', {transition: 'vertical'});
-    const [toggleValue, setToggleValue] = useState(false);
-    const settingsPressedHandler = () => navigation.navigate('SettingsPage');
-    const profilePressedHandler = () => navigation.navigate('ProfilePage');
     const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email,setEmail] = useState("");
     const [sex, setSex] = useState("");
-    const [targetCalories, setTargetCalories] = useState();
-    const [dailyCalories, setDailyCalories] = useState();
     const [dailySteps, setDailySteps] = useState();
+    const [dailyCalories, setDailyCalories] = useState();
     const [weight, setWeight] = useState("");
 
 
@@ -62,13 +57,11 @@ export default function ProfilePage({navigation}) {
           console.log("No such document!");
         }
 
+        setDailyCalories(docSnap.get("dailyCalories"))
         setFirstName(docSnap.get("firstName"));
         setSex(docSnap.get("sex"));
         setWeight(docSnap.get("weight"));
-        setTargetCalories(docSnap.get("targetCalories"));
-        setDailyCalories(docSnap.get("dailyCalories"));
         setDailySteps(docSnap.get("currentSteps"));
-        setEmail(docSnap.get("Email"));
         console.log("get user data finished");
     };
 
@@ -97,12 +90,12 @@ export default function ProfilePage({navigation}) {
                 <View style={{ marginVertical: 30}}>
                     <Text style={[caloriesStyles.caloriesItemsText, { fontSize: 37.5, opacity: .75}]}>Hello,</Text>
                     <Text style={[caloriesStyles.caloriesItemsText, { fontSize: 50, color: '#3777D9'}]}>{firstName}</Text>
-                </View>
+                </View> 
 
                 <View>
                     <View style={[profilestyle.section, {backgroundColor: '#dee0fc'}]}>
                         <Text style={[caloriesStyles.caloriesItemsText, {opacity: .5,}]}>Email</Text>
-                        <Text style={[caloriesStyles.caloriesItemsText, { fontSize: 17.5}]}>{email}</Text>
+                        <Text style={[caloriesStyles.caloriesItemsText, { fontSize: 17.5}]}>{authentication.currentUser.email}</Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
