@@ -110,7 +110,7 @@ return (
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
             onPress={registerPressedHandler}>
-                <Text style={[styles.buttonText,]}>New? Get Started </Text>
+                <Text  style={[styles.buttonText]}>New user? Get Started</Text>
             </TouchableOpacity>
 
             <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.login,]} 
@@ -118,15 +118,6 @@ return (
                 <Text  style={[styles.buttonText, styles.blueText]}>Existing user? Log in</Text>
             </TouchableOpacity>
             
-            <Text style={{textAlign: 'center', fontFamily: 'Righteous_400Regular'}}>OR</Text>
-
-            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup, 
-            {backgroundColor: '#8fd4fc', borderColor: '#8fd4fc', marginBottom: 20, marginTop: 10}]} 
-            onPress={buttonPressedHandler}>
-                <Text style={[styles.buttonText,]}>Quick log in as previous user</Text>
-            </TouchableOpacity>
-
-
         </Animated.View>
     </SafeAreaView>
 );

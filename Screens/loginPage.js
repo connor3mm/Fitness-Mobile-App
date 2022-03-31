@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import {Button, SafeAreaView, StyleSheet, Text,TextInput, View, Image, Alert, TouchableOpacity,ScrollView, KeyboardAvoidingView} from "react-native";
-import styleSheet from "react-native-web/dist/exports/StyleSheet";
+import {Image, SafeAreaView, StyleSheet, Text,TextInput, View, Alert, TouchableOpacity, KeyboardAvoidingView} from "react-native";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import { authentication } from '../firebase/firebase-config';
 import { signInWithEmailAndPassword, } from "firebase/auth";
-
 
 
 export default function loginPage({navigation}) {
@@ -34,7 +32,7 @@ export default function loginPage({navigation}) {
     const alertInvalidEmail = () =>
     Alert.alert(
       "",
-      "The email you've selected is invalid, please choose another one",
+      "The email you've selected is invalid, please choose another one.",
       [
         {
           text: "Okay",
@@ -47,7 +45,7 @@ export default function loginPage({navigation}) {
     const alertUserNotFound = () =>
     Alert.alert(
       "",
-      "User not found",
+      "User not found. Try again.",
       [
         {
           text: "Okay",
@@ -60,7 +58,7 @@ export default function loginPage({navigation}) {
     const alertWrongPassword = () =>
     Alert.alert(
       "",
-      "Incorrect password",
+      "Incorrect password. Try again.",
       [
         {
           text: "Okay",
@@ -72,7 +70,7 @@ export default function loginPage({navigation}) {
     const alertLogin = () =>
     Alert.alert(
       "",
-      "You've been logged in",
+      "You're now logged in.",
       [
         { text: "Continue", onPress: () => {
             navigation.navigate('Homepage');} }
@@ -97,36 +95,43 @@ export default function loginPage({navigation}) {
                 </Text>
             </TouchableOpacity>
 
-            <Text style ={{marginBottom:'15%',fontFamily: 'Righteous_400Regular',fontSize:20, textAlign:'center'}}>Please enter your login credentials bellow</Text>
+            <Text style ={{marginBottom:'15%',fontFamily: 'Righteous_400Regular',fontSize:20, textAlign:'center', margin: 10}}>
+                Please enter your login credentials bellow
+            </Text>
+
             <KeyboardAvoidingView behavior='padding'>
-
                 <View style={styles.inputText}>
-                    <TextInput style ={styles.input} placeholder='Email' value={email} 
-                        onChangeText={text => setEmail(text)}
-                    >
-                    </TextInput>
 
-                    <TextInput style ={styles.input} placeholder='Password' value={password} 
-                        onChangeText={text => setPassword(text)}
-                        secureTextEntry
-                    >
-                    </TextInput>
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                    color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Email</Text>
+
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='example@mail.com' value={email} 
+                            onChangeText={text => setEmail(text)}>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/inbox.png')} />
+                    </View>
+
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                    color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Password</Text>
+
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='xxxxx' value={password} 
+                            onChangeText={text => setPassword(text)} secureTextEntry>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/key.png')} />
+                    </View>
                 </View>
-
                 
                 <View style={{flexDirection:'row', justifyContent:'space-evenly', marginTop:'15%'}}>
-
                     <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
                         onPress={combinedHandler}>
                     <Text style={[styles.buttonText,]}>Login</Text>
                     </TouchableOpacity>
-
                 </View>
-
-
-
-
             </KeyboardAvoidingView>
+
+
         </SafeAreaView>
 
     )
@@ -136,18 +141,22 @@ export default function loginPage({navigation}) {
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
-        alignItems: 'center',
+        backgroundColor: '#f9fbfc',
+        alignItems: 'stretch',
     },
 
     input:{
-        paddingHorizontal:15,
-        paddingVertical:10,
-        marginTop:10,
-        borderRadius:10,
-        borderColor:"black",
-        borderWidth:1,
+        paddingTop: 2,
+        paddingBottom: 5,
+        margin: 30,
+        marginTop: 20,
+        marginRight: -20,
         fontFamily: 'Righteous_400Regular',
+        borderWidth: 0,
+        borderBottomColor: '#4356FF',
+        borderBottomWidth: 1.5,
+        fontSize: 15,
+        width: '80%'
     },
 
     button: {

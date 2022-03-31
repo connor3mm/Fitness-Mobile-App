@@ -127,16 +127,11 @@ export default function Home({navigation}) {
 
     const combinedHandler = () => {
         createTwoButtonAlert();
-    }
-
+    };
         
     return(
         <SafeAreaView style = {[styles.container, styling.menuContainer, {backgroundColor: '#f9fbfc'}]}>
 
-
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>{isFocused ? 'focused' : 'unfocused'}</Text>
-            </View>
             <CustomStatusBar />
 
             <LinearGradient  start={{x: 0, y: 0}} end={{x: 1, y: 0}} 

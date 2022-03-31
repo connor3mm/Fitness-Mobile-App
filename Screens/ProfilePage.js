@@ -8,7 +8,6 @@ import { signOut } from "firebase/auth";
 import { doc, getDoc} from 'firebase/firestore/lite';
 import { db } from '../firebase/firebase-config';
 import { authentication } from '../firebase/firebase-config';
-import { styles } from './Welcomepage';
 
 
 export default function ProfilePage({navigation}) {   

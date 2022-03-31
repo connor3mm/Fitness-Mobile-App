@@ -10,6 +10,7 @@ import {
     KeyboardAvoidingView,
     Image
 } from "react-native";
+import footerLogo from '../CustomComponents/footerLogo';
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
 import { authentication } from '../firebase/firebase-config';
@@ -38,8 +39,8 @@ export default function registerPage({navigation}) {
             if(error.code === "auth/invalid-email" || email === "") {alertInvalidEmail(); return;}
             if(error.code === "auth/email-already-in-use") {alertEmailInUse(); return;}
             if(password === "") {alertPasswordError(); return;}
-        })
-    }
+        });
+    };
 
     const alertPasswordError = () =>
         Alert.alert(
@@ -80,7 +81,7 @@ export default function registerPage({navigation}) {
     const alertEmailInUse = () =>
     Alert.alert(
       "",
-      "The email you've entered already, please choose another one",
+      "This email is already taken, please choose another one.",
       [
         {
           text: "Okay",
@@ -93,7 +94,7 @@ export default function registerPage({navigation}) {
     const alertRegisterUser = () =>
     Alert.alert(
       "Attention!",
-      "Your registration is almost complete. Please click on the \"Next\" button to continue the registration process, otherwise your account will be fully not created",
+      "Your registration is almost complete. Please click on the \"Next\" button to continue the registration process, otherwise your account will be fully not created.",
       [
         {
           text: "Cancel",
@@ -107,14 +108,14 @@ export default function registerPage({navigation}) {
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
             navigation.navigate('registerFormPage');} }
       ]
     );
 
     const combinedHandler = () => {
         registerUser();
-    }
+    };
 
 
     return(
@@ -132,24 +133,37 @@ export default function registerPage({navigation}) {
 
             <Text style ={{marginBottom:'15%',fontFamily: 'Righteous_400Regular',fontSize:20, textAlign:'center'}}>Please enter your new registration credentials bellow</Text>
             <KeyboardAvoidingView behavior='padding'>
+                    <View style={styles.inputText}>
 
-                <View style={styles.inputText}>
-                    <TextInput style ={styles.input} placeholder='Email' value={email}
-                        onChangeText={text => setEmail(text)}
-                    >
-                    </TextInput>
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                    color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Email</Text>
 
-                    <TextInput style ={styles.input} placeholder='Password' value={password}
-                        onChangeText={text => setPassword(text)}
-                        secureTextEntry
-                    >
-                    </TextInput>
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='example@mail.com' value={email} 
+                            onChangeText={text => setEmail(text)}>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/inbox.png')} />
+                    </View>
 
-                    <TextInput style ={styles.input} placeholder='Confirm Password' value={password2}
-                               onChangeText={text => setPassword2(text)}
-                               secureTextEntry
-                    >
-                    </TextInput>
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                    color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Password</Text>
+
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='xxxxx' value={password} 
+                            onChangeText={text => setPassword(text)} secureTextEntry>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/key.png')} />
+                    </View>
+
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                    color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Confirm Password</Text>
+
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='xxxxx' value={password2} 
+                            onChangeText={text => setPassword2(text)} secureTextEntry>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/key.png')} />
+                    </View>
                 </View>
 
 
@@ -167,21 +181,26 @@ export default function registerPage({navigation}) {
 }
 
 
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
-        alignItems: 'center',
+        backgroundColor: '#f9fbfc',
+        alignItems: 'stretch',
     },
 
     input:{
-        paddingHorizontal:15,
-        paddingVertical:10,
-        marginTop:10,
-        borderRadius:10,
-        borderColor:"black",
-        borderWidth:1,
+        paddingTop: 2,
+        paddingBottom: 5,
+        margin: 30,
+        marginTop: 20,
+        marginRight: -20,
         fontFamily: 'Righteous_400Regular',
+        borderWidth: 0,
+        borderBottomColor: '#4356FF',
+        borderBottomWidth: 1.5,
+        fontSize: 15,
+        width: '80%'
     },
 
     button: {
@@ -194,8 +213,8 @@ export const styles = StyleSheet.create({
     },
 
     buttonText: {
-        color: 'white',
-        textAlign: 'center',
+        color: 'white', 
+        textAlign: 'center', 
         fontFamily: 'Righteous_400Regular'
     },
 
@@ -215,5 +234,5 @@ export const styles = StyleSheet.create({
     },
 
 
-
+    
 });

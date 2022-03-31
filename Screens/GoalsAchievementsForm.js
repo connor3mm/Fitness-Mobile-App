@@ -127,7 +127,7 @@ export const formStyles = StyleSheet.create({
     },
 
     inputStyle: {
-        borderBottomColor: '#424242',
+        borderBottomColor: '#3777D9',
         borderBottomWidth: 2,
         fontSize: 15,
         marginVertical: 12.5,

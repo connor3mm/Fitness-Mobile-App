@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text,TextInput, View, TouchableOpacity, Alert, KeyboardAvoidingView} from "react-native";
+import { SafeAreaView, StyleSheet, Text,TextInput, View, TouchableOpacity, Alert, KeyboardAvoidingView, Image} from "react-native";
 import styleSheet from "react-native-web/dist/exports/StyleSheet";
 import { Righteous_400Regular} from '@expo-google-fonts/righteous';
 import { useFonts } from 'expo-font';
@@ -12,12 +12,12 @@ import {RadioButton} from "react-native-paper";
 
 export default function registerFormPage({navigation}) {
 
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [age, setAge] = useState("")
-    const [sex, setSex] = useState("")
-    const [targetSteps, setTargetSteps] = useState("")
-    const [weight, setWeight] = useState("")
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [age, setAge] = useState("");
+    const [sex, setSex] = useState("");
+    const [targetSteps, setTargetSteps] = useState("");
+    const [weight, setWeight] = useState("");
 
     const uid = authentication.currentUser.uid;
 
@@ -39,8 +39,8 @@ export default function registerFormPage({navigation}) {
             weight: weight,
             age: age,
             sex: sex,
-        })
-    }
+        });
+    };
 
     
     const createTwoButtonAlert = () =>
@@ -62,7 +62,7 @@ export default function registerFormPage({navigation}) {
     const alertAgeNaN = () =>
     Alert.alert(
       "",
-      "Age is invalid, please use a positive number",
+      "Age is invalid, please use a positive number.",
       [
         {
           text: "Okay",
@@ -75,7 +75,7 @@ export default function registerFormPage({navigation}) {
     const alertWeightNaN = () =>
     Alert.alert(
       "",
-      "Weight is invalid, please use a positive number",
+      "Weight is invalid, please use a positive number.",
       [
         {
           text: "Okay",
@@ -87,7 +87,7 @@ export default function registerFormPage({navigation}) {
     const alertSexNaN = () =>
         Alert.alert(
             "",
-            "Sex has Not been chosen",
+            "Sex has Not been chosen.",
             [
                 {
                     text: "Okay",
@@ -111,45 +111,67 @@ export default function registerFormPage({navigation}) {
 
 
     const combinedHandler = () => {
-        if(firstName === "" || lastName === "") alertNameNaN()
-            else if(isNaN(age) || age < 0 || age === "") alertAgeNaN()
-                else if(isNaN(weight) || weight < 0 || weight === "") alertWeightNaN()
-                    else if(sex === "") alertSexNaN()
+        if(firstName === "" || lastName === "") alertNameNaN();
+            else if(isNaN(age) || age < 0 || age === "") alertAgeNaN();
+                else if(isNaN(weight) || weight < 0 || weight === "") alertWeightNaN();
+                    else if(sex === "") alertSexNaN();
                             else{
                                 setData();
                                 createTwoButtonAlert();
                             }
-    }
+    };
 
 
     
 
     return(
         <SafeAreaView style={styles.container}>
-            <Text style ={{marginBottom:'15%',fontFamily: 'Righteous_400Regular',fontSize:20, textAlign:'center'}}>Please enter your information bellow</Text>
+            <Text style ={{marginBottom:'15%',fontFamily: 'Righteous_400Regular',
+            fontSize:20, textAlign:'center', marginTop: 20}}>Please enter your information bellow</Text>
             <KeyboardAvoidingView behavior='padding'>
 
                 <View style={styles.inputText}>
-                    <TextInput style ={styles.input} placeholder='First name' value={firstName} 
-                        onChangeText={text => setFirstName(text)}
-                    >
-                    </TextInput>
+                
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                        color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>First Name</Text>
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='John' value={firstName} 
+                            onChangeText={text => setFirstName(text)}>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/user.png')} />
+                    </View>
+                    
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                        color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Second name</Text>
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='Doe' value={lastName} 
+                            onChangeText={text => setLastName(text)}>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/user.png')} />
+                    </View>
 
-                    <TextInput style ={styles.input} placeholder='Last name' value={lastName} 
-                        onChangeText={text => setLastName(text)}
-                    >
-                    </TextInput>
 
-                    <TextInput style ={styles.input} placeholder='Age' value={age} 
-                        onChangeText={text => setAge(text)}
-                    >
-                    </TextInput>
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                        color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Age</Text>
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='18' value={age} 
+                            onChangeText={text => setAge(text)}>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/age-group.png')} />
+                    </View>
 
-                    <TextInput style ={styles.input} placeholder='Current weight in KG' value={weight}
-                               onChangeText={text => setWeight(text)}
-                    >
-                    </TextInput>
 
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                        color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Weight</Text>
+                    <View style={{ flexDirection: 'row'}}>
+                        <TextInput style ={styles.input} placeholder='Weight' value={weight} 
+                            onChangeText={text => setWeight(text)}>
+                        </TextInput>
+                        <Image style={{ width: 17.5, height: 17.5, alignSelf: 'center'}} source={require('../assets/img/weight2.png')} />
+                    </View>
+
+                    <Text style={{ fontFamily: 'Righteous_400Regular', 
+                        color: '#3777D9', fontSize: 12.5, marginLeft: 30, marginTop: 15, marginBottom: -10}}>Sex</Text>
                     <RadioButton.Group
                         onValueChange={sex => setSex(sex)} value={sex}>
                         <RadioButton.Item label="Male" value="Male"/>
@@ -175,19 +197,22 @@ export default function registerFormPage({navigation}) {
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#f9fbfc',
+        alignItems: 'stretch',
     },
 
     input:{
-        paddingHorizontal:15,
-        paddingVertical:10,
-        marginTop:10,
-        borderRadius:10,
-        borderColor:"black",
-        borderWidth:1,
+        paddingTop: 2,
+        paddingBottom: 5,
+        margin: 30,
+        marginTop: 20,
+        marginRight: -20,
         fontFamily: 'Righteous_400Regular',
+        borderWidth: 0,
+        borderBottomColor: '#4356FF',
+        borderBottomWidth: 1.5,
+        fontSize: 15,
+        width: '80%'
     },
 
     button: {

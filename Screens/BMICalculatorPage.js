@@ -480,7 +480,7 @@ export default function BMICalculator({navigation}) {
                         <TextInput
                             contextMenuHidden={true}
                             keyboardType='numeric'
-                            style={[BMIstyles.input,]}
+                            style={[BMIstyles.input,{width: '35%'}]}
                             placeholder='Age'
                             onChangeText={(Age) => setAge(Age)}
                         />
@@ -539,17 +539,17 @@ export default function BMICalculator({navigation}) {
 
 export const BMIstyles = StyleSheet.create({
     input: {
-        borderWidth: 1,
-        borderColor: '#777',
-        padding: 8,
         margin: 10,
         width: 150,
         alignItems: 'center',
+        borderBottomColor: '#3777D9',
+        borderBottomWidth: 2,
+        fontSize: 15,
+        marginVertical: 12.5,
+        padding: 7.5,
+        width: '80%',
     },
 
-    shortInput: {
-        // width: '45%',
-    },
 
     homeButton: {
         width: 35,
@@ -564,14 +564,14 @@ export const BMIstyles = StyleSheet.create({
 
     sectionHeading: { 
         textAlign: 'center',
-        margin: 25,
+        marginTop: 40,
         fontSize: 19,
         color: '#3777D9',
     },
 
     activity: {
         flex: 1,
-        marginBottom: 25,
+        marginBottom: 35,
         textAlign: 'center',
         paddingRight: 150,
         paddingBottom: 60,

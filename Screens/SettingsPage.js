@@ -29,7 +29,24 @@ export default function SettingsPage({navigation}) {
             <Text style={[caloriesStyles.caloriesItemsText, setttingStyles.title]}>Settings</Text>  
     
             <ScrollView showsHorizontalScrollIndicator={false}
-                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} style={{ marginHorizontal: 2.5, marginVertical: 10, }}>
+                        showsVerticalScrollIndicator={false} alwaysBounceVertical={true} 
+                        style={{ marginHorizontal: 2.5, marginVertical: 10, }}>
+
+
+                <View style={[setttingStyles.settingsSection,]}>
+                    <View style={{ flexDirection: 'row', alignSelf: 'center'}}>
+                        <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/help.png')}/>
+                        <Text  style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>About</Text>
+                    </View>
+                    <TouchableOpacity onPress={aboutPressedHandler} style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
+                        <Image style={{ width: 15, height: 15, transform: [{ rotate: '180deg'}],}} 
+                        source={require('../assets/img/angle-left.png')}/>
+                    </TouchableOpacity>
+                </View>
+
+                <Text style={{ fontFamily: 'Righteous_400Regular', color: 'red', textAlign: 'center', fontSize: 27.5, marginVertical: 10}}>
+                    Coming Soon!
+                </Text>
 
                 <View style={[setttingStyles.settingsSection,]}>
 
@@ -61,20 +78,8 @@ export default function SettingsPage({navigation}) {
                         <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/darkmode.png')}/>
                         <Text  style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>Dark Mode</Text>
                     </View>
-                    {/* <Toggle value={toggleValue} onValueChange={(toggleValue) => setToggleValue(toggleValue)} /> */}
-
                 </View>
 
-                <View style={[setttingStyles.settingsSection,]}>
-                    <View style={{ flexDirection: 'row', alignSelf: 'center'}}>
-                        <Image style={{ width: 60, height: 60, alignSelf: 'center', marginRight: 10,}} source={require('../assets/img/help.png')}/>
-                        <Text  style={[caloriesStyles.caloriesItemsText, { alignSelf: 'center', color: '#424242'}]}>About</Text>
-                    </View>
-                    <TouchableOpacity onPress={aboutPressedHandler} style={[setttingStyles.settingsButton, {alignSelf: 'center'}]}>
-                        <Image style={{ width: 15, height: 15, transform: [{ rotate: '180deg'}],}} 
-                        source={require('../assets/img/angle-left.png')}/>
-                    </TouchableOpacity>
-                </View>
             </ScrollView>
             
             <FooterLogo/>

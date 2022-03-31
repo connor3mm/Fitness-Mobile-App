@@ -82,6 +82,8 @@ export default function AboutPage({navigation}) {
                     onPress={() => Linking.openURL('https://www.flaticon.com/free-icons/location')}>Flaticon Location icons created by IconMarketPK {"\n"}</Text>
                 <Text style={[caloriesStyles.caloriesItemsText]} 
                     onPress={() => Linking.openURL('https://www.flaticon.com/free-icons/calendar')}>Flaticon Calendar icons created by Freepik {"\n"}</Text>
+                <Text style={[caloriesStyles.caloriesItemsText]} 
+                    onPress={() => Linking.openURL('https://www.flaticon.com/free-icons/lab')}>Lab icons created by Freepik - Flaticon{"\n"}</Text>
             </View>
 
             <View style={[stepStyles.section]}>
