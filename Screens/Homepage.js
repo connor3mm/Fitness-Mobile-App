@@ -87,7 +87,7 @@ export default function Home({navigation}) {
         getUserData();
         const interval = setInterval(() => {
             getUserData();
-        }, 1500);
+        }, 2000);
 
         // Subscribe for the focus Listener
         const unsubscribe = navigation.addListener('focus', () => {
