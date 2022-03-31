@@ -22,7 +22,7 @@ import { setttingStyles } from './SettingsPage';
 
 import { authentication } from '../firebase/firebase-config';
 import { db } from '../firebase/firebase-config';
-import {updateDoc, doc} from "firebase/firestore/lite";
+import {updateDoc, doc, getDoc} from "firebase/firestore/lite";
 
 
 export default class StepCounter extends ValidationComponent {
@@ -31,7 +31,7 @@ export default class StepCounter extends ValidationComponent {
 
 
     setData = async () => {
-        //creates doc with the user info
+        //sets the steps into the DB
         const uid = authentication.currentUser.uid;
         await updateDoc(doc(db,"users",uid),{
             uid: uid,
@@ -39,6 +39,21 @@ export default class StepCounter extends ValidationComponent {
             goalSteps: this.state.dailyStepCountGoal,
         })
     }
+
+    getUserData = async () =>{
+        const docRef = doc(db, "users", authentication.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+
+        this.state.currentStepCount = docSnap.get("currentSteps");
+        this.state.dailyStepCountGoal = docSnap.get("goalSteps")
+        console.log("get user data finished");
+    };
     
 
     state = {
