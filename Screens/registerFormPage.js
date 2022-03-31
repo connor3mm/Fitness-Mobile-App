@@ -84,15 +84,41 @@ export default function registerFormPage({navigation}) {
       ]
     );
 
+    const alertSexNaN = () =>
+        Alert.alert(
+            "",
+            "Sex has Not been chosen",
+            [
+                {
+                    text: "Okay",
+                    style: "cancel"
+                },
+            ]
+        );
+
+    const alertNameNaN = () =>
+        Alert.alert(
+            "",
+            "First or Second name has not been inputted.",
+            [
+                {
+                    text: "Okay",
+                    style: "cancel"
+                },
+            ]
+        );
+
 
 
     const combinedHandler = () => {
-        if(isNaN(age) || age < 0 || age === "") alertAgeNaN()
-            else if(isNaN(weight) || weight < 0 || weight === "") alertWeightNaN()
-                    else{
-                        setData();
-                        createTwoButtonAlert();
-                    }
+        if(firstName === "" || lastName === "") alertNameNaN()
+            else if(isNaN(age) || age < 0 || age === "") alertAgeNaN()
+                else if(isNaN(weight) || weight < 0 || weight === "") alertWeightNaN()
+                    else if(sex === "") alertSexNaN()
+                            else{
+                                setData();
+                                createTwoButtonAlert();
+                            }
     }
 
 
