@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MapView, {Marker, Callout} from 'react-native-maps';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Dimensions, Image, TouchableOpacity} from 'react-native';
 import * as Location from 'expo-location';
 import { TextInput } from 'react-native-gesture-handler';
 import { Search } from "semantic-ui-react";
@@ -50,7 +50,18 @@ export default class GymsNearMe extends React.Component {
 
     render () {
         return (
-            <View style={{marginTop: 50, flex: 1}}>
+            <View style={{ flex: 1}}>
+
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Homepage')}
+                                  style={{ flexDirection: 'row', alignSelf: 'flex-start', marginTop: 30,}}>
+                    <Image style={{ width: 25, height: 25, marginVertical: 30, marginRight: 10,}}
+                           source={require('../assets/img/angle-left.png')}/>
+                    <Text style={{ textDecorationLine: 'underline', alignSelf: 'center',
+                        fontFamily: 'Righteous_400Regular', color: '#424242', fontSize: 16.5,}}>
+                        Dashboard
+                    </Text>
+                </TouchableOpacity>
+
             <MapView style={styles.map}
                      initialRegion={{
                          latitude: 37.78825,

@@ -201,7 +201,7 @@ export default function Home({navigation}) {
             style={{width: '95%',}}>
 
             <View style={[styling.menu,]}>
-                <TouchableOpacity disabled={true} activeOpacity={.7} style={[styles.button, styles.login, styling.menuIcon,
+                <TouchableOpacity activeOpacity={.7} style={[styles.button, styles.login, styling.menuIcon,
                 {backgroundColor: 'pink', borderColor: 'pink', fontSize: 20}]} 
                 onPress={gymsNearMePressedHandler}>
                     <Text  style={[styles.buttonText, styling.blackText, {color: 'red'}]}>Coming Soon!</Text>
