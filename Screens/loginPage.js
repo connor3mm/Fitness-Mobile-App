@@ -10,14 +10,14 @@ import { signInWithEmailAndPassword, } from "firebase/auth";
 
 export default function loginPage({navigation}) {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
 
     const signInUser = () => {
         signInWithEmailAndPassword(authentication, email, password)
         .then((result) => {
-            console.log(result)
+            console.log(result);
             alertLogin();
         })
         .catch((error) => {
@@ -26,9 +26,9 @@ export default function loginPage({navigation}) {
             if(error.code === "auth/wrong-password") alertWrongPassword();
             if(error.code === "auth/user-not-found") alertUserNotFound();
             
-        })
+        });
         console.log("entered sign in functions");
-    }
+    };
 
 
     const alertInvalidEmail = () =>
@@ -81,7 +81,7 @@ export default function loginPage({navigation}) {
 
     const combinedHandler = () => {
         signInUser();
-    }
+    };
 
 
     return(

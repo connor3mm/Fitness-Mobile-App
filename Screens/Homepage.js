@@ -61,14 +61,14 @@ export default function Home({navigation}) {
         }
             setFirstName(docSnap.get("firstName"));
             setSex(docSnap.get("sex"));
-            setWeight(docSnap.get("weight"))
+            setWeight(docSnap.get("weight"));
             setLastName(docSnap.get("lastName"));
             setTargetCalories(docSnap.get("targetCalories"));
             setDailyCalories(docSnap.get("dailyCalories"));
             setTargetSteps(docSnap.get("goalSteps"));
             setDailySteps(docSnap.get("currentSteps"));
-            console.log("get user data finished")
-    }
+            console.log("get user data finished");
+    };
 
 
     useEffect(() => {
