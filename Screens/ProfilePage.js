@@ -17,6 +17,7 @@ export default function ProfilePage({navigation}) {
     const [sex, setSex] = useState("");
     const [dailySteps, setDailySteps] = useState();
     const [dailyCalories, setDailyCalories] = useState();
+    const [age, setAge] = useState();
     const [weight, setWeight] = useState("");
 
 
@@ -61,6 +62,7 @@ export default function ProfilePage({navigation}) {
         setSex(docSnap.get("sex"));
         setWeight(docSnap.get("weight"));
         setDailySteps(docSnap.get("currentSteps"));
+        setAge(docSnap.get("age"));
         console.log("get user data finished");
     };
 
@@ -111,7 +113,7 @@ export default function ProfilePage({navigation}) {
                                 <Text style={[caloriesStyles.caloriesItemsText, {opacity: .5,}]}>
                                     Age
                                 </Text>
-                                <Text style={[caloriesStyles.caloriesItemsText,{fontSize: 20}]}>19</Text>
+                                <Text style={[caloriesStyles.caloriesItemsText,{fontSize: 20}]}>{age}</Text>
                             </View>
                             
                             <View style={[profilestyle.section, {backgroundColor: '#3777D9', borderColor:'#FFF', borderWidth: .5}]}>
