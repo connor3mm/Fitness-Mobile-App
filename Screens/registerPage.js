@@ -94,7 +94,7 @@ export default function registerPage({navigation}) {
     const alertRegisterUser = () =>
     Alert.alert(
       "Attention!",
-      "Your registration is almost complete. Please click on the \"Next\" button to continue the registration process, otherwise your account will be fully not created.",
+      "Your registration is almost complete. Please click on the \"Next\" button to continue the registration process, otherwise your account will not be fully not created.",
       [
         {
           text: "Cancel",
