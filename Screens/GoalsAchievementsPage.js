@@ -32,10 +32,13 @@ import { Righteous_400Regular } from '@expo-google-fonts/righteous';
 import {authentication, db} from "../firebase/firebase-config";
 import { useRoute } from '@react-navigation/native';
 import { doc, getDoc, } from "firebase/firestore/lite";
+import {stepStyles} from "./StepCounterPage";
+
 
 export default function GoalsAchievements({navigation, route}) {
 
     const uid = authentication.currentUser.uid;
+    const [bodyType, setBodyType] = useState();
 
     const getUserData = async () => {
         const docRef = doc(db, "users", authentication.currentUser.uid);
@@ -44,7 +47,8 @@ export default function GoalsAchievements({navigation, route}) {
         if (docSnap.exists()) {
           console.log("Document data:", docSnap.data());
 
-          setSex(docSnap.get("sex"))
+          setSex(docSnap.get("sex"));
+          setBodyType(docSnap.get('bodyType'))
     
           //getting goals food items from DB
           const fitnessMapGoals = docSnap.data().goals;
@@ -74,10 +78,27 @@ export default function GoalsAchievements({navigation, route}) {
 
 
 
-          //Load data from DB for the card components into the App
+    //Load data from DB for the card components into the App
     useEffect(() => {
+        // Interval to update count
         getUserData();
-    },[])
+        const interval = setInterval(() => {
+            getUserData();
+        }, 1000);
+
+        // Subscribe for the focus Listener
+        const unsubscribe = navigation.addListener('focus', () => {
+            getUserData();
+        });
+
+        return () => {
+            // Clear setInterval in case of screen unmount
+            getUserData();
+            clearTimeout(interval);
+            // Unsubscribe for the focus Listener
+            unsubscribe;
+        };
+    }, [navigation]);
 
 
     const homePressedHandler = () => navigation.navigate('Homepage');
@@ -107,6 +128,7 @@ export default function GoalsAchievements({navigation, route}) {
 
         setOpenModal(false);
     };
+
 
     return (
 
@@ -150,6 +172,16 @@ export default function GoalsAchievements({navigation, route}) {
                     >
                         <Text style={goalsStyles.buttonTextStyle}>Choose body shape for women</Text>
                     </TouchableOpacity>) : null}
+                </View>
+
+                <View style={[stepStyles.section, {marginTop: 50}]}>
+                    <Text style={[caloriesStyles.caloriesItemsText, stepStyles.text]}>Goal Body Type</Text>
+                    <Text style={[caloriesStyles.caloriesItemsText, {fontSize: 27.5}]}>
+                        <Text style={{ fontSize: 14 }}>{bodyType}</Text>
+                    </Text>
+                    <Image style={{ opacity: .25, width: 75, height: 75,
+                        position: 'absolute', top: 10, right: -3, transform: [{ scaleX: -1}] }}
+                           source={require('../assets/img/body.png')}/>
                 </View>
 
                 <Modal visible={openModal} animationType='slide'>

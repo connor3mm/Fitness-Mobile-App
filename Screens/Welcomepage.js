@@ -73,12 +73,6 @@ return (
                 <Text  style={[styles.buttonText, styles.blueText]}>Existing user? Log In</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity  activeOpacity={.7} style={[styles.button, styles.boxShadow, styles.signup,]} 
-            onPress={buttonPressedHandler}>
-                <Text style={[styles.buttonText,]}>Go to menu no users</Text>
-            </TouchableOpacity>
-
-
         </View>
     </SafeAreaView>
 );
