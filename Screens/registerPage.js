@@ -213,7 +213,4 @@ export const styles = StyleSheet.create({
         borderColor: '#4356FF',
         shadowColor: 'black',
     },
-
-
-
 });

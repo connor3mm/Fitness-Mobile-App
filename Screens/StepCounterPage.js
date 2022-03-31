@@ -26,9 +26,6 @@ import {updateDoc, doc, getDoc} from "firebase/firestore/lite";
 
 
 export default class StepCounter extends ValidationComponent {
-    
-    //const uid = authentication.currentUser.uid;
-
 
     setData = async () => {
         //sets the steps into the DB

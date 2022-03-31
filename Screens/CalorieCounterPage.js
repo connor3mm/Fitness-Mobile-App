@@ -36,7 +36,7 @@ export default function CalorieCounter({navigation}) {
     const uid = authentication.currentUser.uid;
 
 
-    //setting the goalCalories, consumedCalories and lefover calories into DB
+    //setting the goalCalories, consumedCalories and leftover calories into DB
     const setUserCalories = async () => {
         await updateDoc(doc(db,"users",uid),{
             targetCalories: parseInt(goalCalories),
@@ -89,7 +89,7 @@ const getUserData = async () => {
           key: foodMapItemBreakfast.key,
         };
       });
-      //console.log("arrayResult", arrayResultBreakfast);
+
       setBreakfastFood(arrayResultBreakfast);
 
 
@@ -106,7 +106,7 @@ const getUserData = async () => {
           key: foodMapItemLunch.key,
         };
       });
-      //console.log("arrayResult", arrayResultLunch);
+
       setLunchFood(arrayResultLunch);
 
 
@@ -122,7 +122,6 @@ const getUserData = async () => {
           key: foodMapItemDinner.key,
         };
       });
-      //console.log("arrayResult", arrayResultDinner);
       setDinnerFood(arrayResultDinner);
 
     } else {
@@ -158,7 +157,6 @@ const getUserData = async () => {
             navigation.navigate('Homepage');} }
       ]
     );
-
 
     
     //Load data from DB for the card components into the App

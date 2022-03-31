@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-//import Toggle from 'react-native-toggle-element';
 import {SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert} from "react-native";
 import { caloriesStyles } from "./CalorieCounterPage";
 import { setttingStyles } from './SettingsPage';

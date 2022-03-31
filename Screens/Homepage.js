@@ -23,15 +23,11 @@ import { useIsFocused } from "@react-navigation/native";
 import {signOut} from "firebase/auth";
 
 
-
 export default function Home({navigation}) {
 
     let [fontsLoaded, error] = useFonts ({
         Righteous_400Regular,
     });
-
-    //if (!fontsLoaded) return <AppLoading/>;
-
 
     const bmiPressedHandler = () => navigation.navigate('BMICalculatorPage');
     const gymsNearMePressedHandler = () => navigation.navigate('GymsNearMePage');
@@ -54,11 +50,8 @@ export default function Home({navigation}) {
     const [dailySteps, setDailySteps] = useState();
     const [weight, setWeight] = useState("");
 
-    //const [breakfastFood, setBreakfastFood] = useState([])
     const isFocused = navigation.useIsFocused;
 
-    //const isFocused = useIsFocused();
-   
 
     const getUserData = async () =>{
 
